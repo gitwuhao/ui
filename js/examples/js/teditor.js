@@ -44,6 +44,9 @@ window.examples.teditor=function(){
 						console.info(this.label);
 					}
 				}]
+			},
+			onButtonClick:function(){
+				console.info("onButtonClick:"+this.title);
 			}
 		},'|',{
 			cls:'addtoprow',
@@ -136,11 +139,14 @@ window.examples.teditor=function(){
 	};
 	var items=ui.teditor.items;
 	for(var i=0,len=items.length;i<len;i++){
-		var menu=items[i].menu;
+		var item=items[i];
+		var menu=item.menu;
 		if(menu){
 			menu.render=render;
 		}
 	}
+
+
 
 }
 

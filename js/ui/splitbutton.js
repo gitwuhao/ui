@@ -41,25 +41,32 @@
 		},
 		onRenderAfter:function(config){
 			CF.logger(this,arguments);
-			var $elem=this.$elem;
-			this.$splitbutton=$elem;
-
-			this.$button=$elem.children("."+config._c_button+":first");
+			var $splitbutton=this.$elem;
 			
-			var $button=this.$button;
+			this.$splitbutton=$splitbutton;
 
-			this.$icon=$button.children("."+config._c_icon);
-
-			this.$arrowbutton=$elem.children("."+config._c_arrow_button+":first");
-
-			this.$arrowicon=this.$arrowbutton.children("."+config._c_icon);
+			this.$elem=$splitbutton.children("."+config._c_button+":first");
 			
-			this.callSuperMethod();			
+			var $button=this.$elem;
+
+			this.$arrowbutton=$splitbutton.children("."+config._c_arrow_button+":first");
+
+			this.callSuperMethod();
+
+			this.$elem=this.$splitbutton;
 		},
 		onBindEvent:function(){
 			CF.logger(this,arguments);
 			var me=this;
-			this.callSuperMethod();
+			
+			this.$button.click(function(event){
+				if(me.on("buttonClick")!=false){
+					me.trigger("buttonclick");
+				}
+			});
+
+			this.$splitbutton.bindHover();
+
 			this.$arrowbutton.click(function(event){
 				if(me.on("arrowButtonClick")!=false){
 					me.trigger("arrowbuttonclick");
