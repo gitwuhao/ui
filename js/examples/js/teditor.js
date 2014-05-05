@@ -3,6 +3,7 @@ window.examples.teditor=function(){
 
 	ui.teditor=new ui.toolbar({
 		render : document.body,
+		cls : 'x-ui-teditor',
 		labelVisible : false,
 		items : [{
 			cls:'selectedcol',
