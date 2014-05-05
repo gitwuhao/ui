@@ -273,31 +273,38 @@
 		}
 	});
 
-	var instance=new MessageBox();
+	var instance;
+
+	function getInstance(){
+		if(!instance){
+			instance=new MessageBox();
+		}
+		return instance;
+	}
 
 	ui.messagebox={};
 
 	CF.merger(ui.messagebox,MessageBox.statics,{
 		show:function(config){
-			instance.show(config);
+			getInstance().show(config);
 		},
 		confirm:function(config){
-			instance.confirm(config);
+			getInstance().confirm(config);
 		},
 		alert:function(config){
-			instance.alert(config);
+			getInstance().alert(config);
 		},
 		wait:function(config){
 		
 		},
 		progress:function(config){
-			instance.progress(config);
+			getInstance().progress(config);
 		},
 		hide:function(){
-			instance.close();
+			getInstance().close();
 		},
 		delConfirm:function(config){
-			instance.delConfirm(config);
+			getInstance().delConfirm(config);
 		}
 	});
 
