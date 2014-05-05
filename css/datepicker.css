@@ -1,0 +1,94 @@
+.x-ui-datepicker{
+	width: 200px;
+	display: inline-block;
+	border: 1px solid #E1E1E1;
+}
+.x-ui-datepicker-icon{
+
+}
+.x-ui-datepicker-header{
+	position: relative;
+	background-color: #F5F5F5;
+	border-bottom: 1px solid #E1E1E1;
+	font-size: 12px;
+	height: 26px;
+}
+.x-ui-datepicker-header-label{
+	font-weight: bold;
+	font-family: helvetica, arial, verdana, sans-serif;
+	line-height: 25px;
+	text-align: center;
+}
+.x-ui-datepicker-header-label span{
+	cursor: pointer;
+}
+.x-ui-datepicker-prev-icon,.x-ui-datepicker-next-icon{
+	position: absolute;
+	top: 0px;
+	cursor: pointer;
+	color: #A3A3A3;
+	padding: 6px;
+	font-weight: bold;
+}
+.x-ui-datepicker-prev-icon{
+	left: 0px;
+}
+.x-ui-datepicker-next-icon{
+	right: 0px;
+}
+div.x-ui-datepicker-prev-icon.hover,div.x-ui-datepicker-next-icon.hover{
+	color: #36B2F7;
+	background-color: transparent;
+}
+.x-ui-datepicker table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+.x-ui-datepicker-year-month-box{
+	display: none;
+}
+
+.x-ui-datepicker-year-month-list,.x-ui-datepicker-day-list {
+	width: 100%;
+}
+.x-ui-datepicker-week{
+	font-size: 12px;
+	height: 25px;
+	text-align: center;
+}
+.x-ui-datepicker-year,.x-ui-datepicker-month,.x-ui-datepicker-day{
+	cursor: pointer;
+	color: #000;
+	overflow: hidden;
+	text-align: center;
+	padding: 3px;
+	font: normal 13px helvetica, arial, verdana, sans-serif;
+	line-height: 23px;
+}
+.x-ui-datepicker-year,.x-ui-datepicker-month {
+	vertical-align: middle;
+	width: 25%;
+}
+.x-ui-datepicker-separator{
+	background-color: #E1E1E1;
+	line-height: 1px;
+	height: 1px;
+	font-size: 0px;
+	padding: 0px;
+}
+.x-ui-prev-year,.x-ui-next-year,.x-ui-prev-month-day,.x-ui-next-month-day{
+	color: #979797;
+}
+.x-ui-datepicker .selected{
+	outline: 1px solid #B9D7FC;
+	color: #36B2F7;
+	background: -webkit-gradient(linear, 0 0, 0 bottom, from(#FCFCFC), to(rgba(224, 238, 255, 0.5)));
+}
+.x-ui-datepicker .hover{
+	background-color: #EAF3FA;
+}
+.x-ui-datepicker .today {
+	color: #39B6F7;
+	font-weight: bold;
+}

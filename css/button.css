@@ -1,0 +1,10 @@
+.x-ui-button{
+	float:left;
+	margin: 1px;
+	padding: 1px;
+}
+.x-ui-button.hover{
+	background-color: #D5E1F2;
+	padding: 0px;
+	border: 1px solid #A3BDE3;
+}

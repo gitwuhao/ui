@@ -1,0 +1,55 @@
+.x-ui-text{
+	margin-right: 10px;
+}
+.user{
+	width: 150px;
+}
+.user2{
+	width: 150px;
+}
+.user3{
+	width: 300px;
+}
+.user2 .x-ui-text-box {
+	border: 1px solid #7AC6E9;
+	border-radius: 3px;
+}
+.od-text{
+	font-size: 12px;
+	font-family: 宋体;
+	display: inline-block;
+}
+.od-text *{
+	box-sizing: border-box;
+}
+.od-text table {
+	border-collapse: collapse;
+}
+.od-text .od-label{
+	float: left;
+	line-height: 22px;
+	padding-right: 5px;
+	width: 80px;
+	text-align: right;
+}
+.od-text .od-textfield{
+	float: left;
+	border-radius: 2px;
+	border: 1px solid #DDD;
+}
+.od-textfield input {
+	height: 18px;
+	outline: 0px;
+	border: 0px;
+	padding: 3px 2px 3px 2px;
+	width: 100%;
+	font: normal 12px/16px 宋体;
+}
+.od-text .od-arrow-icon{
+	background-position: -380px -280px;
+	width: 18px;
+	height: 20px;
+	cursor: pointer;
+	background-repeat: no-repeat;
+	background-image: url(/oD/images/all_icon.png);
+}

@@ -1,0 +1,31 @@
+.x-ui-form .x-ui-textfield{
+	height: 24px;
+}
+
+.x-ui-form .x-ui-text .x-ui-label,.x-ui-form .x-ui-form-label {
+	line-height: 24px;
+	width: 60px;
+}
+.x-ui-form .x-ui-text .x-ui-label{
+	height: 30px;
+}
+.x-ui-form .x-ui-text .x-ui-invalid-icon{
+	background-position: -420px -60px;
+}
+.x-ui-form .x-ui-text .x-ui-clear-icon{
+	background-position: -420px -80px;
+}
+.x-ui-button-box .x-ui-button {
+	border: 1px solid #DDD;
+	padding: 5px 15px;
+	border-radius: 3px;
+	font: normal 14px/18px helvetica, arial, verdana, sans-serif;
+	cursor: pointer;
+	margin: 0px 5px
+}
+.x-ui-button-box .x-ui-button.hover{
+	background-color: #FAFAFA;
+}
+.x-ui-form table{
+	width:100%;
+}

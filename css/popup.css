@@ -1,0 +1,9 @@
+.x-ui-popu{
+	position: absolute;
+	margin: 2px 0px 0px 0px;
+	padding: 0px;
+	background-color: #FFF;
+	box-shadow: 1px 1px 3px #DDD;
+	display: none;
+	z-index: 300000;
+}

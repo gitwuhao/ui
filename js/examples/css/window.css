@@ -1,0 +1,15 @@
+.x-ui-icon.help{
+	background-image: url(../images/tool-sprites.png);
+	background-repeat: no-repeat;
+	width: 16px;
+	height: 16px;
+}
+.help{
+	background-position: 0 -320px;
+
+}
+
+.user .x-ui-win-body{
+	width: 500px;
+	height: 300px;
+}

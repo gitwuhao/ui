@@ -1,0 +1,192 @@
+.x-ui-mask{
+	width: 100%;
+	height: 100%;
+	left: 0px;
+	top: 0px;
+	opacity: 0.35;
+	background-color: #000;
+	background: -webkit-radial-gradient(circle, #FFF, #D3D3D3);
+	-webkit-user-select: none;
+	position: fixed;
+	z-index: 100000;
+	display: none;
+}
+.x-ui-window{
+	position: absolute;
+	padding: 5px;
+	background-color: #07A8E5;
+	z-index: 200000;
+	border-radius: 4px;
+	box-shadow: #AAA 0px 0px 6px;
+	font-size: 13px;
+	font-family: helvetica, arial, verdana, sans-serif;
+	display: none;
+}
+.x-ui-win-header{
+	height: 30px;
+	color: #FFF;
+	white-space: nowrap;
+	padding: 5px;
+}
+.x-ui-title{
+	overflow: hidden;
+	width: 60%;
+	line-height: 16px;
+	text-overflow: ellipsis;
+	font-weight: bold;
+	display: inline-block;
+	position: relative;
+	left: 0px;
+	top: 0px;
+}
+.x-ui-iconbar{
+	float: right;
+}
+.x-ui-iconbar .x-ui-icon{
+	float: left;
+	width: 20px;
+	height: 20px;
+	margin-left: 5px;
+	cursor: pointer;
+	opacity: 0.8;
+}
+.x-ui-iconbar .restore{
+	background-position: -440px -120px;
+	display: none;
+}
+.x-ui-iconbar .maximize{
+	background-position: -440px -100px;
+}
+.x-ui-iconbar .close{
+	background-position: -440px -80px;
+}
+.x-ui-iconbar .hover{
+	opacity: 1;
+}
+.x-ui-win-body,.x-ui-message-box{
+	overflow: auto;
+	background-color: #FFF;
+}
+.x-ui-win-body{
+}
+
+.x-ui-message-box{
+	width:300px;
+	padding: 10px;
+}
+
+.x-ui-message-box .x-ui-icon{
+	height: 40px;
+	width: 40px;
+	float: left;
+	margin-right: 5px;
+	background-position: 100px;
+}
+.x-ui-message-box .question{
+	background-position: -458px -220px;
+}
+.x-ui-message-box .info{
+	background-position: -418px -260px;
+}
+.x-ui-message-box .warning{
+	background-position: -458px -260px;
+}
+.x-ui-message-box .error{
+	background-position: -418px -220px;
+}
+.x-ui-message-text{
+	min-height: 50px;
+	overflow: hidden;
+}
+
+.x-ui-message .x-ui-progress-box{
+	display: none;
+}
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+.x-ui-progress-box,.x-ui-progress .x-ui-win-header,.x-ui-progress .x-ui-message-box,.x-ui-progress .x-ui-button-box{
+	display: none;
+}
+.x-ui-progress .x-ui-progress-box{
+	display: block;
+}
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+.x-ui-win-form .x-ui-win-body{
+	padding: 5px;
+}
+
+.x-ui-button-box{
+	background-color: #FFF;
+	text-align: center;
+	padding-bottom: 5px;
+}
+
+.x-ui-button-box .x-ui-button{
+	display: inline-block;
+	float: none;
+}
+.x-ui-button-box .x-ui-button.hover {
+	background-color: #FAFAFA;
+}
+/*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+.x-ui-qtip{
+	background: none;
+	box-shadow: none;
+	padding: 0px;
+}
+.x-ui-qtip-box{
+	display: none;
+}
+
+.x-ui-qtip-arrow-box .x-ui-icon{
+	position: absolute;
+	width: 30px;
+	height: 30px;
+	display: none;
+}
+.x-ui-qtip-arrow-box .top{
+	background-position: -462px -186px;
+	left: 50px;
+	top: 0px;
+}
+.x-ui-qtip-arrow-box .right{
+	right: 0px;
+	top: 30%;
+	background-position: -423px -185px;
+}
+.x-ui-qtip-arrow-box .bottom{
+	background-position: -422px -145px;
+	bottom: 0px;
+	left: 50px;
+}
+.x-ui-qtip-arrow-box .left{
+	background-position: -463px -145px;
+	left: 0px;
+	top: 30%;
+}
+.x-ui-qtip-body{
+	margin: 20px;
+	background-color: #FFF;
+	border-radius: 4px;
+	box-shadow: #AAA 0px 0px 6px;
+	font-size: 13px;
+	font-family: helvetica, arial, verdana, sans-serif;
+}
+.x-ui-del-confirm-label{
+	text-align: center;
+	font-size: 14px;
+	color: #FF0052;
+	padding: 10px 20px;
+	cursor: pointer;
+}
+.x-ui-qtip .x-ui-qtip-box{
+	display: block;
+}
+.x-ui-qtip .x-ui-win-header,.x-ui-qtip .x-ui-message-box,.x-ui-qtip .x-ui-progress-box,.x-ui-qtip .x-ui-button-box{
+	display: none;
+}
+.x-ui-qtip .x-ui-win-body{
+	background: none;
+}

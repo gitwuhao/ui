@@ -1,0 +1,38 @@
+.x-ui-combolist-popu{
+	box-shadow:none;
+	border: 1px solid #CCC;
+}
+.x-ui-combo .x-ui-text-box{
+	cursor: default;
+}
+
+.x-ui-combo .x-ui-arrow-icon{
+	background-position: -420px -20px;
+	width: 18px;
+}
+
+.x-ui-combo-list{
+	list-style: none;
+	text-decoration: none;
+	margin: 0px;
+	padding: 0px;
+	max-height: 200px;
+	overflow-y: auto;
+}
+.x-ui-combo-list-item{
+	margin: 0px;
+	font-size: 12px;
+	padding: 1px 6px;
+	line-height: 22px;
+	cursor: pointer;
+}
+.x-ui-combo-list-item.hover{
+	background-color: #D5E1F2;
+}
+.x-ui-combo-list-separator {
+	height: 1px;
+	line-height: 1px;
+	overflow: hidden;
+	background: #D3D3D3;
+	margin: 3px 0;
+}

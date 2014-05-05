@@ -1,0 +1,81 @@
+.x-ui-text{
+	font-size: 12px;
+	font-family: 宋体;
+}
+div.x-ui-text{
+	float: left;
+}
+.x-ui-text *{
+	box-sizing: border-box;
+}
+.x-ui-text table{
+	border-collapse: collapse;
+	width: 100%;
+}
+.x-ui-text td{
+	padding: 0px;
+}
+.x-ui-text .x-ui-label{
+	line-height: 22px;
+	width: 60px;
+	text-align: right;
+}
+.x-ui-text .x-ui-label-padding{
+	width: 8px;
+	font-size: 1px;
+}
+
+.x-ui-text.hover .x-ui-text-box,.x-ui-text.focus .x-ui-text-box{
+	border-color:#00C2FF;
+	box-shadow: 0 0 5px #8CDDFF;
+}
+
+.x-ui-label-padding .x-ui-required-icon{
+	color:red;
+	font-weight:bold;
+	font: normal 13px/17px helvetica, arial, verdana, sans-serif;
+}
+
+.x-ui-text .x-ui-text-box{
+	border-radius: 2px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #C0C0C0 #D9D9D9 #D9D9D9;
+	-webkit-user-select: none;
+	background-color: #FFF;
+}
+
+.x-ui-textfield input {
+	height: 18px;
+	outline: 0px;
+	border: 0px;
+	padding: 3px 2px 3px 2px;
+	width: 100%;
+	font: normal 12px/16px 宋体;
+}
+.x-ui-text-box .x-ui-textfield{
+	height: 20px;
+}
+.x-ui-text-box .x-ui-text-icon,.x-ui-text-box .x-ui-invalid-icon{
+	display: none;
+	width: 16px;
+}
+.x-ui-text-box .x-ui-unit {
+	text-align: center;
+	display: table-cell;
+}
+.error .x-ui-invalid-icon {
+	display: table-cell;
+	background-position: -420px -60px;
+}
+.x-ui-text-box .x-ui-clear-icon{
+	display: table-cell;
+	background-position: -420px -80px;
+	font-size: 0px;
+	cursor: pointer;
+}
+.error .x-ui-text-box{
+	border-color: #CF4C35;
+}
+
+

@@ -1,0 +1,13 @@
+.x-ui-date .x-ui-text-box{
+	cursor: default;
+}
+
+.x-ui-date .x-ui-arrow-icon{
+	background-position: -420px -0px;
+	width: 18px;
+}
+
+.x-ui-datepicker-popu .x-ui-calendar{
+	width: 200px;
+	height: 230px;
+}

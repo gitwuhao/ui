@@ -1,0 +1,19 @@
+.x-ui-tab-view-box {
+	border: 1px solid #DDD;
+	min-height: 100px;
+}
+.x-ui-tabbar-tag{
+	padding: 5px 10px;
+	width: 100px;
+	text-align: center;
+	border-left: 2px groove rgba(126, 126, 126, 0.3);
+}
+.x-ui-tab-view{
+	min-height: 200px;
+}
+.x-ui-tabbar-tag.selected{
+	font-weight: bold;
+}
+.x-ui-tabbar-tag.hover{
+	color: #5A5A5A;
+}

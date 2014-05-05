@@ -1,0 +1,43 @@
+.x-ui-toolbar-box{
+	position: absolute;
+	z-index: 10000;
+	top: 10px;
+	left: 10px;
+	box-shadow: 2px 2px 5px #707070;
+	border: 1px solid #CFCFCF;
+	background-color: #FFF;
+	border-radius: 5px;
+	display: block;
+}
+.x-ui-toolbar-button-box,.x-ui-toolbar-popup-box{
+	font-size:12px;
+	font-family:宋体;
+	-webkit-user-select: none;
+}
+.x-ui-toolbar-button-box{
+	float: left;
+	margin: 5px;
+	overflow: hidden;
+}
+.x-ui-breakline{
+	clear: both;
+}
+.x-ui-toolbar-button-box .x-ui-separator{
+	float: left;
+	width: 2px;
+	height: 18px;
+	display: inline-block;
+	border-right: 1px solid #FFF;
+	margin: 2px 2px 0px 3px;
+	background-color: #C9C4C4;
+}
+
+.x-ui-toolbar-button-box .x-ui-text-box{
+	width: 40px;
+}
+.x-ui-toolbar-button-box .x-ui-text .x-ui-label{
+	width: 40px;
+}
+.x-ui-toolbar-button-box .x-ui-text .x-ui-label-padding{
+	display: none;
+}

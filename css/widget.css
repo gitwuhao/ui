@@ -1,0 +1,14 @@
+body *,.border-box * {
+	box-sizing: border-box;
+}
+.x-ui-icon, .x-ui-arrow-icon,.x-ui-clear-icon,.x-ui-del-icon ,.x-ui-invalid-icon {
+	background-repeat: no-repeat;
+	background-image: url(../images/all_icon.png);
+}
+.x-ui-icon {
+	width: 20px;
+	height: 20px;
+}
+.x-ui-label {
+	line-height: 20px;
+}
