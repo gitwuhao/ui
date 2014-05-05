@@ -41,7 +41,7 @@
 
 	var html=['<div class="demo-list">'];
 	for(var i=0,len=array.length;i<len;i++){
-		html.push('<a href="examples.html?demo=',array[i],'" >',array[i],'</a>');
+		html.push('<a href="index.html?demo=',array[i],'" >',array[i],'</a>');
 	}
 	html.push('</div>');
 	document.write(html.join(""));
