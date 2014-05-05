@@ -47,13 +47,12 @@
 
 			this.$elem=$splitbutton.children("."+config._c_button+":first");
 			
-			var $button=this.$elem;
-
 			this.$arrowbutton=$splitbutton.children("."+config._c_arrow_button+":first");
 
 			this.callSuperMethod();
 
 			this.$elem=this.$splitbutton;
+
 		},
 		onBindEvent:function(){
 			CF.logger(this,arguments);

@@ -25,7 +25,11 @@
 					if(item==ui.menu.separator){
 						html.push('<li class="',config._c_separator,'"></li>');
 					}else{
-						html.push('<li class="',config._c_menu_item,' ',(item.cls||""),'">');
+						html.push('<li class="',config._c_menu_item,' ',(item.cls||""),'"');
+						if(item.title){
+							html.push(' title="',item.title,'"');
+						}
+						html.push('>');
 						if(config.icon!=false){
 							html.push('<span class="',config._c_icon,'"></span>');
 						}
