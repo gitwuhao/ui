@@ -10,46 +10,63 @@
 
 
 	window.examples=examples;
-	//?demo=menu
-    jQuery.loadJSQueue(
-		path+'/form.js',
-		path+'/button.js',
-		path+'/toolbar.js',
-		path+'/text.js',
-		path+'/combo.js',
-		path+'/menu.js',
-		path+'/splitbutton.js',
-		path+'/calendar.js',
-		path+'/datepicker.js',
-		path+'/date.js',
-		path+'/window.js',
-		path+'/teditor.js',
-		path+'/tab.js',
-		function(){
-			//document.clear();
+	
+	var array=[
+		'form',
+		'button',
+		'toolbar',
+		'text',
+		'combo',
+		'menu',
+		'splitbutton',
+		'calendar',
+		'datepicker',
+		'date',
+		'window',
+		'teditor',
+		'tab'
+	];
+	
+	var param=[];
+	for(var i=0,len=array.length;i<len;i++){
+		param.push(path+'/'+array[i]+'.js');
+	}
+	
+	param.push(function(){
 			
-		}
-	);
-function run(){
-	var p=jQuery.getParam();
-	var demo=p.demo;
-	if(demo){
-		var fn=examples[demo];
-		if(fn){
-			document.title="ui."+demo;
-			jQuery.includePack('css',examples.path+'/css/'+demo+'.css',fn);
-			//fn();
-		}
-	}
-}
+	});
 
-jQuery.schedule(function(){
-	if(window.ui){
-		if(window.ui.ready){
-			 run();
-			 return false;
+    jQuery.loadJSQueue.apply(this,param);
+	
+
+	var html=['<div class="demo-list">'];
+	for(var i=0,len=array.length;i<len;i++){
+		html.push('<a href="examples.html?demo=',array[i],'" >',array[i],'</a>');
+	}
+	html.push('</div>');
+	document.write(html.join(""));
+
+
+	function run(){
+		var p=jQuery.getParam();
+		var demo=p.demo;
+		if(demo){
+			var fn=examples[demo];
+			if(fn){
+				document.title="ui."+demo;
+				jQuery.includePack('css',examples.path+'/css/'+demo+'.css',fn);
+				//fn();
+			}
 		}
 	}
-});
+
+	jQuery.schedule(function(){
+		if(window.ui){
+			if(window.ui.ready){
+				 run();
+				 return false;
+			}
+		}
+	});
 
 })(CF,jQuery);
