@@ -63,6 +63,7 @@ div.x-ui-text{
 .x-ui-text-box .x-ui-unit {
 	text-align: center;
 	display: table-cell;
+	color: #A9A9A9;
 }
 .error .x-ui-invalid-icon {
 	display: table-cell;
