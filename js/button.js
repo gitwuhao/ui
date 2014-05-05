@@ -35,7 +35,6 @@
 			CF.logger(this,arguments);
 			var $elem=this.$elem;
 			this.$button=$elem;
-			//this.$icon=$elem.children(this._c_icon);
 			this.callSuperMethod();
 		},
 		onBindEvent:function(){

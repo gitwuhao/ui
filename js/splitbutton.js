@@ -84,7 +84,8 @@
 					var menuConfig=CF.merger(this.menu,{
 						autoSetOffset:true,
 						align:'lb',
-						$offsetElement : this.$elem
+						$offsetElement : this.$elem,
+						owner : this
 					});
 					
 					this.menu=new ui.menu(menuConfig);

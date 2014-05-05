@@ -85,13 +85,15 @@
 					var $elem=$(elem);
 					$elem.bindHover();
 					item.$elem=$elem;
+					
+					item.owner=me;
 
 					me.setMenuItemData(item);
-
+					
 					if(item.menu){
 						setTimeout(function(){
 							me.bindSubMenuTrigger(item);
-						},100);
+						},100);	
 					}
 					//if(item.onClick || !item.menu){
 					$elem.click(function(event){
