@@ -22,14 +22,16 @@
 				var html=['<ul class="',config._c_menu,'">'];
 				for(var i=0,len=items.length;i<len;i++){
 					var item=items[i];
-					if(item=='-'){
+					if(item==ui.menu.separator){
 						html.push('<li class="',config._c_separator,'"></li>');
 					}else{
 						html.push('<li class="',config._c_menu_item,' ',(item.cls||""),'">');
 						if(config.icon!=false){
 							html.push('<span class="',config._c_icon,'"></span>');
 						}
-						html.push('<label class="',config._c_label,'">',item.label,'</label>');
+						if(item.label){
+							html.push('<label class="',config._c_label,'">',item.label,'</label>');
+						}
 						if(item.menu){
 							html.push('<span class="',config._c_arrow_icon,'"></span>');
 						}
@@ -39,6 +41,7 @@
 				html.push('</ul>');
 				return html.join('');
 			},
+			separator:'-',
 			align:'trbl',
 			addContextMenu:function(context,menu){
 				$.disabledRightButton();
@@ -78,7 +81,7 @@
 			var items=this.items;
 			this.$menuitem.each(function(index,elem){
 				var item=items[index];
-				if(item.label){	
+				if(item!=ui.menu.separator){	
 					var $elem=$(elem);
 					$elem.bindHover();
 					item.$elem=$elem;
