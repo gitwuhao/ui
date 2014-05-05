@@ -156,6 +156,10 @@
 			
 			this._super_=this._class_._super_.prototype;
 
+			if(!this._super_){
+				this._super_=this._class_._super_;
+			}
+
 			if(config.autoRender!=false){
 				if(!this.$render){
 					this.$render=$.getBody();
