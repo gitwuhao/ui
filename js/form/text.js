@@ -29,9 +29,12 @@
 					if(config.title){
 						html.push(' title="',config.title,'"');
 					}
-					html.push('>',
-						'<table>',
-						'<tr>');
+					html.push('>');
+					if(config.label){
+						html.push(
+							'<table>',
+							'<tr>');
+					}
 				}else{
 					html.push('<tr class="',config._c_text,' ',(config.cls||''),'">');
 				}
@@ -46,11 +49,11 @@
 					}else{
 						html.push('&nbsp;');
 					}
-					html.push('</td>');
+					html.push('</td>',
+							  '<td>');
 				}
 				
-				html.push('<td>',
-							'<div class="',config._c_text_box,'">',
+				html.push(	'<div class="',config._c_text_box,'">',
 						    '<table>',
 							'<tr>',
 							  '<td class="',config._c_textfield,'"><input type="text" ');
@@ -66,6 +69,9 @@
 				}
 				if(config.vtype){
 					html.push(' vtype="',config.vtype,'" ');
+				}
+				if(config.placeholder){
+					html.push(' placeholder="',config.placeholder,'" ');
 				}
 				html.push(' /></td>');
 				var text_icon;
@@ -84,13 +90,17 @@
 				}
 				html.push('</tr>',
 							'</table>',
-							'</div>',
-						  '</td>',
+							'</div>');
+				
+				if(config.label){
+					html.push('</td>',
 						  '</tr>');
-
+				}
 				if(!config.form){
-					html.push('</table>',
-						'</div>');
+					if(config.label){
+						html.push('</table>');
+					}
+					html.push('</div>');
 				}
 				return html.join("");
 			}
