@@ -2,7 +2,7 @@
 
 	
 	var examples={
-		path : 'js/examples'
+		path : 'examples'
 	};
 
 	

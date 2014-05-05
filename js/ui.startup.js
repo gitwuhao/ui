@@ -5,21 +5,21 @@
 	$.includePack('css','css/ui.css');
 
     $.loadJSQueue(
-		path+'ui/widget.js',
-		path+'ui/popu.js',
-		path+'ui/calendar.js',
-		path+'ui/datepicker.js',
-		path+'ui/form.js',
-		path+'ui/form/text.js',
-		path+'ui/form/combo.js',
-		path+'ui/form/date.js',
-		path+'ui/button.js',
-		path+'ui/menu.js',
-		path+'ui/splitbutton.js',
-		path+'ui/toolbar.js',
-		path+'ui/tab.js',
-		path+'ui/window.js',
-		path+'ui/messagebox.js',
+		path+'widget.js',
+		path+'popu.js',
+		path+'calendar.js',
+		path+'datepicker.js',
+		path+'form.js',
+		path+'form/text.js',
+		path+'form/combo.js',
+		path+'form/date.js',
+		path+'button.js',
+		path+'menu.js',
+		path+'splitbutton.js',
+		path+'toolbar.js',
+		path+'tab.js',
+		path+'window.js',
+		path+'messagebox.js',
 		function(){
 			ui.ready=true;
 
