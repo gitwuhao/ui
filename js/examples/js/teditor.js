@@ -1,43 +1,43 @@
 (function(){
 window.examples.teditor=function(){
 
-	var teditor=new ui.toolbar({
+	ui.teditor=new ui.toolbar({
 		render : document.body,
 		labelVisible : false,
 		items : [{
-			cls:'tedui-selectedcol',
+			cls:'selectedcol',
 			title:'选择列',
 			onButtonClick:function(){
 				console.info("onButtonClick:"+this.title);
 			}
 		},{
-			cls:'tedui-selectedrow',
+			cls:'selectedrow',
 			title:'选择行',
 			onButtonClick:function(){
 				console.info("onButtonClick:"+this.title);
 			}
 		},{
-			cls:'tedui-selectedtable',
+			cls:'selectedtable',
 			title:'选择表格',
 			onButtonClick:function(){
 				console.info("onButtonClick:"+this.title);
 			}
 		},'|',{
-			cls:'tedui-deltable',
+			cls:'deltable',
 			xtype:'splitbutton',
 			title:'删除',
 			menu : {
 				width : 150,
 				items:[{
 					label:'删除行1',
-					cls:'tedui-delrow',
+					cls:'delrow',
 					value : '',
 					onClick : function(event){
 						console.info(this.label);
 					}
 				},'-',{
 					label:'删除列2',
-					cls:'tedui-delcol',
+					cls:'delcol',
 					value:'',
 					onClick : function(event){
 						console.info(this.label);
@@ -45,57 +45,57 @@ window.examples.teditor=function(){
 				}]
 			}
 		},'|',{
-			cls:'tedui-addtoprow',
+			cls:'addtoprow',
 			title:'在上方增加行',
 			onButtonClick:function(){
 				console.info("onButtonClick:"+this.title);
 			}
 		},{
-			cls:'tedui-addbottomrow',
+			cls:'addbottomrow',
 			title:'在下方增加行',
 			onButtonClick:function(){
 				console.info("onButtonClick:"+this.title);
 			}
 		},{
-			cls:'tedui-addleftcol',
+			cls:'addleftcol',
 			title:'在左方增加列',
 			onButtonClick:function(){
 				console.info("onButtonClick:"+this.title);
 			}
 		},{
-			cls:'tedui-addrightcol',
+			cls:'addrightcol',
 			title:'在右方增加列',
 			onButtonClick:function(){
 				console.info("onButtonClick:"+this.title);
 			}
 		},'|',{
-			cls:'tedui-merge',
+			cls:'merge',
 			title:'合并单元格',
 			onButtonClick:function(){
 				console.info("onButtonClick:"+this.title);
 			}
 		},{
-			cls:'tedui-split',
+			cls:'split',
 			title:'拆分单元格',
 			onButtonClick:function(){
 				console.info("onButtonClick:"+this.title);
 			}
 		},'||',{
-			cls:'tedui-alignlefttop',
+			cls:'alignlefttop',
 			xtype:'splitbutton',
 			title:'对齐方式',
 			onButtonClick:function(){
 				console.info("onButtonClick:"+this.title);
 			}
 		},'|',{
-			cls:'tedui-bordercolor',
+			cls:'bordercolor',
 			xtype:'splitbutton',
 			title:'边框颜色',
 			onButtonClick:function(){
 				console.info("onButtonClick:"+this.title);
 			}
 		},{
-			cls:'tedui-bgcolor',
+			cls:'bgcolor',
 			xtype:'splitbutton',
 			title:'单元格底纹',
 			onButtonClick:function(){
@@ -117,15 +117,29 @@ window.examples.teditor=function(){
 			vtype:'int',
 			unit:'px'
 		},'|',{
-			cls:'tedui-slider',
+			cls:'slider',
 			title:'标尺滑块',
 			onButtonClick:function(){
 				console.info("onButtonClick:"+this.title);
 			}
-		}]
+		}],
+		hideButton : function(cls){
+			var button=this.$buttonbar.children("."+cls);
+
+		}
 	});
 	
 
+	function render(){
+		return ui.teditor.$popup;
+	};
+	var items=ui.teditor.items;
+	for(var i=0,len=items.length;i<len;i++){
+		var menu=items[i].menu;
+		if(menu){
+			menu.render=render;
+		}
+	}
 
 }
 

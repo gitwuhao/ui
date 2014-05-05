@@ -1,0 +1,78 @@
+.x-ui-toolbar-box .merge .x-ui-icon{
+	background-position: -358px 0px;
+}
+.x-ui-toolbar-box .split .x-ui-icon{
+	background-position: -358px -20px;
+}
+.x-ui-toolbar-box .addrightcol .x-ui-icon{
+	background-position: -358px -40px;
+}
+.x-ui-toolbar-box .addleftcol .x-ui-icon{
+	background-position: -358px -60px;
+}
+.x-ui-toolbar-box .addtoprow .x-ui-icon{
+	background-position: -358px -80px;
+}
+.x-ui-toolbar-box .addbottomrow .x-ui-icon{
+	background-position: -358px -100px;
+}
+.x-ui-toolbar-box .deltable .x-ui-icon{
+	background-position: -358px -120px;
+}
+.x-ui-toolbar-box .delcol .x-ui-icon{
+	background-position: -358px -140px;
+}
+.x-ui-toolbar-box .delrow .x-ui-icon{
+	background-position: -358px -160px;
+}
+.x-ui-toolbar-box .bgcolor .x-ui-icon{
+	background-position: -358px -180px;
+}
+.x-ui-toolbar-box .bordercolor .x-ui-icon{
+	background-position: -358px -200px;
+}
+.x-ui-toolbar-box .slider .x-ui-icon{
+	background-position: -358px -220px;
+}
+.x-ui-toolbar-box .alignlefttop .x-ui-icon{
+	background-position: -378px 0px;
+}
+.x-ui-toolbar-box .alignleftcenter .x-ui-icon{
+	background-position: -378px -20px;
+}
+.x-ui-toolbar-box .alignleftbottom .x-ui-icon{
+	background-position: -378px -40px;
+}
+.x-ui-toolbar-box .aligncenterleft .x-ui-icon{
+	background-position: -378px -60px;
+}
+.x-ui-toolbar-box .aligncenter .x-ui-icon{
+	background-position: -378px -80px;
+}
+.x-ui-toolbar-box .aligncenterbottom .x-ui-icon{
+	background-position: -378px -100px;
+}
+.x-ui-toolbar-box .alignrighttop .x-ui-icon{
+	background-position: -378px -120px;
+}
+.x-ui-toolbar-box .alignrightcenter .x-ui-icon{
+	background-position: -378px -140px;
+}
+.x-ui-toolbar-box .alignrightbottom .x-ui-icon{
+	background-position: -378px -160px;
+}
+.x-ui-toolbar-box .height .x-ui-icon{
+	background-position: -378px -180px;
+}
+.x-ui-toolbar-box .width .x-ui-icon{
+	background-position: -378px -200px;
+}
+.x-ui-toolbar-box .selectedcol .x-ui-icon{
+	background-position: -398px 0px;
+}
+.x-ui-toolbar-box .selectedrow .x-ui-icon{
+	background-position: -398px -20px;
+}
+.x-ui-toolbar-box .selectedtable .x-ui-icon{
+	background-position: -398px -40px;
+}
