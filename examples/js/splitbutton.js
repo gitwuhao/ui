@@ -67,9 +67,9 @@ window.examples.splitbutton=function(){
 		onButtonClick:function(){
 			console.info("onButtonClick:"+this.label);
 		},
-		onArrowButtonClick:function(){
+		onArrowClick:function(){
 			this.callPrototypeMethod();
-			console.info("onArrowButtonClick:"+this.label);
+			console.info("onArrowClick:"+this.label);
 		}
 	});
 

@@ -144,13 +144,13 @@
 			});
 
 			this.$text.focus(function(event){
-				if(!me.isDisabled && this.value.length>0){
+				if(me.focus() && this.value.length>0){
 					me.$icon.addClass(me._clear_icon);
 				}
 			});
 
 			this.$text.blur(function(event){
-				if(!me.isDisabled && this.value.length>0){
+				if(me.blur() && this.value.length>0){
 					me.$icon.removeClass(me._clear_icon);
 				}
 			});
@@ -158,15 +158,15 @@
 			this.$elem.bindHover();
 
 		},
-		disabled:function(){
-			this.callSuperMethod();
+		onDisabled:function(){
 			this.$text[0].readOnly=true;
 		},
-		enabled:function(){
-			this.callSuperMethod();
+		onEnabled:function(){
 			this.$text[0].readOnly=false;
 		}
 	});
 
+
+	ui.form.extendItem(ui.form.text);
 	
 })(CF,$,ui);

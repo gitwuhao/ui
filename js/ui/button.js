@@ -40,16 +40,18 @@
 		onBindEvent:function(){
 			var me=this;
 			this.$button.click(function(event){
-				if(!me.isDisabled && me.on("buttonClick")!=false){
-					me.trigger("buttonclick");
+				if(me.focus()){ 
+					me.on("click");
 				}
 			});
 			this.$elem.bindHover();
 		},
-		onButtonClick : function(event){
+		onClick : function(event){
 			CF.logger(this,arguments);
 		}
 	});
 
 	
+	ui.form.extendItem(ui.button);
+
 })(CF,$,ui);

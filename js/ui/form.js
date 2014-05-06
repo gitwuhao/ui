@@ -75,6 +75,86 @@
 				}
 				item.on("render",config);
 				return item;
+			},
+			setActive: function(item){
+				if(this.active && this.active!=item){
+					this.active.blur();
+				}
+				this.active=item;
+			},
+			removeActive: function(item){
+				if(this.active==item){
+					this.active=null;
+				}
+			},
+			children : [],
+			item:{
+				blur : function(){
+					CF.logger(this,arguments);
+					return this.on('blur');
+				},
+				onBlurBefore : function(){
+					if(this.isDisabled==true){
+						return false;
+					}
+				},
+				onBlur : CF.emptyFunction,
+				onBlurAfter : function(){
+					this.$elem.removeClass("selected");
+					ui.form.removeActive(this);
+					this.isFocus=false;
+				},
+				focus : function(){
+					CF.logger(this,arguments);
+					return this.on('focus');
+				},
+				onFocusBefore : function(){
+					if(this.isDisabled==true){
+						return false;
+					}
+				},
+				onFocus : CF.emptyFunction,
+				onFocusAfter : function(){
+					ui.form.setActive(this);
+					this.$elem.removeClass("hover");
+					this.$elem.addClass("selected");
+					this.isFocus=true;
+				},
+				disabled : function(){
+					CF.logger(this,arguments);
+					return this.on('disabled');
+				},
+				onDisabledBefore : function(){
+					if(this.isDisabled==true){
+						return false;
+					}
+					this.isDisabled=true;
+					this.$elem.addClass("disabled");
+					ui.form.removeActive(this);
+					this.isFocus=false;
+				},
+				onDisabled : CF.emptyFunction,
+				onDisabledAfter : CF.emptyFunction,
+				enabled:function(){
+					CF.logger(this,arguments);
+					return this.on('enabled');
+				},
+				onDisabledBefore:function(){
+					if(this.isDisabled==false){
+						return false;
+					}
+					this.isDisabled=false;
+					this.$elem.removeClass("disabled");
+				},
+				onDisabled : CF.emptyFunction,
+				onDisabledAfter : CF.emptyFunction
+			},
+			extendItem : function(_class_){
+				if(!_class_._item_class_){
+					CF.apply(_class_.prototype,ui.form.item);
+					this.children.push(_class_);
+					_class_._item_class_="__item_class__";
+				}
 			}
 		},
 		onRender:function(config){

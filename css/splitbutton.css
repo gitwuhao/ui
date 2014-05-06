@@ -7,17 +7,8 @@
 	margin: 0px;
 	padding: 0px;
 }
-.x-ui-split-button.hover{
-	background-color: #D5E1F2;
-	padding: 0;
-	border: 1px solid #A3BDE3;
-}
-.x-ui-split-button.selected{
-	border: 1px solid #F79129;
-	padding: 0;
-}
 .x-ui-split-button.selected .x-ui-arrow-button.hover{
-	border-color:#F79129;
+	border-color:#F79B39;
 }
 .x-ui-split-button.disabled{
 	opacity: 0.3;
@@ -28,7 +19,7 @@
 }
 .x-ui-arrow-button.hover{
 	padding-left: 0px;
-	border-left: 1px solid #A3BDE3;
+	border-left: 1px solid #5FA1FF;
 }
 .x-ui-arrow-button .x-ui-arrow-icon{
 	background-position: -422px -20px;

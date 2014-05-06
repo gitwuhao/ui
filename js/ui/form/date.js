@@ -36,9 +36,6 @@
 			this.$date=$("."+config._c_text_box+":first",elem);
 
 			this.$text=$(":text:first",this.$date);
-
-
-			//_popu_trigger_
 			
 			this.$icon=this.$text.parent().next();
 
@@ -49,32 +46,33 @@
 		onBindEvent:function(){
 			var me=this;
 
-			if(this.readonly!=true){
-				this.$label.click(function(event){
-					me.$text.focus();
+			if(this.readonly==true){
+				this.$text.click(function(event){
+					if(event.timeStamp-me.lastFocusTime>300){
+						me.focus();
+					}
 				});
 			}
-			
-			this.$text.click(function(event){
-				me.on("datePickerToggle");
-			});
 
 			this.$text.focus(function(event){
-				me.$elem.addClass("focus");
+				me.lastFocusTime=event.timeStamp;
+				me.focus();
 			});
+			
 
 			this.$text.blur(function(event){
-				me.$elem.removeClass("focus");
+				me.blur();
 			});
 
 			this.$icon.click(function(event){
-				me.$text.focus();
-				me.on("datePickerToggle");
+				if(me.focus()){
+					me.on("arrowClick");
+				}
 			});
 			
 			this.$elem.bindHover();
 		},
-		onDatePickerToggle : function(event){
+		onFocus : function(event){
 			CF.logger(this,arguments);
 			var me=this;
 			if(!this.datepicker){
@@ -82,6 +80,7 @@
 					cls : "combo",
 					onSelected : function(date){
 						me.$text.val(date);
+						me.onFocusAfter();
 					},
 					autoSetOffset : true,
 					align : 'lb',

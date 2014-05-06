@@ -173,7 +173,6 @@
 			CF.logger(this,arguments);
 			this.isHide=true;
 			this.$elem.hide();
-			this.trigger("hide");
 		},
 		onHideAfter : function(){
 			CF.logger(this,arguments);
@@ -192,7 +191,6 @@
 			}
 			this.isHide=false;
 			this.$elem.show();
-			this.trigger("show");
 			this.lastShowTimestamp=$.timestamp();
 		},
 		onShowAfter:function(){

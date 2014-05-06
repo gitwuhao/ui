@@ -63,35 +63,33 @@
 			
 			if(this.readonly==true){
 				this.$text.click(function(event){
-					me.on("click");
+					if(event.timeStamp-me.lastFocusTime>300){
+						me.focus();
+					}
 				});
 			}
 
 			this.$text.focus(function(event){
-				me.$elem.addClass("focus");
+				me.lastFocusTime=event.timeStamp;
+				me.focus();
 			});
 			
 
 			this.$text.blur(function(event){
-				if(me.on("textBlur")!=false){
-					me.trigger("textBlur");
-				}
-				me.$elem.removeClass("focus");
+				me.blur();
 			});
 
 			if(this.arrowIcon!=false){
 				this.$icon.click(function(event){
-					if(me.on("arrowClick")!=false){
-						me.trigger("arrowClick");
+					if(me.focus()){
+						me.on("arrowClick");
 					}
-					me.$text.focus();
-					me.on("click");
 				});
 			}
 
 			this.$elem.bindHover();
 		},
-		onClick : function(event){
+		onFocus : function(event){
 			CF.logger(this,arguments);
 			var me=this;
 			if(this.items && !this.list){
@@ -108,6 +106,7 @@
 					$offsetElement : this.$combo,
 					onItemSelectedAfter : function(item){
 						me.on("selected",item);
+						me.onFocusAfter();
 					}
 				});
 				this.list=new ComboList(listConfig);
@@ -122,9 +121,6 @@
 				this.$value.val(item.value||"");
 			}
 		},
-		onTextFocus : function(event){
-			CF.logger(this,arguments);
-		},
 		onArrowClick: function(event){
 			CF.logger(this,arguments);
 		},
@@ -136,6 +132,11 @@
 			this.callSuperMethod();
 		}
 	});
+
+
+
+
+	ui.form.extendItem(ui.form.combo);
 
 
 	var ComboList=function(){

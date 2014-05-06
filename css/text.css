@@ -25,10 +25,6 @@ div.x-ui-text{
 	font-size: 1px;
 }
 
-.x-ui-text.hover .x-ui-text-box,.x-ui-text.focus .x-ui-text-box{
-	border-color:#00C2FF;
-	box-shadow: 0 0 5px #8CDDFF;
-}
 .x-ui-text.disabled{
 	opacity: 0.3;
 }

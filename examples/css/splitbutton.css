@@ -1,14 +1,11 @@
-.ok .x-ui-arrow-icon{
-	margin: 5px 0px;
-}
-
-
-.ok .x-ui-arrow-button.hover {
-	padding-left: 0px;
-	border-left: 1px solid #C6C6C6;
-}
-
-
 .x-ui-arrow-button{
 	margin-right: 5px;
+	height: 30px;
 }
+.x-ui-split-button .x-ui-arrow-icon{
+	margin-top: 5px;
+}
+.x-ui-split-button{
+	padding: 0px;
+}
+

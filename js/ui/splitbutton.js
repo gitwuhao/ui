@@ -59,26 +59,24 @@
 			var me=this;
 			
 			this.$button.click(function(event){
-				if(!me.isDisabled && me.on("buttonClick")!=false){
-					me.trigger("buttonclick");
+				if(me.focus()){ 
+					me.on("click");
 				}
-				me.$elem.addClass("selected");
 			});
 
 			this.$splitbutton.bindHover();
 
 			this.$arrowbutton.click(function(event){
-				if(!me.isDisabled && me.on("arrowButtonClick")!=false){
-					me.trigger("arrowbuttonclick");
+				if(me.focus()){
+					me.on("arrowClick");
 				}
-				me.$elem.addClass("selected");
 			});
 			this.$arrowbutton.bindHover();
 		},
-		onButtonClick : function(event){
+		onClick : function(event){
 			CF.logger(this,arguments);
 		},
-		onArrowButtonClick:function(event){
+		onArrowClick:function(event){
 			CF.logger(this,arguments);
 			if(this.menu){
 				if(!this.menu.toggle){
@@ -90,7 +88,6 @@
 					});
 					
 					this.menu=new ui.menu(menuConfig);
-					//this.menu.on("render",menuConfig);
 				}
 				this.menu.toggle();
 			}
@@ -104,4 +101,6 @@
 	});
 
 	
+	ui.form.extendItem(ui.splitbutton);
+
 })(CF,jQuery,ui);

@@ -166,7 +166,7 @@ window.examples.toolbar=function(){
 							}
 						}]
 				},
-				onArrowButtonClickAfter : function(event){
+				onArrowClickAfter : function(event){
 					CF.logger(this,arguments);
 					
 				}
