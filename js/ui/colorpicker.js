@@ -711,6 +711,7 @@ For usage and examples: colpick.com/plugin
 
 	CF.merger(ui.colorpicker,{
 		getInstance:function(config){
+			config.align=config.align||'lb';
 			return{
 				config:config,
 				show:function(){
