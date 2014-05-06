@@ -62,6 +62,7 @@
 				if(!me.isDisabled && me.on("buttonClick")!=false){
 					me.trigger("buttonclick");
 				}
+				me.$elem.addClass("selected");
 			});
 
 			this.$splitbutton.bindHover();
@@ -70,6 +71,7 @@
 				if(!me.isDisabled && me.on("arrowButtonClick")!=false){
 					me.trigger("arrowbuttonclick");
 				}
+				me.$elem.addClass("selected");
 			});
 			this.$arrowbutton.bindHover();
 		},

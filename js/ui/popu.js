@@ -28,12 +28,12 @@
 				if(align){
 					//right
 					if(align.indexOf("r")>-1){
-						left=left + $offsetElement.outerWidth();
+						left=left + $offsetElement.outerWidth(true);
 					}
 
 					//bottom
 					if(align.indexOf("b")>-1){
-						top=top + $offsetElement.outerHeight();
+						top=top + $offsetElement.outerHeight(true);
 					}
 				}
 				popu.setOffset(left,top);

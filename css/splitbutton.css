@@ -12,6 +12,13 @@
 	padding: 0;
 	border: 1px solid #A3BDE3;
 }
+.x-ui-split-button.selected{
+	border: 1px solid #F79129;
+	padding: 0;
+}
+.x-ui-split-button.selected .x-ui-arrow-button.hover{
+	border-color:#F79129;
+}
 .x-ui-split-button.disabled{
 	opacity: 0.3;
 }
