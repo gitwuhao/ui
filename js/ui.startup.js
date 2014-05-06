@@ -3,8 +3,6 @@
 	var path='js/ui/';
 
 	$.includePack('css','css/ui.css');
-	
-    $.loadJSQueue('js/plugins/colpick.js');
 
     $.loadJSQueue(
 		path+'widget.js',
