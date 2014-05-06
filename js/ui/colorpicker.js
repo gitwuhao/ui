@@ -12,36 +12,31 @@
 				_c_colorpicker : '-colorpicker'
 			}
 		},
-		onRenderBefore:function(config){
+		onRenderAfter : function(config){
 			CF.logger(this,arguments);
-			
 			var me=this;
-
-			this.calendarConfig={
-				date : config.date,
-				px : config.px,
-				autoRender:false,
-				onRender:function(){},
-				onSelected : function(date){
-					me.onSelected(date);
-					me.onHide();
+			this.$elem.colpick({
+				flat:true,
+				layout:'hex',
+				submit: 1,
+				submitText: '确认',
+				onChange: function (hsb,hex,rgb,el) {
+					me.on('change');
+				},
+				onSubmit: function (hsb,hex,rgb,el) {
+					me.on('submit');
+					me.on('hide');
 				}
-			};
-
-			config.html=ui.calendar.getTemplate(this.calendarConfig);
-		},
-		onRender:function(config){
-			CF.logger(this,arguments);
-			this.callSuperMethod();
-			this.calendar=new ui.calendar(this.calendarConfig);
-			this.calendar.$elem=this.$elem.children();
-			this.calendar.on("render",this.calendarConfig);
-			delete this.calendarConfig;
+			});
+			this.on("bindEvent",null);
 		},
 		onBindEvent:function(){
 			CF.logger(this,arguments);
 		},
-		onSelected:function(date){
+		onChange:function(hsb,hex,rgb,el){
+			CF.logger(this,arguments);
+		},
+		onSubmit:function(hsb,hex,rgb,el){
 			CF.logger(this,arguments);
 		}
 	});

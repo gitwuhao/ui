@@ -10,7 +10,10 @@
 		statics:{
 			_c_popu_box : ui.cssPrefix+'-popu',
 			getTemplate: function(config){
-				return ['<div class="',this._c_popu_box," ",(config.boxcls||"")," ",(config.cls||""),'">',config.html,'</div>'].join('');
+				return ['<div class="',this._c_popu_box," ",(config.boxcls||""),
+							" ",(config.cls||""),'">',
+							(config.html||''),
+						'</div>'].join('');
 			},
 			setOffset:function(config){
 				var popu=config.popu,
