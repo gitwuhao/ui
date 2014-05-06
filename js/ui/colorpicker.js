@@ -721,7 +721,8 @@ For usage and examples: colpick.com/plugin
 				},
 				toggle:function(){
 					getInstance().toggle(this.config);
-				}
+				},
+				removes : ui.widget.remove
 			};
 		},
 		show:function(config){

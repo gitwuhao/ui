@@ -9,7 +9,6 @@ window.examples.colorpicker=function(){
 	var div=document.createElement('div');
 	div.className="box";
 
-	
 
 	jQuery.getBody().append(div);
 
@@ -40,7 +39,7 @@ window.examples.colorpicker=function(){
 
 
 
-	 var button=new ui.button({
+	window.buttonColor=new ui.button({
 		cls : "ted-ui-slider",
 		icon : true,
 		//render : div,
@@ -68,7 +67,7 @@ window.examples.colorpicker=function(){
 
 
 
-	var date=new ui.form.combo({
+	window.comboColor=new ui.form.combo({
 		render : div,
 		label : "颜色",
 		icon : "color",
