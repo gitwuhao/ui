@@ -393,9 +393,6 @@
 
 .colpick_hex .colpick_hex_field input {
 	right: 0px;
-	margin-top: 3px;
-	height: 20px;
-	line-height: 22px;
 }
 .colpick_full .colpick_hex_field input {
 	right: 5px;
