@@ -31,6 +31,7 @@
 					me.on('hide');
 				}
 			});
+			this.$colorpicker=this.$elem.children();
 			this.on("bindEvent",null);
 		},
 		onBindEvent:function(){
@@ -41,7 +42,15 @@
 		},
 		onSubmit:function(hsb,hex,rgb,el){
 			CF.logger(this,arguments);
+		},/*rgbhex、hex、full*/
+		setLayout:function(layout){
+			var colorpicker=this.$colorpicker[0];
+			if(!layout){
+				layout="full";
+			}
+			colorpicker.className="colpick  colpick_"+layout;
 		}
+		
 	});
 
 })(CF,$,ui);

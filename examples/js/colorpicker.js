@@ -18,6 +18,9 @@ window.examples.colorpicker=function(){
 	});
 	
 	colorpicker.show();
+
+	window.colorpicker=colorpicker;
+
 }
 
 })();

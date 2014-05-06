@@ -91,6 +91,7 @@ For usage and examples: colpick.com/plugin
 				color: 'FF0000',
 				livePreview: true,
 				flat: false,
+				//rgbhex、hex、full
 				layout: 'full',
 				submit: 1,
 				submitText: 'OK',
