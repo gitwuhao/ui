@@ -61,9 +61,9 @@
 			}
 		
 			
-			if(this.items && this.readonly==true){
+			if(this.readonly==true){
 				this.$text.click(function(event){
-					me.on("listToggle");
+					me.on("click");
 				});
 			}
 
@@ -85,13 +85,13 @@
 						me.trigger("arrowClick");
 					}
 					me.$text.focus();
-					me.on("listToggle");
+					me.on("click");
 				});
 			}
 
 			this.$elem.bindHover();
 		},
-		onListToggle : function(event){
+		onClick : function(event){
 			CF.logger(this,arguments);
 			var me=this;
 			if(this.items && !this.list){

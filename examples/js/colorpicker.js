@@ -25,11 +25,11 @@ window.examples.colorpicker=function(){
 					align : 'lb',
 					$offsetElement : this.$elem,
 					onChange:function(color){
-						console.info("button onChange:#"+color);
+						console.info("button onChange:"+color);
 						me.color=color;
 					},
 					onSubmit:function(color){
-						console.info("button onSubmit:#"+color);
+						console.info("button onSubmit:"+color);
 						me.color=color;
 					}
 				});
@@ -53,11 +53,11 @@ window.examples.colorpicker=function(){
 					align : 'lb',
 					$offsetElement : this.$elem,
 					onChange:function(color){
-						console.info("button onChange:#"+color);
+						console.info("button onChange:"+color);
 						me.color=color;
 					},
 					onSubmit:function(color){
-						console.info("button onSubmit:#"+color);
+						console.info("button onSubmit:"+color);
 						me.color=color;
 					}
 				});
@@ -68,19 +68,18 @@ window.examples.colorpicker=function(){
 
 
 
-	var date=new ui.form.date({
+	var date=new ui.form.combo({
 		render : div,
 		label : "颜色",
-		cls : "date",
+		icon : "color",
 		readonly : true,
-		name : "bcms",
-		onDatePickerToggle : function(){
+		onClick : function(){
 			var me=this;
 			if(!this.colorpicker){
 				this.colorpicker=ui.colorpicker.getInstance({
 					align : 'lb',
 					layout:'rgbhex',
-					$offsetElement : this.$date,
+					$offsetElement : this.$combo,
 					onChange:function(color){
 						console.info("button onChange:"+color);
 						me.$text.val(color);

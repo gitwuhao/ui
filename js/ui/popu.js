@@ -40,7 +40,7 @@
 			},
 			setCurrentPopu : function(popu){
 				var _popu=this.currentPopu;
-				if(_popu){
+				if(_popu && _popu!=popu){
 					_popu.on("hide");
 				}
 				this.currentPopu=popu;
@@ -58,6 +58,13 @@
 						me.setCurrentPopu(null);
 					}
 				});
+				
+				
+				$.getDoc().mousedown(function(event){
+					
+
+				});
+
 
 				$.getDoc().click(function(event){
 					var currentPopu=me.currentPopu;
@@ -99,7 +106,6 @@
 							me.setCurrentPopu(null);
 						}
 					}
-
 
 				});
 

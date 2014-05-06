@@ -675,15 +675,21 @@ For usage and examples: colpick.com/plugin
 			}else{
 				this.setLayout("hex");
 			}
+			this.onHide();
 			this.on("show");
+			this.config.isHide=false;
+			
 		},
 		hide:function(){
 			CF.logger(this,arguments);
 			this.on("hide");
+			if(this.config){
+				this.config.isHide=true;
+			}
 		},
 		toggle : function(config){
 			CF.logger(this,arguments);
-			if(this.config==config && this.isHide==false){
+			if(this.config==config && config.isHide==false){
 				this.hide();
 				return;
 			}

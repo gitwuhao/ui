@@ -16,9 +16,7 @@
 
 				ui.widget.applyCSS(config,this.css);
 
-				if(config.arrowIcon!=false){
-					config._c_text_icon=config._c_arrow_icon;
-				}
+				config._c_text_icon=config._c_arrow_icon;				
 
 				if(config.cls){
 					config.cls=config._c_date + " " +config.cls;
