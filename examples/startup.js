@@ -24,6 +24,7 @@
 		'date',
 		'window',
 		'teditor',
+		'colorpicker',
 		'tab'
 	];
 	

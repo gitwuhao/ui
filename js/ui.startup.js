@@ -1,8 +1,10 @@
 (function(CF,$){
 
-	var path='js/';
+	var path='js/ui/';
 
 	$.includePack('css','css/ui.css');
+	
+    $.loadJSQueue('js/plugins/colpick.js');
 
     $.loadJSQueue(
 		path+'widget.js',
@@ -20,7 +22,6 @@
 		path+'tab.js',
 		path+'window.js',
 		path+'messagebox.js',
-		path+'plugins/colpick.js',
 		path+'colorpicker.js',
 		function(){
 			ui.ready=true;

@@ -12,6 +12,9 @@
 				_c_colorpicker : '-colorpicker'
 			}
 		},
+		onRenderBefore:function(config){
+			CF.logger(this,arguments);
+		},
 		onRenderAfter : function(config){
 			CF.logger(this,arguments);
 			var me=this;

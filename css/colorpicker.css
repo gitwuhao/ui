@@ -1,3 +1,10 @@
+.x-ui-colorpicker-popu{
+	border: 1px solid #CCC;
+}
+
+
+
+
 .colpick {
 	position: absolute;
 	width: 346px;
@@ -152,7 +159,7 @@
 /*Field label container*/
 .colpick_field_letter {
 	position: absolute;
-	width: 12px;
+	width: 17px;
 	height: 20px;
 	line-height: 20px;
 	padding-left: 4px;
@@ -160,6 +167,7 @@
 	border-right: 1px solid #bdbdbd;
 	font-weight: bold;
 	color:#777;
+	/* margin-right: 10px; */
 }
 /*Text inputs*/
 .colpick_field input, .colpick_hex_field input {
@@ -174,11 +182,11 @@
 	font-size: 12px;
 	font-family: Arial, Helvetica, sans-serif;
 	color: #555;
-	text-align: right;
+	text-align: left;
 	outline: none;
 }
 .colpick_hex_field input {
-	right: 4px;
+	right: -5px;
 }
 /*Field up/down arrows*/
 .colpick_field_arrs {
@@ -299,30 +307,32 @@
 	height:201px;
 }
 .colpick_hex .colpick_hex_field {
-	width:72px;
+	width: 78px;
 	height:25px;
-	top:168px;
+	top: 170px;
 	left:80px;
 }
 .colpick_hex .colpick_hex_field div, .colpick_hex .colpick_hex_field input {
-	height: 25px;
-	line-height: 25px;
+	height: 23px;
+	line-height: 23px;
 }
 .colpick_hex .colpick_new_color {
 	left:6px;
-	top:168px;
+	top: 170px;
 	width:30px;
 	border-right:none;
+	/* margin-right: 5px; */
 }
 .colpick_hex .colpick_current_color {
 	left:36px;
-	top:168px;
+	top: 170px;
 	width:30px;
 	border-left:none;
+	margin-left: 5px;
 }
 .colpick_hex .colpick_submit {
-	left:164px;
-	top: 168px;
+	left: 170px;
+	top: 170px;
 	width:30px;
 	height:25px;
 	line-height: 25px;
