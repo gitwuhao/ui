@@ -97,6 +97,10 @@
 		getItem:function(icon){
 			return this.itemsMap['_'+icon+'_'];
 		},
+		hideIcon : function(icon){
+			var item=this.getItem(icon);
+			item.$elem.addClass('hide');
+		},
 		disabledIcon : function(icon){
 			var item=this.getItem(icon);
 			item.disabled();
