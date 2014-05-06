@@ -20,6 +20,8 @@
 		path+'tab.js',
 		path+'window.js',
 		path+'messagebox.js',
+		path+'plugins/colpick.js',
+		path+'colorpicker.js',
 		function(){
 			ui.ready=true;
 
