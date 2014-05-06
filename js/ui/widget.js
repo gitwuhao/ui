@@ -199,10 +199,6 @@
 				$elem.remove();
 			}
 			for(var key in this){
-				var item=this[key];
-				if(item.remove==ui.widget.remove){
-					item.remove();
-				}
 				this[key]=null;
 				delete this[key];
 			}

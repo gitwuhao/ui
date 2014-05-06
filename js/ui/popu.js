@@ -39,7 +39,7 @@
 				popu.setOffset(left,top);
 			},
 			setCurrentPopu : function(popu){
-				CF.logger(this,arguments);
+				CF.logger(this.prototype,arguments);
 				var _popu=this.currentPopu;
 				if(_popu && _popu!=popu){
 					_popu.on("hide");
@@ -48,7 +48,7 @@
 				this.initEventListener();
 			},
 			removeCurrentPopu:function(popu){
-				CF.logger(this,arguments);
+				CF.logger(this.prototype,arguments);
 				if(this.currentPopu==popu){
 					this.currentPopu=null;
 				}
@@ -56,6 +56,7 @@
 			initEventListener : function(){
 				var me=this;
 				$.getDoc().keydown(function(event){
+					CF.logger(me.prototype,arguments);
 					if(event.keyCode==27){
 						me.setCurrentPopu(null);
 					}
@@ -64,11 +65,13 @@
 				
 				$.getDoc().mousedown(function(event){
 					
+					CF.logger(me.prototype,arguments);
 
 				});
 
 
 				$.getDoc().click(function(event){
+					CF.logger(me.prototype,arguments);
 					var currentPopu=me.currentPopu;
 					if(!currentPopu){
 						return;

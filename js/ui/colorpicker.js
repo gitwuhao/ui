@@ -679,12 +679,22 @@ For usage and examples: colpick.com/plugin
 			}
 			this.onHide();
 			this.on("show");
-			this.config.isHide=false;
 			
+		},
+		onShowAfter:function(){
+			CF.logger(this,arguments);
+			this.callSuperMethod();
+			if(this.config){
+				this.config.isHide=false;
+			}
 		},
 		hide:function(){
 			CF.logger(this,arguments);
 			this.on("hide");
+		},
+		onHideAfter : function(){
+			CF.logger(this,arguments);
+			this.callSuperMethod();
 			if(this.config){
 				this.config.isHide=true;
 			}
@@ -738,8 +748,5 @@ For usage and examples: colpick.com/plugin
 			getInstance().toggle(config);
 		}
 	});
-
-	delete ui.messagebox.css;
-
 
 })(CF,$,ui);
