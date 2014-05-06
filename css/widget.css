@@ -12,3 +12,6 @@ body *,.border-box * {
 .x-ui-label {
 	line-height: 20px;
 }
+.hide{
+	display: none;
+}

@@ -125,34 +125,46 @@
 			var me=this;
 
 			this.$label.click(function(event){
-				me.$text.focus();
+				if(!me.isDisabled){
+					me.$text.focus();
+				}
 			});
 
 			this.$icon.mousedown(function(event){
-				var $target=me.$icon;
-				if($target.is("."+me._c_clear_icon)>-1){
-					me.$text.val("");
-					$target.removeClass(me._clear_icon);
+				if(!me.isDisabled){
+					var $target=me.$icon;
+					if($target.is("."+me._c_clear_icon)>-1){
+						me.$text.val("");
+						$target.removeClass(me._clear_icon);
+					}
+					setTimeout(function(){
+						me.$text.focus();
+					},0);
 				}
-				setTimeout(function(){
-					me.$text.focus();
-				},0);
 			});
 
 			this.$text.focus(function(event){
-				if(this.value.length>0){
+				if(!me.isDisabled && this.value.length>0){
 					me.$icon.addClass(me._clear_icon);
 				}
 			});
 
 			this.$text.blur(function(event){
-				if(this.value.length>0){
+				if(!me.isDisabled && this.value.length>0){
 					me.$icon.removeClass(me._clear_icon);
 				}
 			});
 
 			this.$elem.bindHover();
 
+		},
+		disabled:function(){
+			this.callSuperMethod();
+			this.$text[0].readOnly=true;
+		},
+		enabled:function(){
+			this.callSuperMethod();
+			this.$text[0].readOnly=false;
 		}
 	});
 

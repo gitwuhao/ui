@@ -40,7 +40,7 @@
 		onBindEvent:function(){
 			var me=this;
 			this.$button.click(function(event){
-				if(me.on("buttonClick")!=false){
+				if(!me.isDisabled && me.on("buttonClick")!=false){
 					me.trigger("buttonclick");
 				}
 			});

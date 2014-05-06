@@ -8,3 +8,6 @@
 	padding: 0px;
 	border: 1px solid #A3BDE3;
 }
+.x-ui-button.disabled{
+	opacity: 0.3;
+}

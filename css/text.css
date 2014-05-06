@@ -29,7 +29,9 @@ div.x-ui-text{
 	border-color:#00C2FF;
 	box-shadow: 0 0 5px #8CDDFF;
 }
-
+.x-ui-text.disabled{
+	opacity: 0.3;
+}
 .x-ui-label-padding .x-ui-required-icon{
 	color:red;
 	font-weight:bold;

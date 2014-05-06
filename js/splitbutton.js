@@ -59,7 +59,7 @@
 			var me=this;
 			
 			this.$button.click(function(event){
-				if(me.on("buttonClick")!=false){
+				if(!me.isDisabled && me.on("buttonClick")!=false){
 					me.trigger("buttonclick");
 				}
 			});
@@ -67,7 +67,7 @@
 			this.$splitbutton.bindHover();
 
 			this.$arrowbutton.click(function(event){
-				if(me.on("arrowButtonClick")!=false){
+				if(!me.isDisabled && me.on("arrowButtonClick")!=false){
 					me.trigger("arrowbuttonclick");
 				}
 			});

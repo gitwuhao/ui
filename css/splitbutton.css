@@ -12,6 +12,9 @@
 	padding: 0;
 	border: 1px solid #A3BDE3;
 }
+.x-ui-split-button.disabled{
+	opacity: 0.3;
+}
 .x-ui-arrow-button{
 	float:left;
 	padding-left: 1px;

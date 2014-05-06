@@ -25,10 +25,9 @@
 .x-ui-toolbar-button-box .x-ui-separator{
 	float: left;
 	width: 2px;
-	height: 18px;
-	display: inline-block;
+	height: 14px;
 	border-right: 1px solid #FFF;
-	margin: 2px 2px 0px 3px;
+	margin: 5px 2px 5px 3px;
 	background-color: #C9C4C4;
 }
 

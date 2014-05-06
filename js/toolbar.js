@@ -82,12 +82,28 @@
 			this.$popup=$toolbar.children('.'+this._c_popup_box);
 			var children=this.$buttonbar.children();
 			var items=config.items;
+			this.itemsMap={};
 			for(var i=0,len=items.length;i<len;i++){
 				var item=items[i];
 				if(typeof item!="string"){
 					items[i]=this._class_.getButtonItem(item,children[i]);
+					var icon=item.cls;
+					if(icon){
+						this.itemsMap['_'+icon+'_']=items[i];
+					}
 				}
 			}
+		},
+		getItem:function(icon){
+			return this.itemsMap['_'+icon+'_'];
+		},
+		disabledIcon : function(icon){
+			var item=this.getItem(icon);
+			item.disabled();
+		},
+		enabledIcon : function(icon){
+			var item=this.getItem(icon);
+			item.enabled();
 		}
 	});
 	

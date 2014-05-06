@@ -202,6 +202,14 @@
 				this[key]=null;
 				delete this[key];
 			}
+		},
+		disabled:function(){
+			this.$elem.addClass("disabled");
+			this.isDisabled=true;
+		},
+		enabled:function(){
+			this.$elem.removeClass("disabled");
+			this.isDisabled=false;
 		}
 	};
 
