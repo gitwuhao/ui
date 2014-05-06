@@ -649,6 +649,7 @@ For usage and examples: colpick.com/plugin
 		},
 		//rgbhex,full,hex
 		setLayout:function(layout){
+			CF.logger(this,arguments);
 			var colorpicker=this.$colpick[0];
 			if(!layout){
 				layout="hex";
@@ -657,6 +658,7 @@ For usage and examples: colpick.com/plugin
 		},
 		/*FFFFFF*/
 		setColor:function(color){
+			CF.logger(this,arguments);
 			colpick.setColor.call(this.$elem,color);
 		},
 		show:function(config){

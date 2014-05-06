@@ -39,6 +39,7 @@
 				popu.setOffset(left,top);
 			},
 			setCurrentPopu : function(popu){
+				CF.logger(this,arguments);
 				var _popu=this.currentPopu;
 				if(_popu && _popu!=popu){
 					_popu.on("hide");
@@ -47,6 +48,7 @@
 				this.initEventListener();
 			},
 			removeCurrentPopu:function(popu){
+				CF.logger(this,arguments);
 				if(this.currentPopu==popu){
 					this.currentPopu=null;
 				}
@@ -148,6 +150,7 @@
 			}
 		},
 		resetOffset:function(){
+			CF.logger(this,arguments);
 			if(this.$offsetElement){
 				ui.popu.setOffset({
 					popu : this,
@@ -171,6 +174,7 @@
 		},
 		onHideAfter : function(){
 			CF.logger(this,arguments);
+			ui.popu.removeCurrentPopu(this);
 		},
 		onShowBefore:function(){
 			CF.logger(this,arguments);
@@ -222,6 +226,7 @@
 			}
 		},
 		setOffset : function(left,top){
+			CF.logger(this,arguments);
 			this.$elem.css({
 				left : left,
 				top : top
