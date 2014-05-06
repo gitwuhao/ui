@@ -1,10 +1,6 @@
 .x-ui-colorpicker-popu{
 	border: 1px solid #CCC;
 }
-
-
-
-
 .colpick {
 	position: absolute;
 	width: 346px;
@@ -117,10 +113,10 @@
 	height: 20px;
 	width: 60px;
 	overflow:hidden;
-	background:#f3f3f3;
+	/* background:#f3f3f3; */
 	color:#b8b8b8;
 	font-size:12px;
-	border:1px solid #bdbdbd;
+	border: 1px solid #DDD;
 	border-radius: 3px;
 }
 .colpick_rgb_r {
@@ -163,8 +159,8 @@
 	height: 20px;
 	line-height: 20px;
 	padding-left: 4px;
-	background: #efefef;
-	border-right: 1px solid #bdbdbd;
+	/* background: #efefef; */
+	border-right: 1px solid #DDD;
 	font-weight: bold;
 	color:#777;
 	/* margin-right: 10px; */
@@ -172,12 +168,10 @@
 /*Text inputs*/
 .colpick_field input, .colpick_hex_field input {
 	position: absolute;
-	right: 11px;
 	margin: 0;
 	padding: 0;
 	height: 20px;
 	line-height: 20px;
-	background: transparent;
 	border: none;
 	font-size: 12px;
 	font-family: Arial, Helvetica, sans-serif;
@@ -221,16 +215,15 @@
 	width: 130px;
 	height: 22px;
 	line-height:22px;
-	background: #efefef;
+	/* background: #efefef; */
 	text-align: center;
-	color: #555;
+	color: #000;
 	font-size: 12px;
-	border: 1px solid #bdbdbd;
+	border: 1px solid #DDD;
 	border-radius: 3px;
 }
 .colpick_submit:hover {
-	background:#f3f3f3;
-	border-color:#999;
+	background-color: #FAFAFA;
 	cursor: pointer;
 }
 
@@ -390,8 +383,7 @@
 	border-color:#444;
 }
 
-.colpick_field  input{
-	text-align: center;
+.colpick_rgbhex .colpick_field  input{
 	right: 5px;
 }
 
@@ -408,6 +400,9 @@
 .colpick_full .colpick_hex_field input {
 	right: 5px;
 	width: 100px;
+}
+.colpick_full .colpick_field input {
+	right: -5px;
 }
 .colpick_rgbhex .colpick_hex_field input {
 	left: 15px;

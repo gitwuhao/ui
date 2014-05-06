@@ -617,11 +617,11 @@ For usage and examples: colpick.com/plugin
 				submit: 1,
 				submitText: '确认',
 				onChange: function (hsb,hex,rgb,el) {
-					me.on('change');
+					me.onChange(hsb,hex,rgb,el);
 				},
 				onSubmit: function (hsb,hex,rgb,el) {
-					me.on('submit');
-					me.on('hide');
+					me.onSubmit(hsb,hex,rgb,el);
+					me.hide();
 				}
 			});
 
