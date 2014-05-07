@@ -110,7 +110,6 @@
 							itemData.onClick(event);
 						}
 						me.on("menuItemClick");
-						//event.stopBubble();
 					});
 					//}
 				}
