@@ -40,36 +40,28 @@
 			},
 			setCurrentPopu : function(popu){
 				CF.logger(this.prototype,arguments);
-				var _popu=this.currentPopu;
-				if(_popu && _popu!=popu){
-					_popu.on("hide");
+				if(this.currentPopu && this.currentPopu!=popu){
+					this.currentPopu.on("hide");
 				}
 				this.currentPopu=popu;
 				this.initEventListener();
 			},
-			removeCurrentPopu:function(popu){
+			removeCurrentPopu:function(){
 				CF.logger(this.prototype,arguments);
-				if(this.currentPopu==popu){
-					this.currentPopu=null;
+				if(this.currentPopu){
+					this.currentPopu.hide();
 				}
+				this.currentPopu=null;
 			},
 			initEventListener : function(){
 				var me=this;
 				$.getDoc().keydown(function(event){
 					CF.logger(me.prototype,arguments);
 					if(event.keyCode==27){
-						me.setCurrentPopu(null);
+						me.removeCurrentPopu();
 					}
 				});
 				
-				
-				$.getDoc().mousedown(function(event){
-					
-					CF.logger(me.prototype,arguments);
-
-				});
-
-
 				$.getDoc().click(function(event){
 					CF.logger(me.prototype,arguments);
 					var currentPopu=me.currentPopu;
@@ -80,7 +72,7 @@
 					var target=event.target;
 
 					if(/body|html/gi.test(target.nodeName)){
-						me.setCurrentPopu(null);
+						me.removeCurrentPopu();
 						return;
 					}
 
@@ -108,7 +100,7 @@
 
 					if(currentPopu && currentPopu.lastShowTimestamp){
 						if($.timestamp()-currentPopu.lastShowTimestamp>200){
-							me.setCurrentPopu(null);
+							me.removeCurrentPopu();
 						}
 					}
 

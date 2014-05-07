@@ -4,7 +4,7 @@
 		this.callSuperMethod();
 	};
 
-	ui.extend(ui.button,ui.widget,{
+	ui.extend(ui.button,ui.form.item,{
 		_type_ : "ui",
 		_name_ : "button",
 		statics:{
@@ -40,7 +40,7 @@
 		onBindEvent:function(){
 			var me=this;
 			this.$button.click(function(event){
-				if(me.focus()){ 
+				if(me.on('focus')){ 
 					me.on("click");
 				}
 			});
@@ -51,7 +51,5 @@
 		}
 	});
 
-	
-	ui.form.extendItem(ui.button);
 
 })(CF,$,ui);

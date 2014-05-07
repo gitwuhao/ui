@@ -75,86 +75,6 @@
 				}
 				item.on("render",config);
 				return item;
-			},
-			setActive: function(item){
-				if(this.active && this.active!=item){
-					this.active.blur();
-				}
-				this.active=item;
-			},
-			removeActive: function(item){
-				if(this.active==item){
-					this.active=null;
-				}
-			},
-			children : [],
-			item:{
-				blur : function(){
-					CF.logger(this,arguments);
-					return this.on('blur');
-				},
-				onBlurBefore : function(){
-					if(this.isDisabled==true){
-						return false;
-					}
-				},
-				onBlur : CF.emptyFunction,
-				onBlurAfter : function(){
-					this.$elem.removeClass("selected");
-					ui.form.removeActive(this);
-					this.isFocus=false;
-				},
-				focus : function(){
-					CF.logger(this,arguments);
-					return this.on('focus');
-				},
-				onFocusBefore : function(){
-					if(this.isDisabled==true){
-						return false;
-					}
-				},
-				onFocus : CF.emptyFunction,
-				onFocusAfter : function(){
-					ui.form.setActive(this);
-					this.$elem.removeClass("hover");
-					this.$elem.addClass("selected");
-					this.isFocus=true;
-				},
-				disabled : function(){
-					CF.logger(this,arguments);
-					return this.on('disabled');
-				},
-				onDisabledBefore : function(){
-					if(this.isDisabled==true){
-						return false;
-					}
-					this.isDisabled=true;
-					this.$elem.addClass("disabled");
-					ui.form.removeActive(this);
-					this.isFocus=false;
-				},
-				onDisabled : CF.emptyFunction,
-				onDisabledAfter : CF.emptyFunction,
-				enabled:function(){
-					CF.logger(this,arguments);
-					return this.on('enabled');
-				},
-				onDisabledBefore:function(){
-					if(this.isDisabled==false){
-						return false;
-					}
-					this.isDisabled=false;
-					this.$elem.removeClass("disabled");
-				},
-				onDisabled : CF.emptyFunction,
-				onDisabledAfter : CF.emptyFunction
-			},
-			extendItem : function(_class_){
-				if(!_class_._item_class_){
-					CF.apply(_class_.prototype,ui.form.item);
-					this.children.push(_class_);
-					_class_._item_class_="__item_class__";
-				}
 			}
 		},
 		onRender:function(config){
@@ -187,5 +107,80 @@
 		}
 	});
 
-	
+	ui.form.item=function(render){
+		this.callSuperMethod();
+	};
+
+	ui.extend(ui.form.item,ui.widget,{
+		_type_ : "ui.form",
+		_name_ : "item",
+		statics:{
+			setActive: function(item){
+				if(this.active && this.active!=item){
+					this.removeActive();
+				}
+				this.active=item;
+			},
+			removeActive: function(){
+				if(this.active){
+					this.active.on("blur");
+				}
+				this.active=null;
+			}
+		},
+		blur : CF.emptyFunction,
+		onBlurBefore : function(){
+			CF.logger(this,arguments);
+			if(this.isDisabled==true || this.isFocus==false){
+				return false;
+			}
+		},
+		onBlur : CF.emptyFunction,
+		onBlurAfter : function(){
+			CF.logger(this,arguments);
+			this.$elem.removeClass("selected");
+			this.isFocus=false;
+		},
+		focus : CF.emptyFunction,
+		onFocusBefore : function(){
+			CF.logger(this,arguments);
+			if(this.isDisabled==true || this.isFocus){
+				return false;
+			}
+		},
+		onFocus : CF.emptyFunction,
+		onFocusAfter : function(){
+			CF.logger(this,arguments);
+			ui.form.item.setActive(this);
+			this.$elem.removeClass("hover");
+			this.$elem.addClass("selected");
+			this.isFocus=true;
+		},
+		disabled : CF.emptyFunction,
+		onDisabledBefore : function(){
+			CF.logger(this,arguments);
+			if(this.isDisabled==true){
+				return false;
+			}
+			this.isDisabled=true;
+			this.$elem.addClass("disabled");
+			ui.form.item.removeActive(this);
+			this.isFocus=false;
+		},
+		onDisabled : CF.emptyFunction,
+		onDisabledAfter : CF.emptyFunction,
+		enabled : CF.emptyFunction,
+		onDisabledBefore:function(){
+			CF.logger(this,arguments);
+			if(this.isDisabled==false){
+				return false;
+			}
+			this.isDisabled=false;
+			this.$elem.removeClass("disabled");
+		},
+		onDisabled : CF.emptyFunction,
+		onDisabledAfter : CF.emptyFunction
+	});
+
+
 })(CF,$,ui);

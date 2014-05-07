@@ -10,14 +10,14 @@
 		statics:{
 			css:{
 				_c_combo : '-combo',
-				_c_arrow_icon : '-arrow-icon'
+				_c_text_icon : '-arrow-icon'
 			},
 			getTemplate: function(config){
 
 				ui.widget.applyCSS(config,this.css);
 
 				if(config.arrowIcon!=false){
-					config._c_text_icon=config._c_arrow_icon;
+					config.icon='combo';
 				}
 
 				if(config.cls){
@@ -52,44 +52,16 @@
 			this.callSuperMethod();
 		},
 		onBindEvent:function(){
+			CF.logger(this,arguments);
+			this.callSuperMethod();
 			var me=this;
-
-			if(this.readonly!=true){
-				this.$label.click(function(event){
-					me.$text.focus();
-				});
-			}
-		
-			
-			if(this.readonly==true){
+			if( me.readonly==true){
 				this.$text.click(function(event){
-					if(event.timeStamp-me.lastFocusTime>300){
-						me.focus();
-					}
+					me.focus();
 				});
 			}
-
-			this.$text.focus(function(event){
-				me.lastFocusTime=event.timeStamp;
-				me.focus();
-			});
-			
-
-			this.$text.blur(function(event){
-				me.blur();
-			});
-
-			if(this.arrowIcon!=false){
-				this.$icon.click(function(event){
-					if(me.focus()){
-						me.on("arrowClick");
-					}
-				});
-			}
-
-			this.$elem.bindHover();
 		},
-		onFocus : function(event){
+		focus:function(){
 			CF.logger(this,arguments);
 			var me=this;
 			if(this.items && !this.list){
@@ -114,6 +86,15 @@
 			if(this.list){
 				this.list.toggle();
 			}
+			
+			this.callSuperMethod();
+		},
+		onBlur:function(){
+			CF.logger(this,arguments);
+			var me=this;
+			if(this.list){
+				this.list.on("hide");
+			}
 		},
 		onSelected:function(item){
 			this.$text.val(item.label);
@@ -134,9 +115,6 @@
 	});
 
 
-
-
-	ui.form.extendItem(ui.form.combo);
 
 
 	var ComboList=function(){

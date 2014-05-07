@@ -59,7 +59,7 @@
 			var me=this;
 			
 			this.$button.click(function(event){
-				if(me.focus()){ 
+				if(me.on('focus')){ 
 					me.on("click");
 				}
 			});
@@ -67,11 +67,14 @@
 			this.$splitbutton.bindHover();
 
 			this.$arrowbutton.click(function(event){
-				if(me.focus()){
-					me.on("arrowClick");
-				}
+				me.focus();
+				me.on("arrowClick");
 			});
 			this.$arrowbutton.bindHover();
+		},
+		focus : function(){
+			CF.logger(this,arguments);
+			this.on('focus');
 		},
 		onClick : function(event){
 			CF.logger(this,arguments);
@@ -99,8 +102,5 @@
 			this.callSuperMethod();
 		}
 	});
-
-	
-	ui.form.extendItem(ui.splitbutton);
 
 })(CF,jQuery,ui);

@@ -10,13 +10,13 @@
 		statics:{
 			css:{
 				_c_date : '-date',
-				_c_arrow_icon : '-arrow-icon'
+				_c_text_icon : '-arrow-icon'
 			},
 			getTemplate: function(config){
 
 				ui.widget.applyCSS(config,this.css);
 
-				config._c_text_icon=config._c_arrow_icon;				
+				config.icon='date';
 
 				if(config.cls){
 					config.cls=config._c_date + " " +config.cls;
@@ -44,35 +44,16 @@
 			this.callSuperMethod();
 		},
 		onBindEvent:function(){
+			CF.logger(this,arguments);
+			this.callSuperMethod();
 			var me=this;
-
-			if(this.readonly==true){
+			if( me.readonly==true){
 				this.$text.click(function(event){
-					if(event.timeStamp-me.lastFocusTime>300){
-						me.focus();
-					}
+					me.focus();
 				});
 			}
-
-			this.$text.focus(function(event){
-				me.lastFocusTime=event.timeStamp;
-				me.focus();
-			});
-			
-
-			this.$text.blur(function(event){
-				me.blur();
-			});
-
-			this.$icon.click(function(event){
-				if(me.focus()){
-					me.on("arrowClick");
-				}
-			});
-			
-			this.$elem.bindHover();
 		},
-		onFocus : function(event){
+		focus : function(event){
 			CF.logger(this,arguments);
 			var me=this;
 			if(!this.datepicker){
@@ -88,6 +69,14 @@
 				});
 			}
 			this.datepicker.toggle();
+			this.callSuperMethod();
+		},
+		onBlur:function(){
+			CF.logger(this,arguments);
+			var me=this;
+			if(this.datepicker){
+				this.datepicker.on("hide");
+			}
 		},
 		remove:function(){
 			CF.logger(this,arguments);

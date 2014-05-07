@@ -4,7 +4,7 @@
 		this.callSuperMethod();
 	};
 
-	ui.extend(ui.form.text,ui.widget,{
+	ui.extend(ui.form.text,ui.form.item,{
 		_type_ : "ui.form",
 		_name_ : "text",
 		statics:{
@@ -124,39 +124,36 @@
 			CF.logger(this,arguments);
 			var me=this;
 
-			this.$label.click(function(event){
-				if(!me.isDisabled){
-					me.$text.focus();
-				}
-			});
-
-			this.$icon.mousedown(function(event){
-				if(!me.isDisabled){
-					var $target=me.$icon;
-					if($target.is("."+me._c_clear_icon)>-1){
-						me.$text.val("");
-						$target.removeClass(me._clear_icon);
-					}
-					setTimeout(function(){
-						me.$text.focus();
-					},0);
-				}
+			this.$elem.click(function(event){
+				me.focus();
 			});
 
 			this.$text.focus(function(event){
-				if(me.focus() && this.value.length>0){
+				if(me.on('focus') && this.value.length>0 && me.readonly!=true){
 					me.$icon.addClass(me._clear_icon);
 				}
 			});
 
 			this.$text.blur(function(event){
-				if(me.blur() && this.value.length>0){
+				if(me.on('blur') && this.value.length>0  && me.readonly!=true){
 					me.$icon.removeClass(me._clear_icon);
 				}
 			});
 
+			if(this.icon){
+				this.$icon.click(function(event){
+					if(me.focus()){
+						me.on("arrowClick");
+					}
+				});
+			}
+
 			this.$elem.bindHover();
 
+		},
+		focus : function(){
+			CF.logger(this,arguments);
+			this.$text.focus();
 		},
 		onDisabled:function(){
 			this.$text[0].readOnly=true;
@@ -165,8 +162,6 @@
 			this.$text[0].readOnly=false;
 		}
 	});
-
-
-	ui.form.extendItem(ui.form.text);
 	
+
 })(CF,$,ui);
