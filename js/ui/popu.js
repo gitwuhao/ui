@@ -49,7 +49,7 @@
 			removeCurrentPopu:function(){
 				CF.logger(this.prototype,arguments);
 				if(this.currentPopu){
-					this.currentPopu.hide();
+					this.currentPopu.on("hide");
 				}
 				this.currentPopu=null;
 			},
