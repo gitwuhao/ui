@@ -1,7 +1,6 @@
-.x-ui-form .x-ui-textfield{
+.x-ui-form .x-ui-textfield,.x-ui-form .x-ui-textfield input{
 	height: 24px;
 }
-
 .x-ui-form .x-ui-text .x-ui-label,.x-ui-form .x-ui-form-label {
 	line-height: 24px;
 	width: 60px;
@@ -21,7 +20,8 @@
 	border-radius: 3px;
 	font: normal 14px/18px helvetica, arial, verdana, sans-serif;
 	cursor: pointer;
-	margin: 0px 5px
+	margin: 0px 5px;
+	box-shadow: none;
 }
 .x-ui-button-box .x-ui-button.hover{
 	background-color: #FAFAFA;

@@ -286,7 +286,7 @@ window.examples.window=function(){
 
 
 	
-	var button10=jQuery.createElement('<input type="button" value="确认删除按钮10" style="position: absolute;right: 10px;top: 10px;padding: 10px 20px;z-index: 99999999;" />');
+	var button10=jQuery.createElement('<input type="button" value="确认删除按钮10" style="position: absolute;right: 10px;top: 100px;padding: 10px 20px;z-index: 99999999;" />');
 
 	jQuery.getBody().append(button10);
 
