@@ -66,7 +66,8 @@
 					},
 					autoSetOffset : true,
 					align : 'lb',
-					$offsetElement : this.$date
+					$offsetElement : this.$date,
+					$owner : this
 				});
 			}
 			this.datepicker.toggle();

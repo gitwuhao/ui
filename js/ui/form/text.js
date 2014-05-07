@@ -146,7 +146,7 @@
 					if(me.focus()){
 						me.on("arrowClick");
 					}
-					event.stopBubble();
+					event.stopBubble(me);
 				});
 			}
 

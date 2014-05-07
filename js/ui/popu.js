@@ -62,19 +62,15 @@
 					}
 				});
 				
-				$.getDoc().mousedown(function(event){
+				$.getDoc().mousedown(function(event,owner){
 					CF.logger(me.prototype,arguments);
 					var currentPopu=me.currentPopu;
-					if(!currentPopu){
+					if(!currentPopu || (owner && currentPopu.$owner==owner)){
 						return;
 					}
 
-					var target=event.target;
-
-					if(event.target!=this){
-						me.removeCurrentPopu();
-					}
-
+					me.removeCurrentPopu();
+					
 					/*
 
 					
