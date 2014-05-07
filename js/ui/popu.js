@@ -144,6 +144,12 @@
 				this.resetOffset();
 			}
 		},
+		onBindEvent:function(){
+			CF.logger(this,arguments);
+			this.$elem.mousedown(function(event){
+				return false;
+			});
+		},
 		resetOffset:function(){
 			CF.logger(this,arguments);
 			if(this.$offsetElement){

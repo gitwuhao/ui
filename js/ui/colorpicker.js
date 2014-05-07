@@ -630,6 +630,7 @@ For usage and examples: colpick.com/plugin
 		},
 		onBindEvent:function(){
 			CF.logger(this,arguments);
+			this.callSuperMethod();
 		},
 		onChange:function(hsb,hex,rgb,el){
 			CF.logger(this,arguments);

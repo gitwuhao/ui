@@ -182,7 +182,7 @@
 					});
 				}
 			});
-
+			
 		},
 		onItemSelected:function(item){
 			CF.logger(this,arguments);

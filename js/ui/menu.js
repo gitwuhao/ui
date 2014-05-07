@@ -81,6 +81,10 @@
 		},
 		onBindEvent:function(){
 			CF.logger(this,arguments);
+			
+
+			this.callSuperMethod();
+
 			var me=this;
 			var items=this.items;
 			this.$menuitem.each(function(index,elem){

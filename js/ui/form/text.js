@@ -124,8 +124,9 @@
 			CF.logger(this,arguments);
 			var me=this;
 
-			this.$elem.click(function(event){
+			this.$label.mousedown(function(event){
 				me.focus();
+				return false;
 			});
 
 			this.$text.focus(function(event){
@@ -141,10 +142,11 @@
 			});
 
 			if(this.icon){
-				this.$icon.click(function(event){
+				this.$icon.mousedown(function(event){
 					if(me.focus()){
 						me.on("arrowClick");
 					}
+					return false;
 				});
 			}
 

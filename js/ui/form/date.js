@@ -48,7 +48,7 @@
 			this.callSuperMethod();
 			var me=this;
 			if( me.readonly==true){
-				this.$text.click(function(event){
+				this.$text.mousedown(function(event){
 					me.focus();
 				});
 			}

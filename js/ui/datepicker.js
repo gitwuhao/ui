@@ -40,6 +40,7 @@
 		},
 		onBindEvent:function(){
 			CF.logger(this,arguments);
+			this.callSuperMethod();
 		},
 		onSelected:function(date){
 			CF.logger(this,arguments);
