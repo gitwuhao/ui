@@ -129,6 +129,11 @@
 				this.$elem.css("width",this.width);
 			}
 
+			
+			if(this.height){
+				this.$elem.css("height",this.height);
+			}
+
 			if(this.$offsetElement){
 				var offsetParent=this.offsetParent;
 				if(!offsetParent){

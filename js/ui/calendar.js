@@ -209,10 +209,11 @@
 
 			this.display="day";
 			
+
 			if(this.autoSize==true){
 				var width=this.$render.getBoxInnerWidth();
 				var height=this.$render.getBoxInnerHeight();
-				this.setBoxSize(width,height);				
+				this.setBoxSize(width,height);
 			}
 			this.resize();
 		},

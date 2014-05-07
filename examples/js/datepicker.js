@@ -8,8 +8,8 @@ window.examples.datepicker=function(){
 	jQuery.getBody().append(div);
 
 	var datepicker=new ui.datepicker({
-		width : "",
-		px : 'fx',
+		width : "300",
+		height : "300",
 		cls : "combo",
 		date : "2013-01-23"
 	});
