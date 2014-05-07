@@ -87,7 +87,7 @@
 						autoSetOffset:true,
 						align:'lb',
 						$offsetElement : this.$elem,
-						owner : this
+						$owner : this
 					});
 					
 					this.menu=new ui.menu(menuConfig);

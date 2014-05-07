@@ -50,6 +50,7 @@
 			if( me.readonly==true){
 				this.$text.mousedown(function(event){
 					me.focus();
+					event.stopBubble(me);
 				});
 			}
 		},

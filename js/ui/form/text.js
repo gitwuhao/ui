@@ -126,7 +126,7 @@
 
 			this.$label.mousedown(function(event){
 				me.focus();
-				return false;
+				event.stopBubble(me);
 			});
 
 			this.$text.focus(function(event){
@@ -146,7 +146,7 @@
 					if(me.focus()){
 						me.on("arrowClick");
 					}
-					return false;
+					event.stopBubble();
 				});
 			}
 

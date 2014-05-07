@@ -94,7 +94,7 @@
 					$elem.bindHover();
 					item.$elem=$elem;
 					
-					item.owner=me;
+					item.$owner=me;
 
 					me.setMenuItemData(item);
 					

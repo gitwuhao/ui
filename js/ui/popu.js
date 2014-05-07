@@ -62,7 +62,7 @@
 					}
 				});
 				
-				$.getDoc().click(function(event){
+				$.getDoc().mousedown(function(event){
 					CF.logger(me.prototype,arguments);
 					var currentPopu=me.currentPopu;
 					if(!currentPopu){
@@ -71,11 +71,13 @@
 
 					var target=event.target;
 
-					if(/body|html/gi.test(target.nodeName)){
+					if(event.target!=this){
 						me.removeCurrentPopu();
-						return;
 					}
 
+					/*
+
+					
 					var targetCSS=target.className;
 
 					if(targetCSS.indexOf(popuCSS)>-1){
@@ -104,6 +106,7 @@
 						}
 					}
 
+					*/
 				});
 
 				this.initEventListener=CF.emptyFunction;
@@ -147,7 +150,7 @@
 		onBindEvent:function(){
 			CF.logger(this,arguments);
 			this.$elem.mousedown(function(event){
-				return false;
+				event.stopBubble();
 			});
 		},
 		resetOffset:function(){
