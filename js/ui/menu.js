@@ -104,12 +104,13 @@
 						},100);	
 					}
 					//if(item.onClick || !item.menu){
-					$elem.click(function(event){
+					$elem.mousedown(function(event){
 						var itemData=me.getMenuItemData(this);
 						if(itemData.onClick){
 							itemData.onClick(event);
 						}
 						me.on("menuItemClick");
+						//event.stopBubble();
 					});
 					//}
 				}
