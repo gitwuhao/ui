@@ -9,8 +9,8 @@ window.examples.button=function(){
 		cls : "ok",
 		label : "确定",
 		render : div,
-		onButtonClick:function(){
-			console.info("onButtonClick:"+this.label);
+		onClick:function(){
+			console.info("onClick:"+this.label);
 		}
 	});
 
@@ -18,8 +18,8 @@ window.examples.button=function(){
 		cls : "ted-ui-slider",
 		icon : true,
 		//render : div,
-		onButtonClick:function(){
-			console.info("onButtonClick:"+this.label);
+		onClick:function(){
+			console.info("onClick:"+this.label);
 		}
 	});
  

@@ -8,20 +8,20 @@ window.examples.teditor=function(){
 		items : [{
 			cls:'selectedcol',
 			title:'选择列',
-			onButtonClick:function(){
-				console.info("onButtonClick:"+this.title);
+			onClick:function(){
+				console.info("onClick:"+this.title);
 			}
 		},{
 			cls:'selectedrow',
 			title:'选择行',
-			onButtonClick:function(){
-				console.info("onButtonClick:"+this.title);
+			onClick:function(){
+				console.info("onClick:"+this.title);
 			}
 		},{
 			cls:'selectedtable',
 			title:'选择表格',
-			onButtonClick:function(){
-				console.info("onButtonClick:"+this.title);
+			onClick:function(){
+				console.info("onClick:"+this.title);
 			}
 		},'|',{
 			cls:'deltable',
@@ -45,65 +45,65 @@ window.examples.teditor=function(){
 					}
 				}]
 			},
-			onButtonClick:function(){
-				console.info("onButtonClick:"+this.title);
+			onClick:function(){
+				console.info("onClick:"+this.title);
 			}
 		},'|',{
 			cls:'addtoprow',
 			title:'在上方增加行',
-			onButtonClick:function(){
-				console.info("onButtonClick:"+this.title);
+			onClick:function(){
+				console.info("onClick:"+this.title);
 			}
 		},{
 			cls:'addbottomrow',
 			title:'在下方增加行',
-			onButtonClick:function(){
-				console.info("onButtonClick:"+this.title);
+			onClick:function(){
+				console.info("onClick:"+this.title);
 			}
 		},{
 			cls:'addleftcol',
 			title:'在左方增加列',
-			onButtonClick:function(){
-				console.info("onButtonClick:"+this.title);
+			onClick:function(){
+				console.info("onClick:"+this.title);
 			}
 		},{
 			cls:'addrightcol',
 			title:'在右方增加列',
-			onButtonClick:function(){
-				console.info("onButtonClick:"+this.title);
+			onClick:function(){
+				console.info("onClick:"+this.title);
 			}
 		},'|',{
 			cls:'merge',
 			title:'合并单元格',
-			onButtonClick:function(){
-				console.info("onButtonClick:"+this.title);
+			onClick:function(){
+				console.info("onClick:"+this.title);
 			}
 		},{
 			cls:'split',
 			title:'拆分单元格',
-			onButtonClick:function(){
-				console.info("onButtonClick:"+this.title);
+			onClick:function(){
+				console.info("onClick:"+this.title);
 			}
 		},'||',{
 			cls:'alignlefttop',
 			xtype:'splitbutton',
 			title:'对齐方式',
-			onButtonClick:function(){
-				console.info("onButtonClick:"+this.title);
+			onClick:function(){
+				console.info("onClick:"+this.title);
 			}
 		},'|',{
 			cls:'bordercolor',
 			xtype:'splitbutton',
 			title:'边框颜色',
-			onButtonClick:function(){
-				console.info("onButtonClick:"+this.title);
+			onClick:function(){
+				console.info("onClick:"+this.title);
 			}
 		},{
 			cls:'bgcolor',
 			xtype:'splitbutton',
 			title:'单元格底纹',
-			onButtonClick:function(){
-				console.info("onButtonClick:"+this.title);
+			onClick:function(){
+				console.info("onClick:"+this.title);
 			}
 		},'|',{
 			xtype:'text',
@@ -123,8 +123,8 @@ window.examples.teditor=function(){
 		},'|',{
 			cls:'slider',
 			title:'标尺滑块',
-			onButtonClick:function(){
-				console.info("onButtonClick:"+this.title);
+			onClick:function(){
+				console.info("onClick:"+this.title);
 			}
 		}],
 		hideButton : function(cls){

@@ -107,7 +107,7 @@ window.examples.toolbar=function(){
 							}
 						}]
 					},
-					onButtonClick : function(event){
+					onClick : function(event){
 						CF.logger(this,arguments);
 						splitbutton2.remove();
 					}

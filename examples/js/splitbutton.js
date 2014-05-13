@@ -64,8 +64,8 @@ window.examples.splitbutton=function(){
 				}
 			}]
 		},
-		onButtonClick:function(){
-			console.info("onButtonClick:"+this.label);
+		onClick:function(){
+			console.info("onClick:"+this.label);
 		},
 		onArrowClick:function(){
 			this.callPrototypeMethod();

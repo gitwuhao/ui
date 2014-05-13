@@ -17,7 +17,7 @@ window.examples.colorpicker=function(){
 		cls : "ok",
 		label : "确定",
 		render : div,
-		onButtonClick:function(){
+		onClick:function(){
 			var me=this;
 			if(!this.colorpicker){
 				this.colorpicker=ui.colorpicker.getInstance({
@@ -43,7 +43,7 @@ window.examples.colorpicker=function(){
 		cls : "ted-ui-slider",
 		icon : true,
 		//render : div,
-		onButtonClick:function(){
+		onClick:function(){
 			var me=this;
 
 			if(!this.colorpicker){
@@ -72,12 +72,13 @@ window.examples.colorpicker=function(){
 		label : "颜色",
 		icon : "color",
 		readonly : true,
-		onClick : function(){
+		focus : function(){
 			var me=this;
 			if(!this.colorpicker){
 				this.colorpicker=ui.colorpicker.getInstance({
 					align : 'lb',
-					layout:'rgbhex',
+					layout :'rgbhex',
+					$owner : this,
 					$offsetElement : this.$combo,
 					onChange:function(color){
 						console.info("button onChange:"+color);
@@ -90,6 +91,7 @@ window.examples.colorpicker=function(){
 				});
 			}
 			this.colorpicker.toggle();
+			this.callSuperMethod();
 		}
 	});
 

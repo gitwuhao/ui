@@ -108,14 +108,14 @@ window.examples.window=function(){
 			buttons:[{
 				label:'确定',
 				cls:'confirm',
-				onButtonClick : function(event){
+				onClick : function(event){
 					console.info(this.label);
 
 				}
 			},{
 				label:'取消',
 				cls:'cancel',
-				onButtonClick :  function(event){
+				onClick :  function(event){
 					win4.close();
 				}
 			}]

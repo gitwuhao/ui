@@ -667,6 +667,7 @@ For usage and examples: colpick.com/plugin
 			this.autoSetOffset=true;
 			this.align=config.align;
 			this.$offsetElement=config.$offsetElement;
+			this.$owner=config.$owner;
 			this.config=config;
 			if(config.color){
 				this.setColor(config.color);
