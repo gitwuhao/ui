@@ -4,7 +4,7 @@
 		this.callSuperMethod();
 	};
 
-	ui.extend(ui.button,ui.form.item,{
+	ui.extend(ui.button,ui.widget,{
 		_type_ : "ui",
 		_name_ : "button",
 		statics:{
@@ -40,9 +40,7 @@
 		onBindEvent:function(){
 			var me=this;
 			this.$button.click(function(event){
-				if(me.on('focus')){ 
-					me.on("click");
-				}
+				me.on("click");
 			});
 			this.$elem.bindHover();
 		},

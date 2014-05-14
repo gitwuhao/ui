@@ -59,22 +59,16 @@
 			var me=this;
 			
 			this.$button.click(function(event){
-				if(me.on('focus')){ 
-					me.on("click");
-				}
+				me.on("click");
 			});
 
 			this.$splitbutton.bindHover();
 
 			this.$arrowbutton.click(function(event){
-				me.focus();
 				me.on("arrowClick");
 			});
+
 			this.$arrowbutton.bindHover();
-		},
-		focus : function(){
-			CF.logger(this,arguments);
-			this.on('focus');
 		},
 		onClick : function(event){
 			CF.logger(this,arguments);
