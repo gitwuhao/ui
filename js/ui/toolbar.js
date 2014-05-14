@@ -57,6 +57,9 @@
 
 				config.elem=elem;
 				config.autoRender=false;
+				if(config.selectable!=true){
+					config.selectable=false;
+				}
 				delete config.xtype;
 				if(xtype=='splitbutton'){
 					item=new ui.splitbutton(config);

@@ -138,8 +138,10 @@
 		onBlur : CF.emptyFunction,
 		onBlurAfter : function(){
 			CF.logger(this,arguments);
-			this.$elem.removeClass("selected");
-			this.isFocus=false;
+			if(this.selectable!=false){
+				this.$elem.removeClass("selected");
+				this.isFocus=false;
+			}
 		},
 		focus : CF.emptyFunction,
 		onFocusBefore : function(){
@@ -151,10 +153,12 @@
 		onFocus : CF.emptyFunction,
 		onFocusAfter : function(){
 			CF.logger(this,arguments);
-			ui.form.item.setActive(this);
-			this.$elem.removeClass("hover");
-			this.$elem.addClass("selected");
-			this.isFocus=true;
+			if(this.selectable!=false){
+				ui.form.item.setActive(this);
+				this.$elem.removeClass("hover");
+				this.$elem.addClass("selected");
+				this.isFocus=true;
+			}
 		},
 		disabled : CF.emptyFunction,
 		onDisabledBefore : function(){
@@ -164,8 +168,11 @@
 			}
 			this.isDisabled=true;
 			this.$elem.addClass("disabled");
-			ui.form.item.removeActive(this);
-			this.isFocus=false;
+			
+			if(this.selectable!=false){
+				ui.form.item.removeActive(this);
+				this.isFocus=false;
+			}
 		},
 		onDisabled : CF.emptyFunction,
 		onDisabledAfter : CF.emptyFunction,
