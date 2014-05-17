@@ -435,7 +435,7 @@ For usage and examples: colpick.com/plugin
 						
 						*/
 							stopList = stops.join(',');
-							huebar.attr('style','background:linear-gradient(to bottom,'+stopList+'); ');
+							//huebar.attr('style','background:linear-gradient(to bottom,'+stopList+'); ');
 						//}
 						cal.find('div.colpick_hue').on('mousedown touchstart',downHue);
 						options.newColor = cal.find('div.colpick_new_color');
