@@ -208,6 +208,7 @@
 		},
 		close : function(){
 			CF.logger(this,arguments);
+			this.on("close");
 			this.$elem.hide();
 			this.$mask.hide();
 		},
