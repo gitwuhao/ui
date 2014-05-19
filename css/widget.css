@@ -16,11 +16,13 @@ body *,.border-box * {
 	display: none;
 }
 
-.x-ui-text.hover .x-ui-text-box,.x-ui-button.hover,.x-ui-split-button.hover{
+.x-ui-text.hover .x-ui-text-box,.x-ui-button.hover,
+.x-ui-split-button.hover,.x-ui-checkbox.hover,.x-ui-radio.hover{
 	border: 1px solid #5FA1FF;
 	box-shadow: 0 0 5px #A5C8FF;
 }
-.x-ui-text.selected .x-ui-text-box,.x-ui-button.selected,.x-ui-split-button.selected{
+.x-ui-text.selected .x-ui-text-box,.x-ui-button.selected,
+.x-ui-split-button.selected,.x-ui-checkbox.selected,.x-ui-radio.selected{
 	border: 1px solid #F79B39;
 	box-shadow: 0 0 5px #F9DF7D;
 }
