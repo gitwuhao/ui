@@ -209,8 +209,14 @@
 		close : function(){
 			CF.logger(this,arguments);
 			this.on("close");
+		},
+		onClose:function(){
+			CF.logger(this,arguments);
 			this.$elem.hide();
 			this.$mask.hide();
+		},
+		onCloseAfter:function(){
+			CF.logger(this,arguments);
 		},
 		restore : function(){
 			CF.logger(this,arguments);
