@@ -212,11 +212,13 @@
 		},
 		onClose:function(){
 			CF.logger(this,arguments);
+			//this.tirgger('onclose')
 			this.$elem.hide();
 			this.$mask.hide();
 		},
 		onCloseAfter:function(){
 			CF.logger(this,arguments);
+			//this.tirgger('oncloseafter')
 		},
 		restore : function(){
 			CF.logger(this,arguments);
