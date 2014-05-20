@@ -63,6 +63,7 @@ div.x-ui-text.disabled .x-ui-item-field{
 	color: #A9A9A9;
 	font-size: 12px;
 	font-family: 宋体;
+	background-image: none;
 }
 .x-ui-text.error .x-ui-invalid-icon {
 	display: table-cell;
@@ -78,4 +79,7 @@ div.x-ui-text.disabled .x-ui-item-field{
 	border-color: #CF4C35;
 }
 
-
+.x-ui-text-box .x-ui-spinner-icon{
+	background-position: -422px -98px;
+	display: table-cell;
+}

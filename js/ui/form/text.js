@@ -65,6 +65,7 @@
 					html.push(' value="',config.value,'" ');
 				}
 				html.push(' /></td>');
+
 				var text_icon;
 				var text_value='&nbsp;';
 				if(config.icon){
@@ -94,6 +95,11 @@
 			this.$text=$(":text:first",elem);
 			
 			this.$icon=this.$text.parent().next();
+
+			
+			if(this.vtype=='int'){
+				this.$icon.addClass(config.px+'-spinner-icon');
+			}
 
 			this._clear_icon=config._c_clear_icon;
 			
@@ -139,6 +145,26 @@
 			});
 			//}
 			
+			if(this.vtype=='int'){
+				this.value=this.defaultValue || 0;
+				this.max=this.max || 999;
+				this.min=this.min || 0;
+				this.$text.bind("mousewheel",function(event){
+					if(event.originalEvent.wheelDelta>0){
+						if(me.max > me.value){
+							me.value++;
+							me.setValue(me.value);
+						}
+					}else{
+						if(me.min < me.value){
+							me.value--;
+							me.setValue(me.value);
+						}
+					}
+					return false;
+				});
+			}
+
 			this.bindItemHover(this.$elem);
 		},
 		focus : function(){
