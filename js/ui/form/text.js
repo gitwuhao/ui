@@ -15,7 +15,7 @@
 				_c_textfield : '-textfield',
 				_c_arrow_icon : '-arrow-icon',
 				_c_clear_icon : '-clear-icon',
-				_c_text_icon : '-text-icon',
+				_c_icon : '-icon',
 				_c_unit : '-unit',
 				_c_invalid_icon : '-invalid-icon',
 				_c_required_icon : '-required-icon',
@@ -74,7 +74,7 @@
 					text_icon=config._c_unit;
 					text_value=config.unit;
 				}
-				html.push('<td class="',config._c_text_icon," ",(text_icon||""),'">',text_value,'</td>');
+				html.push('<td class="',config._c_icon," ",(text_icon||""),'">',text_value,'</td>');
 				if(config.required || config.vtype){
 					html.push('<td class="',config._c_invalid_icon,'">&nbsp;</td>');
 				}
@@ -130,39 +130,42 @@
 			});
 
 
-			//if(this.icon){
-			this.$icon.mousedown(function(event){
-				if(me.isDisabled!=true){
-					if(me.isClearState){
-						me.$text.val("");
-						$.removeClass(this,me._clear_icon);
-						me.isClearState=false;
+			if(this.icon && this.readonly!=true){
+				this.$icon.mousedown(function(event){
+					if(me.isDisabled!=true){
+						if(me.isClearState){
+							me.$text.val("");
+							$.removeClass(this,me._clear_icon);
+							me.isClearState=false;
+						}
+						me.focus();
+						me.on("arrowClick");
 					}
-					me.focus();
-					me.on("arrowClick");
-				}
-				event.stopBubble(me);
-			});
-			//}
+					event.stopBubble(me);
+				});
+			}
 			
 			if(this.vtype=='int'){
 				this.value=this.defaultValue || 0;
 				this.max=this.max || 999;
 				this.min=this.min || 0;
-				this.$text.bind("mousewheel",function(event){
-					if(event.originalEvent.wheelDelta>0){
-						if(me.max > me.value){
-							me.value++;
-							me.setValue(me.value);
+				this.$elem.bind("mousewheel",function(event){
+					if(me.isDisabled!=true){
+						if(event.originalEvent.wheelDelta>0){
+							if(me.max > me.value){
+								me.value++;
+								me.setValue(me.value);
+							}
+						}else{
+							if(me.min < me.value){
+								me.value--;
+								me.setValue(me.value);
+							}
 						}
-					}else{
-						if(me.min < me.value){
-							me.value--;
-							me.setValue(me.value);
-						}
+						return false;
 					}
-					return false;
 				});
+
 			}
 
 			this.bindItemHover(this.$elem);

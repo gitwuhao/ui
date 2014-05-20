@@ -53,7 +53,7 @@ div.x-ui-text.disabled .x-ui-item-field{
 .x-ui-text-box .x-ui-textfield{
 	height: 20px;
 }
-.x-ui-text-box .x-ui-text-icon,.x-ui-text-box .x-ui-invalid-icon{
+.x-ui-text-box .x-ui-icon,.x-ui-text-box .x-ui-invalid-icon{
 	display: none;
 	width: 16px;
 }
@@ -80,6 +80,6 @@ div.x-ui-text.disabled .x-ui-item-field{
 }
 
 .x-ui-text-box .x-ui-spinner-icon{
-	background-position: -422px -98px;
+	background-position: -420px -98px;
 	display: table-cell;
 }

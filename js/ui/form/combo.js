@@ -45,8 +45,30 @@
 		},
 		onBindEvent:function(){
 			CF.logger(this,arguments);
-			this.callSuperMethod();
 			var me=this;
+
+			this.$label.mousedown(function(event){
+				me.on('focus');
+				event.stopBubble(me);
+			});
+
+			this.$text.focus(function(event){
+				me.on('focus');
+			});
+
+			this.$text.blur(function(event){
+				me.on('blur');
+			});
+
+
+			this.$icon.mousedown(function(event){
+				if(me.isDisabled!=true){
+					me.focus();
+					me.on("arrowClick");
+				}
+				event.stopBubble(me);
+			});
+			
 			if( me.readonly==true){
 				this.$text.mousedown(function(event){
 					me.focus();

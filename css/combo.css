@@ -6,9 +6,9 @@
 	cursor: default;
 }
 
-.x-ui-combo .x-ui-arrow-icon{
+.x-ui-combo .x-ui-combo-icon{
 	background-position: -420px -20px;
-	width: 18px;
+	display: table-cell;
 }
 
 .x-ui-combo-list{

@@ -1,11 +1,11 @@
 body *,.border-box * {
 	box-sizing: border-box;
 }
-.x-ui-icon,.x-ui-arrow-icon,.x-ui-clear-icon,.x-ui-del-icon ,.x-ui-invalid-icon,.x-ui-text-icon {
+.x-ui-icon,.x-ui-arrow-icon,.x-ui-clear-icon,.x-ui-del-icon ,.x-ui-invalid-icon{
 	background-repeat: no-repeat;
 	background-image: url(/oD/images/all_icon.png);
 }
-.x-ui-icon {
+div.x-ui-icon {
 	width: 20px;
 	height: 20px;
 }

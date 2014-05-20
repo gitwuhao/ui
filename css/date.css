@@ -2,9 +2,9 @@
 	cursor: default;
 }
 
-.x-ui-date .x-ui-arrow-icon{
+.x-ui-date .x-ui-date-icon{
 	background-position: -420px -0px;
-	width: 18px;
+	display: table-cell;
 }
 
 .x-ui-datepicker-popu .x-ui-calendar{

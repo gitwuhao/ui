@@ -25,6 +25,12 @@
 .x-ui-form .x-ui-text .x-ui-clear-icon{
 	background-position: -420px -78px;
 }
+.x-ui-form .x-ui-date .x-ui-date-icon {
+	background-position: -420px 1px;
+}
+.x-ui-form .x-ui-text-box .x-ui-icon{
+	width: 18px;
+}
 .x-ui-button-box .x-ui-button {
 	border: 1px solid #DDD;
 	padding: 5px 15px;
