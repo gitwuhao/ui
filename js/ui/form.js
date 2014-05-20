@@ -108,13 +108,19 @@
 			CF.logger(this,arguments);
 		},
 		getValues:function(){
-			var values={};
+			var values=[];
 			var items=this.items;
 			for(var i=0,len=items.length;i<len;i++){
 				var item=items[i];
-				var value=item.getValue();
-				values[i]=value;
-				values[item.name]=value;
+				if(item.isDisabled==false){
+					var value=item.getValue();
+					values.push(value);
+					if(item.name){
+						values[item.name]=value;
+					}
+				}else{
+					values.push('');
+				}
 			}
 			return values;
 		},

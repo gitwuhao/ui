@@ -195,6 +195,21 @@
 		
 		},
 		remove:function(){
+			var items=this.items;
+			if(items){
+				for(var i=0,len=items.length;i<len;i++){
+					var item=items[i];
+					if(item.remove){
+						item.remove();
+					}
+					
+					for(var key in item){
+						item[key]=null;
+						delete item[key];
+					}
+				}
+			}
+
 			var $elem=this.$elem;
 			if($elem){
 				$elem.remove();
