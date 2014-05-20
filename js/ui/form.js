@@ -84,10 +84,16 @@
 			var table=elem.children[0];
 			var rows=table.rows;
 			var items=this.items;
+			this.itemsMap={};
 			for(var i=0,len=items.length;i<len;i++){
 				var item=items[i];
-				items[i]=this._class_.getFormItem(item,rows[i]);
-				items[i].$owner=this;
+				var item=this._class_.getFormItem(item,rows[i]);
+				item.$owner=this;
+				items[i]=item;
+
+				if(item.name){
+					this.itemsMap['_'+item.name+'_']=item;
+				}
 			}
 
 			if(this.buttons){
@@ -106,6 +112,9 @@
 		},
 		onBindEvent:function(){
 			CF.logger(this,arguments);
+		},
+		getItem:function(name){
+			return this.itemsMap['_'+name+'_'];
 		},
 		getValues:function(){
 			var values=[];
@@ -210,6 +219,12 @@
 				}
 				return html.join("");
 			}
+		},
+		setLabel:function(label){
+			this.$label.text(label+"：");
+		},
+		setValue:function(value){
+			this.$text.val(value);
 		},
 		bindItemHover:function($elem){
 			if(this.isHover!=true){

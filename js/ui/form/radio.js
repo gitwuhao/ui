@@ -23,8 +23,12 @@
 				for(var i=0,len=items.length;i<len;i++){
 					var item=items[i];
 					item.name=config.name;
-					html.push('<div class="',config._c_radio_group,'">',
-							'<input type="button" class="',config._c_icon,
+
+					html.push('<div class="',config._c_radio_group,'"');
+					if(item.width){
+						html.push(' style="width:',item.width,'px;" ');
+					}
+					html.push('><input type="button" class="',config._c_icon,
 								'" value="',item.value,'"/>',
 							'<span>',item.label,'</span>',
 						  '</div>');
@@ -119,9 +123,9 @@
 		},
 		checked:function(item){
 			if(item){
-				this.onChecked(item);
+				this.on("checked",item);
 			}else{
-				this.onChecked(this.items[0]);
+				this.on("checked",this.items[0]);
 			}
 		},
 		onUnChecked:function(item){
@@ -131,7 +135,7 @@
 		},
 		onChecked:function(item){
 			if(this.checkedItem && this.checkedItem!=item){
-				this.onUnChecked(this.checkedItem);
+				this.on('unChecked',this.checkedItem);
 			}else if(this.checkedItem && this.checkedItem==item && item.checked){
 				return;
 			}

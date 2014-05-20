@@ -60,6 +60,10 @@
 				if(config.placeholder){
 					html.push(' placeholder="',config.placeholder,'" ');
 				}
+				if(config.value || config.defaultValue){
+					config.value = config.value || config.defaultValue;
+					html.push(' value="',config.value,'" ');
+				}
 				html.push(' /></td>');
 				var text_icon;
 				var text_value='&nbsp;';

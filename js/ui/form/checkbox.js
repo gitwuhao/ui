@@ -130,9 +130,9 @@
 				item=this.items[0];
 			}
 			if(item.checked){
-				this.onUnChecked(item);
+				this.on("unChecked",item);
 			}else{
-				this.onChecked(item);
+				this.on("checked",item);
 			}
 		},
 		onUnChecked:function(item){
@@ -148,13 +148,13 @@
 		checkedAll : function(){
 			var items=this.items;
 			for(var i=0,len=items.length;i<len;i++){
-				this.onChecked(items[i]);
+				this.on("checked",items[i]);
 			}
 		},
 		unCheckedAll : function(){
 			var items=this.items;
 			for(var i=0,len=items.length;i<len;i++){
-				this.onUnChecked(items[i]);
+				this.on("unChecked",items[i]);
 			}
 		},
 		reverseChecked:function(){
