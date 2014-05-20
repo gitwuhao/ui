@@ -13,16 +13,8 @@
 				_c_text_icon : '-arrow-icon'
 			},
 			getTemplate: function(config){
-
-				ui.widget.applyCSS(config,this.css);
-
+				config.type='date';
 				config.icon='date';
-
-				if(config.cls){
-					config.cls=config._c_date + " " +config.cls;
-				}else{
-					config.cls=config._c_date;
-				}
 				config.readonly=true;
 				return ui.form.text.getTemplate(config);
 			}

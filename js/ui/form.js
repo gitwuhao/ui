@@ -89,8 +89,9 @@
 				items[i]=this._class_.getFormItem(item,rows[i]);
 			}
 
-			
 			if(this.buttons){
+				
+				items=this.buttons;
 				var buttonList=$("."+this._c_button_box,this.$elem).children();
 				for(var i=0,len=buttonList.length;i<len;i++){
 					var item=this.buttons[i];
@@ -115,6 +116,18 @@
 				values[item.name]=value;
 			}
 			return values;
+		},
+		disabled:function(){
+			var items=this.items;
+			for(var i=0,len=items.length;i<len;i++){
+				items[i].disabled();
+			}
+		},
+		enabled:function(){
+			var items=this.items;
+			for(var i=0,len=items.length;i<len;i++){
+				items[i].enabled();
+			}
 		}
 	});
 
@@ -143,7 +156,8 @@
 				ui.widget.applyCSS(config,{
 					_c_label : '-label',
 					_c_required_icon : '-required-icon',
-					_c_label_padding : '-label-padding'
+					_c_label_padding : '-label-padding',
+					_c_item_field : '-item-field'
 				});
 				var html=[];
 				if(!config.form){
@@ -172,7 +186,7 @@
 						html.push('&nbsp;');
 					}
 					html.push('</td>',
-							  '<td>');
+							  '<td  class="',config._c_item_field,'">');
 				}
 				
 				html.push(config.html);
@@ -189,7 +203,22 @@
 				}
 				return html.join("");
 			}
-		},	
+		},
+		bindItemHover:function($elem){
+			var me=this;
+			$elem.on({
+				mouseover : function (event) {
+					if(me.isDisabled!=true && $.hasClass(this,"selected")==false){
+						$.addClass(this,"hover");
+					}
+				},
+				mouseout: function (event) {
+					if(me.isDisabled!=true){
+						$.removeClass(this,"hover");
+					}
+				}
+			});
+		},
 		setData:function(elem,data){
 			$.data(elem,"_"+this.name+"_data_",data);
 		},	
@@ -211,9 +240,11 @@
 			CF.logger(this,arguments);
 			this.$elem.removeClass("selected");
 			this.isFocus=false;
-			
 		},
-		focus : CF.emptyFunction,
+		focus : function(){
+			CF.logger(this,arguments);
+			this.on("focus");
+		},
 		onFocusBefore : function(){
 			CF.logger(this,arguments);
 			if(this.isDisabled==true || this.isFocus){
@@ -228,7 +259,10 @@
 			this.$elem.addClass("selected");
 			this.isFocus=true;
 		},
-		disabled : CF.emptyFunction,
+		disabled : function(){
+			CF.logger(this,arguments);
+			this.on("disabled");
+		},
 		onDisabledBefore : function(){
 			CF.logger(this,arguments);
 			if(this.isDisabled==true){
@@ -243,8 +277,11 @@
 		},
 		onDisabled : CF.emptyFunction,
 		onDisabledAfter : CF.emptyFunction,
-		enabled : CF.emptyFunction,
-		onDisabledBefore:function(){
+		enabled : function(){
+			CF.logger(this,arguments);
+			this.on("enabled");
+		},
+		onEnabledBefore:function(){
 			CF.logger(this,arguments);
 			if(this.isDisabled==false){
 				return false;
@@ -252,8 +289,8 @@
 			this.isDisabled=false;
 			this.$elem.removeClass("disabled");
 		},
-		onDisabled : CF.emptyFunction,
-		onDisabledAfter : CF.emptyFunction
+		onEnabled : CF.emptyFunction,
+		onEnabledAfter : CF.emptyFunction
 	});
 
 

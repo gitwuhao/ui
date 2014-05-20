@@ -17,6 +17,7 @@
 	border-radius: 50%;
 	border: 1px solid #D9D9D9;
 	background-position: -442px -44px;
+	font-size: 0px;
 }
 .x-ui-radio-group span,.x-ui-checkbox-group span{
 	float: left;
@@ -27,6 +28,6 @@
 }
 
 
-.x-ui-radio.selected .x-ui-icon{
+.x-ui-radio-group.checked .x-ui-icon{
 	background-position: -442px -64px;
 }

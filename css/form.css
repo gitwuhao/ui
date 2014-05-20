@@ -15,6 +15,10 @@
 	width: 8px;
 	font-size: 1px;
 }
+.x-ui-form .disabled .x-ui-item-field{
+	opacity: 0.3;
+}
+
 .x-ui-form .x-ui-text .x-ui-invalid-icon{
 	background-position: -420px -60px;
 }

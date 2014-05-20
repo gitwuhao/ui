@@ -13,19 +13,11 @@
 				_c_text_icon : '-arrow-icon'
 			},
 			getTemplate: function(config){
-
-				ui.widget.applyCSS(config,this.css);
-
 				if(config.arrowIcon!=false){
 					config.icon='combo';
 				}
-
-				if(config.cls){
-					config.cls=config._c_combo + " " +config.cls;
-				}else{
-					config.cls=config._c_combo;
-				}
-				return ui.form.text.getTemplate(config);
+				config.type='combo';
+				return ui.form.text.getTemplate.call(this,config);
 			}
 		},
 		onRenderAfter:function(config){
@@ -47,7 +39,7 @@
 				this.$value=this.$icon.children(":hidden");
 			}
 
-			this._css_combo=config._c_combo;
+			this._css_combo=config._c_text;
 			
 			this.callSuperMethod();
 		},
@@ -57,12 +49,19 @@
 			var me=this;
 			if( me.readonly==true){
 				this.$text.mousedown(function(event){
-					me.focus();
+					me.on('focus');
 					event.stopBubble(me);
 				});
 			}
 		},
 		focus:function(){
+			CF.logger(this,arguments);
+			if(this.on('focus')==false){
+				return;
+			}			
+			this.callSuperMethod();
+		},
+		onFocus:function(){
 			CF.logger(this,arguments);
 			var me=this;
 			if(this.items && !this.list){
@@ -88,8 +87,6 @@
 			if(this.list){
 				this.list.toggle();
 			}
-			
-			this.callSuperMethod();
 		},
 		onBlur:function(){
 			CF.logger(this,arguments);

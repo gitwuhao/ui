@@ -31,10 +31,12 @@ window.examples.form=function(){
 			name : "sex",
 			items:[{
 				label:'男',
-				value : '1'
+				value : '1',
+				checked : true
 			},{
 				label:'女',
-				value:'2'
+				value:'2',
+				checked : true
 			}]
 		},{
 			label:'性别',
@@ -59,6 +61,10 @@ window.examples.form=function(){
 		}]
 	});
 
+window.radio=form.items[4];
+
+
+	form.disabled();
 }
 
 })();

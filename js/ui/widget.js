@@ -90,6 +90,7 @@
 
 		if(_superStatics || _statics){
 			CF.merger(true,_class,_superStatics,_statics);
+			CF.merger(true,_class.statics,_superStatics,_statics);
 		}
 		return _prototype;
 	};

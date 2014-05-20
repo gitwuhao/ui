@@ -23,9 +23,23 @@
 			},
 			getTemplate: function(config){
 				var cloneConfig={};
+				
+				
 				CF.merger(cloneConfig,config);
 
 				ui.widget.applyCSS(config,this.css);
+
+				if(!config.type){
+					cloneConfig.type='text';
+					config._c_text='';
+				}
+
+				if(config.cls){
+					cloneConfig.cls=config._c_text + " " +config.cls;
+				}else{
+					cloneConfig.cls=config._c_text;
+				}
+
 				var html=[	'<div class="',config._c_text_box,'">',
 						    '<table>',
 							'<tr>',
@@ -64,7 +78,6 @@
 							'</div>');
 				
 				cloneConfig.html=html.join('');
-				cloneConfig.type='text';
 				return this.getItemTemplate(cloneConfig);
 			}
 		},
@@ -113,7 +126,7 @@
 				});
 			}
 
-			this.$elem.bindHover();
+			this.bindItemHover(this.$elem);
 
 		},
 		focus : function(){
