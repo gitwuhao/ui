@@ -82,7 +82,7 @@ window.examples.form=function(){
 			label:'确定',
 			cls:'confirm',
 			onClick:function(){
-				this.$owner.disabled();
+				console.info(this.$owner.getValues());
 			}
 		},{
 			label:'取消',
