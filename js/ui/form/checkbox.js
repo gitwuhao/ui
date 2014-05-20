@@ -68,17 +68,17 @@
 		bindItemEvent:function(item){
 			var me=this;
 
-
 			this.setData(item.$input[0],item);
 			this.setData(item.$elem[0],item);
 
 			this.bindItemHover(item.$elem);
 			
-
 			item.$owner=this;
 
 			item.$input.focus(function(event){
-				me.on('focus',me.getData(this));
+				var _item_=me.getData(this);
+				me.on('focus',_item_);
+				//me.currentItem=_item_;
 			});
 
 			item.$input.blur(function(event){
@@ -106,14 +106,13 @@
 		focus : function(item){
 			CF.logger(this,arguments);
 			if(item){
-				this.currentItem=item;
-			}
-			if(this.currentItem){
 				item.$input.focus();
 			}
 		},
 		onFocusAfter:function(item){
-			ui.form.item.setActive(this);
+			if(!this.currentItem){
+				ui.form.item.setActive(this);
+			}
 			if(this.currentItem && this.currentItem!=item){
 				this.currentItem.$elem.removeClass("selected");
 			}
@@ -126,6 +125,7 @@
 				this.currentItem.$elem.removeClass("selected");
 			}
 			this.isFocus=false;
+			this.currentItem=null;
 		},
 		checked:function(item){
 			if(!item){
@@ -136,6 +136,16 @@
 			}else{
 				this.onChecked(item);
 			}
+		},
+		onUnChecked:function(item){
+			item.checked=false;
+			item.$elem.removeClass("checked");
+			item.$input.attr("name","");
+		},
+		onChecked:function(item){
+			item.checked=true;
+			item.$elem.addClass("checked");
+			item.$input.attr("name",item.name);
 		},
 		checkedAll : function(){
 			var items=this.items;
@@ -154,17 +164,6 @@
 			for(var i=0,len=items.length;i<len;i++){
 				this.checked(items[i]);
 			}
-		},
-		onUnChecked:function(item){
-			item.checked=false;
-			item.$elem.removeClass("checked");
-			item.$input.attr("name","");
-		},
-		onChecked:function(item){
-			item.checked=true;
-			item.$elem.addClass("checked");
-			item.$input.attr("name",item.name);
-			this.currentItem=item;
 		},
 		onDisabled:function(){
 			var items=this.items;
