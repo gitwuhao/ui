@@ -64,7 +64,7 @@ div.x-ui-text.disabled .x-ui-item-field{
 	font-size: 12px;
 	font-family: 宋体;
 }
-.error .x-ui-invalid-icon {
+.x-ui-text.error .x-ui-invalid-icon {
 	display: table-cell;
 	background-position: -420px -60px;
 }
@@ -74,7 +74,7 @@ div.x-ui-text.disabled .x-ui-item-field{
 	font-size: 0px;
 	cursor: pointer;
 }
-.error .x-ui-text-box{
+.x-ui-text.error .x-ui-text-box{
 	border-color: #CF4C35;
 }
 
