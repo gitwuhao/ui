@@ -49,7 +49,7 @@
 			var me=this;
 			if( me.readonly==true){
 				this.$text.mousedown(function(event){
-					me.on('focus');
+					me.focus();
 					me.toggleList();
 					event.stopBubble(me);
 				});

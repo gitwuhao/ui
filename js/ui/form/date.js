@@ -41,7 +41,7 @@
 			var me=this;
 			if( me.readonly==true){
 				this.$text.mousedown(function(event){
-					me.on('focus');
+					me.focus();
 					event.stopBubble(me);
 				});
 			}

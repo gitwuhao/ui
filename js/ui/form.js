@@ -206,6 +206,9 @@
 			}
 		},
 		bindItemHover:function($elem){
+			if(this.isHover!=true){
+				return;
+			}
 			var me=this;
 			$elem.on({
 				mouseover : function (event) {

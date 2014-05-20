@@ -108,28 +108,34 @@
 			this.$text.focus(function(event){
 				if(me.on('focus') && this.value.length>0 && me.readonly!=true){
 					me.$icon.addClass(me._clear_icon);
+					me.isClearState=true;
 				}
 			});
 
 			this.$text.blur(function(event){
 				if(me.on('blur') && this.value.length>0  && me.readonly!=true){
 					me.$icon.removeClass(me._clear_icon);
+					me.isClearState=false;
 				}
 			});
 
 
-			if(this.icon){
-				this.$icon.mousedown(function(event){
-					if(me.isDisabled!=true){
-						me.on('focus');
-						me.on("arrowClick");
+			//if(this.icon){
+			this.$icon.mousedown(function(event){
+				if(me.isDisabled!=true){
+					if(me.isClearState){
+						me.$text.val("");
+						$.removeClass(this,me._clear_icon);
+						me.isClearState=false;
 					}
-					event.stopBubble(me);
-				});
-			}
-
+					me.focus();
+					me.on("arrowClick");
+				}
+				event.stopBubble(me);
+			});
+			//}
+			
 			this.bindItemHover(this.$elem);
-
 		},
 		focus : function(){
 			CF.logger(this,arguments);
