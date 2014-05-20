@@ -101,7 +101,7 @@
 			var me=this;
 
 			this.$label.mousedown(function(event){
-				me.focus();
+				me.on('focus');
 				event.stopBubble(me);
 			});
 
@@ -117,9 +117,11 @@
 				}
 			});
 
+
 			if(this.icon){
 				this.$icon.mousedown(function(event){
-					if(me.focus()){
+					if(me.isDisabled!=true){
+						me.on('focus');
 						me.on("arrowClick");
 					}
 					event.stopBubble(me);
@@ -134,10 +136,10 @@
 			this.$text.focus();
 		},
 		onDisabled:function(){
-			this.$text[0].readOnly=true;
+			this.$text[0].disabled=true;
 		},
 		onEnabled:function(){
-			this.$text[0].readOnly=false;
+			this.$text[0].disabled=false;
 		}
 	});
 	

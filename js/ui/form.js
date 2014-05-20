@@ -87,15 +87,16 @@
 			for(var i=0,len=items.length;i<len;i++){
 				var item=items[i];
 				items[i]=this._class_.getFormItem(item,rows[i]);
+				items[i].$owner=this;
 			}
 
 			if(this.buttons){
-				
 				items=this.buttons;
 				var buttonList=$("."+this._c_button_box,this.$elem).children();
 				for(var i=0,len=buttonList.length;i<len;i++){
 					var item=this.buttons[i];
 					items[i]=this._class_.getButtonItem(item,buttonList[i]);
+					items[i].$owner=this;
 				}
 			}
 		},

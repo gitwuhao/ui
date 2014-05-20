@@ -50,6 +50,7 @@
 			if( me.readonly==true){
 				this.$text.mousedown(function(event){
 					me.on('focus');
+					me.toggleList();
 					event.stopBubble(me);
 				});
 			}
@@ -58,10 +59,23 @@
 			CF.logger(this,arguments);
 			if(this.on('focus')==false){
 				return;
-			}			
+			}
 			this.callSuperMethod();
 		},
-		onFocus:function(){
+		onBlur:function(){
+			CF.logger(this,arguments);
+			var me=this;
+			if(this.list){
+				this.list.on("hide");
+			}
+		},
+		onSelected:function(item){
+			this.$text.val(item.label);
+			if(this.$value){
+				this.$value.val(item.value||"");
+			}
+		},
+		toggleList:function(){
 			CF.logger(this,arguments);
 			var me=this;
 			if(this.items && !this.list){
@@ -88,21 +102,9 @@
 				this.list.toggle();
 			}
 		},
-		onBlur:function(){
-			CF.logger(this,arguments);
-			var me=this;
-			if(this.list){
-				this.list.on("hide");
-			}
-		},
-		onSelected:function(item){
-			this.$text.val(item.label);
-			if(this.$value){
-				this.$value.val(item.value||"");
-			}
-		},
 		onArrowClick: function(event){
 			CF.logger(this,arguments);
+			this.toggleList();
 		},
 		remove:function(){
 			CF.logger(this,arguments);

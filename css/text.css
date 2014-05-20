@@ -48,6 +48,7 @@ div.x-ui-text.disabled .x-ui-item-field{
 	width: 100%;
 	font: normal 12px/16px 宋体;
 	margin: 0px;
+	background-color: transparent;
 }
 .x-ui-text-box .x-ui-textfield{
 	height: 20px;

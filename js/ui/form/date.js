@@ -41,12 +41,19 @@
 			var me=this;
 			if( me.readonly==true){
 				this.$text.mousedown(function(event){
-					me.focus();
+					me.on('focus');
 					event.stopBubble(me);
 				});
 			}
 		},
-		focus : function(event){
+		focus:function(){
+			CF.logger(this,arguments);
+			if(this.on('focus')==false){
+				return;
+			}
+			this.callSuperMethod();
+		},
+		onFocus:function(){
 			CF.logger(this,arguments);
 			var me=this;
 			if(!this.datepicker){
@@ -63,7 +70,6 @@
 				});
 			}
 			this.datepicker.toggle();
-			this.callSuperMethod();
 		},
 		onBlur:function(){
 			CF.logger(this,arguments);

@@ -54,10 +54,16 @@ window.examples.form=function(){
 		}],
 		buttons:[{
 			label:'确定',
-			cls:'confirm'
+			cls:'confirm',
+			onClick:function(){
+				this.$owner.disabled();
+			}
 		},{
 			label:'取消',
-			cls:'cancel'
+			cls:'cancel',
+			onClick:function(){
+				this.$owner.enabled();
+			}
 		}]
 	});
 

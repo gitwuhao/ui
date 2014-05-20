@@ -74,6 +74,9 @@
 			
 			this.bindItemHover(item.$elem);
 
+
+			item.$owner=this;
+
 			item.$input.focus(function(event){
 				me.on('focus',me.getData(this));
 			});
@@ -102,8 +105,6 @@
 					me.on('checked',_item_);
 				}
 			});
-
-
 		},
 		focus : function(){
 			CF.logger(this,arguments);
@@ -142,6 +143,18 @@
 			item.$elem.addClass("checked");
 			item.$input.attr("name",item.name);
 			this.checkedItem=item;
+		},
+		onDisabled:function(){
+			var items=this.items;
+			for(var i=0,len=items.length;i<len;i++){
+				items[i].$input[0].disabled=true;
+			}
+		},
+		onEnabled:function(){
+			var items=this.items;
+			for(var i=0,len=items.length;i<len;i++){
+				items[i].$input[0].disabled=false;
+			}
 		}
 	});
 
