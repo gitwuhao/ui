@@ -89,8 +89,17 @@
 				console.info("click",event);
 				if(me.isDisabled!=true){
 					var _item_=me.getData(this);
+					if(event.shiftKey){
+						me.checkedAll();
+					}else if(event.ctrlKey){
+						me.unCheckedAll();
+						me.checked(_item_);
+					}else if(event.altKey){
+						me.reverseChecked();
+					}else{
+						me.checked(_item_);
+					}
 					me.focus(_item_);
-					me.checked(_item_);
 				}
 			});
 		},
@@ -126,6 +135,24 @@
 				this.onUnChecked(item);
 			}else{
 				this.onChecked(item);
+			}
+		},
+		checkedAll : function(){
+			var items=this.items;
+			for(var i=0,len=items.length;i<len;i++){
+				this.onChecked(items[i]);
+			}
+		},
+		unCheckedAll : function(){
+			var items=this.items;
+			for(var i=0,len=items.length;i<len;i++){
+				this.onUnChecked(items[i]);
+			}
+		},
+		reverseChecked:function(){
+			var items=this.items;
+			for(var i=0,len=items.length;i<len;i++){
+				this.checked(items[i]);
 			}
 		},
 		onUnChecked:function(item){
