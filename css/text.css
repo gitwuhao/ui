@@ -1,7 +1,3 @@
-.x-ui-text{
-	font-size: 12px;
-	font-family: 宋体;
-}
 div.x-ui-text{
 	float: left;
 }
@@ -15,16 +11,17 @@ div.x-ui-text{
 .x-ui-text td{
 	padding: 0px;
 }
-.x-ui-text .x-ui-label{
+div.x-ui-text .x-ui-label{
 	line-height: 22px;
 	width: 60px;
 	text-align: right;
+	font-size: 12px;
+	font-family: 宋体;
 }
-.x-ui-text .x-ui-label-padding{
+div.x-ui-text .x-ui-label-padding{
 	width: 8px;
 	font-size: 1px;
 }
-
 .x-ui-text.disabled{
 	opacity: 0.3;
 }
@@ -63,6 +60,8 @@ div.x-ui-text{
 	text-align: center;
 	display: table-cell;
 	color: #A9A9A9;
+	font-size: 12px;
+	font-family: 宋体;
 }
 .error .x-ui-invalid-icon {
 	display: table-cell;

@@ -1,22 +1,34 @@
 (function(CF,$,ui){
 	
-	ui.form.text=function(render){
+	ui.form.radio=function(render){
 		this.callSuperMethod();
 	};
 
-	ui.extend(ui.form.text,ui.form.item,{
+	ui.extend(ui.form.radio,ui.form.item,{
 		_type_ : "ui.form",
-		_name_ : "text",
+		_name_ : "radio",
 		statics:{
 			css:{
-				_c_text : '-text',
-				_c_label : '-label',
+				_c_radio : '-radio',
+				_c_radio_group : '-radio-group',
+				_c_icon : '-icon',
+				_c_label : '-label'
 			},
 			getTemplate: function(config){
+				var cloneConfig={};
+				CF.merger(cloneConfig,config);
 				ui.widget.applyCSS(config,this.css);
 				var html=[];
-				
-				return html.join("");
+				var items=config.items;
+				for(var i=0,len=items.length;i<len;i++){
+					html.push('<div class="',config._c_radio_group,'">',
+							'<input type="button" class="',config._c_icon,'" />',
+							'<span>',items[i].label,'</span>',
+						  '</div>');
+				}
+				cloneConfig.html=html.join('');
+				cloneConfig.type='radio';
+				return this.getItemTemplate(cloneConfig);
 			}
 		},
 		onRenderAfter:function(config){
@@ -25,25 +37,64 @@
 			
 			this.$label=$("."+config._c_label+":first",elem);
 			
-			this.$text=$(":text:first",elem);
+			var children=elem.children("td:last").children();
 			
-			this.$icon=this.$text.parent().next();
-
-			this._clear_icon=config._c_clear_icon;
-			
+			var items=this.items;
+			for(var i=0,len=items.length;i<len;i++){
+				var item=items[i];
+				item.$elem=$(children[i]);
+				item.$input=item.$elem.children("input:first");
+				this.setData(item.$input[0],item);
+			}
 			this.callSuperMethod();
-
 		},
 		onBindEvent:function(){
 			CF.logger(this,arguments);
 			var me=this;
+			var items=this.items;
 
-			this.$elem.bindHover();
+			for(var i=0,len=items.length;i<len;i++){
+				var item=items[i];
+				this.bindItemEvent(item);
+			}
+		},
+		bindItemEvent:function(item){
+			var me=this;
+			item.$elem.bindHover();
+			item.$input.focus(function(event){
+				me.on('focus',me.getData(this));
+			});
+
+			item.$input.blur(function(event){
+				me.on('blur',me.getData(this));
+			});
+
+			
+			item.$input.keyup(function(event){
+				if(event.keyCode==32 || event.keyCode==13){
+					me.on('checked',me.getData(this));
+				}
+			});
 
 		},
 		focus : function(){
 			CF.logger(this,arguments);
-			this.$text.focus();
+			this.items[0].$elem.focus();
+		},
+		onFocusAfter:function(item){
+			item.$elem.addClass("hover");
+			this.currentItem=item;
+		},
+		onBlurAfter : function(item){
+			item.$elem.removeClass("hover");
+
+		},
+		checked:function(){
+			this.items[0].$input.tirgger("checked");
+		},
+		onChecked:function(){
+		
+		
 		},
 		onDisabled:function(){
 			this.$text[0].readOnly=true;

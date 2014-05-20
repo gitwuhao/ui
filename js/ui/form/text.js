@@ -22,41 +22,14 @@
 				_c_label_padding : '-label-padding'
 			},
 			getTemplate: function(config){
-				ui.widget.applyCSS(config,this.css);
-				var html=[];
-				if(!config.form){
-					html.push('<div class="',config._c_text,' ',(config.cls||''),'"');
-					if(config.title){
-						html.push(' title="',config.title,'"');
-					}
-					html.push('>');
-					if(config.label){
-						html.push(
-							'<table>',
-							'<tr>');
-					}
-				}else{
-					html.push('<tr class="',config._c_text,' ',(config.cls||''),'">');
-				}
+				var cloneConfig={};
+				CF.merger(cloneConfig,config);
 
-				
-				if(config.label){
-					html.push('<td class="',config._c_label,'">',config.label,'：',
-							  '</td>',
-							  '<td class="',config._c_label_padding,'">');
-					if(config.required){
-						html.push('<span class="',config._c_required_icon,'">*</span>');
-					}else{
-						html.push('&nbsp;');
-					}
-					html.push('</td>',
-							  '<td>');
-				}
-				
-				html.push(	'<div class="',config._c_text_box,'">',
+				ui.widget.applyCSS(config,this.css);
+				var html=[	'<div class="',config._c_text_box,'">',
 						    '<table>',
 							'<tr>',
-							  '<td class="',config._c_textfield,'"><input type="text" ');
+							  '<td class="',config._c_textfield,'"><input type="text" '];
 				if(config.name){
 					html.push(' name="',config.name,'"');
 				}
@@ -82,9 +55,7 @@
 					text_icon=config._c_unit;
 					text_value=config.unit;
 				}
-
 				html.push('<td class="',config._c_text_icon," ",(text_icon||""),'">',text_value,'</td>');
-				
 				if(config.required || config.vtype){
 					html.push('<td class="',config._c_invalid_icon,'">&nbsp;</td>');
 				}
@@ -92,17 +63,9 @@
 							'</table>',
 							'</div>');
 				
-				if(config.label){
-					html.push('</td>',
-						  '</tr>');
-				}
-				if(!config.form){
-					if(config.label){
-						html.push('</table>');
-					}
-					html.push('</div>');
-				}
-				return html.join("");
+				cloneConfig.html=html.join('');
+				cloneConfig.type='text';
+				return this.getItemTemplate(cloneConfig);
 			}
 		},
 		onRenderAfter:function(config){

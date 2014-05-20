@@ -27,6 +27,17 @@ window.examples.form=function(){
 			label:'日期'
 		},{
 			label:'性别',
+			xtype:'radio',
+			name : "sex",
+			items:[{
+				label:'男',
+				value : '1'
+			},{
+				label:'女',
+				value:'2'
+			}]
+		},{
+			label:'性别',
 			xtype:'combo',
 			readonly : true,
 			name : "bcms",

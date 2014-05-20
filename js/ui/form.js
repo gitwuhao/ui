@@ -32,7 +32,7 @@
 
 				var buttons=config.buttons;
 				if(buttons){
-					html.push('<tr class="',config._c_form_item,'">',
+					html.push('<tr>',
 								'<td class="',config._c_form_label,'">&nbsp;</td>',
 								'<td class="',config._c_form_label_padding,'">&nbsp;</td>',
 								'<td class="',config._c_button_box,'" >');
@@ -121,6 +121,7 @@
 	ui.form.item=function(render){
 		this.callSuperMethod();
 	};
+	 
 
 	ui.extend(ui.form.item,ui.widget,{
 		_type_ : "ui.form",
@@ -137,7 +138,63 @@
 					this.active.on("blur");
 				}
 				this.active=null;
+			},
+			getItemTemplate:function(config){
+				ui.widget.applyCSS(config,{
+					_c_label : '-label',
+					_c_required_icon : '-required-icon',
+					_c_label_padding : '-label-padding'
+				});
+				var html=[];
+				if(!config.form){
+					html.push('<div class="',config.px,'-',config.type,' ',(config.cls||''),'"');
+					if(config.title){
+						html.push(' title="',config.title,'"');
+					}
+					html.push('>');
+					if(config.label){
+						html.push(
+							'<table>',
+							'<tr>');
+					}
+				}else{
+					html.push('<tr class="',config.px,'-',config.type,' ',(config.cls||''),'">');
+				}
+
+				
+				if(config.label){
+					html.push('<td class="',config._c_label,'">',config.label,'：',
+							  '</td>',
+							  '<td class="',config._c_label_padding,'">');
+					if(config.required){
+						html.push('<span class="',config._c_required_icon,'">*</span>');
+					}else{
+						html.push('&nbsp;');
+					}
+					html.push('</td>',
+							  '<td>');
+				}
+				
+				html.push(config.html);
+				
+				if(config.label){
+					html.push('</td>',
+						  '</tr>');
+				}
+				if(!config.form){
+					if(config.label){
+						html.push('</table>');
+					}
+					html.push('</div>');
+				}
+				return html.join("");
 			}
+		},	
+		setData:function(elem,data){
+			$.data(elem,"_"+this.name+"_data_",data);
+		},	
+		getData:function(elem){
+			return $.data(elem,"_"+this.name+"_data_");
 		},
 		getValue:function(){
 			return this.$text.val();
@@ -170,7 +227,6 @@
 			this.$elem.removeClass("hover");
 			this.$elem.addClass("selected");
 			this.isFocus=true;
-			
 		},
 		disabled : CF.emptyFunction,
 		onDisabledBefore : function(){

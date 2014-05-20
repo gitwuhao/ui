@@ -1,7 +1,12 @@
 .x-ui-radio{
 	-webkit-user-select: none;
 }
-.x-ui-radio .x-ui-icon{
+.x-ui-radio-group{
+	float: left;
+	width: 20%;
+}
+
+.x-ui-radio-group .x-ui-icon{
 	float: left;
 	line-height: 0px;
 	width: 14px;
@@ -13,12 +18,15 @@
 	border: 1px solid #D9D9D9;
 	background-position: -442px -44px;
 }
-
-.x-ui-radio span{
+.x-ui-radio-group span,.x-ui-checkbox-group span{
 	float: left;
 	margin: 0px 5px;
 	font-size: 12px;
+	line-height: 14px;
+	cursor: default;
 }
+
+
 .x-ui-radio.selected .x-ui-icon{
 	background-position: -442px -64px;
 }

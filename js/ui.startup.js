@@ -13,6 +13,8 @@
 		path+'form/text.js',
 		path+'form/combo.js',
 		path+'form/date.js',
+		path+'form/radio.js',
+		path+'form/checkbox.js',
 		path+'button.js',
 		path+'menu.js',
 		path+'splitbutton.js',

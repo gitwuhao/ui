@@ -1,22 +1,34 @@
 (function(CF,$,ui){
 	
-	ui.form.text=function(render){
+	ui.form.checkbox=function(render){
 		this.callSuperMethod();
 	};
 
-	ui.extend(ui.form.text,ui.form.item,{
+	ui.extend(ui.form.checkbox,ui.form.item,{
 		_type_ : "ui.form",
-		_name_ : "text",
+		_name_ : "checkbox",
 		statics:{
 			css:{
-				_c_text : '-text',
-				_c_label : '-label',
+				_c_checkbox : '-checkbox',
+				_c_checkbox_group : '-checkbox-group',
+				_c_icon : '-icon',
+				_c_label : '-label'
 			},
 			getTemplate: function(config){
+				var cloneConfig={};
+				CF.merger(cloneConfig,config);
 				ui.widget.applyCSS(config,this.css);
 				var html=[];
-				
-				return html.join("");
+				var items=config.items;
+				for(var i=0,len=items.length;i<len;i++){
+					html.push('<div class="',config._c_checkbox_group,'">',
+							'<input type="button" class="',config._c_icon,'" />',
+							'<span>',items[i].label,'</span>',
+						  '</div>');
+				}
+				cloneConfig.html=html.join('');
+				cloneConfig.type='checkbox';
+				return this.getItemTemplate(cloneConfig);
 			}
 		},
 		onRenderAfter:function(config){
