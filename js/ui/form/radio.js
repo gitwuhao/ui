@@ -86,7 +86,6 @@
 			});
 
 			item.$elem.click(function(event){
-				console.info("click",event);
 				if(me.isDisabled!=true){
 					var _item_=me.getData(this);
 					me.focus(_item_);
@@ -153,6 +152,9 @@
 			for(var i=0,len=items.length;i<len;i++){
 				items[i].$input[0].disabled=false;
 			}
+		},
+		getValue:function(){
+			return this.checkedItem.value;
 		}
 	});
 

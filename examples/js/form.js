@@ -97,6 +97,8 @@ window.radio=form.items[4];
 
 
 	form.disabled();
+
+	window.form=form;
 }
 
 })();
