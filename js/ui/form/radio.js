@@ -60,6 +60,8 @@
 				this.bindItemEvent(item);
 				if(item.checked){
 					me.onChecked(item);
+				}else{
+					item.checked=false;
 				}
 			}
 		},
@@ -83,21 +85,8 @@
 				me.on('blur');
 			});
 
-			item.$input.keyup(function(event){
-				if(event.keyCode==32 || event.keyCode==13){
-					me.on('checked',me.getData(this));
-				}
-			});
-
-			item.$input.on("checked",function(event){
-				me.on('checked',me.getData(this));
-			});
-
-			item.$input.on("unchecked",function(event){
-				me.on('unChecked',me.getData(this));
-			});
-
 			item.$elem.click(function(event){
+				console.info("click",event);
 				if(me.isDisabled!=true){
 					var _item_=me.getData(this);
 					me.focus(_item_);

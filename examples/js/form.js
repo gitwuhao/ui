@@ -39,6 +39,32 @@ window.examples.form=function(){
 				checked : true
 			}]
 		},{
+			label:'兴趣',
+			xtype:'checkbox',
+			name : "like",
+			items:[{
+				label:'足球',
+				value : '1',
+				checked : true
+			},{
+				label:'羽毛球',
+				value:'2',
+				checked : true
+			},{
+				label:'游泳',
+				value:'3',
+				checked : true
+			},{
+				label:'跑步',
+				value:'4'
+			},{
+				label:'下棋',
+				value:'5'
+			},{
+				label:'看书',
+				value:'6'
+			}]
+		},{
 			label:'性别',
 			xtype:'combo',
 			readonly : true,

@@ -1,12 +1,13 @@
-.x-ui-radio{
+.x-ui-radio,.x-ui-checkbox{
 	-webkit-user-select: none;
 }
-.x-ui-radio-group{
+.x-ui-radio-group,.x-ui-checkbox-group{
 	float: left;
 	width: 20%;
+	margin: 5px 0px;
 }
 
-.x-ui-radio-group .x-ui-icon{
+.x-ui-radio-group .x-ui-icon,.x-ui-checkbox-group .x-ui-icon{
 	float: left;
 	line-height: 0px;
 	width: 14px;
@@ -14,11 +15,20 @@
 	padding: 0px;
 	margin: 0px;
 	outline: 0px;
-	border-radius: 50%;
 	border: 1px solid #D9D9D9;
-	background-position: -442px -44px;
 	font-size: 0px;
 }
+.x-ui-radio-group .x-ui-icon{
+	background-position: -442px -44px;
+	border-radius: 50%;
+}
+
+.x-ui-checkbox-group .x-ui-icon{
+	background-position: -442px -4px;
+	border-radius: 2px;
+}
+
+
 .x-ui-radio-group span,.x-ui-checkbox-group span{
 	float: left;
 	margin: 0px 5px;
@@ -30,4 +40,8 @@
 
 .x-ui-radio-group.checked .x-ui-icon{
 	background-position: -442px -64px;
+}
+
+.x-ui-checkbox-group.checked .x-ui-icon{
+	background-position: -442px -24px;
 }
