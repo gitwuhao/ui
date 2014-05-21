@@ -15,6 +15,7 @@
 		path+'form/date.js',
 		path+'form/radio.js',
 		path+'form/checkbox.js',
+		path+'form/vtypes.js',
 		path+'button.js',
 		path+'menu.js',
 		path+'splitbutton.js',

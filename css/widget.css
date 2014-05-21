@@ -4,6 +4,7 @@ body *,.border-box * {
 .x-ui-icon,.x-ui-arrow-icon,.x-ui-clear-icon,.x-ui-del-icon ,.x-ui-invalid-icon{
 	background-repeat: no-repeat;
 	background-image: url(/oD/images/all_icon.png);
+	background-position: 100px;
 }
 div.x-ui-icon {
 	width: 20px;

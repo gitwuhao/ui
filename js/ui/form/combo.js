@@ -4,7 +4,7 @@
 		this.callSuperMethod();
 	};
 
-	ui.extend(ui.form.combo,ui.form.text,{
+	ui.extend(ui.form.combo,ui.form.field,{
 		_type_ : "ui.form",
 		_name_ : "combo",
 		statics:{
@@ -40,8 +40,6 @@
 			}
 
 			this._css_combo=config._c_text;
-			
-			this.callSuperMethod();
 		},
 		onBindEvent:function(){
 			CF.logger(this,arguments);

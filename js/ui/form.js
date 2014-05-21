@@ -58,7 +58,7 @@
 					xtype="text";
 				}
 				item=new ui.form[xtype](config);
-				item.on("render",config);
+				item.initRender();
 				return item;
 			},
 			getButtonItem : function(config,elem){
@@ -73,7 +73,7 @@
 				}else{
 					item=new ui.button(config);
 				}
-				item.on("render",config);
+				item.initRender();
 				return item;
 			}
 		},
@@ -105,10 +105,6 @@
 					items[i].$owner=this;
 				}
 			}
-		},
-		onRenderAfter:function(config){
-			CF.logger(this,arguments);
-			this.callSuperMethod();
 		},
 		onBindEvent:function(){
 			CF.logger(this,arguments);
@@ -147,15 +143,25 @@
 		}
 	});
 
-	ui.form.item=function(render){
+	ui.form.field=function(render){
 		this.callSuperMethod();
 	};
 	 
 
-	ui.extend(ui.form.item,ui.widget,{
+	ui.extend(ui.form.field,ui.widget,{
 		_type_ : "ui.form",
-		_name_ : "item",
+		_name_ : "field",
 		statics:{
+			css : {
+				_c_text : '-text',
+				_c_label : '-label',
+				_c_text_box : '-text-box',
+				_c_textfield : '-textfield',
+				_c_icon : '-icon',
+				_c_required_icon : '-required-icon',
+				_c_label_padding : '-label-padding',
+				_c_item_field : '-item-field'
+			},
 			setActive: function(item){
 				if(this.active && this.active!=item){
 					this.removeActive();
@@ -168,13 +174,8 @@
 				}
 				this.active=null;
 			},
-			getItemTemplate:function(config){
-				ui.widget.applyCSS(config,{
-					_c_label : '-label',
-					_c_required_icon : '-required-icon',
-					_c_label_padding : '-label-padding',
-					_c_item_field : '-item-field'
-				});
+			getFieldTemplate:function(config){
+				ui.widget.applyCSS(config,this.css);
 				var html=[];
 				if(!config.form){
 					html.push('<div class="',config.px,'-',config.type,' ',(config.cls||''),'"');
@@ -226,7 +227,7 @@
 		setValue:function(value){
 			this.$text.val(value);
 		},
-		bindItemHover:function($elem){
+		bindFieldHover:function($elem){
 			if(this.isHover!=true){
 				return;
 			}
@@ -279,7 +280,7 @@
 		onFocus : CF.emptyFunction,
 		onFocusAfter : function(){
 			CF.logger(this,arguments);
-			ui.form.item.setActive(this);
+			ui.form.field.setActive(this);
 			this.$elem.removeClass("hover");
 			this.$elem.addClass("selected");
 			this.isFocus=true;
@@ -296,7 +297,7 @@
 			this.isDisabled=true;
 			this.$elem.addClass("disabled");
 			
-			ui.form.item.removeActive(this);
+			ui.form.field.removeActive(this);
 			this.isFocus=false;
 			
 		},

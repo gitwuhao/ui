@@ -4,7 +4,7 @@
 		this.callSuperMethod();
 	};
 
-	ui.extend(ui.form.date,ui.form.text,{
+	ui.extend(ui.form.date,ui.form.field,{
 		_type_ : "ui.form",
 		_name_ : "date",
 		statics:{
@@ -32,8 +32,6 @@
 			this.$icon=this.$text.parent().next();
 
 			this._css_date=config._c_date;
-			
-			this.callSuperMethod();
 		},
 		onBindEvent:function(){
 			CF.logger(this,arguments);

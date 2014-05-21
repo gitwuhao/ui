@@ -46,7 +46,7 @@
 			}
 			this.calendar=new ui.calendar(this.calendarConfig);
 			this.calendar.$elem=this.$elem.children();
-			this.calendar.on("render",this.calendarConfig);
+			this.calendar.initRender();
 			delete this.calendarConfig;
 		},
 		onBindEvent:function(){

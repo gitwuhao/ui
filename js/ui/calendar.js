@@ -178,9 +178,6 @@
 			this.$monthList=jQuery("."+config._c_month,this.$yearMonthBox);
 			this.$dayList=jQuery("."+config._c_day,this.$dayBox);
 			
-			
-			this.callSuperMethod();
-
 
 			var defaultDate=ui.calendar.parse(this.date);
 			if(!defaultDate){

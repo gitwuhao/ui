@@ -140,7 +140,7 @@
 					this.buttons[i].$elem=$(button);
 				}
 			}
-			this.callSuperMethod();
+
 		},
 		onBindEvent:function(){
 			CF.logger(this,arguments);

@@ -65,7 +65,7 @@
 				}else{
 					item=new ui.button(config);
 				}
-				item.on("render",config);
+				item.initRender();
 				return item;
 			}
 		},

@@ -4,22 +4,16 @@
 		this.callSuperMethod();
 	};
 
-	ui.extend(ui.form.text,ui.form.item,{
+	ui.extend(ui.form.text,ui.form.field,{
 		_type_ : "ui.form",
 		_name_ : "text",
 		statics:{
 			css:{
 				_c_text : '-text',
-				_c_label : '-label',
-				_c_text_box : '-text-box',
-				_c_textfield : '-textfield',
-				_c_arrow_icon : '-arrow-icon',
 				_c_clear_icon : '-clear-icon',
 				_c_icon : '-icon',
 				_c_unit : '-unit',
-				_c_invalid_icon : '-invalid-icon',
-				_c_required_icon : '-required-icon',
-				_c_label_padding : '-label-padding'
+				_c_invalid_icon : '-invalid-icon'
 			},
 			getTemplate: function(config){
 				var cloneConfig={};
@@ -83,7 +77,7 @@
 							'</div>');
 				
 				cloneConfig.html=html.join('');
-				return this.getItemTemplate(cloneConfig);
+				return this.getFieldTemplate(cloneConfig);
 			}
 		},
 		onRenderAfter:function(config){
@@ -96,14 +90,7 @@
 			
 			this.$icon=this.$text.parent().next();
 
-			
-			if(this.vtype=='int'){
-				this.$icon.addClass(config.px+'-spinner-icon');
-			}
-
 			this._clear_icon=config._c_clear_icon;
-			
-			this.callSuperMethod();
 
 		},
 		onBindEvent:function(){
@@ -139,9 +126,8 @@
 							me.isClearState=false;
 						}
 						me.focus();
-						me.on("arrowClick");
+						me.on("iconClick");
 					}
-					event.stopBubble(me);
 				});
 			}
 			
@@ -167,8 +153,13 @@
 				});
 
 			}
+			
+			var vtype=ui.form.vtypes[this.vtype];
+			if(vtype){
+				vtype(this);
+			}
 
-			this.bindItemHover(this.$elem);
+			this.bindFieldHover(this.$elem);
 		},
 		focus : function(){
 			CF.logger(this,arguments);

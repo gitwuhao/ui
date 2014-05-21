@@ -4,7 +4,7 @@
 		this.callSuperMethod();
 	};
 
-	ui.extend(ui.form.radio,ui.form.item,{
+	ui.extend(ui.form.radio,ui.form.field,{
 		_type_ : "ui.form",
 		_name_ : "radio",
 		statics:{
@@ -35,7 +35,7 @@
 				}
 				cloneConfig.html=html.join('');
 				cloneConfig.type='radio';
-				return this.getItemTemplate(cloneConfig);
+				return this.getFieldTemplate(cloneConfig);
 			}
 		},
 		onRenderAfter:function(config){
@@ -52,7 +52,7 @@
 				item.$elem=$(children[i]);
 				item.$input=item.$elem.children("input:first");
 			}
-			this.callSuperMethod();
+
 		},
 		onBindEvent:function(){
 			CF.logger(this,arguments);
@@ -76,7 +76,7 @@
 			this.setData(item.$input[0],item);
 			this.setData(item.$elem[0],item);
 
-			this.bindItemHover(item.$elem);
+			this.bindFieldHover(item.$elem);
 			
 
 			item.$owner=this;
@@ -107,7 +107,7 @@
 			}
 		},
 		onFocusAfter:function(item){
-			ui.form.item.setActive(this);
+			ui.form.field.setActive(this);
 			if(this.currentItem && this.currentItem!=item){
 				this.currentItem.$elem.removeClass("selected");
 			}

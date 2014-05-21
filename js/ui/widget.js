@@ -160,15 +160,23 @@
 			if(!this._super_){
 				this._super_=this._class_._super_;
 			}
+			
+			this.config=config;
 
 			if(config.autoRender!=false){
 				if(!this.$render){
 					this.$render=$.getBody();
 				}
-				this.on("render",config);
+				this.initRender();
 			}
 
 			//config._class_name_;
+		},
+		initRender:function(){
+			this.on("render",this.config);
+			this.on("bindEvent",null);
+			delete this.config;
+			delete this.initRender;
 		},
 		onRender : function(config){
 			CF.logger(this,arguments);
@@ -185,11 +193,6 @@
 				this.$render.append(div);
 			}
 			this.$elem=$(div);
-		},
-		onRenderAfter : function(config){
-			CF.logger(this,arguments);
-			//ui.widget.clearCSS(this,this._class_.css);
-			this.on("bindEvent",null);
 		},
 		onBindEvent:function(){
 		

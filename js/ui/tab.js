@@ -26,8 +26,7 @@
 			CF.logger(this,arguments);
 			var $tabpanel=this.$elem;
 			this.$tabbarbox=$tabpanel.children('.'+this._c_tabbar_box);
-			this.$tabviewbox=$tabpanel.children('.'+this._c_tab_view_box);			
-			this.callSuperMethod();	
+			this.$tabviewbox=$tabpanel.children('.'+this._c_tab_view_box);
 		},
 		onBindEvent:function(){
 			CF.logger(this,arguments);
