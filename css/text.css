@@ -81,4 +81,5 @@ div.x-ui-text.disabled .x-ui-item-field{
 .x-ui-text-box .x-ui-spinner-icon{
 	background-position: -420px -98px;
 	display: table-cell;
+	cursor: pointer;
 }

@@ -34,12 +34,13 @@
 			
 
 			item.$icon.addClass(item.px+'-spinner-icon');
-
+			
 			item.$icon.mousedown(function(event){
-				if(event.offset){
-				
+				var height=this.offsetHeight/2;
+				if( height > event.offsetY){
+					item.spinUp();
 				}else{
-				
+					item.spinDown();
 				}
 			});
 		},
