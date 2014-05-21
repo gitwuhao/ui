@@ -20,6 +20,17 @@
 					this.setValue(this.value);
 				}
 			};
+			
+			item.$icon.addClass(item.px+'-spinner-icon');
+			
+			item.onIconMouseDown=function(event){
+				var height=event.target.offsetHeight/2;
+				if( height > event.offsetY){
+					this.spinUp();
+				}else{
+					this.spinDown();
+				}
+			};
 
 			item.$elem.bind("mousewheel",function(event){
 				if(item.isDisabled!=true){
@@ -28,21 +39,12 @@
 					}else{
 						item.spinDown();
 					}
-					return false;
+					item.focus();
+					event.stopBubble(item);
 				}
 			});
 			
 
-			item.$icon.addClass(item.px+'-spinner-icon');
-			
-			item.$icon.mousedown(function(event){
-				var height=this.offsetHeight/2;
-				if( height > event.offsetY){
-					item.spinUp();
-				}else{
-					item.spinDown();
-				}
-			});
 		},
 		'int' : function(item){
 			item.value=item.defaultValue || 0;

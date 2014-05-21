@@ -91,6 +91,8 @@
 			this.$icon=this.$text.parent().next();
 
 			this._clear_icon=config._c_clear_icon;
+				
+			
 
 		},
 		onBindEvent:function(){
@@ -116,48 +118,25 @@
 				}
 			});
 
-
-			if(this.icon && this.readonly!=true){
-				this.$icon.mousedown(function(event){
-					if(me.isDisabled!=true){
-						if(me.isClearState){
-							me.$text.val("");
-							$.removeClass(this,me._clear_icon);
-							me.isClearState=false;
-						}
-						me.focus();
-						me.on("iconClick");
+			this.$icon.mousedown(function(event){
+				if(me.isDisabled!=true){
+					if(me.isClearState){
+						me.$text.val("");
+						$.removeClass(this,me._clear_icon);
+						me.isClearState=false;
 					}
-				});
-			}
+					me.focus();
+					me.on("iconMouseDown",event);
+					event.stopBubble(me);
+				}
+			});
 			
-			if(this.vtype=='int'){
-				this.value=this.defaultValue || 0;
-				this.max=this.max || 999;
-				this.min=this.min || 0;
-				this.$elem.bind("mousewheel",function(event){
-					if(me.isDisabled!=true){
-						if(event.originalEvent.wheelDelta>0){
-							if(me.max > me.value){
-								me.value++;
-								me.setValue(me.value);
-							}
-						}else{
-							if(me.min < me.value){
-								me.value--;
-								me.setValue(me.value);
-							}
-						}
-						return false;
-					}
-				});
-
-			}
 			
 			var vtype=ui.form.vtypes[this.vtype];
 			if(vtype){
 				vtype(this);
 			}
+
 
 			this.bindFieldHover(this.$elem);
 		},
