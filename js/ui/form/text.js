@@ -92,8 +92,6 @@
 
 			this._clear_icon=config._c_clear_icon;
 				
-			
-
 		},
 		onBindEvent:function(){
 			CF.logger(this,arguments);
@@ -124,20 +122,13 @@
 						me.$text.val("");
 						$.removeClass(this,me._clear_icon);
 						me.isClearState=false;
+					}else{
+						me.on("iconMouseDown",event);
 					}
 					me.focus();
-					me.on("iconMouseDown",event);
 					event.stopBubble(me);
 				}
 			});
-			
-			
-			var vtype=ui.form.vtypes[this.vtype];
-			if(vtype){
-				vtype(this);
-			}
-
-
 			this.bindFieldHover(this.$elem);
 		},
 		focus : function(){

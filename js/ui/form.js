@@ -245,6 +245,12 @@
 				}
 			});
 		},
+		onBindEventAfter:function(){
+			CF.logger(this,arguments);
+			if(this.vtype){
+				ui.form.vtypes.register(this);
+			}
+		},
 		setData:function(elem,data){
 			$.data(elem,"_"+this.name+"_data_",data);
 		},	
