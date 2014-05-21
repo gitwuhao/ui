@@ -48,9 +48,6 @@
 				if(config.maxlength){
 					html.push(' maxlength="',config.maxlength,'" ');
 				}
-				if(config.vtype){
-					html.push(' vtype="',config.vtype,'" ');
-				}
 				if(config.placeholder){
 					html.push(' placeholder="',config.placeholder,'" ');
 				}

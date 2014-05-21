@@ -117,7 +117,7 @@
 			var items=this.items;
 			for(var i=0,len=items.length;i<len;i++){
 				var item=items[i];
-				if(item.isDisabled==false){
+				if(item.isDisabled!=true){
 					var value=item.getValue();
 					values.push(value);
 					if(item.name){

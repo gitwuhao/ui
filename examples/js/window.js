@@ -70,7 +70,7 @@ window.examples.window=function(){
 
 	var win4=new ui.window({
 		width : 500,
-		items : {
+		item : {
 			xtype:'form',
 			cls : 'form',
 			items : [{
@@ -138,7 +138,7 @@ window.examples.window=function(){
 		width : 300,
 		closable:true,
 		title:'填写表单',
-		items:{
+		item:{
 			xtype:'form',
 			cls : 'form',
 			items : [{

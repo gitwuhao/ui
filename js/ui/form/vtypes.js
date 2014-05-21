@@ -72,14 +72,10 @@
 					 event.keyCode==39 || 
 					 event.ctrlKey  || event.altKey ){
 					return;
-				 }else if(event.keyCode==38){
-					 if(item.spinUp){
-						item.spinUp();
-					 }
-				 }else if(event.keyCode==40){
-					 if(item.spinDown){
-						item.spinDown();
-					 }
+				 }else if(event.keyCode==38 && item.spinUp){
+					item.spinUp(); 
+				 }else if(event.keyCode==40 && item.spinDown){
+					 item.spinDown();
 				}else if(!event.shiftKey && (event.keyCode>=48 && event.keyCode<=57)){
 
 				//}else if(event.shiftKey || 
@@ -89,7 +85,7 @@
 				 }else{
 					event.stopBubble(item);
 				 }
-				console.info(event.keyCode);
+				//console.info(event.keyCode);
 			});
 
 

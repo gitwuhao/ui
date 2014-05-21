@@ -197,9 +197,11 @@
 		},
 		show : function(){
 			CF.logger(this,arguments);
-			if(this.items && !this.form){
-				this.items.render=this.$body[0];
-				this.form=new ui.form(this.items);
+			if(this.item && this.item.xtype=='form'){
+				delete this.item.xtype;
+				this.item.render=this.$body[0];
+				this.form=new ui.form(this.item);
+				this.item=this.form;
 				this.$elem.addClass(this._c_form);
 			}
 			this.$mask.show();
@@ -266,10 +268,6 @@
 			this._body_overflow=$.getBody().css("overflow");
 
 			$.getBody().css("overflow","hidden");
-		},
-		remove:function(){
-			CF.logger(this,arguments);
-			this.callSuperMethod();
 		}
 	});
 	

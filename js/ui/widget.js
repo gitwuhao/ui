@@ -76,9 +76,10 @@
 		
 		_class._super_=superClass;
 		//_class._prototype_=prototype;
-		_class._owner_name_=prototype._type_+"."+prototype._name_;
+		prototype._owner_name_=prototype._type_+"."+prototype._name_;
 
 		prototype.constructor=_class;
+		_class._owner_name_=prototype._owner_name_;
 
 		ui.setOwner(_class,prototype);
 
@@ -198,6 +199,11 @@
 		
 		},
 		remove:function(){
+			CF.logger(this,arguments);
+			var item=this.item;
+			if(item && item.remove){
+				item.remove();
+			}
 			var items=this.items;
 			if(items){
 				for(var i=0,len=items.length;i<len;i++){
