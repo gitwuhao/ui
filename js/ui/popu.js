@@ -53,6 +53,12 @@
 				}
 				this.currentPopu=null;
 			},
+			removePopu:function(popu){
+				CF.logger(this.prototype,arguments);
+				if(popu==this.currentPopu){
+					this.currentPopu=null;
+				}
+			},
 			initEventListener : function(){
 				var me=this;
 				$.getDoc().keydown(function(event){

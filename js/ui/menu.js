@@ -225,7 +225,7 @@
 		},
 		remove:function(){
 			CF.logger(this,arguments);
-			ui.popu.removeCurrentPopu(this);
+			ui.popu.removePopu(this);
 			var items=this.items;
 			if(items){
 				for(var i=0,len=items.length;i<len;i++){

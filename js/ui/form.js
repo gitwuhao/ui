@@ -174,6 +174,11 @@
 				}
 				this.active=null;
 			},
+			removeItem: function(item){
+				if(this.active==item){
+					this.active=null;
+				}
+			},
 			getFieldTemplate:function(config){
 				ui.widget.applyCSS(config,this.css);
 				var html=[];
@@ -302,10 +307,9 @@
 			}
 			this.isDisabled=true;
 			this.$elem.addClass("disabled");
-			
-			ui.form.field.removeActive(this);
+
+			ui.form.field.removeItem(this);
 			this.isFocus=false;
-			
 		},
 		onDisabled : CF.emptyFunction,
 		onDisabledAfter : CF.emptyFunction,
@@ -322,7 +326,12 @@
 			this.$elem.removeClass("disabled");
 		},
 		onEnabled : CF.emptyFunction,
-		onEnabledAfter : CF.emptyFunction
+		onEnabledAfter : CF.emptyFunction,
+		remove:function(){
+			CF.logger(this,arguments);
+			ui.form.field.removeItem(this);
+			this.callSuperMethod();
+		}
 	});
 
 
