@@ -65,7 +65,12 @@
 			item.minValue=item.minValue || 0;
 			
 			item.$text.keydown(function(event){
-				 if(event.keyCode==6 || event.keyCode==8 || event.keyCode==9 || event.ctrlKey  || event.altKey ){
+				 if(event.keyCode==6 || 
+					 event.keyCode==8 || 
+					 event.keyCode==9 || 
+					 event.keyCode==37 || 
+					 event.keyCode==39 || 
+					 event.ctrlKey  || event.altKey ){
 					return;
 				 }else if(event.keyCode==38){
 					 if(item.spinUp){
@@ -75,8 +80,16 @@
 					 if(item.spinDown){
 						item.spinDown();
 					 }
+				}else if(!event.shiftKey && (event.keyCode>=48 && event.keyCode<=57)){
+
+				//}else if(event.shiftKey || 
+				//	 (event.keyCode>=65 && event.keyCode<=90) || 
+				//	 (event.keyCode>=187 && event.keyCode<=222)){
+					
+				 }else{
+					event.stopBubble(item);
 				 }
-				event.stopBubble(item);
+				console.info(event.keyCode);
 			});
 
 
