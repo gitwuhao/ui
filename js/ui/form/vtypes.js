@@ -18,7 +18,8 @@
 			}
 		},
 		spin:function(item){
-			item.value=item.defaultValue || 0;
+			item.defaultValue=item.defaultValue || 0;
+			item.value=item.defaultValue;
 			item.maxValue=item.maxValue || 999;
 			item.minValue=item.minValue || 0;
 			item.spinUp=function(){
@@ -57,6 +58,8 @@
 					event.stopBubble(item);
 				}
 			});
+			
+
 
 		},
 		'int' : function(item){
@@ -88,6 +91,23 @@
 				//console.info(event.keyCode);
 			});
 
+			
+			item.setValue=function(value){
+				if(value){
+					value=parseInt(value);
+					if(isNaN(value)){
+						value="";
+					}
+				}
+
+				if(value==""){
+					this.value=this.defaultValue;
+					this.$text.val("");
+				}else{
+					this.value=value;
+					this.$text.val(value);
+				}
+			};
 
 	
 		},

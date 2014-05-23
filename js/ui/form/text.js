@@ -116,9 +116,9 @@
 			this.$icon.mousedown(function(event){
 				if(me.isDisabled!=true){
 					if(me.isClearState){
-						me.$text.val("");
-						//$.removeClass(this,me._clear_icon);
-						//me.isClearState=false;
+						me.setValue("");
+						$.removeClass(this,me._clear_icon);
+						me.isClearState=false;
 					}else{
 						me.on("iconMouseDown",event);
 					}
