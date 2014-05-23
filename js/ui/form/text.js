@@ -113,6 +113,12 @@
 				}
 			});
 
+
+			this.$text.change(function(event){
+				me.value=this.value;
+				me.on('change');
+			});
+
 			this.$icon.mousedown(function(event){
 				if(me.isDisabled!=true){
 					/*
