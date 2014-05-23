@@ -67,7 +67,7 @@
 			item.maxValue=item.maxValue || 999;
 			item.minValue=item.minValue || 0;
 			
-			item.$text.keydown(function(event){
+			item.addEventListener('textkeydown',function(event){
 				 if(event.keyCode==6 || 
 					 event.keyCode==8 || 
 					 event.keyCode==9 || 

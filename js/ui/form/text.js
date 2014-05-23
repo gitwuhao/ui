@@ -126,6 +126,18 @@
 					event.stopBubble(me);
 				}
 			});
+			
+			if(this.readonly!=true){
+				this.$text.keydown(function(event){
+					if(me.isDisabled!=true){
+						if(event.shiftKey && event.keyCode==8){
+							me.setValue("");
+						}else{
+							me.trigger("textkeydown",event);
+						}
+					}
+				});
+			}
 			this.bindFieldHover(this.$elem);
 		},
 		focus : function(){
