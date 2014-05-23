@@ -101,27 +101,30 @@
 
 			this.$text.focus(function(event){
 				if(me.on('focus') && this.value.length>0 && me.readonly!=true){
-					me.$icon.addClass(me._clear_icon);
-					me.isClearState=true;
+					//me.$icon.addClass(me._clear_icon);
+					//me.isClearState=true;
 				}
 			});
 
 			this.$text.blur(function(event){
 				if(me.on('blur') && this.value.length>0  && me.readonly!=true){
-					me.$icon.removeClass(me._clear_icon);
-					me.isClearState=false;
+					//me.$icon.removeClass(me._clear_icon);
+					//me.isClearState=false;
 				}
 			});
 
 			this.$icon.mousedown(function(event){
 				if(me.isDisabled!=true){
+					/*
 					if(me.isClearState){
 						me.setValue("");
 						$.removeClass(this,me._clear_icon);
 						me.isClearState=false;
 					}else{
-						me.on("iconMouseDown",event);
+						
 					}
+					*/
+					me.trigger("iconmousedown",event);
 					me.focus();
 					event.stopBubble(me);
 				}

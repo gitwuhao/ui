@@ -38,15 +38,21 @@
 			
 			item.$icon.addClass(item.px+'-spinner-icon');
 			
-			item.onIconMouseDown=function(event){
+			item.addEventListener('iconmousedown',function(event){
 				var height=event.target.offsetHeight/2;
 				if( height > event.offsetY){
 					this.spinUp();
 				}else{
 					this.spinDown();
 				}
-			};
+			});
 
+
+			/*
+			*
+			*addEvent()
+			*
+			*/
 			item.$elem.bind("mousewheel",function(event){
 				if(item.isDisabled!=true){
 					if(event.originalEvent.wheelDelta>0){
