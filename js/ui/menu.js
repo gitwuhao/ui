@@ -86,6 +86,7 @@
 
 			var me=this;
 			var items=this.items;
+
 			this.$menuitem.each(function(index,elem){
 				var item=items[index];
 				if(item!=ui.menu.separator){	
@@ -94,6 +95,12 @@
 					item.$elem=$elem;
 					
 					item.$owner=me;
+
+					item.name=item.cls; 
+					
+					if(item.name){
+						items['_'+item.name+'_']=item;
+					}
 
 					me.setMenuItemData(item);
 					
@@ -124,6 +131,9 @@
 			},function(event){
 				return false;
 			});
+		},
+		getItem:function(name){
+			return this.items['_'+name+'_'];
 		},
 		onSubMenuMouseOver:function(event){
 			CF.logger(this,arguments);

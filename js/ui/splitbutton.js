@@ -76,17 +76,20 @@
 		onArrowClick:function(event){
 			CF.logger(this,arguments);
 			if(this.menu){
-				if(!this.menu.toggle){
-					var menuConfig=CF.merger(this.menu,{
-						autoSetOffset:true,
-						align:'lb',
-						$offsetElement : this.$elem,
-						$owner : this
-					});
-					
-					this.menu=new ui.menu(menuConfig);
-				}
+				this.initMenu();
 				this.menu.toggle();
+			}
+		},
+		initMenu:function(){
+			CF.logger(this,arguments);
+			if(this.menu && !this.menu.toggle){
+				var menuConfig=CF.merger(this.menu,{
+					autoSetOffset:true,
+					align:'lb',
+					$offsetElement : this.$elem,
+					$owner : this
+				});
+				this.menu=new ui.menu(menuConfig);			
 			}
 		},
 		remove:function(){

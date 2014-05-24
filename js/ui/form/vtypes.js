@@ -168,7 +168,7 @@
 		matchUnit : function(value){
 			var rs=value.match(/(\d+)(%|px)/i);
 			if(rs==null){
-				rs=[value,'px'];
+				rs=[value,value,'px'];
 			}
 			return rs;
 		},
