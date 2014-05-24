@@ -626,15 +626,21 @@ For usage and examples: colpick.com/plugin
 			});
 
 			this.$colpick=this.$elem.children();
-			this.on("bindEvent",null);
+			
+			this.$hexField=$('.colpick_hex_field :text',this.$colpick);
+			
+			//this.on("bindEvent",null);
 		},
-		onBindEvent:function(){
-			CF.logger(this,arguments);
-			this.callSuperMethod();
+		getHexFieldValue:function(){
+			return this.$hexField.val();
 		},
 		onChange:function(hsb,hex,rgb,el){
 			CF.logger(this,arguments);
-			this.color="#"+hex;
+			if(this.getHexFieldValue()==""){
+				this.color="";
+			}else{
+				this.color="#"+hex;
+			}
 			if(this.config && this.config.onChange){
 				this.config.onChange(this.color);
 				this.config.color=this.color;
@@ -642,10 +648,15 @@ For usage and examples: colpick.com/plugin
 		},
 		onSubmit:function(hsb,hex,rgb,el){
 			CF.logger(this,arguments);
-			this.color="#"+hex;
+			if(this.getHexFieldValue()==""){
+				this.color="";
+			}else{
+				this.color="#"+hex;
+			}
 			if(this.config && this.config.onSubmit){
 				this.config.onSubmit(this.color);
 				this.config.color=this.color;
+				this.config.hexFieldValue=this.getHexFieldValue();
 			}
 		},
 		//rgbhex,full,hex
