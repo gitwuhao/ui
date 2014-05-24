@@ -15,6 +15,7 @@
 							(config.html||''),
 						'</div>'].join('');
 			},
+			key : "u."+$.random(),
 			setOffset:function(config){
 				var popu=config.popu,
 					$offsetElement=config.$offsetElement,
@@ -71,7 +72,7 @@
 				$.getDoc().mousedown(function(event,owner){
 					CF.logger(me.prototype,arguments);
 					var currentPopu=me.currentPopu;
-					if(!currentPopu || event.target.__is_popu_owner__ || (owner && (currentPopu==owner ||  currentPopu.$owner==owner))){
+					if(!currentPopu || event.target[ui.popu.key] || (owner && (currentPopu==owner ||  currentPopu.$owner==owner))){
 						return;
 					}
 
@@ -159,7 +160,7 @@
 			var me=this;
 			this.$elem.mousedown(function(event){
 				//event.stopBubble(me);
-				event.target.__is_popu_owner__=1;
+				event.target[ui.popu.key]=1;
 			});
 		},
 		resetOffset:function(){
