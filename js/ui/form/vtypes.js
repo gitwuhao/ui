@@ -140,6 +140,7 @@
 					this.unit="px";
 				}
 				this.percentValue=0;
+				this.setValue("");
 				this.$icon.text(this.unit);
 			});
 
