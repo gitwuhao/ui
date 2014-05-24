@@ -72,20 +72,14 @@
 			*addEvent()
 			*
 			*/
-			item.$elem.bind("mousewheel",function(event){
-				if(item.isDisabled!=true){
-					if(event.originalEvent.wheelDelta>0){
-						item.spinUp();
-					}else{
-						item.spinDown();
-					}
-					item.focus();
-					event.stopBubble(item);
+			item.addEventListener('mousewheel',function(event){
+				if(event.originalEvent.wheelDelta>0){
+					this.spinUp();
+				}else{
+					this.spinDown();
 				}
+				this.focus();
 			});
-			
-
-
 		},
 		'int' : function(item){
 			item.defaultValue=item.defaultValue || 0;
@@ -136,6 +130,34 @@
 			};
 
 	
+		},	
+		pxToPercent:function(item){
+			item.$icon.css('cursor','pointer');
+			item.addEventListener('iconmousedown',function(event){
+				if(this.unit=="px"){
+					this.unit="%";
+				}else{
+					this.unit="px";
+				}
+				this.percentValue=0;
+				this.$icon.text(this.unit);
+			});
+
+
+			item.addEventListener('mousewheel',function(event){
+				if(this.unit=="%"){
+					var wheelDelta=event.originalEvent.wheelDelta;
+					if(wheelDelta>0 && this.percentValue<100){
+						this.percentValue++;
+					}else if(wheelDelta<0 && this.percentValue > 0){
+						this.percentValue--;
+					}else{
+						return;
+					}
+					this.setValue(this.percentValue);
+				}
+			});
+		
 		},
 		intText:'只能输入整数',
 		email:function(item){
