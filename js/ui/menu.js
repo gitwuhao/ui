@@ -77,7 +77,6 @@
 			var $elem=this.$elem;
 			this.$menu=$elem.children("."+config._c_menu);
 			this.$menuitem=this.$menu.children("li");
-			this.callSuperMethod();
 		},
 		onBindEvent:function(){
 			CF.logger(this,arguments);
