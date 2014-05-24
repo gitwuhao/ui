@@ -112,22 +112,15 @@
 			});
 
 			
-			item.setValue=function(value){
+			item.addEventListener('setvalue',function(value){
 				if(value){
 					value=parseInt(value);
 					if(isNaN(value)){
 						value="";
 					}
 				}
-
-				if(value==""){
-					this.value=this.defaultValue;
-					this.$text.val("");
-				}else{
-					this.value=value;
-					this.$text.val(value);
-				}
-			};
+				this.value=value;
+			});
 
 	
 		},	
@@ -165,7 +158,12 @@
 					this.setValue(this.percentValue);
 				}
 			});
-		
+			
+			item.addEventListener('setvalue',function(value){
+				if(this.unit=="%" && value>100){
+					this.value=100;
+				}
+			});
 		},
 		matchUnit : function(value){
 			var rs=value.match(/(\d+)(%|px)/i);

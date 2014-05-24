@@ -230,7 +230,9 @@
 			this.$label.text(label+"：");
 		},
 		setValue:function(value){
-			this.$text.val(value);
+			this.value=value;
+			this.trigger("setvalue",value);
+			this.$text.val(this.value);
 		},
 		bindFieldHover:function($elem){
 			if(this.isHover!=true){
