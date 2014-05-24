@@ -135,15 +135,22 @@
 			item.$icon.css('cursor','pointer');
 			item.addEventListener('iconmousedown',function(event){
 				if(this.unit=="px"){
-					this.unit="%";
+					this.setUnit("%");
 				}else{
+					this.setUnit("px");
+				}
+			});
+
+			item.setUnit=function(unit){
+				if(unit=="px"){
 					this.unit="px";
+				}else{
+					this.unit="%";
 				}
 				this.percentValue=0;
 				this.setValue("");
 				this.$icon.text(this.unit);
-			});
-
+			};
 
 			item.addEventListener('mousewheel',function(event){
 				if(this.unit=="%"){
@@ -159,6 +166,13 @@
 				}
 			});
 		
+		},
+		matchUnit : function(value){
+			var rs=value.match(/(\d+)(%|px)/i);
+			if(rs==null){
+				rs=[value,'px'];
+			}
+			return rs;
 		},
 		intText:'只能输入整数',
 		email:function(item){
