@@ -100,36 +100,22 @@
 			});
 
 			this.$text.focus(function(event){
-				if(me.on('focus') && this.value.length>0 && me.readonly!=true){
-					//me.$icon.addClass(me._clear_icon);
-					//me.isClearState=true;
+				if(me.on('focus')){
+					me.trigger("textfocus",event);
 				}
 			});
 
 			this.$text.blur(function(event){
-				if(me.on('blur') && this.value.length>0  && me.readonly!=true){
-					//me.$icon.removeClass(me._clear_icon);
-					//me.isClearState=false;
+				if(me.on('blur')){
+					me.setValue(this.value);
+					me.trigger("textblur",event);
 				}
 			});
 
 
-			this.$text.change(function(event){
-				me.value=this.value;
-				me.on('change');
-			});
 
 			this.$icon.mousedown(function(event){
 				if(me.isDisabled!=true){
-					/*
-					if(me.isClearState){
-						me.setValue("");
-						$.removeClass(this,me._clear_icon);
-						me.isClearState=false;
-					}else{
-						
-					}
-					*/
 					me.trigger("iconmousedown",event);
 					me.focus();
 					event.stopBubble(me);

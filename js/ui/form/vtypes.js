@@ -17,6 +17,25 @@
 				}
 			}
 		},
+/*		enterToTab:function(item){
+			item.addEventListener('textkeydown',function(event){
+				 if(event.keyCode==13){
+				 }
+			});
+		},
+*/
+		enterToChange:function(item){
+			item.addEventListener('textkeydown',function(event){
+				 if(event.keyCode==13){
+					this.$text.blur();
+				 }
+			});
+
+			item.addEventListener('textblur',function(event){
+				this.on('change');
+			});
+
+		},
 		spin:function(item){
 			item.defaultValue=item.defaultValue || 0;
 			item.value=item.defaultValue;
@@ -81,10 +100,10 @@
 					 event.keyCode==39 || 
 					 event.ctrlKey  || event.altKey ){
 					return;
-				 }else if(event.keyCode==38 && item.spinUp){
-					item.spinUp(); 
-				 }else if(event.keyCode==40 && item.spinDown){
-					 item.spinDown();
+				 }else if(event.keyCode==38 && this.spinUp){
+					this.spinUp(); 
+				 }else if(event.keyCode==40 && this.spinDown){
+					 this.spinDown();
 				}else if(!event.shiftKey && (event.keyCode>=48 && event.keyCode<=57)){
 
 				//}else if(event.shiftKey || 
@@ -92,7 +111,7 @@
 				//	 (event.keyCode>=187 && event.keyCode<=222)){
 					
 				 }else{
-					event.stopBubble(item);
+					event.stopBubble(this);
 				 }
 				//console.info(event.keyCode);
 			});
