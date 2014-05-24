@@ -159,7 +159,7 @@
 			var me=this;
 			this.$elem.mousedown(function(event){
 				//event.stopBubble(me);
-				event.target.__is_popu_owner__=true;
+				event.target.__is_popu_owner__=1;
 			});
 		},
 		resetOffset:function(){
