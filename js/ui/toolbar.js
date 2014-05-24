@@ -18,6 +18,7 @@
 			},
 			getTemplate: function(config){
 				ui.widget.applyCSS(config,this.css);
+
 				var html=['<div class="',config._c_toolbar_box,' ',(config.cls||''),' border-box">',
 				'<div class="',config._c_button_box,'">'];
 				var items=config.items;
