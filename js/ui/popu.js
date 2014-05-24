@@ -71,7 +71,7 @@
 				$.getDoc().mousedown(function(event,owner){
 					CF.logger(me.prototype,arguments);
 					var currentPopu=me.currentPopu;
-					if(!currentPopu || (owner && (currentPopu==owner ||  currentPopu.$owner==owner))){
+					if(!currentPopu || event.target.__is_popu_owner__ || (owner && (currentPopu==owner ||  currentPopu.$owner==owner))){
 						return;
 					}
 
@@ -158,7 +158,8 @@
 			CF.logger(this,arguments);
 			var me=this;
 			this.$elem.mousedown(function(event){
-				event.stopBubble(me);
+				//event.stopBubble(me);
+				event.target.__is_popu_owner__=true;
 			});
 		},
 		resetOffset:function(){
