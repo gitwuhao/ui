@@ -149,7 +149,6 @@
 	$.getDoc().keydown(function(event){
 		if(event.ctrlKey){
 			var cmd='';
-			
 			/*ctrl+z*/
 			if(event.keyCode==90){
 				cmd='undo';
@@ -157,7 +156,7 @@
 			}else if(event.keyCode==89){
 				cmd='redo';
 			}
-			//
+
 			if(cmd){
 				var target=event.target;
 				var tagName=target.tagName;
