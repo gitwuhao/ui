@@ -141,12 +141,21 @@
 			}
 			return result;
 		},
+		execute:function(index,callback){
+			if(index >= this.index){
+				while(index >= this.index && this.redo()){}
+			}else if(index <= this.index){
+				while(index <= this.index && this.undo()){}
+			}
+
+			if(callback){
+				callback();
+			}
+		},
 		clear: function (callback) {
 			var prev_size = this.undoCommands.length;
 			
 			this._removeCommand();
-
-			//this.undoCommands = [];
 
 			this.index = -1;
 
@@ -221,26 +230,6 @@
 	});
 
 var undo=ui.UndoManager.getInstance(20);
-undo.add({
-	title:'合并单元格',
-	undo:function(){
-		console.info(this.title+" undo.");
-	},
-	redo:function(){
-		console.info(this.title+" redo.");
-	}
-});
-
-undo.add({
-	title:'删除单元格',
-	undo:function(){
-		console.info(this.title+" undo.");
-	},
-	redo:function(){
-		console.info(this.title+" redo.");
-	}
-});
-
 for(var i=0;i<20;i++){
 undo.add({
 	title:'修改表格宽度'+i,
