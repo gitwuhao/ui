@@ -1,22 +1,29 @@
 (function(CF,jQuery,ui){
 "use strict";
 
+	var currentUndo;
 
 	ui.UndoManager={
-		redo:function(){
-		
-		
+		redo : function(callback){
+			if(currentUndo){
+				currentUndo.redo(callback);
+			}
 		},
-		undo:function(){
-		
-		
+		undo : function(callback){
+			if(currentUndo){
+				currentUndo.undo(callback);
+			}
 		},
-		setCurrent:function(undo){
-			this.current=undo;
+		setCurrent : function(undo){
+			currentUndo=undo;
+		},
+		getCurrent : function(){
+			return currentUndo;
 		},
 		getInstance:function(size){
 			var instace=new undo(size);
-			return{
+
+			var currentUndo={
 				destroy : function(){
 					if(instace){
 						instace.clear();
@@ -25,23 +32,14 @@
 					for(var key in this){
 						delete this[key];
 					}
-				},
-				add : function (command,callback) {
-					instace.add(command,callback);
-				},
-				undo : function (callback) {
-					instace.undo(callback);
-				},
-				redo : function (callback) {
-					instace.redo(callback);
-				},
-				hasUndo : function () {
-					instace.hasUndo();
-				},
-				hasRedo : function () {
-					instace.hasRedo();
 				}
 			};
+
+			CF.exportMethod(currentUndo,instace);
+
+			this.setCurrent(currentUndo);
+
+			return currentUndo;
 		}
 	};
 
@@ -49,7 +47,7 @@
 		if(size>0){
 			this.size=size;
 		}
-		ui.UndoManager.setCurrent(this);
+		this.undoCommands=[];
 	};
 
 
@@ -59,13 +57,11 @@
 		isExecuting : false,
 		size : 20,
 		add: function (command,callback) {
-			if (isExecuting) {
-				return this;
+			if (this.isExecuting) {
+				return false;
 			}
-			// if we are here after having called undo,
-			// invalidate items higher on the stack
-			this.undoCommands.splice(this.index + 1, this.undoCommands.length - this.index);
 
+			this.undoCommands.splice(this.index + 1, this.undoCommands.length - this.index);
 
 			if(this.undoCommands.length>=this.size){
 				 this.undoCommands.splice(0,1);
@@ -73,51 +69,59 @@
 
 			this.undoCommands.push(command);
 
-			// set the current index to the end
 			this.index = this.undoCommands.length - 1;
 			if (callback) {
 				callback();
 			}
-			return this;
+			return true;
 		},
-		execute:function (action) {
+		_execute:function (command,action) {
 
-			var command = this.undoCommands[this.index];
-			if (!command) {
-				return this;
-			}
 			if (!command || typeof command[action] !== "function") {
-				return this;
+				return false;
 			}
 			this.isExecuting = true;
 
 			command[action]();
 
 			this.isExecuting = false;
-			return this;
+
+			return true;
 		},
-		undo: function (callback) {
-
-			this.execute("undo");
-
-			this.index -= 1;
+		undo: function (callback) {			
+			var command = this.undoCommands[this.index];
+			if (!command) {
+				return false;
+			}
+			
+			var result=false;
+			if(this._execute(command,"undo")){
+				this.index -= 1;
+				result=true;
+			}
 
 			if (callback) {
 				callback();
 			}
-			return this;
+			return result;
 		},
 
 		redo: function (callback) {
+            var command = this.undoCommands[this.index + 1];
+			if (!command) {
+				return false;
+			}
 
-			this.execute("redo");
-
-			this.index += 1;
+			var result=false;
+			if(this._execute(command,"redo")){
+				this.index += 1;
+				result=true;
+			}
 
 			if (callback) {
 				callback();
 			}
-			return this;
+			return result;
 		},
 		clear: function (callback) {
 			var prev_size = this.undoCommands.length;
@@ -141,8 +145,46 @@
 		}
 	};
 
+
 	
 
 
-
 })(CF,jQuery,ui);
+
+
+/*
+
+
+var undo=ui.UndoManager.getInstance(20);
+undo.add({
+	title:'合并单元格',
+	undo:function(){
+		console.info(this.title+" undo.");
+	},
+	redo:function(){
+		console.info(this.title+" redo.");
+	}
+});
+
+undo.add({
+	title:'删除单元格',
+	undo:function(){
+		console.info(this.title+" undo.");
+	},
+	redo:function(){
+		console.info(this.title+" redo.");
+	}
+});
+
+
+undo.add({
+	title:'修改表格宽度',
+	undo:function(){
+		console.info(this.title+" undo.");
+	},
+	redo:function(){
+		console.info(this.title+" redo.");
+	}
+});
+
+*/

@@ -19,7 +19,8 @@
 		path+'tab.js',
 		path+'window.js',
 		path+'messagebox.js',
-		path+'colorpicker.js'
+		path+'colorpicker.js',
+		path+'undo.js'
 	];
 
 })();
