@@ -61,10 +61,10 @@
 				return false;
 			}
 
-			this.undoCommands.splice(this.index + 1, this.undoCommands.length - this.index);
+			this._removeCommand(this.index + 1, this.undoCommands.length - this.index);
 
 			if(this.undoCommands.length>=this.size){
-				 this.undoCommands.splice(0,1);
+				this._removeCommand(0);
 			}
 
 			this.undoCommands.push(command);
@@ -74,6 +74,24 @@
 				callback();
 			}
 			return true;
+		},
+		_removeCommand:function(index,size){
+			var array;
+
+			if(index>=0){
+				array=this.undoCommands.splice(index,size||1);
+
+			}else{
+				array=this.undoCommands;
+				this.undoCommands=[];
+			}
+
+			for(var i=0,len=array.length;i<len;i++){
+				var command=array[i];
+				if(command.remove){
+					command.remove();
+				}
+			}
 		},
 		_execute:function (command,action) {
 
@@ -125,8 +143,10 @@
 		},
 		clear: function (callback) {
 			var prev_size = this.undoCommands.length;
+			
+			this._removeCommand();
 
-			this.undoCommands = [];
+			//this.undoCommands = [];
 
 			this.index = -1;
 
@@ -148,11 +168,35 @@
 
 	$.getDoc().keydown(function(event){
 		if(event.ctrlKey){
-			var cmd='';
+			var target=event.target;
+			var tagName=target.tagName;
+			/*过滤文本框、编辑框的 ctrl+z  ctrl+y */
+			if(	/^textarea$/i.test(tagName) ||  (/^input$/i.test(tagName) && /^text$/i.test(target.type)) || target.isContentEditable  ){
 			/*ctrl+z*/
+			}else if(event.keyCode==90){
+				ui.UndoManager.undo();
+			/*ctrl+y*/
+			}else if(event.keyCode==89){
+				ui.UndoManager.redo();
+			}
+		}
+	});
+
+})(CF,jQuery,ui);
+
+
+/*
+
+
+
+
+	$.getDoc().keydown(function(event){
+		if(event.ctrlKey){
+			var cmd='';
+			*ctrl+z*
 			if(event.keyCode==90){
 				cmd='undo';
-			/*ctrl+y*/
+			*ctrl+y*
 			}else if(event.keyCode==89){
 				cmd='redo';
 			}
@@ -161,26 +205,20 @@
 				var target=event.target;
 				var tagName=target.tagName;
 
-				/*过滤文本框、编辑框的 ctrl+z  ctrl+y */
+				*过滤文本框、编辑框的 ctrl+z  ctrl+y *
 				if(	/^textarea$/i.test(tagName) || 
 					(/^input$/i.test(tagName) && /^text$/i.test(target.type)) ||
 					target.isContentEditable  ){
 					if(document.execCommand(cmd)){
 						return false;
 					}
+					return;
 				}
 				ui.UndoManager[cmd]();
 			}
 		}
 
 	});
-
-
-})(CF,jQuery,ui);
-
-
-/*
-
 
 var undo=ui.UndoManager.getInstance(20);
 undo.add({
@@ -203,15 +241,18 @@ undo.add({
 	}
 });
 
-
+for(var i=0;i<20;i++){
 undo.add({
-	title:'修改表格宽度',
+	title:'修改表格宽度'+i,
 	undo:function(){
 		console.info(this.title+" undo.");
 	},
 	redo:function(){
 		console.info(this.title+" redo.");
+	},
+	remove:function(){
+		console.info("remove command"+this.title);
 	}
 });
-
+}
 */
