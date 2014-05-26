@@ -175,20 +175,35 @@
 	};
 
 
+
 	$.getDoc().keydown(function(event){
 		if(event.ctrlKey){
-			var target=event.target;
-			var tagName=target.tagName;
-			/*过滤文本框、编辑框的 ctrl+z  ctrl+y */
-			if(	/^textarea$/i.test(tagName) ||  (/^input$/i.test(tagName) && /^text$/i.test(target.type)) || target.isContentEditable  ){
+			var cmd='';
 			/*ctrl+z*/
-			}else if(event.keyCode==90){
-				ui.UndoManager.undo();
+			if(event.keyCode==90){
+				cmd='undo';
 			/*ctrl+y*/
 			}else if(event.keyCode==89){
-				ui.UndoManager.redo();
+				cmd='redo';
+			}
+
+			if(cmd){
+				var target=event.target;
+				var tagName=target.tagName;
+
+				/*过滤文本框、编辑框的 ctrl+z  ctrl+y */
+				if(	/^textarea$/i.test(tagName) || 
+					(/^input$/i.test(tagName) && /^text$/i.test(target.type)) ||
+					target.isContentEditable  ){
+					if(document.execCommand(cmd)){
+						return false;
+					}
+					return;
+				}
+				ui.UndoManager[cmd]();
 			}
 		}
+
 	});
 
 })(CF,jQuery,ui);
@@ -198,6 +213,21 @@
 
 
 
+	$.getDoc().keydown(function(event){
+		if(event.ctrlKey){
+			var target=event.target;
+			var tagName=target.tagName;
+			\/*过滤文本框、编辑框的 ctrl+z  ctrl+y *\/
+			if(	/^textarea$/i.test(tagName) ||  (/^input$/i.test(tagName) && /^text$/i.test(target.type)) || target.isContentEditable  ){
+			\/*ctrl+z*\/
+			}else if(event.keyCode==90){
+				ui.UndoManager.undo();
+			\/*ctrl+y*\/
+			}else if(event.keyCode==89){
+				ui.UndoManager.redo();
+			}
+		}
+	});
 
 	$.getDoc().keydown(function(event){
 		if(event.ctrlKey){
