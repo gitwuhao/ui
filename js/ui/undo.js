@@ -34,8 +34,10 @@
 					}
 				}
 			};
-
+			
 			CF.exportMethod(currentUndo,instace);
+
+			CF.extendEventListener(currentUndo);
 
 			this.setCurrent(currentUndo);
 
@@ -73,6 +75,8 @@
 			if (callback) {
 				callback();
 			}
+			
+			this.scope.trigger('add',command);
 			return true;
 		},
 		_removeCommand:function(index,size){
@@ -103,6 +107,8 @@
 			command[action]();
 
 			this.isExecuting = false;
+
+			this.scope.trigger(action,command);
 
 			return true;
 		},
@@ -162,6 +168,8 @@
 			if (callback && (prev_size > 0)) {
 				callback();
 			}
+			
+			this.scope.trigger('clear',null);
 		},
 		hasUndo: function () {
 			return this.index !== -1;
