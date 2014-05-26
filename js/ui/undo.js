@@ -112,39 +112,50 @@
 
 			return true;
 		},
-		undo: function (callback) {			
+		undo: function (callback) {
+			
+			this.scope.trigger('undobefore',null);
+
 			var command = this.undoCommands[this.index];
-			if (!command) {
-				return false;
+			if (command) {
+				var result=false;
+				if(this._execute(command,"undo")){
+					this.index -= 1;
+					result=true;
+				}
+
+				if (callback) {
+					callback();
+				}
 			}
 			
-			var result=false;
-			if(this._execute(command,"undo")){
-				this.index -= 1;
-				result=true;
-			}
 
-			if (callback) {
-				callback();
-			}
+			this.scope.trigger('undoafter',null);
+
 			return result;
 		},
 
 		redo: function (callback) {
+			
+			this.scope.trigger('redobefore',null);
+
             var command = this.undoCommands[this.index + 1];
-			if (!command) {
-				return false;
+			if (command) {
+			
+				var result=false;
+				if(this._execute(command,"redo")){
+					this.index += 1;
+					result=true;
+				}
+
+				if (callback) {
+					callback();
+				}
+
 			}
 
-			var result=false;
-			if(this._execute(command,"redo")){
-				this.index += 1;
-				result=true;
-			}
 
-			if (callback) {
-				callback();
-			}
+			this.scope.trigger('redoafter',null);
 			return result;
 		},
 		execute:function(index,callback){
