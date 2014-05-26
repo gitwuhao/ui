@@ -752,7 +752,7 @@ For usage and examples: colpick.com/plugin
 		return rgbToHex(hsbToRgb(hsb));
 	};
 	
-
+/*
 	$.extend({
 		colpick:{ 
 			rgbToHex: rgbToHex,
@@ -763,5 +763,5 @@ For usage and examples: colpick.com/plugin
 			hexToRgb: hexToRgb
 		}
 	});
-
+*/
 })(CF,$,ui);
