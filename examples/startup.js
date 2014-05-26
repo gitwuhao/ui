@@ -25,7 +25,8 @@
 		'window',
 		'teditor',
 		'colorpicker',
-		'tab'
+		'tab',
+		'undo'
 	];
 	
 	var param=[];
