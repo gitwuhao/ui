@@ -108,7 +108,7 @@
 
 			this.isExecuting = false;
 
-			this.scope.trigger(action,command);
+			this.scope.trigger(action,command,action);
 
 			return true;
 		},
