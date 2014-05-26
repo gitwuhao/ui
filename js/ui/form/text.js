@@ -88,7 +88,10 @@
 			this.$icon=this.$text.parent().next();
 
 			this._clear_icon=config._c_clear_icon;
-				
+
+			if(this.isDisabled){
+				this.disabled();
+			}
 		},
 		onBindEvent:function(){
 			CF.logger(this,arguments);

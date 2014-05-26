@@ -32,6 +32,11 @@
 			this.$icon=this.$text.parent().next();
 
 			this._css_date=config._c_date;
+
+			
+			if(this.isDisabled){
+				this.disabled();
+			}
 		},
 		onBindEvent:function(){
 			CF.logger(this,arguments);

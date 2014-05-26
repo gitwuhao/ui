@@ -53,6 +53,11 @@
 				item.$input=item.$elem.children("input:first");
 			}
 
+			
+			if(this.isDisabled){
+				this.disabled();
+			}
+
 		},
 		onBindEvent:function(){
 			CF.logger(this,arguments);

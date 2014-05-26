@@ -7,6 +7,178 @@ For usage and examples: colpick.com/plugin
  */
 (function(CF,$,ui){
 
+	var colorpicker=function(){
+		this.callSuperMethod();
+	};
+
+	ui.extend(colorpicker,ui.popu,{
+		_type_ : "ui",
+		_name_ : "colorpicker",
+		statics:{
+			css:{
+				_c_colorpicker : '-colorpicker'
+			}
+		},
+		onRenderBefore:function(config){
+			CF.logger(this,arguments);
+		},
+		onRenderAfter : function(config){
+			CF.logger(this,arguments);
+			var me=this;
+
+			colpick.init.call(this.$elem,{
+				flat:true,
+				layout:'hex',
+				submit: 1,
+				submitText: '确认',
+				onChange: function (hsb,hex,rgb,el) {
+					me.onChange(hsb,hex,rgb,el);
+				},
+				onSubmit: function (hsb,hex,rgb,el) {
+					me.onSubmit(hsb,hex,rgb,el);
+					me.hide();
+				}
+			});
+
+			this.$colpick=this.$elem.children();
+			
+			this.$hexField=$('.colpick_hex_field :text',this.$colpick);
+			
+			//this.on("bindEvent",null);
+		},
+		getHexFieldValue:function(){
+			return this.$hexField.val();
+		},
+		onChange:function(hsb,hex,rgb,el){
+			CF.logger(this,arguments);
+			if(this.getHexFieldValue()==""){
+				this.color="";
+			}else{
+				this.color="#"+hex;
+			}
+			if(this.config && this.config.onChange){
+				this.config.onChange(this.color);
+				this.config.color=this.color;
+			}
+		},
+		onSubmit:function(hsb,hex,rgb,el){
+			CF.logger(this,arguments);
+			if(this.getHexFieldValue()==""){
+				this.color="";
+			}else{
+				this.color="#"+hex;
+			}
+			if(this.config && this.config.onSubmit){
+				this.config.onSubmit(this.color);
+				this.config.color=this.color;
+				this.config.hexFieldValue=this.getHexFieldValue();
+			}
+		},
+		//rgbhex,full,hex
+		setLayout:function(layout){
+			CF.logger(this,arguments);
+			var colorpicker=this.$colpick[0];
+			if(!layout){
+				layout="hex";
+			}
+			colorpicker.className="colpick  colpick_"+layout;
+		},
+		/*FFFFFF*/
+		setColor:function(color){
+			CF.logger(this,arguments);
+			colpick.setColor.call(this.$elem,color);
+		},
+		show:function(config){
+			CF.logger(this,arguments);
+			this.autoSetOffset=true;
+			this.align=config.align;
+			this.$offsetElement=config.$offsetElement;
+			this.$owner=config.$owner;
+			this.config=config;
+			if(config.color){
+				this.setColor(config.color);
+			}else{
+				this.setColor('FF0000');
+			}
+			if(config.layout){
+				this.setLayout(config.layout);
+			}else{
+				this.setLayout("hex");
+			}
+			this.onHide();
+			this.on("show");
+			
+		},
+		onShowAfter:function(){
+			CF.logger(this,arguments);
+			this.callSuperMethod();
+			if(this.config){
+				this.config.isHide=false;
+			}
+		},
+		hide:function(){
+			CF.logger(this,arguments);
+			this.on("hide");
+		},
+		onHideAfter : function(){
+			CF.logger(this,arguments);
+			this.callSuperMethod();
+			if(this.config){
+				this.config.isHide=true;
+			}
+		},
+		toggle : function(config){
+			CF.logger(this,arguments);
+			if(this.config==config && config.isHide==false){
+				this.hide();
+				return;
+			}
+			this.show(config);
+		}
+	});
+
+	
+	var instance;
+
+	function getInstance(){
+		if(!instance){
+			instance=new colorpicker();
+		}
+		return instance;
+	}
+
+	ui.colorpicker={};
+
+	CF.merger(ui.colorpicker,{
+		getInstance:function(config){
+			config.align=config.align||'lb';
+			return{
+				config:config,
+				show:function(){
+					getInstance().show(this.config);
+				},
+				hide:function(){
+					getInstance().hide(this.config);
+				},
+				toggle:function(){
+					getInstance().toggle(this.config);
+				},
+				removes : ui.widget.remove
+			};
+		},
+		show:function(config){
+			getInstance().show(config);
+		},
+		hide:function(config){
+			getInstance().hide(config);
+		},
+		toggle:function(config){
+			getInstance().toggle(config);
+		}
+	});
+
+
+
 	var colpick = function () {
 		var tpl = ['<div class="colpick">',
 						'<div class="colpick_color">',
@@ -589,176 +761,6 @@ For usage and examples: colpick.com/plugin
 			hsbToRgb: hsbToRgb,
 			hexToHsb: hexToHsb,
 			hexToRgb: hexToRgb
-		}
-	});
-
-	var colorpicker=function(){
-		this.callSuperMethod();
-	};
-
-	ui.extend(colorpicker,ui.popu,{
-		_type_ : "ui",
-		_name_ : "colorpicker",
-		statics:{
-			css:{
-				_c_colorpicker : '-colorpicker'
-			}
-		},
-		onRenderBefore:function(config){
-			CF.logger(this,arguments);
-		},
-		onRenderAfter : function(config){
-			CF.logger(this,arguments);
-			var me=this;
-
-			colpick.init.call(this.$elem,{
-				flat:true,
-				layout:'hex',
-				submit: 1,
-				submitText: '确认',
-				onChange: function (hsb,hex,rgb,el) {
-					me.onChange(hsb,hex,rgb,el);
-				},
-				onSubmit: function (hsb,hex,rgb,el) {
-					me.onSubmit(hsb,hex,rgb,el);
-					me.hide();
-				}
-			});
-
-			this.$colpick=this.$elem.children();
-			
-			this.$hexField=$('.colpick_hex_field :text',this.$colpick);
-			
-			//this.on("bindEvent",null);
-		},
-		getHexFieldValue:function(){
-			return this.$hexField.val();
-		},
-		onChange:function(hsb,hex,rgb,el){
-			CF.logger(this,arguments);
-			if(this.getHexFieldValue()==""){
-				this.color="";
-			}else{
-				this.color="#"+hex;
-			}
-			if(this.config && this.config.onChange){
-				this.config.onChange(this.color);
-				this.config.color=this.color;
-			}
-		},
-		onSubmit:function(hsb,hex,rgb,el){
-			CF.logger(this,arguments);
-			if(this.getHexFieldValue()==""){
-				this.color="";
-			}else{
-				this.color="#"+hex;
-			}
-			if(this.config && this.config.onSubmit){
-				this.config.onSubmit(this.color);
-				this.config.color=this.color;
-				this.config.hexFieldValue=this.getHexFieldValue();
-			}
-		},
-		//rgbhex,full,hex
-		setLayout:function(layout){
-			CF.logger(this,arguments);
-			var colorpicker=this.$colpick[0];
-			if(!layout){
-				layout="hex";
-			}
-			colorpicker.className="colpick  colpick_"+layout;
-		},
-		/*FFFFFF*/
-		setColor:function(color){
-			CF.logger(this,arguments);
-			colpick.setColor.call(this.$elem,color);
-		},
-		show:function(config){
-			CF.logger(this,arguments);
-			this.autoSetOffset=true;
-			this.align=config.align;
-			this.$offsetElement=config.$offsetElement;
-			this.$owner=config.$owner;
-			this.config=config;
-			if(config.color){
-				this.setColor(config.color);
-			}else{
-				this.setColor('FF0000');
-			}
-			if(config.layout){
-				this.setLayout(config.layout);
-			}else{
-				this.setLayout("hex");
-			}
-			this.onHide();
-			this.on("show");
-			
-		},
-		onShowAfter:function(){
-			CF.logger(this,arguments);
-			this.callSuperMethod();
-			if(this.config){
-				this.config.isHide=false;
-			}
-		},
-		hide:function(){
-			CF.logger(this,arguments);
-			this.on("hide");
-		},
-		onHideAfter : function(){
-			CF.logger(this,arguments);
-			this.callSuperMethod();
-			if(this.config){
-				this.config.isHide=true;
-			}
-		},
-		toggle : function(config){
-			CF.logger(this,arguments);
-			if(this.config==config && config.isHide==false){
-				this.hide();
-				return;
-			}
-			this.show(config);
-		}
-	});
-
-	
-	var instance;
-
-	function getInstance(){
-		if(!instance){
-			instance=new colorpicker();
-		}
-		return instance;
-	}
-
-	ui.colorpicker={};
-
-	CF.merger(ui.colorpicker,{
-		getInstance:function(config){
-			config.align=config.align||'lb';
-			return{
-				config:config,
-				show:function(){
-					getInstance().show(this.config);
-				},
-				hide:function(){
-					getInstance().hide(this.config);
-				},
-				toggle:function(){
-					getInstance().toggle(this.config);
-				},
-				removes : ui.widget.remove
-			};
-		},
-		show:function(config){
-			getInstance().show(config);
-		},
-		hide:function(config){
-			getInstance().hide(config);
-		},
-		toggle:function(config){
-			getInstance().toggle(config);
 		}
 	});
 

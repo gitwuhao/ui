@@ -40,6 +40,11 @@
 			}
 
 			this._css_combo=config._c_text;
+
+			
+			if(this.isDisabled){
+				this.disabled();
+			}
 		},
 		onBindEvent:function(){
 			CF.logger(this,arguments);
