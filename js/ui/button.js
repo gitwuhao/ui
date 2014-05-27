@@ -43,9 +43,13 @@
 		onBindEvent:function(){
 			var me=this;
 			this.$button.click(function(event){
-				me.on("click");
+				if(me.isDisabled!=true){
+					me.on("click");
+				}
 			});
-			this.$elem.bindHover();
+
+			this.isHover=true;
+			this.bindHover(this.$elem);
 		},
 		onClick : function(event){
 			CF.logger(this,arguments);

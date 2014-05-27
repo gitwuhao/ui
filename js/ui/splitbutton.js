@@ -59,16 +59,22 @@
 			var me=this;
 			
 			this.$button.click(function(event){
-				me.on("click");
+				if(me.isDisabled!=true){
+					me.on("click");
+				}
 			});
 
 			this.$splitbutton.bindHover();
 
 			this.$arrowbutton.click(function(event){
-				me.on("arrowClick");
+				if(me.isDisabled!=true){
+					me.on("arrowClick");
+				}
 			});
 
-			this.$arrowbutton.bindHover();
+			this.isHover=true;
+			this.bindHover(this.$splitbutton);
+			this.bindHover(this.$arrowbutton);
 		},
 		onClick : function(event){
 			CF.logger(this,arguments);

@@ -234,24 +234,6 @@
 			this.trigger("setvalue",value);
 			this.$text.val(this.value);
 		},
-		bindFieldHover:function($elem){
-			if(this.isHover!=true){
-				return;
-			}
-			var me=this;
-			$elem.on({
-				mouseover : function (event) {
-					if(me.isDisabled!=true && $.hasClass(this,"selected")==false){
-						$.addClass(this,"hover");
-					}
-				},
-				mouseout: function (event) {
-					if(me.isDisabled!=true){
-						$.removeClass(this,"hover");
-					}
-				}
-			});
-		},
 		onBindEventAfter:function(){
 			CF.logger(this,arguments);
 			if(this.vtype){

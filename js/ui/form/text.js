@@ -117,7 +117,7 @@
 
 			
 			this.$elem.bind("mousewheel",function(event){
-				if(this.isDisabled!=true && me.hasEventListener('mousewheel')){
+				if(me.isDisabled!=true && me.hasEventListener('mousewheel')){
 					me.trigger("mousewheel",event);
 					event.stopBubble(me);
 				}
@@ -142,7 +142,7 @@
 					}
 				});
 			}
-			this.bindFieldHover(this.$elem);
+			this.bindHover(this.$elem);
 		},
 		focus : function(){
 			CF.logger(this,arguments);

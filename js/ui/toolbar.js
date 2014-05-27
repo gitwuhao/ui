@@ -109,6 +109,22 @@
 		enabledIcon : function(icon){
 			var item=this.getItem(icon);
 			item.enabled();
+		},
+		disabled:function(){
+			for(var key in this.itemsMap){
+				var item=this.itemsMap[key];
+				if(item.__isUI__){
+					item.disabled();
+				}
+			}
+		},
+		enabled:function(){
+			for(var key in this.itemsMap){
+				var item=this.itemsMap[key];
+				if(item.__isUI__){
+					item.enabled();
+				}
+			}
 		}
 	});
 	

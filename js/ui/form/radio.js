@@ -81,7 +81,7 @@
 			this.setData(item.$input[0],item);
 			this.setData(item.$elem[0],item);
 
-			this.bindFieldHover(item.$elem);
+			this.bindHover(item.$elem);
 			
 
 			item.$owner=this;

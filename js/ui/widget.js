@@ -102,6 +102,7 @@
 	ui.renderContainer
 
 	ui.widget={
+		__isUI__:true,
 		_type_ : "ui",
 		_name_ : "widget",
 		__isClass__:true,
@@ -236,6 +237,24 @@
 		enabled:function(){
 			this.$elem.removeClass("disabled");
 			this.isDisabled=false;
+		},
+		bindHover:function($elem){
+			if(this.isHover!=true){
+				return;
+			}
+			var me=this;
+			$elem.on({
+				mouseover : function (event) {
+					if(me.isDisabled!=true && $.hasClass(this,"selected")==false){
+						$.addClass(this,"hover");
+					}
+				},
+				mouseout: function (event) {
+					if(me.isDisabled!=true){
+						$.removeClass(this,"hover");
+					}
+				}
+			});
 		}
 	};
 
