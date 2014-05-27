@@ -196,7 +196,7 @@
 
 
 	$.getDoc().keydown(function(event){
-		if(event.ctrlKey){
+		if(event.ctrlKey && ui.UndoManager.getCurrent()){
 			var cmd='';
 			/*ctrl+z*/
 			if(event.keyCode==90){
