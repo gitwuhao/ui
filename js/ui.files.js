@@ -20,7 +20,8 @@
 		path+'window.js',
 		path+'messagebox.js',
 		path+'colorpicker.js',
-		path+'undo.js'
+		path+'undo.js',
+		path+'htmlfilter.js'
 	];
 
 })();
