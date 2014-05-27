@@ -83,3 +83,12 @@ div.x-ui-text.disabled .x-ui-item-field{
 	display: table-cell;
 	cursor: pointer;
 }
+
+.x-ui-text-box .px-to-percent{
+	cursor: pointer;
+}
+
+
+.disabled .x-ui-text-box .px-to-percent{
+	cursor: default;
+}

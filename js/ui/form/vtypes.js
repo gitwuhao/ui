@@ -125,7 +125,7 @@
 	
 		},	
 		pxToPercent:function(item){
-			item.$icon.css('cursor','pointer');
+			item.$icon.addClass('px-to-percent');
 			item.addEventListener('iconmousedown',function(event){
 				if(this.unit=="px"){
 					this.setUnit("%");
