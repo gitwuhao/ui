@@ -232,6 +232,7 @@
 		},
 		disabled:function(){
 			this.$elem.addClass("disabled");
+			this.$elem.removeClass("selected hover");
 			this.isDisabled=true;
 		},
 		enabled:function(){
