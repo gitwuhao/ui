@@ -1,4 +1,4 @@
-(function(CF,jQuery,ui){
+(function(CF,$,ui){
 "use strict";
 //.replace(/\s?sale-grid5\s?/gi," ")
 	
@@ -28,7 +28,7 @@
 							handle:_rule
 						};
 					}
-					allRule[_key]=jQuery.extend({},tagRule,_rule);
+					allRule[_key]=$.extend({},tagRule,_rule);
 				}
 				delete allRule[key];
 			}
@@ -53,13 +53,14 @@
 		var nodeName=elem.nodeName.toLowerCase();
 
 		var removes=allRule['@remove'];
-		
-		for(var n=0,_len=removes.length;n<_len;n++){
-			var _name=removes[n];
-			var reg = new RegExp(_name, 'gi');
-			if(reg.test(nodeName)){
-				jQuery(elem).remove();
-				return;
+		if(removes){
+			for(var n=0,_len=removes.length;n<_len;n++){
+				var _name=removes[n];
+				var reg = new RegExp(_name, 'gi');
+				if(reg.test(nodeName)){
+					$(elem).remove();
+					return;
+				}
 			}
 		}
 
@@ -69,7 +70,7 @@
 
 		if(publicRule){
 			if(tagRule){
-				_tagRule=jQuery.extend({},publicRule,tagRule);
+				_tagRule=$.extend({},publicRule,tagRule);
 			}else{
 				_tagRule=publicRule;
 			}
@@ -87,7 +88,7 @@
 				}
 			}
 			if(elem.innerHTML==""){
-				jQuery(elem).remove();
+				$(elem).remove();
 			}
 		}
 	};
@@ -99,7 +100,7 @@
 		if(nodeName=="br"){
 			return;
 		}
-		var $target=jQuery(this);
+		var $target=$(this);
 		if(this.innerHTML==""){
 			$target.remove();
 			return;
@@ -113,7 +114,7 @@
 		var childNodes=this.childNodes;
 		var elem=$target;
 		for(var len=childNodes.length-1;len>=0;len--){
-			var node=jQuery(childNodes[len]);
+			var node=$(childNodes[len]);
 			elem.before(node);
 			elem=node;
 		}
@@ -127,7 +128,7 @@
 	};
 
 	htmlfilter.UnitConverter=function(name){
-		var value=jQuery.style(this,name);
+		var value=$.style(this,name);
 		if(/px/i.test(value)){
 			return;
 		}
@@ -139,7 +140,7 @@
 			value=value * 16;
 		}
 		value=parseInt(value) + "px";
-		jQuery.style(this,name,value);
+		$.style(this,name,value);
 		return value;
 	};
 
@@ -147,14 +148,14 @@
 	htmlfilter.tagReplace=function(name){
 		return function(){
 			var elem=document.createElement(name);
-			var $target=jQuery(this);
+			var $target=$(this);
 			$target.before(elem);
 			$target.appendTo(elem);
 			var childNodes=this.childNodes;
 			var node=this;
 			for(var len=childNodes.length-1;len>=0;len--){
 				var _node=childNodes[len];
-				jQuery(node).before(_node);
+				$(node).before(_node);
 				node=_node;
 			}
 			$target.remove();
@@ -162,7 +163,7 @@
 	};
 
 	htmlfilter.ColorConverter=function(name){
-		var value=jQuery.style(this,name);
+		var value=$.style(this,name);
 		if(/#/.test(value)){
 			return;
 		}
@@ -204,11 +205,11 @@
 				return;
 			}else if(removes){
 				removeAttr(elem,elem.attributes,removes,function(_elem,attrName){
-					jQuery.removeAttr(_elem,attrName);
+					$.removeAttr(_elem,attrName);
 				});
 			}else if(keeps){
 				keepAttr(elem,elem.attributes,keeps,function(_elem,attrName){
-					jQuery.removeAttr(_elem,attrName);
+					$.removeAttr(_elem,attrName);
 				});
 			}
 		
@@ -246,7 +247,7 @@
 		}
 	};
 
-	//jQuery.removeAttr(document.body,"class");
+	//$.removeAttr(document.body,"class");
 
 	function filterStyle(rule,elem){
 		if(elem.style.length>0){
@@ -262,13 +263,13 @@
 				handleAttr(elem,attrHandleList,elem.style);
 			}
 			var result=filterAttr(rule,elem,elem.style,function(_elem,attrName){
-				jQuery.style(_elem,attrName,"");
+				$.style(_elem,attrName,"");
 			});
 			var cssText=elem.style.cssText;
 			if(cssText==""){
-				jQuery.removeAttr(elem,"style");
+				$.removeAttr(elem,"style");
 			}else{
-				jQuery.attr(elem,"style",elem.style.cssText);
+				$.attr(elem,"style",elem.style.cssText);
 			}
 
 			return result;
@@ -282,7 +283,7 @@
 				_elem.classList.remove(attrName);
 			});
 			if(elem.className==""){
-				jQuery.removeAttr(elem,"class");
+				$.removeAttr(elem,"class");
 			}
 			return result;
 		}
@@ -349,7 +350,7 @@
 			style:{
 				display : function(name,attr){
 					if(this.style[name]=="none"){
-						jQuery(this).remove();
+						$(this).remove();
 					}
 				},
 				"padding": htmlfilter.UnitConverter,
@@ -370,7 +371,7 @@
 		span:{
 			handle : function(){
 				if(this.innerHTML==""){
-					jQuery(this).remove();
+					$(this).remove();
 				}
 			}
 		},
@@ -395,7 +396,7 @@
 				style : {
 					display:function(){
 						if(this.style[name]=="none"){
-							jQuery(this).remove();
+							$(this).remove();
 						}
 					}
 				},
@@ -425,4 +426,4 @@
 
 	ui.htmlfilter=htmlfilter;
 
-})(CF,jQuery,ui);
+})(CF,$,ui);
