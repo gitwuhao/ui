@@ -175,7 +175,8 @@
 		},
 		initRender:function(){
 			this.on("render",this.config);
-			this.on("bindEvent",null);
+			this.on("bindEvent");
+			this.on("ready");
 			delete this.config;
 			delete this.initRender;
 		},
