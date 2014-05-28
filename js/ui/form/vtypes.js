@@ -189,7 +189,6 @@
 				}
 			});
 
-
 			
 			item.addEventListener('iconmousedown',function(event){
 				if(this.isClearState){
@@ -197,7 +196,6 @@
 				}
 			});
 			
-
 
 			item.addEventListener('setvalue',function(value){
 				if(value==""){
