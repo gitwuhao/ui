@@ -172,17 +172,42 @@
 			}
 			return rs;
 		},
-		intText:'只能输入整数',
-		email:function(item){
+		'clear':function(item){
+			item._clear_icon=item.px+'-clear-icon';
+
+			item.addEventListener('textfocus',function(event){
+				if(event.target.value.length>0){
+					this.$icon.addClass(this._clear_icon);
+					this.isClearState=true;
+				}
+			});
+
+			item.addEventListener('textblur',function(event){
+				if(this.isClearState){
+					this.$icon.removeClass(this._clear_icon);
+					this.isClearState=false;
+				}
+			});
+
+
 			
-		
-		},
-		emailText:'只能输入整数',
-		url:function(item){
+			item.addEventListener('iconmousedown',function(event){
+				if(this.isClearState){
+					this.setValue("");
+				}
+			});
 			
-		
-		},
-		urlText:'只能输入整数'
+
+
+			item.addEventListener('setvalue',function(value){
+				if(value==""){
+					this.$icon.removeClass(this._clear_icon);
+					this.isClearState=false;
+				}
+				this.value=value;
+			});
+
+		}
 	};
 
 
