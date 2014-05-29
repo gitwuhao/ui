@@ -17,6 +17,25 @@ For usage and examples: colpick.com/plugin
 		statics:{
 			css:{
 				_c_colorpicker : '-colorpicker'
+			},
+			toHexColor : function(hex){
+				var len = 6 - hex.length;
+				if(len==3){
+					var vals=hex.split("");
+					var o = [];
+					for (var i=0; i<len; i++) {
+						o.push(vals[i],vals[i]);
+					}
+					hex = o.join('');
+				}else if (len > 0) {
+					var o = [];
+					for (var i=0; i<len; i++) {
+						o.push('0');
+					}
+					o.push(hex);
+					hex = o.join('');
+				}
+				return "#"+rgbToHex(hexToRgb(hex));
 			}
 		},
 		onRenderBefore:function(config){
@@ -32,10 +51,17 @@ For usage and examples: colpick.com/plugin
 				submit: 1,
 				submitText: '确认',
 				onChange: function (hsb,hex,rgb,el) {
-					me.onChange(hsb,hex,rgb,el);
+					this.color="#"+hex;
+					me.onChange();
 				},
 				onSubmit: function (hsb,hex,rgb,el) {
-					me.onSubmit(hsb,hex,rgb,el);
+					var hexFieldValue=me.getHexFieldValue();
+					if($.trim(hexFieldValue)==""){
+						me.color="";
+					}else{
+						me.color=colorpicker.toHexColor(hexFieldValue);
+					}
+					me.onSubmit();
 					me.hide();
 				}
 			});
@@ -49,29 +75,18 @@ For usage and examples: colpick.com/plugin
 		getHexFieldValue:function(){
 			return this.$hexField.val();
 		},
-		onChange:function(hsb,hex,rgb,el){
+		onChange:function(l){
 			CF.logger(this,arguments);
-			if(this.getHexFieldValue()==""){
-				this.color="";
-			}else{
-				this.color="#"+hex;
-			}
 			if(this.config && this.config.onChange){
 				this.config.onChange(this.color);
 				this.config.color=this.color;
 			}
 		},
-		onSubmit:function(hsb,hex,rgb,el){
+		onSubmit:function(){
 			CF.logger(this,arguments);
-			if(this.getHexFieldValue()==""){
-				this.color="";
-			}else{
-				this.color="#"+hex;
-			}
 			if(this.config && this.config.onSubmit){
 				this.config.onSubmit(this.color);
 				this.config.color=this.color;
-				this.config.hexFieldValue=this.getHexFieldValue();
 			}
 		},
 		//rgbhex,full,hex
@@ -751,8 +766,7 @@ For usage and examples: colpick.com/plugin
 	var hsbToHex = function (hsb) {
 		return rgbToHex(hsbToRgb(hsb));
 	};
-	
-/*
+	/*
 	$.extend({
 		colpick:{ 
 			rgbToHex: rgbToHex,
@@ -763,5 +777,5 @@ For usage and examples: colpick.com/plugin
 			hexToRgb: hexToRgb
 		}
 	});
-*/
+	*/
 })(CF,$,ui);
