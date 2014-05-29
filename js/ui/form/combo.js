@@ -17,7 +17,11 @@
 					config.icon='combo';
 				}
 				config.type='combo';
-				return ui.form.text.getTemplate.call(this,config);
+				var readonly=config.readonly;
+				config.readonly=false;
+				var html=ui.form.text.getTemplate(config);
+				config.readonly=readonly;
+				return html;
 			}
 		},
 		onRenderAfter:function(config){
@@ -52,15 +56,21 @@
 
 			this.$label.mousedown(function(event){
 				me.on('focus');
-				event.stopBubble(me);
+				ui.popu.filterTriggerOwner(event.target);
 			});
 
 			this.$text.focus(function(event){
-				me.on('focus');
+				if(me.on('focus') && me.readonly==true){
+					setTimeout(function(){
+						me.$text[0].readOnly=true;
+					},0);
+				}
 			});
 
 			this.$text.blur(function(event){
-				me.on('blur');
+				if(me.on('blur') && me.readonly==true){
+					this.readOnly=false;
+				}
 			});
 
 
@@ -69,14 +79,20 @@
 					me.focus();
 					me.on("arrowClick");
 				}
-				event.stopBubble(me);
+				ui.popu.filterTriggerOwner(event.target);
 			});
 			
-			if( me.readonly==true){
+			if(this.readonly==true){
 				this.$text.mousedown(function(event){
-					me.focus();
-					me.toggleList();
-					event.stopBubble(me);
+					if(me.isDisabled!=true ){
+						if(!me.isFocus){
+							this.readOnly=false;
+						}else{
+							this.readOnly=true;
+						}
+						me.toggleList();
+						ui.popu.filterTriggerOwner(event.target);
+					}
 				});
 			}
 		},
@@ -137,6 +153,12 @@
 				this.list.remove();
 			}
 			this.callSuperMethod();
+		},
+		onDisabled:function(){
+			this.$text[0].disabled=true;
+		},
+		onEnabled:function(){
+			this.$text[0].disabled=false;
 		}
 	});
 
