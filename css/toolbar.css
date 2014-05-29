@@ -40,3 +40,11 @@
 .x-ui-toolbar-button-box .x-ui-text{
 	margin: 1px 2px;
 }
+
+.x-ui-toolbar-box .x-ui-button.hover,.x-ui-toolbar-box  .x-ui-split-button.hover,.x-ui-toolbar-box  .x-ui-button.selected,.x-ui-toolbar-box  .x-ui-split-button.selected {
+	padding: 0px;
+}
+.x-ui-toolbar-box .x-ui-text.hover .x-ui-text-box,.x-ui-toolbar-box .x-ui-button.hover,.x-ui-toolbar-box  .x-ui-split-button.hover,.x-ui-toolbar-box .x-ui-checkbox-group.hover .x-ui-icon,.x-ui-toolbar-box .x-ui-radio-group.hover .x-ui-icon {
+	border: 1px solid #5FA1FF;
+	box-shadow: 0 0 5px #A5C8FF;
+}

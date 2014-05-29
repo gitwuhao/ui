@@ -1,8 +1,10 @@
 .x-ui-button{
-	float:left;
 	margin: 1px;
 	padding: 1px;
 }
 .x-ui-button.disabled{
 	opacity: 0.3;
+}
+.x-ui-button,.x-ui-button .x-ui-icon,.x-ui-button .x-ui-label{
+	float: left;	
 }
