@@ -15,7 +15,6 @@
 							(config.html||''),
 						'</div>'].join('');
 			},
-			key : "u."+$.random(),
 			setOffset:function(config){
 				var popu=config.popu,
 					$offsetElement=config.$offsetElement,
@@ -60,6 +59,9 @@
 					this.currentPopu=null;
 				}
 			},
+			filterTriggerOwner:function(target){
+				this.triggerOwner=target;
+			},
 			initEventListener : function(){
 				var me=this;
 				$.getDoc().keydown(function(event){
@@ -72,11 +74,12 @@
 				$.getDoc().mousedown(function(event,owner){
 					CF.logger(me.prototype,arguments);
 					var currentPopu=me.currentPopu;
-					if(!currentPopu || event.target[ui.popu.key] || (owner && (currentPopu==owner ||  currentPopu.$owner==owner))){
+					if(!currentPopu || event.target==me.triggerOwner || (owner && (currentPopu==owner ||  currentPopu.$owner==owner))){
+						me.triggerOwner=null;
 						return;
 					}
-
 					me.removeCurrentPopu();
+					me.triggerOwner=null;
 					
 					/*
 
@@ -159,8 +162,11 @@
 			CF.logger(this,arguments);
 			var me=this;
 			this.$elem.mousedown(function(event){
-				//event.stopBubble(me);
-				event.target[ui.popu.key]=1;
+				if(/^input$/i.test(event.target.tagName)){
+					ui.popu.filterTriggerOwner(event.target)
+				}else{
+					event.stopBubble(me);
+				}
 			});
 		},
 		resetOffset:function(){
