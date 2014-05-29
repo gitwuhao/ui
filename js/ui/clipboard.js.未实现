@@ -1,0 +1,63 @@
+(function(CF,$,ui){
+	
+	var clipboard={};
+
+	clipboard.paste={};
+
+
+
+
+	CF.exportMethod(clipboard.paste,{
+		registerListener:function(){
+			if(this.pasteContext){
+				return;
+			}
+			var div=document.createElement('div');
+
+			$.getBody().append(div);
+
+			$.getBody().on("beforepaste",this._beforepaste_handle);
+
+			$.getBody().on("paste",this._paste_handle);
+			
+			var me=this;
+
+			this._beforepaste_handle=function(event){
+				me.scope.pasteContext.focus();
+			};
+
+			this._paste_handle=function(event){
+				me.scope.trigger('paseafter',me.pasteContext.children(),me.pasteContext.html());
+			};
+			
+			div.contentEditable=true;
+
+			this.pasteContext=$(div);
+		},
+		destroyListener:function(){
+			if(this._beforepaste_handle){
+				$.getDoc().off("beforepaste",this._beforepaste_handle);
+			}
+
+			if(this._paste_handle){
+				$.getDoc().off("paste",this._paste_handle);
+			}
+
+			if(this.pasteContext){
+				this.pasteContext.remove();
+				this.pasteContext=null;
+			}
+		},
+		getData:function(){
+		
+		
+		}
+	});
+
+	CF.extendEventListener(clipboard.paste);
+
+	ui.clipboard=clipboard;
+
+
+
+})(CF,$,ui);
