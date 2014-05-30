@@ -71,7 +71,7 @@
 					}
 				});
 				
-				$.getDoc().mousedown(function(event,owner){
+				$.getDoc().mouseup(function(event,owner){
 					CF.logger(me.prototype,arguments);
 					var currentPopu=me.currentPopu;
 					if(!currentPopu || event.target==me.triggerOwner || (owner && (currentPopu==owner ||  currentPopu.$owner==owner))){
