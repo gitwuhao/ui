@@ -1,6 +1,7 @@
 .x-ui-button{
 	margin: 1px;
 	padding: 1px;
+	-webkit-user-select: none;
 }
 .x-ui-button.disabled{
 	opacity: 0.3;

@@ -132,6 +132,9 @@
 	box-shadow: none;
 	display: inline-block;
 	float: none;
+	color: #606060;
+	background: #FFF;
+	background: -webkit-gradient(linear, left top, left bottom, from(#FFF), to(#EDEDED));
 }
 .x-ui-window .x-ui-button.yes{
 	background: -webkit-gradient(linear, left top, left bottom, from(#F88E11), to(#F06015));
@@ -139,20 +142,24 @@
 .x-ui-window .x-ui-button.no{
 	background: -webkit-gradient(linear, left top, left bottom, from(#F88E11), to(#F06015));
 }
-.x-ui-window .x-ui-button.submit{
+.x-ui-window .x-ui-button.ssubmit{
 	color: #FFF;
 	border: none;
-	background: #F88E11;
-	background: -webkit-gradient(linear, left top, left bottom, from(#F88E11), to(#F06015));
+	background: #07A8E5;
+	background: -webkit-gradient(linear, left top, left bottom, from(#73BEF1), to(#07A8E5));
 	padding: 6px 22px;
 }
-.x-ui-window .x-ui-button.cancel{
+.x-ui-window .x-ui-button.scancel{
 	color: #606060;
 	background: #FFF;
 	background: -webkit-gradient(linear, left top, left bottom, from(#FFF), to(#EDEDED));
 }
 .x-ui-window .x-ui-win-button-box .x-ui-button.hover {
-	background-color: #FAFAFA;
+	background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#dcdcdc));
+}
+.x-ui-window .x-ui-win-button-box .x-ui-button:active{
+	color: #999;
+	background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#fff));
 }
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
