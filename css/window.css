@@ -130,8 +130,6 @@
 	cursor: pointer;
 	margin: 0px 5px;
 	box-shadow: none;
-}
-.x-ui-win-button-box .x-ui-button, .x-ui-window .x-ui-form-item-field .x-ui-button,.x-ui-window .x-ui-form-item-field .x-ui-text{
 	display: inline-block;
 	float: none;
 }
