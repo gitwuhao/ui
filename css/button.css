@@ -9,3 +9,6 @@
 .x-ui-button,.x-ui-button .x-ui-icon,.x-ui-button .x-ui-label{
 	float: left;	
 }
+.x-ui-button.button{
+	background: -webkit-gradient(linear, left top, left bottom, from(#FFF), to(#EDEDED)); 
+}
