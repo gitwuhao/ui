@@ -30,7 +30,7 @@
 							html.push(' title="',item.title,'"');
 						}
 						html.push('>');
-						if(config.icon){
+						if(config.icon || !item.label){
 							html.push('<span class="',config._c_icon,'"></span>');
 						}
 						if(item.label){

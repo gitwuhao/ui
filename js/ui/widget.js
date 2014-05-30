@@ -2,7 +2,8 @@
 
 	var ui=window.ui||{},
 		widget,
-		ObjectConstructor={}.constructor;
+		ObjectConstructor={}.constructor,
+		ObjectHasOwnProperty=Object.prototype.hasOwnProperty;
 
 	function callSuperMethod(){
 		var caller=arguments.callee.caller;
@@ -12,7 +13,7 @@
 		var _result;
 		var _super_prototype_=_super_.prototype;
 
-		if(_super_prototype_){
+		if(_super_prototype_ && _super_prototype_[method]){
 			_result=_super_prototype_[method].apply(this,arg);
 		}else if(_super_[method]){
 			_result=_super_[method].apply(this,arg);
@@ -128,6 +129,13 @@
 			delete config.px;
 			delete config.isApplyCSS;
 		},
+		getSuper:function(){
+			var _super_=this._class_._super_.prototype;
+			if(!_super_){
+				_super_=this._class_._super_;
+			}
+			return _super_;
+		},
 		constructor : function(config){
 			if(config){
 				if(config.nodeType){
@@ -156,12 +164,7 @@
 			ui.widget.applyCSS(config,this._class_.css);
 			
 			CF.merger(this,config);
-			
-			this._super_=this._class_._super_.prototype;
 
-			if(!this._super_){
-				this._super_=this._class_._super_;
-			}
 			
 			this.config=config;
 
@@ -200,40 +203,6 @@
 		onBindEvent:function(){
 		
 		},
-		remove:function(){
-			CF.logger(this,arguments);
-			var item=this.item;
-			if(item && item.remove){
-				item.remove();
-			}
-			var items=this.items;
-			if(items){
-				for(var i=0,len=items.length;i<len;i++){
-					var item=items[i];
-					if(item.remove){
-						item.remove();
-					}
-					
-					for(var key in item){
-						item[key]=null;
-						delete item[key];
-					}
-				}
-			}
-
-			var $elem=this.$elem;
-			if($elem){
-				$elem.remove();
-			}
-			for(var key in this){
-				var item=this[key];
-				this[key]=null;
-				delete this[key];
-				if(item && item.__isUI__ && item.remove){
-					item.remove();
-				}
-			}
-		},
 		disabled:function(){
 			this.$elem.addClass("disabled");
 			this.$elem.removeClass("selected hover");
@@ -260,6 +229,46 @@
 					}
 				}
 			});
+		},
+		remove:function(){
+			CF.logger(this,arguments);
+			var item=this.item;
+			if(item && item.remove){
+				item.remove();
+			}
+			var items=this.items;
+			if(items){
+				for(var i=0,len=items.length;i<len;i++){
+					var item=items[i];
+					if(item.remove){
+						item.remove();
+					}
+					
+					for(var key in item){
+						if(ObjectHasOwnProperty.call(item,key)){
+							var _item_=item[key];
+							item[key]=null;
+							delete item[key];
+						}
+					}
+				}
+			}
+
+			var $elem=this.$elem;
+			if($elem){
+				$elem.remove();
+			}
+			for(var key in this){
+				if(ObjectHasOwnProperty.call(this,key)){
+					var item=this[key];
+					this[key]=null;
+					delete this[key];
+					
+					if(item && item.__isUI__ && !/^\$/.test(key) && item.remove){
+						item.remove();
+					}
+				}
+			}
 		}
 	};
 

@@ -97,12 +97,6 @@
 				});
 				this.menu=new ui.menu(menuConfig);			
 			}
-		},
-		remove:function(){
-			if(this.menu && this.menu.remove){
-				this.menu.remove();
-			}
-			this.callSuperMethod();
 		}
 	});
 
