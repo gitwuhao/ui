@@ -38,6 +38,7 @@ div.x-ui-text.disabled .x-ui-item-field{
 	border-color: #C0C0C0 #D9D9D9 #D9D9D9;
 	-webkit-user-select: none;
 	background-color: #FFF;
+	box-shadow: 1px 1px 3px #EEE inset;
 }
 
 .x-ui-textfield input {
