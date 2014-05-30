@@ -16,7 +16,7 @@
 				_c_iconbar: '-iconbar',
 				_c_icon: '-icon',
 				_c_body: '-win-body',
-				_c_button_box: '-button-box',
+				_c_button_box: '-win-button-box',
 				_c_button: '-button'
 			},
 			getTemplate: function(config){

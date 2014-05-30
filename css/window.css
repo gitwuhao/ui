@@ -116,17 +116,26 @@
 	padding: 5px;
 }
 
-.x-ui-button-box{
+.x-ui-window .x-ui-win-button-box{
 	background-color: #FFF;
 	text-align: center;
 	padding-bottom: 10px;
 }
 
-.x-ui-button-box .x-ui-button{
+.x-ui-window .x-ui-win-button-box .x-ui-button{
+	border: 1px solid #DDD;
+	padding: 5px 15px;
+	border-radius: 3px;
+	font: normal 14px/18px helvetica, arial, verdana, sans-serif;
+	cursor: pointer;
+	margin: 0px 5px;
+	box-shadow: none;
+}
+.x-ui-win-button-box .x-ui-button, .x-ui-window .x-ui-form-item-field .x-ui-button,.x-ui-window .x-ui-form-item-field .x-ui-text{
 	display: inline-block;
 	float: none;
 }
-.x-ui-button-box .x-ui-button.hover {
+.x-ui-window .x-ui-win-button-box .x-ui-button.hover {
 	background-color: #FAFAFA;
 }
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
