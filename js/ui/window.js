@@ -173,7 +173,7 @@
 					button.$elem.bindHover();
 				}
 			}
-
+			
 		},
 		resetOffset:function(){
 			var maxWidth=window.innerWidth;
@@ -207,16 +207,29 @@
 			this.$mask.show();
 			this.$elem.show();
 			this.resetOffset();
+			this.isHide=false;
+			
+			var me=this;
+
+			$.getDoc().one("keydown",function(event){
+				CF.logger(me,arguments);
+				if(event.keyCode==27){
+					me.close();
+				}
+			});
 		},
 		close : function(){
 			CF.logger(this,arguments);
-			this.on("close");
+			if(this.isHide!=true){
+				this.on("close");
+			}
 		},
 		onClose:function(){
 			CF.logger(this,arguments);
 			//this.tirgger('onclose')
 			this.$elem.hide();
 			this.$mask.hide();
+			this.isHide=true;
 		},
 		onCloseAfter:function(){
 			CF.logger(this,arguments);
