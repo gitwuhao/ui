@@ -30,7 +30,7 @@
 							html.push(' title="',item.title,'"');
 						}
 						html.push('>');
-						if(config.icon!=false){
+						if(config.icon){
 							html.push('<span class="',config._c_icon,'"></span>');
 						}
 						if(item.label){
@@ -231,23 +231,6 @@
 			data={};
 			$.data(elem,"_menu_item_data_",data);
 			return data;
-		},
-		remove:function(){
-			CF.logger(this,arguments);
-			ui.popu.removePopu(this);
-			var items=this.items;
-			if(items){
-				for(var i=0,len=items.length;i<len;i++){
-					var item=items[i];
-					if(item.menu && item.menu.remove){
-						item.menu.remove();
-					}
-					if(item.$elem){
-						item.$elem.remove();
-					}
-				}
-			}
-			this.callSuperMethod();
 		}
 
 	});

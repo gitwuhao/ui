@@ -14,7 +14,7 @@
 
 		if(_super_prototype_){
 			_result=_super_prototype_[method].apply(this,arg);
-		}else{
+		}else if(_super_[method]){
 			_result=_super_[method].apply(this,arg);
 		}
 
@@ -227,11 +227,11 @@
 			}
 			for(var key in this){
 				var item=this[key];
-				if(item.remove){
-					item.remove();
-				}
 				this[key]=null;
 				delete this[key];
+				if(item && item.__isUI__ && item.remove){
+					item.remove();
+				}
 			}
 		},
 		disabled:function(){

@@ -55,6 +55,24 @@
 					this.$mask=$(mask);
 				}
 				return this.$mask;
+			},
+			clearBodyScroll:function(){
+				var style=document.body.style;
+				this.BodyOverflow={
+					overflow : style.overflow,
+					overflowX : style.overflowX,
+					overflowY : style.overflowY,
+				};
+				style.overflow=style.overflowX=style.overflowY="hidden";
+			},
+			resetBodyScroll:function(){
+				if(this.BodyOverflow){
+					var style=document.body.style;
+					style.overflow = this.BodyOverflow.overflow;
+					style.overflowX = this.BodyOverflow.overflowX;
+					style.overflowY = this.BodyOverflow.overflowY;
+					this.BodyOverflow=null;
+				}
 			}
 		},
 		onRenderBefore:function(config){
@@ -158,7 +176,6 @@
 				icon.$elem.bindHover();
 			}
 			
-
 			if(this.buttons){
 				var buttons=this.buttons;
 				for(var i=0,len=buttons.length;i<len;i++){
@@ -204,6 +221,8 @@
 				this.item=this.form;
 				this.$elem.addClass(this._c_form);
 			}
+
+			ui.window.clearBodyScroll();
 			this.$mask.show();
 			this.$elem.show();
 			this.resetOffset();
@@ -217,6 +236,8 @@
 					me.close();
 				}
 			});
+			
+
 		},
 		close : function(){
 			CF.logger(this,arguments);
@@ -230,6 +251,7 @@
 			this.$elem.hide();
 			this.$mask.hide();
 			this.isHide=true;
+			ui.window.resetBodyScroll();
 		},
 		onCloseAfter:function(){
 			CF.logger(this,arguments);

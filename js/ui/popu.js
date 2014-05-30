@@ -249,6 +249,11 @@
 				left : left,
 				top : top
 			});
+		},
+		remove:function(){
+			CF.logger(this,arguments);
+			ui.popu.removePopu(this);
+			this.callSuperMethod();
 		}
 	});
 
