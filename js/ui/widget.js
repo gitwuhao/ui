@@ -226,6 +226,10 @@
 				$elem.remove();
 			}
 			for(var key in this){
+				var item=this[key];
+				if(item.remove){
+					item.remove();
+				}
 				this[key]=null;
 				delete this[key];
 			}
