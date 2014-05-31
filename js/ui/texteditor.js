@@ -35,7 +35,7 @@
 			if(this.$currentItem){
 				this.$currentItem.trigger("editorblur",this.$text.val());
 			}
-			this.$elem.hide();
+			this.hide();
 		},
 		_show:function(){
 			if(this.currentConfig){
@@ -47,6 +47,7 @@
 			if(config==this.currentConfig){
 				this.$elem.show();
 			}
+
 			this.hide();
 
 			var $item=$(config.item);
@@ -95,9 +96,9 @@
 				}
 				this.$text[0].type="text";
 				this.$text.val("");
-				delete this.currentConfig;
 			}
 
+			delete this.currentConfig;
 			delete this.$currentItem;
 		}
 	});
