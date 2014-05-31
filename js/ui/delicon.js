@@ -7,7 +7,7 @@
 		_type_ : "ui",
 		_name_ : "delicon",
 		_init:function(){
-			var delIcon=$.createElement('<div class="x-ui-del-icon"><div class="x-ui-icon"></div></div>');
+			var delIcon=$.createElement('<div class="x-ui-del-icon" title="点击删除"><div class="x-ui-icon"></div></div>');
 			$.getBody().append(delIcon);
 			this._init=CF.emptyFunction;
 			this.$delIcon=$(delIcon);
@@ -85,7 +85,7 @@
 				me.$item=null;
 				me.timeOutId=null;
 				me.isHide=false;
-			},500);
+			},100);
 		},
 		click:function(){
 			if(this.$item && this.isHide!=true){
