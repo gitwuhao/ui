@@ -46,8 +46,7 @@
 					}
 					html.push('</div>');
 				}
-				html.push('<div class="',config._c_sub_win,'"></div>',
-						'</div>');
+				html.push('</div>');
 				return html.join('');
 			},
 			getMask : function(){
@@ -119,9 +118,6 @@
 			var $elem=this.$elem;
 
 			var $header=$elem.children('.'+this._c_header);
-			
-			this.$subwin=$elem.children('.'+this._c_sub_win);
-
 			this.$header=$header;
 			this.$tile=$header.children('.'+this._c_title);
 			
@@ -234,27 +230,14 @@
 			this.isHide=false;
 			
 			var me=this;
-
+/*
 			$.getDoc().one("keydown",function(event){
 				CF.logger(me,arguments);
 				if(event.keyCode==27){
 					me.close();
 				}
 			});
-		},
-		createSubWin:function(html){
-			CF.logger(this,arguments);
-			this.$subwin.html(html);
-			this.resetSubWinOffset();
-			this.$subwin.show();
-		},
-		showSubWin:function(){
-			CF.logger(this,arguments);
-			this.$subwin.slideToggle("slow");
-		},
-		hideSubWin:function(){
-			CF.logger(this,arguments);
-			this.$subwin.slideToggle("slow");
+*/
 		},
 		resetSubWinOffset:function(){
 			
