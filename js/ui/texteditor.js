@@ -32,8 +32,8 @@
 			this._init=CF.emptyFunction;
 		},
 		_hide:function(){
-			if(this.currentConfig){
-				$(this.currentConfig.item).trigger("editorblur",this.$text.val());
+			if(this.$currentItem){
+				this.$currentItem.trigger("editorblur",this.$text.val());
 			}
 			this.$elem.hide();
 		},
@@ -79,6 +79,7 @@
 
 			this.$elem.show();
 			this.$text.focus();
+			this.$currentItem=$item;
 			this.currentConfig=config;
 		},
 		//&& !/\s*type\s*/i.test(key)
@@ -96,6 +97,8 @@
 				this.$text.val("");
 				delete this.currentConfig;
 			}
+
+			delete this.$currentItem;
 		}
 	});
  
