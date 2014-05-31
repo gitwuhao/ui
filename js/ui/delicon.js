@@ -91,6 +91,13 @@
 			if(this.$item && this.isHide!=true){
 				this.$item.trigger("delete");
 			}
+		},
+		hide:function(item){
+			if(item){
+				this._hideIcon(item);
+			}else if(this.$item){
+				this._hideIcon(this.$item[0]);
+			}
 		}
 	});
  

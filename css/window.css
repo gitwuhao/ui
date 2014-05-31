@@ -115,23 +115,11 @@
 .x-ui-win-form .x-ui-win-body{
 	padding: 5px;
 }
-.x-ui-window .x-ui-sub-win-body{
-    position: absolute;
-	display: none;
-    height: 150px;
-    width: 430px;
-    margin: 10px;
-    top: 35px;
-	border-radius: 5px;
-    background-color: #FFF;
-	overflow: auto;
-}
 .x-ui-window .x-ui-win-button-box{
 	background-color: #FFF;
 	text-align: center;
 	padding-bottom: 10px;
 }
-
 .x-ui-window .x-ui-win-button-box .x-ui-button{
 	border: 1px solid #DDD;
 	padding: 5px 20px;
