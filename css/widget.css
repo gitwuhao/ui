@@ -34,4 +34,8 @@ div.x-ui-icon {
 	margin-top: -10px;
 	margin-left: -10px;
 	cursor: pointer;
+	opacity: 0.8;
+}
+.x-ui-del-icon:hover{
+	opacity: 1;
 }
