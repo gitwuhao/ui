@@ -22,3 +22,8 @@ div.x-ui-icon {
 	border: 1px solid #F79B39;
 	box-shadow: 0 0 5px #F9DF7D;
 }
+
+
+.x-ui-del-item .x-ui-icon{
+	background-position: -400px -140px;
+}

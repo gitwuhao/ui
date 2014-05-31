@@ -120,11 +120,11 @@
 	display: none;
     height: 150px;
     width: 430px;
-    border: 1px solid #DDD;
     margin: 10px;
     top: 35px;
 	border-radius: 5px;
     background-color: #FFF;
+	overflow: auto;
 }
 .x-ui-window .x-ui-win-button-box{
 	background-color: #FFF;

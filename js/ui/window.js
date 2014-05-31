@@ -16,6 +16,7 @@
 				_c_iconbar: '-iconbar',
 				_c_icon: '-icon',
 				_c_body: '-win-body',
+				_c_sub_win: '-sub-win-body',
 				_c_button_box: '-win-button-box',
 				_c_button: '-button'
 			},
@@ -45,7 +46,8 @@
 					}
 					html.push('</div>');
 				}
-				html.push('</div>');
+				html.push('<div class="',config._c_sub_win,'"></div>',
+						'</div>');
 				return html.join('');
 			},
 			getMask : function(){
@@ -117,6 +119,9 @@
 			var $elem=this.$elem;
 
 			var $header=$elem.children('.'+this._c_header);
+			
+			this.$subwin=$elem.children('.'+this._c_sub_win);
+
 			this.$header=$header;
 			this.$tile=$header.children('.'+this._c_title);
 			
@@ -236,8 +241,32 @@
 					me.close();
 				}
 			});
+		},
+		createSubWin:function(html){
+			CF.logger(this,arguments);
+			this.$subwin.html(html);
+			this.resetSubWinOffset();
+			this.$subwin.show();
+		},
+		showSubWin:function(){
+			CF.logger(this,arguments);
+			this.$subwin.slideToggle("slow");
+		},
+		hideSubWin:function(){
+			CF.logger(this,arguments);
+			this.$subwin.slideToggle("slow");
+		},
+		resetSubWinOffset:function(){
 			
+			var width=this.$elem.innerWidth()-30;
+			
+			var height=this.$elem.innerHeight()-60;
 
+			this.$subwin.css({
+				width : width,
+				height : height
+			});
+		
 		},
 		close : function(){
 			CF.logger(this,arguments);
