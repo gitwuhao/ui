@@ -115,7 +115,17 @@
 .x-ui-win-form .x-ui-win-body{
 	padding: 5px;
 }
-
+.x-ui-window .x-ui-sub-win-body{
+    position: absolute;
+	display: none;
+    height: 150px;
+    width: 430px;
+    border: 1px solid #DDD;
+    margin: 10px;
+    top: 35px;
+	border-radius: 5px;
+    background-color: #FFF;
+}
 .x-ui-window .x-ui-win-button-box{
 	background-color: #FFF;
 	text-align: center;
@@ -144,6 +154,14 @@
 	border-color:#CECECE;
 	background: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#fff));
 }
+/*
+.x-ui-window .x-ui-win-button-box .x-ui-button.submit{
+	color: #FFF;
+	background: -webkit-gradient(linear, left top, left bottom, from(#53B3FF), to(#2FA4FF));
+	border: none;
+	padding: 6px 21px;
+}
+*/
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
 .x-ui-qtip{
