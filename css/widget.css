@@ -24,6 +24,14 @@ div.x-ui-icon {
 }
 
 
-.x-ui-del-item .x-ui-icon{
+.x-ui-del-icon .x-ui-icon{
 	background-position: -400px -140px;
+}
+.x-ui-del-icon{
+	position: absolute;
+	z-index: 990000;
+	display: none;
+	margin-top: -10px;
+	margin-left: -10px;
+	cursor: pointer;
 }

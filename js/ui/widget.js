@@ -39,7 +39,22 @@
 				_fn._owner_name_=_class._owner_name_;
 			}
 		}
-	}
+	};
+
+	ui.setOwnerName=function(prototype){
+		if(prototype._type_){
+			prototype._owner_name_=prototype._type_+"."+prototype._name_;
+		}
+	};
+
+	ui.setData=function(item,data){
+		$.data(item,this._owner_name_,data);
+	
+	};
+
+	ui.getData=function(item){
+		$.data(item,this._owner_name_);
+	};
 
 	ui.__delete__="__delete_prototype__";
 

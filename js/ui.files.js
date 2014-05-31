@@ -21,7 +21,8 @@
 		path+'messagebox.js',
 		path+'colorpicker.js',
 		path+'undo.js',
-		path+'htmlfilter.js'
+		path+'htmlfilter.js',
+		path+'delicon.js'
 	];
 
 })();
