@@ -19,12 +19,34 @@
 					this.value="";
 				}
 			});
+			
+			var me=this;
+			this.$text.blur(function(event){
+				me._hide();
+			});
 			 
+			this.$text.focus(function(event){
+				me._show();
+			});
+
 			this._init=CF.emptyFunction;
+		},
+		_hide:function(){
+			if(this.currentConfig){
+				$(this.currentConfig.item).trigger("editorblur",this.$text.val());
+			}
+			this.$elem.hide();
+		},
+		_show:function(){
+			if(this.currentConfig){
+				this.onEditor(this.currentConfig);
+			}
 		},
 		onEditor : function(config){
 			this._init();
-			
+			if(config==this.currentConfig){
+				this.$elem.show();
+			}
 			this.hide();
 
 			var $item=$(config.item);
@@ -34,6 +56,10 @@
 				this.$text[0].type="text";
 			}
 
+
+			if(config.value){
+				this.$text.val(config.value);
+			}
 
 			if(config.cls){
 				this.$elem[0].className="x-ui-text-editor "+config.cls;
@@ -52,6 +78,7 @@
 			});
 
 			this.$elem.show();
+			this.$text.focus();
 			this.currentConfig=config;
 		},
 		//&& !/\s*type\s*/i.test(key)
@@ -66,6 +93,7 @@
 					}
 				}
 				this.$text[0].type="text";
+				this.$text.val("");
 				delete this.currentConfig;
 			}
 		}
