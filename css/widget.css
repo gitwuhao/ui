@@ -39,3 +39,14 @@ div.x-ui-icon {
 .x-ui-del-icon:hover{
 	opacity: 1;
 }
+.x-ui-text-editor{
+	position: absolute;
+	z-index: 990000;
+	display: none;
+}
+.x-ui-text-editor input{
+	margin:0px;
+	border:none;
+	outline:none;
+	padding:0px;
+}
