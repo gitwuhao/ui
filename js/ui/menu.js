@@ -114,7 +114,7 @@
 						if(itemData.onClick){
 							itemData.onClick(event);
 						}
-						//me.on("menuItemClick");
+						me.on("itemClick");
 					});
 					//}
 				}
@@ -212,7 +212,7 @@
 			item.menu=menu=new ui.menu(menu);
 			return menu;
 		},
-		onMenuItemClick:function(){
+		onItemClick:function(){
 			CF.logger(this,arguments);
 			this.triggerParentMenuHide();
 			this.on("hide");
