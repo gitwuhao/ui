@@ -110,7 +110,7 @@
 						},100);	
 					}
 					//if(item.onClick || !item.menu){
-					$elem.mouseup(function(event){
+					$elem.click(function(event){
 						var itemData=me.getMenuItemData(this);
 						if(itemData.onClick){
 							itemData.onClick(event);
