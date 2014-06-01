@@ -81,7 +81,6 @@
 		onBindEvent:function(){
 			CF.logger(this,arguments);
 			
-
 			this.callSuperMethod();
 
 			var me=this;
@@ -182,6 +181,20 @@
 				}
 				return false;
 			});
+		},		
+		setOffset : function(left,top){
+			CF.logger(this,arguments);
+			if(left==0 && top==0){
+				this.hide();
+				//console.info("offset:["+left+","+top+"]");
+				//因鼠标在menuitem上快速移动，导致hide timeout状态不同步
+				//当前菜单显示，上级菜单隐藏的bug
+			}else{
+				this.$elem.css({
+					left : left,
+					top : top
+				});
+			}
 		},
 		renderSubMenu:function(item){
 			var menu=item.menu;

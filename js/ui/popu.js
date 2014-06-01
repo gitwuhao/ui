@@ -20,7 +20,7 @@
 					$offsetElement=config.$offsetElement,
 					offsetParent=config.offsetParent,
 					align=config.align;
-
+				
 				var offset=$offsetElement.offsetElement(offsetParent);
 				var left=offset.left;
 				var top=offset.top;
@@ -80,39 +80,6 @@
 					}
 					me.removeCurrentPopu();
 					me.triggerOwner=null;
-					
-					/*
-
-					
-					var targetCSS=target.className;
-
-					if(targetCSS.indexOf(popuCSS)>-1){
-						return;
-					}
-
-					var popuCSS=me._c_popu_box;
-					var offsetParent=target.offsetParent;
-
-
-					while(offsetParent){
-						var parentCss=offsetParent.className;
-						if( parentCss.indexOf(popuCSS)>-1){
-							return;
-						}else if(/body|html/gi.test(offsetParent.nodeName)){
-							break;
-						}
-						offsetParent=offsetParent.offsetParent;
-					}
-
-
-
-					if(currentPopu && currentPopu.lastShowTimestamp){
-						if($.timestamp()-currentPopu.lastShowTimestamp>200){
-							me.removeCurrentPopu();
-						}
-					}
-
-					*/
 				});
 
 				this.initEventListener=CF.emptyFunction;
@@ -231,6 +198,7 @@
 				return;
 			}
 			var me=this;
+			
 			this.timeOutId=setTimeout(function(){
 				me.on("hide");
 			},500);
