@@ -2,9 +2,11 @@
 	margin: 1px;
 	padding: 1px;
 	-webkit-user-select: none;
+	cursor: pointer;
 }
 .x-ui-button.disabled{
 	opacity: 0.3;
+	cursor: default;
 }
 .x-ui-button,.x-ui-button .x-ui-icon,.x-ui-button .x-ui-label{
 	float: left;	
