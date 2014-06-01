@@ -115,7 +115,7 @@
 						if(itemData.onClick){
 							itemData.onClick(event);
 						}
-						me.on("menuItemClick");
+						//me.on("menuItemClick");
 					});
 					//}
 				}
