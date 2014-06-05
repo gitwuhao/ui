@@ -46,7 +46,7 @@
 		html.push('<a href="?demo=',array[i],'" >',array[i],'</a>');
 	}
 	html.push('</div>');
-	document.write(html.join(""));
+	$.getBody().append(html.join(""));
 
 
 	function run(){
