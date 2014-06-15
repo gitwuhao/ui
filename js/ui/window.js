@@ -253,9 +253,7 @@
 		},
 		close : function(){
 			ui.logger();
-			if(this.isHide!=true){
-				this.on("close");
-			}
+			this.on("close");
 		},
 		onClose:function(){
 			ui.logger();

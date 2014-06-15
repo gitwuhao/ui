@@ -66,8 +66,8 @@
 			this.callSuperMethod();
 
 			this.closeIcon.handle=function(event){
-				me.close();
 				me.handle('cancel');
+				me.close();
 			};
 		},
 		onRenderAfter:function(){
@@ -169,8 +169,8 @@
 
 			var me=this;
 			this.$quickTipBody.click(function(event){
-				me.close();
 				me.handle();
+				me.close();
 			});
 		},
 		setQuickTipOffset:function(target){
