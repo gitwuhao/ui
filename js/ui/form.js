@@ -78,7 +78,7 @@
 			}
 		},
 		onRender:function(config){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.callSuperMethod();
 			var elem=this.$elem[0];
 			var table=elem.children[0];
@@ -107,7 +107,7 @@
 			}
 		},
 		onBindEvent:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 		},
 		getItem:function(name){
 			return this.itemsMap['_'+name+'_'];
@@ -235,7 +235,7 @@
 			this.$text.val(this.value);
 		},
 		onBindEventAfter:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(this.vtype){
 				ui.form.vtypes.register(this);
 			}
@@ -251,41 +251,41 @@
 		},
 		blur : CF.emptyFunction,
 		onBlurBefore : function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(this.isDisabled==true || this.isFocus==false){
 				return false;
 			}
 		},
 		onBlur : CF.emptyFunction,
 		onBlurAfter : function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.$elem.removeClass("selected");
 			this.isFocus=false;
 		},
 		focus : function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.on("focus");
 		},
 		onFocusBefore : function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(this.isDisabled==true || this.isFocus){
 				return false;
 			}
 		},
 		onFocus : CF.emptyFunction,
 		onFocusAfter : function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			ui.form.field.setActive(this);
 			this.$elem.removeClass("hover");
 			this.$elem.addClass("selected");
 			this.isFocus=true;
 		},
 		disabled : function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.on("disabled");
 		},
 		onDisabledBefore : function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(this.isDisabled==true){
 				return false;
 			}
@@ -298,11 +298,11 @@
 		onDisabled : CF.emptyFunction,
 		onDisabledAfter : CF.emptyFunction,
 		enabled : function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.on("enabled");
 		},
 		onEnabledBefore:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(this.isDisabled==false){
 				return false;
 			}
@@ -312,7 +312,7 @@
 		onEnabled : CF.emptyFunction,
 		onEnabledAfter : CF.emptyFunction,
 		remove:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			ui.form.field.removeItem(this);
 			this.callSuperMethod();
 		}

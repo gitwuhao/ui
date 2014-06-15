@@ -23,13 +23,13 @@
 			}
 		},
 		onRenderAfter:function(config){
-			CF.logger(this,arguments);
+			ui.logger();
 			var $tabpanel=this.$elem;
 			this.$tabbarbox=$tabpanel.children('.'+this._c_tabbar_box);
 			this.$tabviewbox=$tabpanel.children('.'+this._c_tab_view_box);
 		},
 		onBindEvent:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			var tagList=this.$tabbarbox.children();
 			var tabViewList=this.$tabviewbox.children();
 			var items=this.items;
@@ -40,7 +40,7 @@
 			}
 		},
 		setCurrentTab : function(tab){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(this.currentTab){
 				this.currentTab.hide();
 			}
@@ -55,7 +55,7 @@
 			this.items[tabPanel.index]=tabPanel;
 		},
 		remove : function(tab){
-			CF.logger(this,arguments);
+			ui.logger();
 			var items=this.items;
 			if(tab){
 				delete items[tab.index];
@@ -102,7 +102,7 @@
 			})()
 		},
 		onRender : function(config){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.index=this._class_.getTabIndex();
 
 			var $tabbarbox=this.$tabbarbox;
@@ -148,7 +148,7 @@
 			delete this.src;
 		},
 		onBindEvent:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 
 			this.$tag.bindHover();
 			
@@ -161,26 +161,26 @@
 			
 		},
 		hide:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.on("hide");
 		},
 		show:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.on("show");
 		},
 		onHide:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.$tabview.hide();
 			this.$tag.removeClass("selected");
 		},
 		onShow:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.onRenderTabView();
 			this.$tabview.show();
 			this.$tag.addClass("selected");
 		},
 		remove:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.$tag.remove();
 			this.$tabview.remove();
 			this.callSuperMethod();

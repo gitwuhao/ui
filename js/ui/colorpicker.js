@@ -39,10 +39,10 @@ For usage and examples: colpick.com/plugin
 			}
 		},
 		onRenderBefore:function(config){
-			CF.logger(this,arguments);
+			ui.logger();
 		},
 		onRenderAfter : function(config){
-			CF.logger(this,arguments);
+			ui.logger();
 			var me=this;
 
 			colpick.init.call(this.$elem,{
@@ -76,14 +76,14 @@ For usage and examples: colpick.com/plugin
 			return this.$hexField.val();
 		},
 		onChange:function(l){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(this.config && this.config.onChange){
 				this.config.onChange(this.color);
 				this.config.color=this.color;
 			}
 		},
 		onSubmit:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(this.config && this.config.onSubmit){
 				this.config.onSubmit(this.color);
 				this.config.color=this.color;
@@ -91,7 +91,7 @@ For usage and examples: colpick.com/plugin
 		},
 		//rgbhex,full,hex
 		setLayout:function(layout){
-			CF.logger(this,arguments);
+			ui.logger();
 			var colorpicker=this.$colpick[0];
 			if(!layout){
 				layout="hex";
@@ -100,11 +100,11 @@ For usage and examples: colpick.com/plugin
 		},
 		/*FFFFFF*/
 		setColor:function(color){
-			CF.logger(this,arguments);
+			ui.logger();
 			colpick.setColor.call(this.$elem,color);
 		},
 		show:function(config){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.autoSetOffset=true;
 			this.align=config.align;
 			this.$offsetElement=config.$offsetElement;
@@ -125,25 +125,25 @@ For usage and examples: colpick.com/plugin
 			
 		},
 		onShowAfter:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.callSuperMethod();
 			if(this.config){
 				this.config.isHide=false;
 			}
 		},
 		hide:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.on("hide");
 		},
 		onHideAfter : function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.callSuperMethod();
 			if(this.config){
 				this.config.isHide=true;
 			}
 		},
 		toggle : function(config){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(this.config==config && config.isHide==false){
 				this.hide();
 				return;

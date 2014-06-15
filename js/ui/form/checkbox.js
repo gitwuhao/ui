@@ -35,7 +35,7 @@
 			}
 		},
 		onRenderAfter:function(config){
-			CF.logger(this,arguments);
+			ui.logger();
 			var elem=this.$elem;
 
 			this.$label=$("."+config._c_label+":first",elem);
@@ -56,7 +56,7 @@
 
 		},
 		onBindEvent:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			var me=this;
 			var items=this.items;
 
@@ -107,7 +107,7 @@
 			});
 		},
 		focus : function(item){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(item){
 				item.$input.focus();
 			}

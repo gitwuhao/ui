@@ -77,7 +77,7 @@
 			}
 		},
 		onRenderBefore:function(config){
-			CF.logger(this,arguments);
+			ui.logger();
 			var me=this;
 			if(!config.icons){
 				config.icons=[];
@@ -114,7 +114,7 @@
 			this.$mask=ui.window.getMask();
 		},
 		onRenderAfter:function(config){
-			CF.logger(this,arguments);
+			ui.logger();
 			var $elem=this.$elem;
 
 			var $header=$elem.children('.'+this._c_header);
@@ -162,7 +162,7 @@
 
 		},
 		onBindEvent:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			var me=this;
 		
 			var icons=this.icons;
@@ -214,7 +214,7 @@
 			});
 		},
 		show : function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(this.item && this.item.xtype=='form'){
 				delete this.item.xtype;
 				this.item.render=this.$body[0];
@@ -252,13 +252,13 @@
 		
 		},
 		close : function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(this.isHide!=true){
 				this.on("close");
 			}
 		},
 		onClose:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			//this.tirgger('onclose')
 			this.$elem.hide();
 			this.$mask.hide();
@@ -266,11 +266,11 @@
 			ui.window.resetBodyScroll();
 		},
 		onCloseAfter:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			//this.tirgger('oncloseafter')
 		},
 		restore : function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			
 			this.$elem.offset(this._original_offset);
 
@@ -285,7 +285,7 @@
 			$.getBody().css("overflow",this._body_overflow);
 		},
 		maximize : function(event){
-			CF.logger(this,arguments);
+			ui.logger();
 			var maxWidth=window.innerWidth;
 			var maxHeight=window.innerHeight;
 

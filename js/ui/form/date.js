@@ -23,7 +23,7 @@
 			}
 		},
 		onRenderAfter:function(config){
-			CF.logger(this,arguments);
+			ui.logger();
 			var elem=this.$elem;
 			
 			this.$label=$("."+config._c_label+":first",elem);
@@ -42,7 +42,7 @@
 			}
 		},
 		onBindEvent:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			var me=this;
 
 			this.$label.mousedown(function(event){
@@ -102,18 +102,18 @@
 			*/
 		},
 		focus:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(this.on('focus')==false){
 				return;
 			}
 			this.callSuperMethod();
 		},
 		onArrowClick: function(event){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.togglePopu();
 		},
 		togglePopu:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			var me=this;
 			if(!this.datepicker){
 				this.datepicker=new ui.datepicker({
@@ -131,14 +131,14 @@
 			this.datepicker.toggle();
 		},
 		onBlur:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			var me=this;
 			if(this.datepicker){
 				this.datepicker.on("hide");
 			}
 		},
 		remove:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(this.list && this.list.remove){
 				this.list.remove();
 			}

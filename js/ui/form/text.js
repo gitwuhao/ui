@@ -78,7 +78,7 @@
 			}
 		},
 		onRenderAfter:function(config){
-			CF.logger(this,arguments);
+			ui.logger();
 			var elem=this.$elem;
 			
 			this.$label=$("."+config._c_label+":first",elem);
@@ -94,7 +94,7 @@
 			}
 		},
 		onBindEvent:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			var me=this;
 
 			this.$label.mousedown(function(event){
@@ -145,7 +145,7 @@
 			this.bindHover(this.$elem);
 		},
 		focus : function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.$text.focus();
 		},
 		onDisabled:function(){

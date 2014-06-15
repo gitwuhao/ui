@@ -25,7 +25,7 @@
 			}
 		},
 		onRenderAfter:function(config){
-			CF.logger(this,arguments);
+			ui.logger();
 			var elem=this.$elem;
 			
 			this.$label=$("."+config._c_label+":first",elem);
@@ -51,7 +51,7 @@
 			}
 		},
 		onBindEvent:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			var me=this;
 
 			this.$label.mousedown(function(event){
@@ -97,14 +97,14 @@
 			}
 		},
 		focus:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(this.on('focus')==false){
 				return;
 			}
 			this.callSuperMethod();
 		},
 		onBlur:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			var me=this;
 			if(this.list){
 				this.list.on("hide");
@@ -117,7 +117,7 @@
 			}
 		},
 		toggleList:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			var me=this;
 			if(this.items && !this.list){
 				var list={
@@ -144,11 +144,11 @@
 			}
 		},
 		onArrowClick: function(event){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.toggleList();
 		},
 		remove:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(this.list && this.list.remove){
 				this.list.remove();
 			}
@@ -199,18 +199,18 @@
 			align:'trbl'
 		},
 		onRenderBefore:function(config){
-			CF.logger(this,arguments);
+			ui.logger();
 			config.html=this._class_.getTemplate(config);
 		},
 		onRender:function(config){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.callSuperMethod();
 			var $elem=this.$elem;
 			this.$list=$elem.children("."+config._c_combo_list);
 			this.$listitem=this.$list.children("li");
 		},
 		onBindEvent:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.callSuperMethod();
 			var me=this;
 			var items=this.items;
@@ -233,11 +233,11 @@
 			
 		},
 		onItemSelected:function(item){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.on("hide");
 		},
 		remove:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			ui.popu.removeCurrentPopu(this);
 			this.callSuperMethod();
 		}

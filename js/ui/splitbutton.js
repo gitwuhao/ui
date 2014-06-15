@@ -36,11 +36,11 @@
 		},
 		//menu : null,
 		onRender:function(config){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.callSuperMethod();
 		},
 		onRenderAfter:function(config){
-			CF.logger(this,arguments);
+			ui.logger();
 			var $splitbutton=this.$elem;
 			
 			this.$splitbutton=$splitbutton;
@@ -55,7 +55,7 @@
 
 		},
 		onBindEvent:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			var me=this;
 			
 			this.$button.click(function(event){
@@ -77,17 +77,17 @@
 			this.bindHover(this.$arrowbutton);
 		},
 		onClick : function(event){
-			CF.logger(this,arguments);
+			ui.logger();
 		},
 		onArrowClick:function(event){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(this.menu){
 				this.initMenu();
 				this.menu.toggle();
 			}
 		},
 		initMenu:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(this.menu && !this.menu.toggle){
 				var menuConfig=CF.merger(this.menu,{
 					autoSetOffset:true,

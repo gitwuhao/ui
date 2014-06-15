@@ -7,7 +7,7 @@
 
 	function callSuperMethod(){
 		var caller=arguments.callee.caller;
-		var method=caller._name;
+		var method=caller._name_;
 		var arg=caller.arguments;
 		var _super_=caller._owner_._super_;
 		var _result;
@@ -25,31 +25,30 @@
 	
 	function callPrototypeMethod(){
 		var caller=arguments.callee.caller;
-		var method=caller._name;
+		var method=caller._name_;
 		var arg=caller.arguments;
 		var _prototype_=this._class_.prototype;
 		return _prototype_[method].apply(this,arg);
 	}
 
 	ui.setOwner=function(_class,prototype){
-		for(var key in prototype){
-			var _fn=prototype[key];
-			if(typeof _fn == "function" && !_fn._owner_){
-				_fn._owner_=_class;
-				_fn._owner_name_=_class._owner_name_;
-			}
-		}
+		CF.setOwner(_class,prototype);
 	};
 
 	ui.setOwnerName=function(prototype){
-		if(prototype._type_){
-			prototype._owner_name_=prototype._type_+"."+prototype._name_;
-		}
+		CF.setOwner(prototype);
 	};
 
 	ui.setData=function(item,data){
 		$.data(item,this._owner_name_,data);
 	
+	};
+	ui.logger=function(){
+		var caller,
+			arg;
+		caller=arguments.callee.caller;
+		arg=caller.arguments;
+		CF.logger(caller,arg);
 	};
 
 	ui.getData=function(item){
@@ -62,9 +61,7 @@
 		var _prototype=_class.prototype,
 			_constructor=_prototype.constructor,
 			_superClass,_superStatics,_statics;
-		if(_constructor!=ObjectConstructor){
-			_constructor._name="constructor";
-		}
+
 		
 		
 		for(var key in prototype){
@@ -104,6 +101,10 @@
 		_prototype.callSuperMethod=callSuperMethod;
 		_prototype.callPrototypeMethod=callPrototypeMethod;
 
+		if(_constructor!=ObjectConstructor){
+			_constructor._name_='constructor';
+			_constructor._owner_name_=prototype._owner_name_;
+		}
 
 		if(_superStatics || _statics){
 			CF.merger(true,_class,_superStatics,_statics);
@@ -200,7 +201,7 @@
 			delete this.initRender;
 		},
 		onRender : function(config){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(this.elem){
 				this.$elem=$(this.elem);
 				delete this.elem;
@@ -246,7 +247,7 @@
 			});
 		},
 		remove:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			var item=this.item;
 			if(item && item.remove){
 				item.remove();

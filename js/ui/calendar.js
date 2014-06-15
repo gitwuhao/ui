@@ -157,7 +157,7 @@
 			}
 		},
 		onRenderAfter:function(config){
-			CF.logger(this,arguments);
+			ui.logger();
 			var $elem=this.$elem;
 
 			var $header=$elem.children("."+config._c_header);
@@ -215,7 +215,7 @@
 			this.resize();
 		},
 		onBindEvent:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 
 			this.$prevIcon.bindHover();
 			this.$nextIcon.bindHover();
@@ -308,7 +308,7 @@
 
 		},
 		setBoxSize:function(width,height){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(width<200 ||  height<200){
 				return;
 			}
@@ -319,7 +319,7 @@
 			});
 		},
 		resize : function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			
 			var boxInnerHeight=this.$elem.getBoxInnerHeight();
 			var headerHeight=this.$header.outerHeight();
@@ -363,13 +363,13 @@
 
 		},
 		setYear:function(year){
-			CF.logger(this,arguments);
+			ui.logger();
 			var calendarDate=this.calendarDate;
 			calendarDate.setFullYear(year);
 			this.setHeaderLabel();
 		},		
 		setMonth:function(month){
-			CF.logger(this,arguments);
+			ui.logger();
 			var calendarDate=this.calendarDate;
 			calendarDate.setMonth(month-1);
 			this.setHeaderLabel();
@@ -377,7 +377,7 @@
 			this.setDisplay("day");
 		},
 		setDisplay:function(display){
-			CF.logger(this,arguments);
+			ui.logger();
 			/*day,year*/
 			if("day"==display){
 				this.$yearMonthBox.slideUp();
@@ -389,7 +389,7 @@
 			this.display=display;
 		},
 		onSelected:function(date){
-			CF.logger(this,arguments);
+			ui.logger();
 			var calendarDate=this.calendarDate;
 			calendarDate.setFullYear(this.year);
 			calendarDate.setMonth(this.month-1);
@@ -399,29 +399,29 @@
 			this.setMonthValue();
 		},
 		onYearNextPage:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.startYear+=this._class_.YEAR_CELL-2;
 			this.setYearValue();
 		},
 		onYearPrevPage:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.startYear-=this._class_.YEAR_CELL-2;
 			this.setYearValue();
 		},
 		onMonthNextPage:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			var calendarDate=this.calendarDate;
 			calendarDate.setMonth(calendarDate.getMonth()+1);
 			this.setTDValue();
 		},
 		onMonthPrevPage:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			var calendarDate=this.calendarDate;
 			calendarDate.setMonth(calendarDate.getMonth()-1);
 			this.setTDValue();
 		},
 		setTDValue:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			
 			this.setHeaderLabel();
 
@@ -433,7 +433,7 @@
 			
 		},
 		setHeaderLabel:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			var calendarDate=this.calendarDate;
 			
 			this.year=calendarDate.getFullYear();
@@ -445,7 +445,7 @@
 			this.$headerLabel.html([this.year,ui.calendar.YEAR_LABEL,this.month,ui.calendar.MONTH_LABEL].join(""));
 		},
 		setYearValue:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			
 			var _c_year=this._c_year;
 
@@ -470,7 +470,7 @@
 
 		},
 		setMonthValue:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 
 			var _c_month=this._c_month;
 			
@@ -488,7 +488,7 @@
 			});
 		},
 		setDayValue:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 
 			var calendarDate=this.calendarDate;
 			var calendarDateTime=calendarDate.getTime();

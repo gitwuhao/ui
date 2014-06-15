@@ -32,7 +32,7 @@
 			}
 		},
 		onRenderAfter:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			var $elem=this.$elem;
 			this.$button=$elem;
 			
@@ -52,7 +52,7 @@
 			this.bindHover(this.$elem);
 		},
 		onClick : function(event){
-			CF.logger(this,arguments);
+			ui.logger();
 		}
 	});
 

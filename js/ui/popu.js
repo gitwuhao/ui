@@ -39,7 +39,7 @@
 				popu.setOffset(left,top);
 			},
 			setCurrentPopu : function(popu){
-				CF.logger(this.prototype,arguments);
+				ui.logger();
 				if(this.currentPopu && this.currentPopu!=popu){
 					this.currentPopu.on("hide");
 				}
@@ -47,14 +47,14 @@
 				this.initEventListener();
 			},
 			removeCurrentPopu:function(){
-				CF.logger(this.prototype,arguments);
+				ui.logger();
 				if(this.currentPopu){
 					this.currentPopu.on("hide");
 				}
 				this.currentPopu=null;
 			},
 			removePopu:function(popu){
-				CF.logger(this.prototype,arguments);
+				ui.logger();
 				if(popu==this.currentPopu){
 					this.currentPopu=null;
 				}
@@ -65,14 +65,12 @@
 			initEventListener : function(){
 				var me=this;
 				$.getDoc().keydown(function(event){
-					CF.logger(me.prototype,arguments);
 					if(event.keyCode==27){
 						me.removeCurrentPopu();
 					}
 				});
 				
 				$.getDoc().mousedown(function(event,owner){
-					CF.logger(me.prototype,arguments);
 					var currentPopu=me.currentPopu;
 					if(!currentPopu || event.target==me.triggerOwner || (owner && (currentPopu==owner ||  currentPopu.$owner==owner))){
 						me.triggerOwner=null;
@@ -86,11 +84,11 @@
 			}
 		},
 		onRenderBefore:function(config){
-			CF.logger(this,arguments);
+			ui.logger();
 			config.html=this._class_.getTemplate(config);
 		},
 		onRender:function(config){
-			CF.logger(this,arguments);
+			ui.logger();
 			config.boxcls=config.px+"-"+this._name_+"-popu";
 			var div=$.createElement(ui.popu.getTemplate(config));
 			if(this.$render){
@@ -126,7 +124,7 @@
 			}
 		},
 		onBindEvent:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			var me=this;
 			this.$elem.mousedown(function(event){
 				if(/^input$/i.test(event.target.tagName)){
@@ -137,7 +135,7 @@
 			});
 		},
 		resetOffset:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(this.$offsetElement){
 				ui.popu.setOffset({
 					popu : this,
@@ -148,28 +146,28 @@
 			}
 		},
 		onHideBefore : function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(this.isHide==true){
 				return false;
 			}
 		},
 		onHide : function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.isHide=true;
 			this.$elem.hide();
 		},
 		onHideAfter : function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			ui.popu.removeCurrentPopu(this);
 		},
 		onShowBefore:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(this.isHide==false){
 				return false;
 			}
 		},
 		onShow :function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(this.autoSetOffset!=false){
 				this.resetOffset();
 			}
@@ -178,11 +176,11 @@
 			this.lastShowTimestamp=$.timestamp();
 		},
 		onShowAfter:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			ui.popu.setCurrentPopu(this);
 		},
 		show : function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(this.timeOutId){
 				clearTimeout(this.timeOutId);
 				this.timeOutId=null;
@@ -193,7 +191,7 @@
 			this.on("show");
 		},
 		hide : function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(this.timeOutId || this.isHide==true){
 				return;
 			}
@@ -204,7 +202,7 @@
 			},500);
 		},
 		toggle : function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(this.isHide==false){
 				this.on("hide");
 			}else{
@@ -212,14 +210,14 @@
 			}
 		},
 		setOffset : function(left,top){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.$elem.css({
 				left : left,
 				top : top
 			});
 		},
 		remove:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			ui.popu.removePopu(this);
 			this.callSuperMethod();
 		}

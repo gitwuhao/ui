@@ -39,7 +39,7 @@
 			}
 		},
 		onRenderBefore:function(config){
-			CF.logger(this,arguments);
+			ui.logger();
 			var html=['<div class="',config._c_message_box,'">',
 					  '<div class="',config._c_icon,' ',MessageBox.INFO,'"></div>',
 					  '<div class="',config._c_message_text,'"></div>',
@@ -71,7 +71,7 @@
 			};
 		},
 		onRenderAfter:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.callSuperMethod();
 			
 			var $elem=this.$elem;
@@ -87,7 +87,7 @@
 
 		},
 		reconfig:function(config){
-			CF.logger(this,arguments);
+			ui.logger();
 			
 			this.setConfig(config);
 			
@@ -118,7 +118,7 @@
 			}
 		},
 		show:function(config){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.reconfig(config);
 			this.$mask.show();
 			this.$elem.show();
@@ -132,7 +132,7 @@
 		
 		},
 		progress:function(config){
-			CF.logger(this,arguments);
+			ui.logger();
 			config.type="progress";
 			this.setConfig(config);
 			this.$elem[0].className=this._c_window+" "+this._c_progress;
@@ -140,7 +140,7 @@
 			this._super_.show.call(this,config);
 		},
 		getQuickTip:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(this.$quickTip){
 				return;
 			}
@@ -174,7 +174,7 @@
 			});
 		},
 		setQuickTipOffset:function(target){
-			CF.logger(this,arguments);
+			ui.logger();
 			var $target=$(target);
 			var offset=$target.offsetElement(document.body);
 			var left=offset.left;
@@ -241,7 +241,7 @@
 			
 		},
 		delConfirm:function(config){
-			CF.logger(this,arguments);
+			ui.logger();
 			
 			config.type="quickTip";
 			this.setConfig(config);
@@ -259,13 +259,13 @@
 			this.$elem.show();
 		},
 		handle:function(type){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(this.config.handle){
 				this.config.handle(type);
 			}
 		},
 		setConfig:function(config){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.config=config;
 			
 

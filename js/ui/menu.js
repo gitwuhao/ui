@@ -73,13 +73,13 @@
 			}
 		},
 		onRenderAfter:function(config){
-			CF.logger(this,arguments);
+			ui.logger();
 			var $elem=this.$elem;
 			this.$menu=$elem.children("."+config._c_menu);
 			this.$menuitem=this.$menu.children("li");
 		},
 		onBindEvent:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			
 			this.callSuperMethod();
 
@@ -135,36 +135,36 @@
 			return this.items['_'+name+'_'];
 		},
 		onSubMenuMouseOver:function(event){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.triggerSubMenuHide();
 			this.parentMenu.show();
 			this.show();
 		},
 		onMenuMouseOver:function(event){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.triggerSubMenuHide();
 			this.show();
 		},
 		onSubMenuShow:function(menu){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.triggerSubMenuHide();
 			this.subMenu=menu;
 			menu.resetOffset();
 			menu.show();
 		},
 		onShowAfter:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(!this.parentMenu){
 				this.callSuperMethod();
 			}
 		},
 		onHide:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.triggerSubMenuHide();
 			this.callSuperMethod();
 		},
 		bindSubMenuTrigger:function(item){
-			CF.logger(this,arguments);
+			ui.logger();
 			var me=this;
 			item.$elem.hover(function(event){
 				var itemData=me.getMenuItemData(this);
@@ -183,7 +183,7 @@
 			});
 		},		
 		setOffset : function(left,top){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(left==0 && top==0){
 				this.hide();
 				//console.info("offset:["+left+","+top+"]");
@@ -213,30 +213,30 @@
 			return menu;
 		},
 		onItemClick:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			this.triggerParentMenuHide();
 			this.on("hide");
 		},
 		triggerParentMenuHide:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(this.parentMenu){
 				this.parentMenu.on("hide");
 				this.parentMenu.triggerParentMenuHide();
 			}
 		},
 		triggerSubMenuHide:function(){
-			CF.logger(this,arguments);
+			ui.logger();
 			if(this.subMenu){
 				this.subMenu.on("hide");
 				this.subMenu.triggerSubMenuHide();
 			}
 		},
 		setMenuItemData:function(item){
-			CF.logger(this,arguments);
+			ui.logger();
 			item.$elem.data("_menu_item_data_",item);
 		},
 		getMenuItemData:function(elem){
-			CF.logger(this,arguments);
+			ui.logger();
 			var data=$.data(elem,"_menu_item_data_");
 			if(data){
 				return data;
