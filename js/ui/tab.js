@@ -90,6 +90,9 @@
 			}
 			var tabPanel=new Tab(tab);
 			this.items[tabPanel.index]=tabPanel;
+			if(tab.active && !this.currentTab){
+				this.setCurrentTab(tabPanel);
+			}
 		},
 		remove : function(tab){
 			ui.logger();
@@ -110,6 +113,12 @@
 				for(var i=0,len=items.length;i<len;i++){
 					this.remove(items[i]);
 				}
+			}
+			if(this.topbar  && this.topbar.remove){
+				this.topbar.remove();
+			}
+			if(this.bottombar && this.bottombar.remove){
+				this.bottombar.remove();
 			}
 			this.callSuperMethod();
 		}

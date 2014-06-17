@@ -2,8 +2,36 @@
 window.examples.tab=function(){
 
 	var tab=new ui.tab({
+		px : 'ide',
 		render : document.body,
+		topbar:{
+			items : [{
+					cls:"tedui-selectedcol"
+				},{
+					cls:"tedui-selectedcol"
+				},{
+					cls:"tedui-selectedcol"
+				},{
+					cls:"tedui-selectedcol"
+				},{
+					cls:"tedui-selectedcol"
+				}]
+		},
+		bottombar:{
+			items : [{
+					cls:"tedui-selectedcol"
+				},{
+					cls:"tedui-selectedcol"
+				},{
+					cls:"tedui-selectedcol"
+				},{
+					cls:"tedui-selectedcol"
+				},{
+					cls:"tedui-selectedcol"
+				}]
+		},
 		items : [{
+			active:true,
 			cls:'tedui-selectedcol',
 			label:'选择列1',
 			onTagClick:function(){

@@ -17,3 +17,72 @@
 .x-ui-tabbar-tag.hover{
 	color: #5A5A5A;
 }
+
+.ide-tab-panel{
+	color: #BCBCBC;
+	font-size: 11px;
+	background-color: #333;
+	width: 300px;
+}
+
+.ide-tabbar-box{
+	height: 18px;
+	text-align: center;
+	background: linear-gradient(#222 0%, #1B1B1B 100%);
+	border-bottom: 2px groove #363636;
+	text-shadow: 0px -1px 0px #000;
+	border-top: 2px groove #363636;
+}
+
+.ide-tabbar-tag{
+	float: left;
+	min-width: 60px;
+	max-width: 100px;
+	border-left: 1px solid #000;
+	height: 16px;
+	line-height: 18px;
+	color: #777;
+	margin-top: -1px;
+}
+.ide-tabbar-tag.selected{
+	border-top: 2px groove #454545;
+	color: #BCBCBC;
+	background-color: #333;
+	border-left: none;
+	height: 18px;
+	line-height: 17px;
+	margin-top: -2px;
+	border-right: none;
+}
+.ide-tabbar-box::after {
+	content: "";
+	float: left;
+	height: 16px;
+	margin-top: -1px;
+	border-right: 1px solid #000;
+}
+.ide-topbar-box{
+	overflow: hidden;
+	padding: 3px 0px;
+	border-bottom: 2px groove #454545;
+}
+.ide-bottombar-box{
+	overflow: hidden;
+	border-top: 2px groove #454545;
+	border-bottom: none;
+	padding: 1px 5px 1px 0px;
+	background-color: #2E2E2E;
+}
+.ide-tab-view{
+	min-height:100px;
+}
+.ide-button{
+	width:15px;
+	height:15px;
+	float: left;
+	border: 1px solid #CCC;
+	margin: 0px 5px;
+}
+.ide-bottombar-box .ide-toolbar-button-box{
+	float: right;
+}
