@@ -43,6 +43,10 @@
 							item.title=item.label;
 							delete item.label;
 						}
+
+						if(config.px){
+							item.px=config.px;
+						}
 						html.push(_class.getTemplate(item));
 					}
 				}

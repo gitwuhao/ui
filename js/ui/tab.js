@@ -12,14 +12,29 @@
 			css:{
 				_c_tab_panel: '-tab-panel',
 				_c_tabbar_box: '-tabbar-box',
-				_c_tab_view_box: '-tab-view-box'
+				_c_topbar_box: '-topbar-box',
+				_c_tab_view_box: '-tab-view-box',
+				_c_bottombar_box: '-bottombar-box'
 			},
 			getTemplate: function(config){
 				ui.widget.applyCSS(config,this.css);
-				return ['<div class="',config._c_tab_panel,' ',(config.cls||''),' border-box">',
-							'<div class="',config._c_tabbar_box,'"></div>',
-							'<div class="',config._c_tab_view_box,'"></div>',
-				'</div>'].join('');
+				var html=['<div class="',config._c_tab_panel,' ',(config.cls||''),' border-box">',
+							'<div class="',config._c_tabbar_box,'"></div>']
+				if(config.topbar){
+					if(config.px){
+						config.topbar.px=config.px;
+					}
+					html.push('<div class="',config._c_topbar_box,'">',ui.toolbar.getTemplate(config.topbar),'</div>');
+				}
+				html.push(   '<div class="',config._c_tab_view_box,'"></div>');
+				if(config.bottombar){
+					if(config.px){
+						config.bottombar.px=config.px;
+					}
+					html.push('<div class="',config._c_bottombar_box,'">',ui.toolbar.getTemplate(config.bottombar),'</div>');
+				}
+				html.push('</div>');
+				return html.join('');
 			}
 		},
 		onRenderAfter:function(config){
@@ -27,6 +42,24 @@
 			var $tabpanel=this.$elem;
 			this.$tabbarbox=$tabpanel.children('.'+this._c_tabbar_box);
 			this.$tabviewbox=$tabpanel.children('.'+this._c_tab_view_box);
+			if(config.topbar){
+				var $topbarbox=$tabpanel.children('.'+this._c_topbar_box);
+				config.topbar.elem=$topbarbox.children()[0];
+				config.topbar.autoRender=false;
+				var item=new ui.toolbar(config.topbar);
+				item.initRender();
+				config.topbar=item;
+			}
+
+			if(config.bottombar){
+				var $bottombarbox=$tabpanel.children('.'+this._c_bottombar_box);
+				config.bottombar.elem=$bottombarbox.children()[0];
+				config.bottombar.autoRender=false;
+				var item=new ui.toolbar(config.bottombar);
+				item.initRender();
+				config.topbar=item;
+			}
+
 		},
 		onBindEvent:function(){
 			ui.logger();
@@ -51,6 +84,10 @@
 			tab.$tabbarbox=this.$tabbarbox;
 			tab.$tabviewbox=this.$tabviewbox;
 			tab.tabPanel=this;
+			
+			if(this.px){
+				tab.px=this.px;
+			}
 			var tabPanel=new Tab(tab);
 			this.items[tabPanel.index]=tabPanel;
 		},
@@ -77,13 +114,13 @@
 			this.callSuperMethod();
 		}
 	});
-	
+
 
 
 	var Tab=function(){
 		this.callSuperMethod();
 	};
-	
+
 
 	ui.extend(Tab,ui.widget,{
 		_type_ :"ui.tab",
@@ -110,7 +147,7 @@
 			delete this.$tabbarbox;
 			delete this.$tabviewbox;
 			delete this.$render;
-			
+
 
 			var html=['<div class="',this._c_tabbar_tag,'">',this.label,'</div>'];
 			var tag=jQuery.createElement(html.join(''));
@@ -118,20 +155,20 @@
 
 			this.$elem=jQuery(tag);
 			this.$tag=this.$elem;
-			
+
 
 			var tabView=jQuery.createElement(['<div class="',this._c_tab_view,'"></div>'].join(''));
 			$tabviewbox.append(tabView);
-			
+
 			this.$tabview=jQuery(tabView);
-			
-			
+
+
 			delete this._c_tab_view;
 			delete this._c_tabbar_tag;
 			delete this.px;
 			delete this.isApplyCSS;
 
-		},			
+		},
 		onRenderTabView : function(){
 			var html=[];
 			if(this.html){
@@ -151,14 +188,14 @@
 			ui.logger();
 
 			this.$tag.bindHover();
-			
+
 			var me=this;
 
 			this.$tag.click(function(event){
 				me.on("tagClick");
 				me.tabPanel.setCurrentTab(me);
 			});
-			
+
 		},
 		hide:function(){
 			ui.logger();
