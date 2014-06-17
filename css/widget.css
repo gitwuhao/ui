@@ -1,4 +1,4 @@
-body *,.border-box * {
+.border-box * {
 	box-sizing: border-box;
 }
 .x-ui-icon,.x-ui-arrow-icon,.x-ui-clear-icon,.x-ui-del-icon ,.x-ui-invalid-icon{
