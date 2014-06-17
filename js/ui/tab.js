@@ -13,7 +13,7 @@
 				_c_tab_panel: '-tab-panel',
 				_c_tabbar_box: '-tabbar-box',
 				_c_topbar_box: '-topbar-box',
-				_c_tab_view_box: '-tab-view-box',
+				_c_tabview_box: '-tabview-box',
 				_c_bottombar_box: '-bottombar-box'
 			},
 			getTemplate: function(config){
@@ -26,7 +26,7 @@
 					}
 					html.push('<div class="',config._c_topbar_box,'">',ui.toolbar.getTemplate(config.topbar),'</div>');
 				}
-				html.push(   '<div class="',config._c_tab_view_box,'"></div>');
+				html.push(   '<div class="',config._c_tabview_box,'"></div>');
 				if(config.bottombar){
 					if(config.px){
 						config.bottombar.px=config.px;
@@ -41,7 +41,7 @@
 			ui.logger();
 			var $tabpanel=this.$elem;
 			this.$tabbarbox=$tabpanel.children('.'+this._c_tabbar_box);
-			this.$tabviewbox=$tabpanel.children('.'+this._c_tab_view_box);
+			this.$tabviewbox=$tabpanel.children('.'+this._c_tabview_box);
 			if(config.topbar){
 				var $topbarbox=$tabpanel.children('.'+this._c_topbar_box);
 				config.topbar.elem=$topbarbox.children()[0];
@@ -137,7 +137,7 @@
 		statics:{
 			css:{
 				_c_tabbar_tag: '-tabbar-tag',
-				_c_tab_view: '-tab-view'
+				_c_tabview: '-tabview'
 			},
 			getTabIndex : (function(){
 				var tabIndex=0;
@@ -166,13 +166,13 @@
 			this.$tag=this.$elem;
 
 
-			var tabView=jQuery.createElement(['<div class="',this._c_tab_view,'"></div>'].join(''));
+			var tabView=jQuery.createElement(['<div class="',this._c_tabview,'"></div>'].join(''));
 			$tabviewbox.append(tabView);
 
 			this.$tabview=jQuery(tabView);
 
 
-			delete this._c_tab_view;
+			delete this._c_tabview;
 			delete this._c_tabbar_tag;
 			delete this.px;
 			delete this.isApplyCSS;
