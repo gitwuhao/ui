@@ -42,22 +42,20 @@
 			var $tabpanel=this.$elem;
 			this.$tabbarbox=$tabpanel.children('.'+this._c_tabbar_box);
 			this.$tabviewbox=$tabpanel.children('.'+this._c_tabview_box);
-			if(config.topbar){
+			if(this.topbar){
 				var $topbarbox=$tabpanel.children('.'+this._c_topbar_box);
-				config.topbar.elem=$topbarbox.children()[0];
-				config.topbar.autoRender=false;
-				var item=new ui.toolbar(config.topbar);
-				item.initRender();
-				config.topbar=item;
+				this.topbar.elem=$topbarbox.children()[0];
+				this.topbar.autoRender=false;
+				this.topbar=new ui.toolbar(this.topbar);
+				this.topbar.initRender();
 			}
 
-			if(config.bottombar){
+			if(this.bottombar){
 				var $bottombarbox=$tabpanel.children('.'+this._c_bottombar_box);
-				config.bottombar.elem=$bottombarbox.children()[0];
-				config.bottombar.autoRender=false;
-				var item=new ui.toolbar(config.bottombar);
-				item.initRender();
-				config.topbar=item;
+				this.bottombar.elem=$bottombarbox.children()[0];
+				this.bottombar.autoRender=false;
+				this.bottombar=new ui.toolbar(this.bottombar);
+				this.bottombar.initRender();
 			}
 
 		},
