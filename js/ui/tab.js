@@ -163,7 +163,7 @@
 			this.$tag=this.$elem;
 
 
-			var tabView=jQuery.createElement(['<div class="',this._c_tabview,'"></div>'].join(''));
+			var tabView=jQuery.createElement(['<div class="',this._c_tabview,' ',(this.cls||''),'"></div>'].join(''));
 			$tabviewbox.append(tabView);
 
 			this.$tabview=jQuery(tabView);
