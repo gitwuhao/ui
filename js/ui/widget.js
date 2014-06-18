@@ -89,14 +89,23 @@
 		
 		_class._super_=superClass;
 		//_class._prototype_=prototype;
-		prototype._owner_name_=prototype._type_+"."+prototype._name_;
 
 		prototype.constructor=_class;
+		
+		prototype._type_=prototype._type_||_superClass._type_;
+		
+		prototype._name_=prototype._name_||_superClass._name_;
+
+		prototype._owner_name_=prototype._type_+"."+prototype._name_;
+
 		_class._owner_name_=prototype._owner_name_;
 
 		ui.setOwner(_class,prototype);
 
+		
 		CF.merger(true,_prototype,_superClass, prototype);
+		
+
 		_prototype._class_=_class;
 		_prototype.callSuperMethod=callSuperMethod;
 		_prototype.callPrototypeMethod=callPrototypeMethod;
