@@ -5,7 +5,6 @@
 	};
 
 	ui.extend(ui.form,ui.widget,{
-		_type_ : "ui",
 		_name_ : "form",
 		statics:{
 			css:{

@@ -5,7 +5,6 @@
 	};
 
 	ui.extend(MessageBox,ui.window,{
-		_type_ : "ui",
 		_name_ : "MessageBox",
 		statics:{
 			css:{

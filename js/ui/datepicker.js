@@ -5,7 +5,6 @@
 	};
 
 	ui.extend(ui.datepicker,ui.popu,{
-		_type_ : "ui",
 		_name_ : "datepicker",
 		statics:{
 			css:{

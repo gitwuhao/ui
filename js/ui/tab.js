@@ -6,7 +6,6 @@
 
 
 	ui.extend(ui.tab,ui.widget,{
-		_type_ : "ui",
 		_name_ : "tab",
 		statics:{
 			css:{

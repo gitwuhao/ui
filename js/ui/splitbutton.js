@@ -5,7 +5,6 @@
 	};
 	
 	ui.extend(ui.splitbutton,ui.button,{
-		_type_ : "ui",
 		_name_ : "splitbutton",
 		statics:{
 			css:{

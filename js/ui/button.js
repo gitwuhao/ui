@@ -5,7 +5,6 @@
 	};
 
 	ui.extend(ui.button,ui.widget,{
-		_type_ : "ui",
 		_name_ : "button",
 		statics:{
 			css:{

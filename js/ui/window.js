@@ -5,7 +5,6 @@
 	};
 
 	ui.extend(ui.window,ui.widget,{
-		_type_ : "ui",
 		_name_ : "window",
 		statics:{
 			css:{

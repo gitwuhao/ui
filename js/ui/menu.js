@@ -5,7 +5,6 @@
 	};
 
 	ui.extend(ui.menu,ui.popu,{
-		_type_ :"ui",
 		_name_ :"menu",
 		statics:{
 			css:{

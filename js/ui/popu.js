@@ -5,7 +5,6 @@
 	};
 
 	ui.extend(ui.popu,ui.widget,{
-		_type_ : "ui",
 		_name_ : "popu",
 		statics:{
 			_c_popu_box : ui.cssPrefix+'-popu',

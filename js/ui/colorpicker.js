@@ -12,7 +12,6 @@ For usage and examples: colpick.com/plugin
 	};
 
 	ui.extend(colorpicker,ui.popu,{
-		_type_ : "ui",
 		_name_ : "colorpicker",
 		statics:{
 			css:{

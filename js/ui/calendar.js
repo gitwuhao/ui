@@ -5,7 +5,6 @@
 	};
 
 	ui.extend(ui.calendar,ui.widget,{
-		_type_ : "ui",
 		_name_ : "calendar",
 		statics:{
 			css:{

@@ -4,7 +4,6 @@
 
 
 	CF.exportMethod(ui.delicon,{
-		_type_ : "ui",
 		_name_ : "delicon",
 		_init:function(){
 			var delIcon=$.createElement('<div class="x-ui-del-icon" title="点击删除"><div class="x-ui-icon"></div></div>');

@@ -4,7 +4,6 @@
 
 
 	CF.exportMethod(ui.texteditor,{
-		_type_ : "ui",
 		_name_ : "texteditor",
 		_init:function(){
 			var elem=$.createElement('<div class="x-ui-text-editor"><input type="text" /></div>');

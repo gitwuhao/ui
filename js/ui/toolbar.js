@@ -6,7 +6,6 @@
 	
 
 	ui.extend(ui.toolbar,ui.widget,{
-		_type_ : "ui",
 		_name_ : "toolbar",
 		statics:{
 			css:{
