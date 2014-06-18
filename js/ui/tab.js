@@ -87,9 +87,17 @@
 			}
 			var tabPanel=new Tab(tab);
 			this.items[tabPanel.index]=tabPanel;
+
+			if(tabPanel.cls){
+				this.items['_'+tabPanel.cls+'_']=tabPanel;
+			}
+
 			if(tab.active && !this.currentTab){
 				this.setCurrentTab(tabPanel);
 			}
+		},
+		getTab:function(key){
+			return this.items['_'+key+'_'];
 		},
 		remove : function(tab){
 			ui.logger();
