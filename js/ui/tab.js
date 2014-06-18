@@ -4,7 +4,6 @@
 		this.callSuperMethod();
 	};
 
-
 	ui.extend(ui.tab,ui.widget,{
 		_name_ : "tab",
 		statics:{
