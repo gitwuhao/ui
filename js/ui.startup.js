@@ -9,9 +9,11 @@
 		function(){
 
 			UIList.push(function(){
-				ui.ready=true; 			 
+				ui.ready=true;
+				$.getDoc().trigger('UIReady',ui);
 			});
 
 			$.loadJSQueue.apply(this,UIList);
+
 		});
 })(CF,$);
