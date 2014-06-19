@@ -288,7 +288,6 @@
 					}
 				}
 			}
-
 			var $elem=this.$elem;
 			if($elem){
 				$elem.remove();

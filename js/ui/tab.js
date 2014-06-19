@@ -46,6 +46,7 @@
 				this.topbar.autoRender=false;
 				this.topbar=new ui.toolbar(this.topbar);
 				this.topbar.initRender();
+				this.topbar.$owner=this;
 			}
 
 			if(this.bottombar){
@@ -54,6 +55,7 @@
 				this.bottombar.autoRender=false;
 				this.bottombar=new ui.toolbar(this.bottombar);
 				this.bottombar.initRender();
+				this.bottombar.$owner=this;
 			}
 
 		},
@@ -85,6 +87,9 @@
 				tab.px=this.px;
 			}
 			var tabPanel=new Tab(tab);
+
+			tabPanel.$owner=this;
+
 			this.items[tabPanel.index]=tabPanel;
 
 			if(tabPanel.cls){
