@@ -30,7 +30,11 @@
 		var _prototype_=this._class_.prototype;
 		return _prototype_[method].apply(this,arg);
 	}
-
+	
+	var _class_map_={};
+	ui.getClass=function(xtype){
+		return _class_map_[xtype];
+	};
 	ui.setOwner=function(_class,prototype){
 		CF.setOwner(_class,prototype);
 	};
@@ -99,6 +103,9 @@
 		prototype._owner_name_=prototype._type_+"."+prototype._name_;
 
 		_class._owner_name_=prototype._owner_name_;
+		
+
+		_class_map_[prototype._owner_name_]=_class;
 
 		ui.setOwner(_class,prototype);
 

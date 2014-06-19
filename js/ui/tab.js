@@ -125,6 +125,28 @@
 				this.bottombar.remove();
 			}
 			this.callSuperMethod();
+		},				
+		getItem:function(icon){
+			var item;
+			if(this.topbar){
+				item=this.topbar.getItem(icon);
+			}
+			if(!item && this.bottombar){
+				item=this.bottombar.getItem(icon);
+			}
+			return item;
+		},
+		disabled:function(icon){
+			var item=this.getItem(icon);
+			if(item){
+				item.disabled();
+			}
+		},
+		enabled:function(icon){
+			var item=this.getItem(icon);
+			if(item){
+				item.enabled();
+			}
 		}
 	});
 
