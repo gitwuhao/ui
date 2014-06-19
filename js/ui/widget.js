@@ -2,34 +2,8 @@
 
 	var ui=window.ui||{},
 		widget,
-		ObjectConstructor={}.constructor,
 		ObjectHasOwnProperty=Object.prototype.hasOwnProperty;
 
-	function callSuperMethod(){
-		var caller=arguments.callee.caller;
-		var method=caller._name_;
-		var arg=caller.arguments;
-		var _super_=caller._owner_._super_;
-		var _result;
-		var _super_prototype_=_super_.prototype;
-
-		if(_super_prototype_ && _super_prototype_[method]){
-			_result=_super_prototype_[method].apply(this,arg);
-		}else if(_super_[method]){
-			_result=_super_[method].apply(this,arg);
-		}
-
-		return _result;
-		
-	};
-	
-	function callPrototypeMethod(){
-		var caller=arguments.callee.caller;
-		var method=caller._name_;
-		var arg=caller.arguments;
-		var _prototype_=this._class_.prototype;
-		return _prototype_[method].apply(this,arg);
-	}
 	
 	var _class_map_={};
 	ui.getClass=function(xtype){
@@ -59,76 +33,15 @@
 		$.data(item,this._owner_name_);
 	};
 
-	ui.__delete__="__delete_prototype__";
+	ui.__delete__=CF.__delete__;
 
-	ui.extend=function(_class,superClass,prototype){
-		var _prototype=_class.prototype,
-			_constructor=_prototype.constructor,
-			_superClass,_superStatics,_statics;
-
+	ui.extend=function(){
+		var _prototype=CF.extend.apply(this,arguments);
 		
+		_class_map_[_prototype._owner_name_]=_prototype._class_;
 		
-		for(var key in prototype){
-			var pt=prototype[key];
-			if(ui.__delete__==pt){
-				delete prototype[key];
-			}
-		}
-
-		if(typeof superClass =="object"){
-			_superClass=superClass;
-		}else{
-			_superClass=superClass.prototype;
-		}
-
-		if(superClass.statics){
-			_superStatics=superClass.statics;
-		}
-
-		if(prototype.statics){
-			_statics=prototype.statics;
-			_class.statics=_statics;
-			delete prototype.statics;
-		}
-		
-		_class._super_=superClass;
-		//_class._prototype_=prototype;
-
-		prototype.constructor=_class;
-		
-		prototype._type_=prototype._type_||_superClass._type_;
-		
-		prototype._name_=prototype._name_||_superClass._name_;
-
-		prototype._owner_name_=prototype._type_+"."+prototype._name_;
-
-		_class._owner_name_=prototype._owner_name_;
-		
-
-		_class_map_[prototype._owner_name_]=_class;
-
-		ui.setOwner(_class,prototype);
-
-		
-		CF.merger(true,_prototype,_superClass, prototype);
-		
-
-		_prototype._class_=_class;
-		_prototype.callSuperMethod=callSuperMethod;
-		_prototype.callPrototypeMethod=callPrototypeMethod;
-
-		if(_constructor!=ObjectConstructor){
-			_constructor._name_='constructor';
-			_constructor._owner_name_=prototype._owner_name_;
-		}
-
-		if(_superStatics || _statics){
-			CF.merger(true,_class,_superStatics,_statics);
-			CF.merger(true,_class.statics,_superStatics,_statics);
-		}
 		return _prototype;
 	};
-
 
 	ui.cssPrefix = "x-ui";
 
