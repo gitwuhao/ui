@@ -215,9 +215,12 @@
 			this.on("ready");
 			delete this.config;
 			delete this.initRender;
+
+			this.isRender=true;
 		},
 		onRender : function(config){
 			ui.logger();
+			
 			if(this.elem){
 				this.$elem=$(this.elem);
 				delete this.elem;
