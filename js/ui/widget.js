@@ -38,7 +38,7 @@
 	ui.extend=function(){
 		var _prototype=CF.extend.apply(this,arguments);
 		
-		_class_map_[_prototype._owner_name_]=_prototype._class_;
+		_class_map_[_prototype._owner_name_]=_prototype.getClass();
 		
 		return _prototype;
 	};
@@ -75,9 +75,9 @@
 			delete config.isApplyCSS;
 		},
 		getSuper:function(){
-			var _super_=this._class_._super_.prototype;
+			var _super_=this.getClass()._super_.prototype;
 			if(!_super_){
-				_super_=this._class_._super_;
+				_super_=this.getClass()._super_;
 			}
 			return _super_;
 		},
@@ -88,7 +88,7 @@
 						render :this.render
 					};
 				}
-				ui.setOwner(this._class_,config);
+				ui.setOwner(this.getClass(),config);
 			}else{
 				config={};
 			}
@@ -106,7 +106,7 @@
 			
 			delete config.render;
 
-			ui.widget.applyCSS(config,this._class_.css);
+			ui.widget.applyCSS(config,this.getClass().css);
 			
 			CF.merger(this,config);
 
@@ -142,7 +142,7 @@
 				return;
 			}
 
-			var div=$.createElement(this._class_.getTemplate(config));
+			var div=$.createElement(this.getClass().getTemplate(config));
 			if(this.$render){
 				this.$render.append(div);
 			}

@@ -180,7 +180,7 @@
 		},
 		onRender : function(config){
 			ui.logger();
-			this.index=this._class_.getTabIndex();
+			this.index=this.getClass().getTabIndex();
 
 			var $tabbarbox=this.$tabbarbox;
 			var $tabviewbox=this.$tabviewbox;

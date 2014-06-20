@@ -84,7 +84,7 @@
 		},
 		onRenderBefore:function(config){
 			ui.logger();
-			config.html=this._class_.getTemplate(config);
+			config.html=this.getClass().getTemplate(config);
 		},
 		onRender:function(config){
 			ui.logger();

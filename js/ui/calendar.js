@@ -199,7 +199,7 @@
 
 			var calendarDateTime=calendarDate.getTime();
 
-			this.startYear=this._class_.getStartYear(calendarDateTime);
+			this.startYear=this.getClass().getStartYear(calendarDateTime);
 
 			this.setTDValue();
 
@@ -399,12 +399,12 @@
 		},
 		onYearNextPage:function(){
 			ui.logger();
-			this.startYear+=this._class_.YEAR_CELL-2;
+			this.startYear+=this.getClass().YEAR_CELL-2;
 			this.setYearValue();
 		},
 		onYearPrevPage:function(){
 			ui.logger();
-			this.startYear-=this._class_.YEAR_CELL-2;
+			this.startYear-=this.getClass().YEAR_CELL-2;
 			this.setYearValue();
 		},
 		onMonthNextPage:function(){
@@ -492,9 +492,9 @@
 			var calendarDate=this.calendarDate;
 			var calendarDateTime=calendarDate.getTime();
 
-			var startDateTime=this._class_.getStartDayDateTime(calendarDateTime);
+			var startDateTime=this.getClass().getStartDayDateTime(calendarDateTime);
 
-			var DAY_OF_TIME_MILLIS=this._class_.DAY_OF_TIME_MILLIS;
+			var DAY_OF_TIME_MILLIS=this.getClass().DAY_OF_TIME_MILLIS;
 
 			
 			var _c_day=this._c_day;

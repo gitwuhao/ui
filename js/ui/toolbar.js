@@ -90,7 +90,7 @@
 			for(var i=0,len=items.length;i<len;i++){
 				var item=items[i];
 				if(typeof item!="string"){
-					items[i]=this._class_.getButtonItem(item,children[i]);
+					items[i]=this.getClass().getButtonItem(item,children[i]);
 					items[i].$owner=this;
 					var icon=item.cls;
 					if(icon){
