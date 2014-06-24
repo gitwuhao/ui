@@ -84,18 +84,20 @@
 
 			if(index>=0){
 				array=this.undoCommands.splice(index,size||1);
-
 			}else{
 				array=this.undoCommands;
 				this.undoCommands=[];
 			}
-
+			if(array.length==0){
+				return;
+			}
 			for(var i=0,len=array.length;i<len;i++){
 				var command=array[i];
 				if(command.remove){
 					command.remove();
 				}
 			}
+			this.scope.trigger('remove',array);
 		},
 		_execute:function (command,action) {
 
