@@ -130,7 +130,7 @@
 			}
 			
 
-			this.scope.trigger('undoafter',null);
+			this.scope.trigger('undoafter',command);
 
 			return result;
 		},
@@ -155,7 +155,7 @@
 			}
 
 
-			this.scope.trigger('redoafter',null);
+			this.scope.trigger('redoafter',command);
 			return result;
 		},
 		execute:function(index,callback){
