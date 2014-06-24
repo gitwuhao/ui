@@ -72,6 +72,9 @@
 			this.undoCommands.push(command);
 
 			this.index = this.undoCommands.length - 1;
+			
+			command.index=this.index;
+
 			if (callback) {
 				callback();
 			}
