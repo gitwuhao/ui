@@ -171,9 +171,9 @@
 		},
 		execute:function(index,callback){
 			if(index >= this.index){
-				while(index >= this.index && this.redo()){}
+				while(index > this.index && this.redo()){}
 			}else if(index <= this.index){
-				while(index <= this.index && this.undo()){}
+				while(index < this.index && this.undo()){}
 			}
 
 			if(callback){
