@@ -110,7 +110,7 @@
 		},
 		_execute:function (command,action) {
 
-			if (!command || typeof command[action] !== "function") {
+			if (!command || typeof command[action] !== "function" || this.scope.trigger('execute',this.index,command,action)==false) {
 				return false;
 			}
 			this.isExecuting = true;
