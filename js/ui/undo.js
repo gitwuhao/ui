@@ -119,52 +119,49 @@
 
 			this.isExecuting = false;
 
-			this.scope.trigger(action,command,action);
-
 			return true;
 		},
 		undo: function (callback) {
-			
+			var result=false;
 			this.scope.trigger('undobefore',null);
 
 			var command = this.undoCommands[this.index];
 			if (command) {
-				var result=false;
 				if(this._execute(command,"undo")){
 					this.index -= 1;
 					result=true;
+					this.scope.trigger('undo',command);
 				}
+				
 
 				if (callback) {
 					callback();
 				}
 			}
 			
-
 			this.scope.trigger('undoafter',command);
-
 			return result;
 		},
 
 		redo: function (callback) {
-			
+			var result=false;
 			this.scope.trigger('redobefore',null);
 
             var command = this.undoCommands[this.index + 1];
 			if (command) {
 			
-				var result=false;
 				if(this._execute(command,"redo")){
 					this.index += 1;
 					result=true;
+					this.scope.trigger('redo',command);
 				}
+
 
 				if (callback) {
 					callback();
 				}
 
 			}
-
 
 			this.scope.trigger('redoafter',command);
 			return result;
@@ -175,7 +172,6 @@
 			}else if(index <= this.index){
 				while(index < this.index && this.undo()){}
 			}
-
 			if(callback){
 				callback();
 			}
@@ -201,6 +197,12 @@
 		},
 		getCommands: function () {
 			return this.undoCommands;
+		},
+		getPrevCommand : function(){
+			return this.undoCommands[this.index - 1];
+		},
+		getNextCommand : function(){
+			return this.undoCommands[this.index + 1];
 		}
 	};
 
