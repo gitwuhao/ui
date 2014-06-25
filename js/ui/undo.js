@@ -167,9 +167,9 @@
 			return result;
 		},
 		execute:function(index,callback){
-			if(index >= this.index){
+			if(index > this.index){
 				while(index > this.index && this.redo()){}
-			}else if(index <= this.index){
+			}else if(index < this.index){
 				while(index < this.index && this.undo()){}
 			}
 			if(callback){
@@ -203,6 +203,9 @@
 		},
 		getNextCommand : function(){
 			return this.undoCommands[this.index + 1];
+		},
+		getCommand : function(){
+			return this.undoCommands[this.index];
 		}
 	};
 
