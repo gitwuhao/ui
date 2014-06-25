@@ -78,6 +78,10 @@
 			if (callback) {
 				callback();
 			}
+
+			if(!command.remove){
+				command.remove=CF.removeOwnProperty;
+			}
 			
 			this.scope.trigger('add',command);
 			return true;
@@ -94,13 +98,15 @@
 			if(array.length==0){
 				return;
 			}
+			
+			this.scope.trigger('remove',array);
+
 			for(var i=0,len=array.length;i<len;i++){
 				var command=array[i];
 				if(command.remove){
 					command.remove();
 				}
 			}
-			this.scope.trigger('remove',array);
 		},
 		_execute:function (command,action) {
 
