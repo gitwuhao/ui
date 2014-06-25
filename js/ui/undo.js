@@ -110,7 +110,9 @@
 		},
 		_execute:function (command,action) {
 
-			if (!command || typeof command[action] !== "function" || this.scope.trigger('execute',this.index,command,action)==false) {
+			if (!command || 
+				typeof command[action] !== "function" || 
+				this.scope.trigger('execute',this.index,command,action)==false) {
 				return false;
 			}
 			this.isExecuting = true;
@@ -133,7 +135,6 @@
 					this.scope.trigger('undo',command);
 				}
 				
-
 				if (callback) {
 					callback();
 				}
@@ -155,7 +156,6 @@
 					result=true;
 					this.scope.trigger('redo',command);
 				}
-
 
 				if (callback) {
 					callback();
