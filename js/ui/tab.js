@@ -19,14 +19,18 @@
 				var html=['<div class="',config._c_tab_panel,' ',(config.cls||''),' border-box">',
 							'<div class="',config._c_tabbar_box,'"></div>']
 				if(config.topbar){
-					if(config.px){
+					if(config.px==ui.cssPrefix){
+						config.topbar.px='x-ui-tab';
+					}else{
 						config.topbar.px=config.px;
 					}
 					html.push('<div class="',config._c_topbar_box,'">',ui.toolbar.getTemplate(config.topbar),'</div>');
 				}
 				html.push(   '<div class="',config._c_tabview_box,'"></div>');
 				if(config.bottombar){
-					if(config.px){
+					if(config.px==ui.cssPrefix){
+						config.bottombar.px='x-ui-tab';
+					}else{
 						config.bottombar.px=config.px;
 					}
 					html.push('<div class="',config._c_bottombar_box,'">',ui.toolbar.getTemplate(config.bottombar),'</div>');

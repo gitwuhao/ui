@@ -214,12 +214,16 @@
 		},
 		show : function(){
 			ui.logger();
-			if(this.item && this.item.xtype=='form'){
-				delete this.item.xtype;
+			if(this.item && !this.item.__isUI__){
 				this.item.render=this.$body[0];
-				this.form=new ui.form(this.item);
-				this.item=this.form;
-				this.$elem.addClass(this._c_form);
+				if(this.item.xtype=='form'){
+					this.form=new ui.form(this.item);
+					this.item=this.form;
+					this.$elem.addClass(this._c_form);
+				}else if(this.item.xtype=='tab'){
+					this.item=new ui.tab(this.item);
+				}
+				delete this.item.xtype;
 			}
 
 			ui.window.clearBodyScroll();
