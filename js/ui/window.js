@@ -21,7 +21,7 @@
 			},
 			getTemplate: function(config){
 				ui.widget.applyCSS(config,this.css);
-				var html=['<div class="',config._c_window,' ',(config.cls||''),'">',
+				var html=['<div class="',config._c_window,' ',(config.cls||''),' border-box">',
 							'<div class="',config._c_header,'">',
 								'<div class="',config._c_title,'">',(config.title||''),'</div>'];
 				if(config.icons){
