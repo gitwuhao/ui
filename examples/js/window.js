@@ -108,14 +108,14 @@ window.examples.window=function(){
 			buttons:[{
 				label:'确定',
 				cls:'confirm',
-				onClick : function(event){
+				handle : function(event){
 					console.info(this.label);
 
 				}
 			},{
 				label:'取消',
 				cls:'cancel',
-				onClick :  function(event){
+				handle :  function(event){
 					win4.close();
 				}
 			}]
@@ -186,7 +186,10 @@ window.examples.window=function(){
 			handle :  function(event){
 				console.info(this.label);
 			}
-		}]
+		}],
+		onCloseAfter : function(){
+			console.info('onCloseAfter');
+		}
 	});
 
 
