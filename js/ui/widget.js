@@ -9,6 +9,23 @@
 	ui.getClass=function(xtype){
 		return _class_map_[xtype];
 	};
+
+	ui.getXTypeHTML=function(config){
+		var _class,
+			xtype=config.xtype;
+		if(xtype=='splitbutton'){
+			_class=ui.splitbutton;
+		}else if(xtype=='text'){
+			_class=ui.form.text;
+		}
+		return _class.getTemplate(config);
+	};
+
+	ui.getXTypeItem=function(config){
+	
+	};
+
+
 	ui.setOwner=function(_class,prototype){
 		CF.setOwner(_class,prototype);
 	};

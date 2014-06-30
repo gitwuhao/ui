@@ -51,3 +51,7 @@
 	height: 100%;
 	border: none;
 }
+.x-ui-tab-panel .x-ui-floatbar-box{
+	float: right;
+	overflow: hidden;
+}

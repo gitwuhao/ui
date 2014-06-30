@@ -11,13 +11,38 @@
 				_c_tab_panel: '-tab-panel',
 				_c_tabbar_box: '-tabbar-box',
 				_c_topbar_box: '-topbar-box',
+				_c_floatbar_box: '-floatbar-box',
 				_c_tabview_box: '-tabview-box',
 				_c_bottombar_box: '-bottombar-box'
 			},
 			getTemplate: function(config){
 				ui.widget.applyCSS(config,this.css);
-				var html=['<div class="',config._c_tab_panel,' ',(config.cls||''),' border-box">',
-							'<div class="',config._c_tabbar_box,'"></div>']
+				var html=['<div class="',config._c_tab_panel,' ',(config.cls||''),' border-box">'];
+				if(config.floatbar){
+					//ui.button
+					var floatbar=config.floatbar;
+					html.push('<div class="',config._c_floatbar_box,'">');
+					for(var i=0,len=floatbar.length;i<len;i++){
+						var item=floatbar[i];
+						var xtype=item.xtype;
+						var _class;
+						if(xtype=='splitbutton'){
+							_class=ui.splitbutton;
+						}else if(xtype=='text'){
+							_class=ui.form.text;
+						}else{
+							_class=ui.button;
+						}
+						if(config.px){
+							item.px=config.px;
+						}
+						html.push(_class.getTemplate(item));
+					}
+					html.push('</div>');
+				}
+				
+				html.push('<div class="',config._c_tabbar_box,'"></div>');
+
 				if(config.topbar){
 					if(config.px==ui.cssPrefix){
 						config.topbar.px='x-ui-tab';
