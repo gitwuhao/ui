@@ -73,7 +73,12 @@
 				var $floatbar=$tabpanel.children('.'+this._c_floatbar_box);
 				var children=$floatbar.children();
 				for(var i=0,len=children.length;i<len;i++){
-					this.floatbar[i]=ui.getXTypeItem(this.floatbar[i],children[i]);
+					var item=ui.getXTypeItem(this.floatbar[i],children[i]);
+					if(item.cls){
+						this.floatbar[item.cls]=item;
+					}
+					item.$owner=this;
+					this.floatbar[i]=item;
 				}
 			}
 			if(this.topbar){
@@ -138,6 +143,31 @@
 		},
 		getTab:function(key){
 			return this.items['_'+key+'_'];
+		},		
+		getItem:function(icon){
+			var item;
+			if(this.topbar){
+				item=this.topbar.getItem(icon);
+			}
+			if(!item && this.bottombar){
+				item=this.bottombar.getItem(icon);
+			}
+			if(!item && this.floatbar){
+				item=this.floatbar[icon]
+			}
+			return item;
+		},
+		disabled:function(icon){
+			var item=this.getItem(icon);
+			if(item){
+				item.disabled();
+			}
+		},
+		enabled:function(icon){
+			var item=this.getItem(icon);
+			if(item){
+				item.enabled();
+			}
 		},
 		remove : function(tab){
 			ui.logger();
@@ -159,6 +189,7 @@
 					this.remove(items[i]);
 				}
 			}
+			
 			if(this.topbar  && this.topbar.remove){
 				this.topbar.remove();
 			}
@@ -166,28 +197,6 @@
 				this.bottombar.remove();
 			}
 			this.callSuperMethod();
-		},				
-		getItem:function(icon){
-			var item;
-			if(this.topbar){
-				item=this.topbar.getItem(icon);
-			}
-			if(!item && this.bottombar){
-				item=this.bottombar.getItem(icon);
-			}
-			return item;
-		},
-		disabled:function(icon){
-			var item=this.getItem(icon);
-			if(item){
-				item.disabled();
-			}
-		},
-		enabled:function(icon){
-			var item=this.getItem(icon);
-			if(item){
-				item.enabled();
-			}
 		}
 	});
 
