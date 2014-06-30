@@ -70,8 +70,8 @@
 			this.$tabbarbox=$tabpanel.children('.'+this._c_tabbar_box);
 			this.$tabviewbox=$tabpanel.children('.'+this._c_tabview_box);
 			if(this.floatbar){
-				var $floatbar=$tabpanel.children('.'+this._c_floatbar_box);
-				var children=$floatbar.children();
+				this.$floatbar=$tabpanel.children('.'+this._c_floatbar_box);
+				var children=this.$floatbar.children();
 				for(var i=0,len=children.length;i<len;i++){
 					var item=ui.getXTypeItem(this.floatbar[i],children[i]);
 					if(item.cls){

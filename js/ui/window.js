@@ -223,6 +223,7 @@
 				}else if(this.item.xtype=='tab'){
 					this.item=new ui.tab(this.item);
 				}
+				this.item.$owner=this;
 				delete this.item.xtype;
 			}
 
