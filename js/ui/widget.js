@@ -21,8 +21,20 @@
 		return _class.getTemplate(config);
 	};
 
-	ui.getXTypeItem=function(config){
-	
+	ui.getXTypeItem=function(config,elem){
+		var item,_class,
+			xtype=config.xtype;
+		config.elem=elem;
+		config.autoRender=false;
+		delete config.xtype;
+		if(xtype=='text' || xtype=='date' || xtype=='checkbox' || xtype=='radio'){
+			_class=ui.form[xtype];
+		}else if(xtype){
+			_class=ui[xtype];
+		}
+		item=new _class(config);
+		item.initRender();
+		return item;
 	};
 
 
