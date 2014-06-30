@@ -5,6 +5,7 @@
 	cursor: pointer;
 }
 .x-ui-button.disabled{
+	background-color: #F1F1F1;
 	opacity: 0.3;
 	cursor: default;
 }
