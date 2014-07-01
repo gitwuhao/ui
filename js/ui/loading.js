@@ -30,19 +30,18 @@
 		},
 		removeHandle:function(){
 			ui.logger();
-			var me=this;
-			this.$box.fadeOut('slow',function(){
-				var parent=me.$target.parent();
-				if(parent){
-					parent.css({
-						height : '',
-						overflow : ''
-					});
-				}
-				me.$box.remove();
-				me.$target.show();
-				CF.removeOwnProperty.call(me);
-			});
+			var $box=this.$box;
+			var $target=this.$target;
+			var parent=$target.parent();
+			if(parent){
+				parent.css({
+					height : '',
+					overflow : ''
+				});
+			}
+			$target.show();
+			$box.remove();
+			CF.removeOwnProperty.call(this);
 		},
 		create :function(){
 			ui.logger();
