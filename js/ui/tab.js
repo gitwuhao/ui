@@ -114,9 +114,11 @@
 		setCurrentTab : function(tab){
 			ui.logger();
 			if(this.currentTab){
+				this.currentTab.isActive=false;
 				this.currentTab.hide();
 			}
 			this.currentTab=tab;
+			this.currentTab.isActive=true;
 			this.currentTab.show();
 		},
 		add : function(tab){
@@ -167,6 +169,18 @@
 			var item=this.getItem(icon);
 			if(item){
 				item.enabled();
+			}
+		},
+		hide:function(icon){
+			var item=this.getItem(icon);
+			if(item){
+				item.$elem.hide();
+			}
+		},
+		show:function(icon){
+			var item=this.getItem(icon);
+			if(item){
+				item.$elem.show();
 			}
 		},
 		remove : function(tab){
