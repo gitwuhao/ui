@@ -13,7 +13,6 @@
 			if(this.config.autoCreate!=false){
 				this.create();
 			}
-			this.startTimeStamp=$.timestamp();
 		},
 		remove : function(){
 			ui.logger();
@@ -102,7 +101,7 @@
 			this.$box=$box;
 			this.$target=$target;
 
-
+			this.startTimeStamp=$.timestamp();
 		}
 	});
 
