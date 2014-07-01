@@ -17,7 +17,7 @@
 		remove : function(){
 			ui.logger();
 			var timeStamp=$.timestamp();
-			var time=1500 - (timeStamp - this.startTimeStamp);
+			var time=1000 - (timeStamp - this.startTimeStamp);
 			var me=this;
 			if(time > 0 ){
 				setTimeout(function(){
