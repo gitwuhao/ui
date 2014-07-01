@@ -1,0 +1,75 @@
+.x-ui-loading-icon-box{
+	position:relative;
+	float: left;
+	width: 128px;
+	height:128px;
+}
+
+.x-ui-loading-icon-box div{
+	position:absolute;
+	background-color: #66ccff;
+	width:20%;
+	height:20%;
+	border-radius:50%;
+	-webkit-animation-name: X-UI-LOADING-BOUNCE-CIRCULARG;
+	-webkit-animation-duration:0.72s;
+	-webkit-animation-iteration-count:infinite;
+	-webkit-transform:scale(.3);
+}
+
+.x-ui-loading-icon-box .x-ui-ball-1{
+	left:0;
+	top:40%;
+	-webkit-animation-delay:0.27s;
+}
+
+.x-ui-loading-icon-box .x-ui-ball-2{
+	left:12%;
+	top:12%;
+	-webkit-animation-delay:0.36s;
+}
+
+.x-ui-loading-icon-box .x-ui-ball-3{
+	top:0;
+	left:40%;
+	-webkit-animation-delay:0.45s;
+}
+
+.x-ui-loading-icon-box .x-ui-ball-4{
+	right:12%;
+	top:12%;
+	-webkit-animation-delay:0.54s;
+}
+
+.x-ui-loading-icon-box .x-ui-ball-5{
+	right:0;
+	top:40%;
+	-webkit-animation-delay:0.63s;
+}
+
+.x-ui-loading-icon-box .x-ui-ball-6{
+	right:12%;
+	bottom:12%;
+	-webkit-animation-delay:0.72s;
+}
+
+.x-ui-loading-icon-box .x-ui-ball-7{
+	left:40%;
+	bottom:0;
+	-webkit-animation-delay:0.81s;
+}
+
+.x-ui-loading-icon-box .x-ui-ball-8{
+	left:12%;
+	bottom:12%;
+	-webkit-animation-delay:0.9s;
+}
+
+@-webkit-keyframes X-UI-LOADING-BOUNCE-CIRCULARG{
+from{
+	-webkit-transform:scale(1);
+}
+to{
+	-webkit-transform:scale(.3);
+}
+}

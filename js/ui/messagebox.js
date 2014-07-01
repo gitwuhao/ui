@@ -266,9 +266,6 @@
 		setConfig:function(config){
 			ui.logger();
 			this.config=config;
-			
-
-		
 		}
 	});
 
