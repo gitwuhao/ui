@@ -1,6 +1,7 @@
 (function(CF,jQuery,ui){
 	ui.loading=function(config){
 		this.config = config;
+		this.ready();
 	};
 
 	
@@ -9,13 +10,39 @@
 		_name_ : 'loading',
 		ready : function(){
 			ui.logger();
-			if(this.config.autoCreate){
+			if(this.config.autoCreate!=false){
 				this.create();
 			}
+			this.startTimeStamp=$.timestamp();
 		},
 		remove : function(){
 			ui.logger();
-			this.$box.remove();
+			var timeStamp=$.timestamp();
+			var time=1000 - (timeStamp - this.startTimeStamp);
+			var me=this;
+			if(time > 0 ){
+				setTimeout(function(){
+					me.removeHandle();
+				},time);
+			}else{
+				this.removeHandle();
+			}
+		},
+		removeHandle:function(){
+			ui.logger();
+			var me=this;
+			this.$box.fadeOut('slow',function(){
+				var parent=me.$target.parent();
+				if(parent){
+					parent.css({
+						height : '',
+						overflow : ''
+					});
+				}
+				me.$box.remove();
+				me.$target.show();
+				CF.removeOwnProperty.call(me);
+			});
 		},
 		create :function(){
 			ui.logger();
@@ -37,6 +64,15 @@
 			
 			var box=$.createElement(html);
 			
+			
+			var parent=$target.parent();
+			if(parent){
+				parent.css({
+					height : parent[0].offsetHeight,
+					overflow : 'hidden'
+				});
+			}
+
 			$target.after(box);
 			
 			var $box=$(box);
@@ -45,9 +81,9 @@
 
 			var $iconBox=$box.children('.x-ui-loading-icon-box');
 
-			var height=$target.height();
+			var height=$target.outerHeight(true);
 			
-			var width=$target.width();
+			var width=$target.outerWidth(true);
 			
 			var _icon_height=$iconBox.height();
 			
@@ -60,11 +96,14 @@
 			});
 			
 			$iconBox.css({
-				top : '-' + ((height - _icon_height) / 2)  + 'px',
-				left : ((width - _icon_width) / 2)
+				top : '-' + ((height / 2 )+_icon_height)  + 'px',
+				left : (width - _icon_width) / 2
 			});
 			
 			this.$box=$box;
+			this.$target=$target;
+
+
 		}
 	});
 

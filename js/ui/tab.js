@@ -144,6 +144,9 @@
 			}
 		},
 		getTab:function(key){
+			if(!key){
+				return this.currentTab;
+			}
 			return this.items['_'+key+'_'];
 		},		
 		getItem:function(icon){
