@@ -7,7 +7,7 @@
 	height: 100%;
 	opacity: 0.1;
 	background-color: #000;
-	background: -webkit-radial-gradient(circle, #FFF, #8D8D8D);
+	background: -webkit-radial-gradient(circle, #FFF, #000);
 }
 .x-ui-loading-icon-box{
 	position:relative;
@@ -18,7 +18,7 @@
 
 .x-ui-loading-icon-box div{
 	position:absolute;
-	background-color: #66ccff;
+	background-color: #66CCFF;
 	width:20%;
 	height:20%;
 	border-radius:50%;
