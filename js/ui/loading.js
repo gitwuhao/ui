@@ -14,7 +14,8 @@
 			}
 		},
 		remove : function(){
-			
+			ui.logger();
+			this.$box.remove();
 		},
 		create :function(){
 			ui.logger();
@@ -40,17 +41,30 @@
 			
 			var $box=$(box);
 
-			var mask=$box.children('.x-ui-loading-mask');
+			var $mask=$box.children('.x-ui-loading-mask');
 
-			var iconBox=$box.children('.x-ui-loading-icon-box');
+			var $iconBox=$box.children('.x-ui-loading-icon-box');
 
 			var height=$target.height();
+			
+			var width=$target.width();
+			
+			var _icon_height=$iconBox.height();
+			
+			var _icon_width=$iconBox.width();
 
-			mask.css({
-				'margin-top':'-' + (height + height) + 'px',
+			$box.css({
+				top : '-' + height + 'px',
 				height : height,
+				width : width
 			});
-
+			
+			$iconBox.css({
+				top : '-' + ((height - _icon_height) / 2)  + 'px',
+				left : ((width - _icon_width) / 2)
+			});
+			
+			this.$box=$box;
 		}
 	});
 

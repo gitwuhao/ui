@@ -22,7 +22,8 @@
 		path+'colorpicker.js',
 		path+'undo.js',
 		path+'delicon.js',
-		path+'texteditor.js'
+		path+'texteditor.js',
+		path+'loading.js'
 	];
 
 })();
