@@ -107,7 +107,7 @@
 }
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
 
-.x-ui-progress-box,.x-ui-progress .x-ui-win-header,.x-ui-progress .x-ui-message-box,.x-ui-progress .x-ui-button-box{
+.x-ui-progress-box,.x-ui-progress .x-ui-win-header,.x-ui-progress .x-ui-message-box,.x-ui-progress .x-ui-button-box,.x-ui-progress .x-ui-win-button-box{
 	display: none;
 }
 .x-ui-progress .x-ui-progress-box{
@@ -207,7 +207,7 @@
 .x-ui-qtip .x-ui-qtip-box{
 	display: block;
 }
-.x-ui-qtip .x-ui-win-header,.x-ui-qtip .x-ui-message-box,.x-ui-qtip .x-ui-progress-box,.x-ui-qtip .x-ui-button-box{
+.x-ui-qtip .x-ui-win-header,.x-ui-qtip .x-ui-message-box,.x-ui-qtip .x-ui-progress-box,.x-ui-qtip .x-ui-button-box,.x-ui-qtip .x-ui-win-button-box{
 	display: none;
 }
 .x-ui-qtip .x-ui-win-body{

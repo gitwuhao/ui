@@ -90,13 +90,13 @@
 			
 			this.setConfig(config);
 			
-			this.$elem[0].className=this._c_window+" "+this._c_message;
+			this.$elem[0].className=this._c_window + ' ' + this._c_message + '  border-box';
 
 			var buttonValue = config.button || MessageBox.OKCANCEL;
 			
 			this.$tile.text(config.title);
 			
-			this.$icon[0].className=this._c_icon+" "+config.icon;
+			this.$icon[0].className=this._c_icon + ' ' + config.icon;
 			
 			this.$msgtext.text(config.msg);
 			
@@ -136,7 +136,7 @@
 			this.setConfig(config);
 			this.$elem[0].className=this._c_window+" "+this._c_progress;
 			this.$progressbox.html(config.html);
-			this._super_.show.call(this,config);
+			this.getSuper().show.call(this,config);
 		},
 		getQuickTip:function(){
 			ui.logger();
@@ -277,9 +277,6 @@
 
 	ui.messagebox={};
 	
-	function quickTip(context){
-	
-	};
 
 	CF.merger(ui.messagebox,MessageBox.statics,{
 		show:function(config){

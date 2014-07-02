@@ -182,8 +182,8 @@
 						button : button
 					},function(event){
 						var buttonItem=event.data.button;
-						if(buttonItem.handle){
-							buttonItem.handle(event);
+						if(buttonItem.handle && buttonItem.handle(event)==false){
+							return;
 						}
 						me.close();
 					});
