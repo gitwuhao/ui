@@ -239,8 +239,11 @@
 					var item=this[key];
 					this[key]=null;
 					delete this[key];
-					
-					if(item && item.__isUI__ && !/^\$/.test(key) && item.remove){
+					if(!item){
+
+					}else if(item._isArray_){
+						CF.removeOwnProperty.call(item);
+					}else if(item.__isUI__ && !/^\$/.test(key) && item.remove){
 						item.remove();
 					}
 				}
