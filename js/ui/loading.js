@@ -27,6 +27,25 @@
 				this.removeHandle();
 			}
 		},
+		_remove_:function(){
+			ui.logger();
+			(function($box,$target,inst){
+				$box.fadeOut(500,function(){
+					setTimeout(function(){
+						var parent=$target.parent();
+						if(parent){
+							parent.css({
+								height : '',
+								overflow : ''
+							});
+						}
+						$target.show();
+						$box.remove();
+						CF.removeOwnProperty.call(inst);
+					},100);
+				});
+			})(this.$box,this.$target,this);
+		},
 		removeHandle:function(){
 			ui.logger();
 			var $box=this.$box;
