@@ -307,6 +307,16 @@
 			this._body_overflow=$.getBody().css("overflow");
 
 			$.getBody().css("overflow","hidden");
+		},
+		remove:function(){
+			ui.logger();
+			if(this.buttons){
+				CF.removeOwnProperty.call(this.buttons);
+			}
+			if(this.icons){
+				CF.removeOwnProperty.call(this.icons);
+			}
+			this.callSuperMethod();
 		}
 	});
 	
