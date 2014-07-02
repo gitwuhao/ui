@@ -40,8 +40,8 @@
 					html.push('<div class="',config._c_button_box,'">');
 					var buttons=config.buttons;
 					for(var i=0,len=buttons.length;i<len;i++){
-						var button=buttons[i];
-						html.push('<div class="',config._c_button,' ',(button.cls||""),'">',button.label,'</div>');
+						buttons[i].xtype='button';
+						html.push(ui.getXTypeHTML(buttons[i]));
 					}
 					html.push('</div>');
 				}
@@ -146,15 +146,23 @@
 			if(this.html){
 				delete this.html;
 			}
-
+			
+			var me=this;
 			if(this.buttons){
 				var $buttonbox=$elem.children('.'+this._c_button_box);
 				var buttonList=$buttonbox.children();
 				for(var i=0,len=buttonList.length;i<len;i++){
-					this.buttons[i].$elem=$(buttonList[i]);
+					var button=ui.getXTypeItem(this.buttons[i],buttonList[i]);
+					button.$owner=this;
+					if(button.cls){
+						this.buttons[button.cls]=button;
+					}
+					this.buttons[i]=button;
+					button.onClickAfter=function(){
+						me.close();
+					};
 				}
 			}
-
 		},
 		onBindEvent:function(){
 			ui.logger();
@@ -173,24 +181,6 @@
 				});
 				icon.$elem.bindHover();
 			}
-			
-			if(this.buttons){
-				var buttons=this.buttons;
-				for(var i=0,len=buttons.length;i<len;i++){
-					var button=buttons[i];
-					button.$elem.click({
-						button : button
-					},function(event){
-						var buttonItem=event.data.button;
-						if(buttonItem.handle && buttonItem.handle(event)==false){
-							return;
-						}
-						me.close();
-					});
-					button.$elem.bindHover();
-				}
-			}
-			
 		},
 		resetOffset:function(){
 			var maxWidth=window.innerWidth;

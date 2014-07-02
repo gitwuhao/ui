@@ -13,10 +13,10 @@
 	ui.getXTypeHTML=function(config){
 		var _class,
 			xtype=config.xtype;
-		if(xtype=='splitbutton'){
-			_class=ui.splitbutton;
-		}else if(xtype=='text'){
-			_class=ui.form.text;
+		if(xtype=='text' || xtype=='date' || xtype=='checkbox' || xtype=='radio'){
+			_class=ui.form[xtype];
+		}else if(xtype){
+			_class=ui[xtype];
 		}
 		return _class.getTemplate(config);
 	};
