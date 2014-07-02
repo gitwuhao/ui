@@ -125,9 +125,7 @@
 			var iconList=$iconbar.children();
 			var iconMap={};
 			for(var i=0,len=iconList.length;i<len;i++){
-				var icon=iconList[i];
-				icon._icon_index_=i;
-				icons[i].$elem=$(icon);
+				icons[i].$elem=$(iconList[i]);
 			}
 			
 			
@@ -153,9 +151,7 @@
 				var $buttonbox=$elem.children('.'+this._c_button_box);
 				var buttonList=$buttonbox.children();
 				for(var i=0,len=buttonList.length;i<len;i++){
-					var button=buttonList[i];
-					button._button_index_=i;
-					this.buttons[i].$elem=$(button);
+					this.buttons[i].$elem=$(buttonList[i]);
 				}
 			}
 
@@ -167,8 +163,10 @@
 			var icons=this.icons;
 			for(var i=0,len=icons.length;i<len;i++){
 				var icon=icons[i];
-				icon.$elem.click(function(event){
-					var iconItem=me.icons[this._icon_index_];
+				icon.$elem.click({
+					icon : icon
+				},function(event){
+					var iconItem=event.data.icon;
 					if(iconItem.handle){
 						iconItem.handle(event);
 					}
@@ -180,8 +178,10 @@
 				var buttons=this.buttons;
 				for(var i=0,len=buttons.length;i<len;i++){
 					var button=buttons[i];
-					button.$elem.click(function(event){
-						var buttonItem=me.buttons[this._button_index_];
+					button.$elem.click({
+						button : button
+					},function(event){
+						var buttonItem=event.data.button;
 						if(buttonItem.handle){
 							buttonItem.handle(event);
 						}

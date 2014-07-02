@@ -235,9 +235,6 @@
 				top : qTop
 			});
 
-			
-
-			
 		},
 		delConfirm:function(config){
 			ui.logger();
@@ -276,9 +273,13 @@
 			instance=new MessageBox();
 		}
 		return instance;
-	}
+	};
 
 	ui.messagebox={};
+	
+	function quickTip(context){
+	
+	};
 
 	CF.merger(ui.messagebox,MessageBox.statics,{
 		show:function(config){
@@ -301,6 +302,9 @@
 		},
 		delConfirm:function(config){
 			getInstance().delConfirm(config);
+		},
+		quickTip : function(context){
+			
 		}
 	});
 
