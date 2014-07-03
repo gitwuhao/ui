@@ -25,6 +25,9 @@
 					var input=ui.form[xtype];
 					item.form=true;
 					item.cls=config._c_form_item;
+					if(config.px){
+						item.px=config.px;
+					}
 					html.push(input.getTemplate(item));
 					delete item.form;
 				}
@@ -37,6 +40,9 @@
 								'<td class="',config._c_button_box,'" >');
 					for(var i=0,len=buttons.length;i<len;i++){
 						var item=buttons[i];
+						if(config.px){
+							item.px=config.px;
+						}
 						html.push(ui.button.getTemplate(item));
 					}
 					html.push(  '</td>',	
