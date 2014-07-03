@@ -12,12 +12,30 @@
 				_c_form_item : '-form-item',
 				_c_button_box : '-button-box',
 				_c_form_label : '-form-label',
-				_c_form_label_padding : '-form-label-padding'
+				_c_form_label_padding : '-form-label-padding',
+				_c_form_table : '-form-table'
 			},
 			getTemplate: function(config){
 				ui.widget.applyCSS(config,this.css);
 				var html=['<div class="',config._c_form,' ',(config.cls||''),'">',
-							'<table>'];
+							'<form'];
+				if(config.autocomplete){	
+					html.push(' autocomplete="',config.autocomplete,'"');
+				}
+				if(config.method){	
+					html.push(' method="',config.method,'"');
+				}
+				if(config.action){	
+					html.push(' action="',config.action,'"');
+				}
+				if(config.id){	
+					html.push(' id="',config.id,'"');
+				}
+				if(config.name){	
+					html.push(' name="',config.name,'"');
+				}
+
+				html.push('><table class="',config._c_form_table,'">');
 				var items=config.items;
 				for(var i=0,len=items.length;i<len;i++){
 					var item=items[i];
@@ -49,7 +67,7 @@
 								//'<td>&nbsp;</td>',
 							  '</tr>');
 				}
-				html.push('</table></div>');
+				html.push('</table><form></div>');
 				return html.join("");
 			},
 			getFormItem : function(config,elem){
@@ -86,7 +104,8 @@
 			ui.logger();
 			this.callSuperMethod();
 			var elem=this.$elem[0];
-			var table=elem.children[0];
+			this.from=elem.children[0];
+			var table=this.from.children[0];
 			var rows=table.rows;
 			var items=this.items;
 			this.itemsMap={};
@@ -204,8 +223,13 @@
 
 				
 				if(config.label){
-					html.push('<td class="',config._c_label,'">',config.label,'：',
-							  '</td>',
+					html.push('<td class="',config._c_label,'">');
+					if($.trim(config.label)){
+						html.push(config.label,'：');
+					}else{
+						html.push('&nbsp;');
+					}
+					html.push('</td>',
 							  '<td class="',config._c_label_padding,'">');
 					if(config.required){
 						html.push('<span class="',config._c_required_icon,'">*</span>');
