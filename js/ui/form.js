@@ -42,7 +42,11 @@
 					var xtype=item.xtype||'text';
 					var input=ui.form[xtype];
 					item.form=true;
-					item.cls=config._c_form_item;
+					if(item.cls){
+						item.cls=item.cls + ' ' + config._c_form_item;
+					}else{
+						item.cls=config._c_form_item;
+					}
 					if(config.px){
 						item.px=config.px;
 					}

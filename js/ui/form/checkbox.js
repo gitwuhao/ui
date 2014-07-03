@@ -23,11 +23,16 @@
 				for(var i=0,len=items.length;i<len;i++){
 					var item=items[i];
 					item.name=config.name;
-					html.push('<div class="',config._c_checkbox_group,'">',
-							'<input type="button" class="',config._c_icon,
-								'" value="',item.value,'"/>',
-							'<span>',item.label,'</span>',
-						  '</div>');
+					html.push('<div class="',config._c_checkbox_group,' ',(item.cls||''),'"');
+					if(item.width){
+						html.push(' style="width:',item.width,'px;" ');
+					}
+					html.push('><input type="button" class="',config._c_icon,
+								'" value="',item.value,'"/>');
+					if(item.label){
+						html.push('<span>',item.label,'</span>');
+					}
+					html.push('</div>');
 				}
 				cloneConfig.html=html.join('');
 				cloneConfig.type='checkbox';
@@ -37,8 +42,6 @@
 		onRenderAfter:function(config){
 			ui.logger();
 			var elem=this.$elem;
-
-			this.$label=$("."+config._c_label+":first",elem);
 
 			var children=elem.children("td:last").children();
 
@@ -71,27 +74,33 @@
 			}
 		},
 		bindItemEvent:function(item){
-			var me=this;
-
-			this.setData(item.$input[0],item);
-			this.setData(item.$elem[0],item);
-
+			ui.logger();
+		
 			this.bindHover(item.$elem);
 			
 			item.$owner=this;
 
-			item.$input.focus(function(event){
-				var _item_=me.getData(this);
-				me.on('focus',_item_);
+			item.$input.focus({
+				item : item,
+				me : this,
+			},function(event){
+				event.data.me.on('focus',event.data.item);
 			});
 
-			item.$input.blur(function(event){
-				me.on('blur');
+			item.$input.blur({
+				item : item,
+				me : this,
+			},function(event){
+				event.data.me.on('blur');
 			});
  
-			item.$elem.click(function(event){
+			item.$elem.click({
+				item : item,
+				me : this,
+			},function(event){
+				var _item_=event.data.item;
+				var me=event.data.me;
 				if(me.isDisabled!=true){
-					var _item_=me.getData(this);
 					if(event.shiftKey){
 						me.checkedAll();
 					}else if(event.ctrlKey){
