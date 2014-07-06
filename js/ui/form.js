@@ -13,7 +13,8 @@
 				_c_button_box : '-button-box',
 				_c_form_label : '-form-label',
 				_c_form_label_padding : '-form-label-padding',
-				_c_form_table : '-form-table'
+				_c_form_table : '-form-table',
+				_c_form_item_box : '-form-item-box'
 			},
 			getTemplate: function(config){
 				ui.widget.applyCSS(config,this.css);
@@ -35,13 +36,20 @@
 					html.push(' name="',config.name,'"');
 				}
 
-				html.push('><table class="',config._c_form_table,'">');
+				html.push('>');
+				if(config.isTableLayout!=false){
+					html.push('<table class="',config._c_form_table,'">');
+				}else{
+					html.push('<div class="',config._c_form_item_box,'">');
+				}
 				var items=config.items;
 				for(var i=0,len=items.length;i<len;i++){
 					var item=items[i];
 					var xtype=item.xtype||'text';
 					var input=ui.form[xtype];
-					item.form=true;
+					if(config.isTableLayout!=false){
+						item.form=true;
+					}
 					if(item.cls){
 						item.cls=item.cls + ' ' + config._c_form_item;
 					}else{
@@ -56,10 +64,14 @@
 
 				var buttons=config.buttons;
 				if(buttons){
-					html.push('<tr>',
-								'<td class="',config._c_form_label,'">&nbsp;</td>',
-								'<td class="',config._c_form_label_padding,'">&nbsp;</td>',
-								'<td class="',config._c_button_box,'" >');
+					if(config.isTableLayout!=false){
+						html.push('<tr>',
+									'<td class="',config._c_form_label,'">&nbsp;</td>',
+									'<td class="',config._c_form_label_padding,'">&nbsp;</td>',
+									'<td class="',config._c_button_box,'" >');
+					}else{
+						html.push('<div class="',config._c_button_box,'" >');
+					}
 					for(var i=0,len=buttons.length;i<len;i++){
 						var item=buttons[i];
 						if(config.px){
@@ -67,11 +79,20 @@
 						}
 						html.push(ui.button.getTemplate(item));
 					}
-					html.push(  '</td>',	
-								//'<td>&nbsp;</td>',
-							  '</tr>');
+					if(config.isTableLayout!=false){
+						html.push(  '</td>',	
+									//'<td>&nbsp;</td>',
+								  '</tr>');
+					}else{
+						html.push('</div>');
+					}
 				}
-				html.push('</table><form></div>');
+				if(config.isTableLayout!=false){
+					html.push('</table>');
+				}else{
+					html.push('</div>');
+				}
+				html.push('<form></div>');
 				return html.join("");
 			},
 			getFormItem : function(config,elem){
@@ -109,8 +130,13 @@
 			this.callSuperMethod();
 			var elem=this.$elem[0];
 			this.from=elem.children[0];
-			var table=this.from.children[0];
-			var rows=table.rows;
+			var rows;
+			if(config.isTableLayout!=false){
+				var table=this.from.children[0];
+				rows=table.rows;
+			}else{
+				rows=this.from.children[0].children;
+			}
 			var items=this.items;
 			this.itemsMap={};
 			for(var i=0,len=items.length;i<len;i++){
@@ -118,7 +144,6 @@
 				var item=this.getClass().getFormItem(item,rows[i]);
 				item.$owner=this;
 				items[i]=item;
-
 				if(item.name){
 					this.itemsMap['_'+item.name+'_']=item;
 				}

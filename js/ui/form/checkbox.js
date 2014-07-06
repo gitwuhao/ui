@@ -43,7 +43,7 @@
 			ui.logger();
 			var elem=this.$elem;
 
-			var children=elem.children("td:last").children();
+			var children=$('.'+this._c_item_field,elem).children();
 
 			var items=this.items;
 			for(var i=0,len=items.length;i<len;i++){
