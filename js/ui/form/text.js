@@ -18,7 +18,6 @@
 			getTemplate: function(config){
 				var cloneConfig={};
 				
-				
 				CF.merger(cloneConfig,config);
 
 				ui.widget.applyCSS(config,this.css);

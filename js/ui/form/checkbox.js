@@ -43,7 +43,7 @@
 			ui.logger();
 			var elem=this.$elem;
 
-			var children=$('.'+this._c_item_field,elem).children();
+			var children=$('.'+this._c_checkbox_group,elem);
 
 			var items=this.items;
 			for(var i=0,len=items.length;i<len;i++){
@@ -52,7 +52,6 @@
 				item.$input=item.$elem.children("input:first");
 			}
 
-			
 			if(this.isDisabled){
 				this.disabled();
 			}

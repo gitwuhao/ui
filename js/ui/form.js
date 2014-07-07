@@ -236,7 +236,14 @@
 				ui.widget.applyCSS(config,this.css);
 				var html=[];
 				if(!config.form){
-					html.push('<div class="',config.px,'-',config.type,' ',(config.cls||''),'"');
+					html.push('<div class="',config.px,'-',config.type,' ',config._c_item_field,' ',(config.cls||''),'" style="');
+
+					if(config.width){
+						html.push('width:',config.width,';');
+					}
+					
+					html.push('"');
+
 					if(config.title){
 						html.push(' title="',config.title,'"');
 					}
