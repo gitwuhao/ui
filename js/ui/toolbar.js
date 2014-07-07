@@ -13,7 +13,8 @@
 				_c_button_box: '-toolbar-button-box',
 				_c_popup_box: '-toolbar-popup-box',
 				_c_separator: '-separator',
-				_c_breakline: '-breakline'
+				_c_breakline: '-breakline',
+				_c_text: '-item-text'
 			},
 			getTemplate: function(config){
 				ui.widget.applyCSS(config,this.css);
@@ -27,6 +28,8 @@
 						html.push('<div class="',config._c_separator,'"></div>');
 					}else if(item=='||'){
 						html.push('<div class="',config._c_breakline,'"></div>');
+					}else if(item._isString_){
+						html.push('<div class="',config._c_text,'">',item,'</div>');
 					}else{
 						if(!item.xtype){
 							item.xtype='button';
