@@ -28,15 +28,10 @@
 					}else if(item=='||'){
 						html.push('<div class="',config._c_breakline,'"></div>');
 					}else{
-						var xtype=item.xtype;
-						var _class;
-						if(xtype=='splitbutton'){
-							_class=ui.splitbutton;
-						}else if(xtype=='text'){
-							_class=ui.form.text;
-						}else{
-							_class=ui.button;
+						if(!item.xtype){
+							item.xtype='button';
 						}
+						var xtype=item.xtype;
 
 						if(config.labelVisible==false && xtype!='text' && item.label){
 							item.title=item.label;
@@ -46,7 +41,7 @@
 						if(config.px){
 							item.px=config.px;
 						}
-						html.push(_class.getTemplate(item));
+						html.push(ui.getXTypeHTML(item));
 					}
 				}
 				
@@ -54,23 +49,6 @@
 				'<div class="',config._c_popup_box,'"></div>',
 				'</div>');
 				return html.join('');
-			},
-			getButtonItem : function(config,elem){
-				var item,_class,
-					xtype=config.xtype;
-
-				config.elem=elem;
-				config.autoRender=false;
-				delete config.xtype;
-				if(xtype=='splitbutton'){
-					item=new ui.splitbutton(config);
-				}else if(xtype=='text'){
-					item=new ui.form.text(config);
-				}else{
-					item=new ui.button(config);
-				}
-				item.initRender();
-				return item;
 			}
 		},
 		//buttons : null,
@@ -90,7 +68,7 @@
 			for(var i=0,len=items.length;i<len;i++){
 				var item=items[i];
 				if(typeof item!="string"){
-					items[i]=this.getClass().getButtonItem(item,children[i]);
+					items[i]=ui.getXTypeItem(item,children[i]);
 					items[i].$owner=this;
 					var icon=item.cls;
 					if(icon){
