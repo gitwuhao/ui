@@ -74,7 +74,7 @@ window.examples.form=function(){
 				value : '1'
 			},{
 				label:'女',
-				value:'1'
+				value:'2'
 
 			}]
 		}],
