@@ -24,16 +24,18 @@
 			});
 		},
 */
-		enterToChange:function(item){
+		enterToChange : function(item){
 			item.addEventListener('textkeydown',function(event){
 				 if(event.keyCode==13){
 					this.$text.blur();
 				 }
 			});
-
+			
+			/*
 			item.addEventListener('textblur',function(event){
 				this.on('change');
 			});
+			*/
 
 		},
 		spin:function(item){
