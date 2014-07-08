@@ -60,9 +60,6 @@
 
 			this.$text.blur(function(event){
 				if(me.on('blur')){
-					if(this.value!=me.value){
-						me.on('change');
-					}
 					if(me.readonly==true){
 						this.readOnly=false;
 					}
@@ -136,10 +133,11 @@
 		},
 		onSelected:function(date){
 			ui.logger(this);
-			if(date!=this.value){
-				this.on('change',date,this.value);
-			}
+			var value=this.value;
 			this.setValue(date);
+			if(value!=this.value  && this.value){
+				this.on('change',this.value);
+			}
 		},
 		onBlur:function(){
 			ui.logger(this);

@@ -69,9 +69,6 @@
 
 			this.$text.blur(function(event){
 				if(me.on('blur')){
-					if(this.value!=me.value){
-						me.on('change');
-					}
 					if(me.readonly==true){
 						this.readOnly=false;
 					}
@@ -143,12 +140,13 @@
 		},
 		onSelected:function(item){
 			ui.logger(this);
-			if(item!=this.selectedItem){
-				this.on('change',item,this.selectedItem);
-			}
+			var selectedItem=this.selectedItem;
+			this.selectedItem=item;
 			this.setValue(item.value);
 			this.onFocusAfter();
-			this.selectedItem=item;
+			if(selectedItem!=this.selectedItem){
+				this.on('change',this.selectedItem);
+			}
 		},
 		onArrowClick: function(event){
 			ui.logger(this);

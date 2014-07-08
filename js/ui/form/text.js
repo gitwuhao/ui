@@ -154,11 +154,11 @@
 		},
 		onBlur:function(){
 			ui.logger(this);
-			var value=this.$text.val();
-			if(value!=this.value){
-				this.on('change',value,this.value);
+			var value=this.value;
+			this.setValue(this.$text.val());
+			if(value!=this.value && this.value){
+				this.on('change',this.value);
 			}
-			this.setValue(value);
 		},
 		setValue:function(value){
 			ui.logger(this);

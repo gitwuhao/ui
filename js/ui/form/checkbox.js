@@ -150,21 +150,23 @@
 		},
 		onUnChecked:function(item){
 			ui.logger(this);
-			if(item.checked!=false){
-				this.on('change','unchecked',item);
-			}
+			var checked=item.checked;
 			item.checked=false;
 			item.$elem.removeClass("checked");
 			item.$input.attr("name","");
+			if(checked!=false){
+				this.on('change',item);
+			}
 		},
 		onChecked:function(item){
 			ui.logger(this);
-			if(item.checked!=true){
-				this.on('change','checked',item);
-			}
+			var checked=item.checked;
 			item.checked=true;
 			item.$elem.addClass("checked");
 			item.$input.attr("name",item.name);
+			if(checked!=true){
+				this.on('change',item);
+			}
 		},
 		checkedAll : function(){
 			ui.logger(this);
