@@ -50,12 +50,16 @@
 		$.data(item,this._owner_name_,data);
 	
 	};
-	ui.logger=function(){
+	
+	ui.logger=function(ref){
 		var caller,
+			_owner_,
 			arg;
 		caller=arguments.callee.caller;
 		arg=caller.arguments;
-		CF.logger(caller,arg);
+		_owner_=arguments.callee.caller._owner_;
+		callerName=ref._owner_name_+'::'+caller._name_;
+		CF.logger(callerName,arg);
 	};
 
 	ui.getData=function(item){
@@ -66,7 +70,7 @@
 
 	ui.extend=function(){
 		var _prototype=CF.extend.apply(this,arguments);
-		
+
 		_class_map_[_prototype._owner_name_]=_prototype.getClass();
 		
 		return _prototype;
@@ -161,7 +165,7 @@
 			this.isRender=true;
 		},
 		onRender : function(config){
-			ui.logger();
+			ui.logger(this);
 			
 			if(this.elem){
 				this.$elem=$(this.elem);
@@ -208,7 +212,7 @@
 			});
 		},
 		remove:function(){
-			ui.logger();
+			ui.logger(this);
 			var item=this.item;
 			if(item && item.remove){
 				item.remove();
@@ -251,13 +255,16 @@
 		}
 	};
 
+
+	CF.extendEventListener(ui.widget);
+
+	
 	ui.widget._owner_name_=ui.widget._type_+"."+ui.widget._name_;
 
 	ui.setOwner(ui.widget,ui.widget);
 
 	delete ui.widget._owner_name_;
 
-	CF.extendEventListener(ui.widget);
 
 	window.ui=ui;
 

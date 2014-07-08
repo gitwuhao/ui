@@ -9,13 +9,13 @@
 		_type_:'ui',
 		_name_ : 'loading',
 		ready : function(){
-			ui.logger();
+			ui.logger(this);
 			if(this.config.autoCreate!=false){
 				this.create();
 			}
 		},
 		remove : function(){
-			ui.logger();
+			ui.logger(this);
 			var timeStamp=$.timestamp();
 			var time=1000 - (timeStamp - this.startTimeStamp);
 			var me=this;
@@ -28,7 +28,7 @@
 			}
 		},
 		_remove_:function(){
-			ui.logger();
+			ui.logger(this);
 			(function($box,$target,inst){
 				$box.fadeOut(500,function(){
 					setTimeout(function(){
@@ -47,7 +47,7 @@
 			})(this.$box,this.$target,this);
 		},
 		removeHandle:function(){
-			ui.logger();
+			ui.logger(this);
 			var $box=this.$box;
 			var $target=this.$target;
 			var parent=$target.parent();
@@ -62,7 +62,7 @@
 			CF.removeOwnProperty.call(this);
 		},
 		create :function(){
-			ui.logger();
+			ui.logger(this);
 			var target=this.config.target;
 			var $target=$(target);
 			var html=['<div class="x-ui-loading-box">',

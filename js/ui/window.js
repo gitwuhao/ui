@@ -76,7 +76,7 @@
 			}
 		},
 		onRenderBefore:function(config){
-			ui.logger();
+			ui.logger(this);
 			var me=this;
 			if(!config.icons){
 				config.icons=[];
@@ -113,7 +113,7 @@
 			this.$mask=ui.window.getMask();
 		},
 		onRenderAfter:function(config){
-			ui.logger();
+			ui.logger(this);
 			var $elem=this.$elem;
 
 			var $header=$elem.children('.'+this._c_header);
@@ -165,7 +165,7 @@
 			}
 		},
 		onBindEvent:function(){
-			ui.logger();
+			ui.logger(this);
 			var me=this;
 		
 			var icons=this.icons;
@@ -203,7 +203,7 @@
 			});
 		},
 		show : function(){
-			ui.logger();
+			ui.logger(this);
 			if(this.item && !this.item.__isUI__){
 				this.item.render=this.$body[0];
 				if(this.item.xtype=='form'){
@@ -246,11 +246,11 @@
 		
 		},
 		close : function(){
-			ui.logger();
+			ui.logger(this);
 			this.on("close");
 		},
 		onClose:function(){
-			ui.logger();
+			ui.logger(this);
 			//this.tirgger('onclose')
 			this.$elem.hide();
 			this.$mask.hide();
@@ -258,11 +258,11 @@
 			ui.window.resetBodyScroll();
 		},
 		onCloseAfter:function(){
-			ui.logger();
+			ui.logger(this);
 			//this.tirgger('oncloseafter')
 		},
 		restore : function(){
-			ui.logger();
+			ui.logger(this);
 			
 			this.$elem.offset(this._original_offset);
 
@@ -277,7 +277,7 @@
 			$.getBody().css("overflow",this._body_overflow);
 		},
 		maximize : function(event){
-			ui.logger();
+			ui.logger(this);
 			var maxWidth=window.innerWidth;
 			var maxHeight=window.innerHeight;
 

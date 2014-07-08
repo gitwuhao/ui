@@ -77,7 +77,7 @@
 			}
 		},
 		onRenderAfter:function(config){
-			ui.logger();
+			ui.logger(this);
 			var elem=this.$elem;
 			
 			this.$label=$("."+config._c_label+":first",elem);
@@ -93,23 +93,22 @@
 			}
 		},
 		onBindEvent:function(){
-			ui.logger();
+			ui.logger(this);
 			var me=this;
 
 			this.$label.mousedown(function(event){
-				me.on('focus');
+				me.on('focus',event,this);
 				event.stopBubble(me);
 			});
 
 			this.$text.focus(function(event){
-				if(me.on('focus')){
+				if(me.on('focus',event,this)){
 					me.trigger("textfocus",event);
 				}
 			});
 
 			this.$text.blur(function(event){
-				if(me.on('blur')){
-					me.setValue(this.value);
+				if(me.on('blur',event,this)){
 					me.trigger("textblur",event);
 				}
 			});
@@ -144,7 +143,7 @@
 			this.bindHover(this.$elem);
 		},
 		focus : function(){
-			ui.logger();
+			ui.logger(this);
 			this.$text.focus();
 		},
 		onDisabled:function(){
@@ -152,6 +151,19 @@
 		},
 		onEnabled:function(){
 			this.$text[0].disabled=false;
+		},
+		onBlur:function(){
+			ui.logger(this);
+			var value=this.$text.val();
+			if(value!=this.value){
+				this.on('change',value,this.value);
+			}
+			this.setValue(value);
+		},
+		setValue:function(value){
+			ui.logger(this);
+			this.callSuperMethod();
+			this.$text.val(this.value);
 		}
 	});
 	

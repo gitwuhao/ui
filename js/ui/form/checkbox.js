@@ -40,7 +40,7 @@
 			}
 		},
 		onRenderAfter:function(config){
-			ui.logger();
+			ui.logger(this);
 			var elem=this.$elem;
 
 			var children=$('.'+this._c_checkbox_group,elem);
@@ -58,7 +58,7 @@
 
 		},
 		onBindEvent:function(){
-			ui.logger();
+			ui.logger(this);
 			var me=this;
 			var items=this.items;
 
@@ -73,7 +73,7 @@
 			}
 		},
 		bindItemEvent:function(item){
-			ui.logger();
+			ui.logger(this);
 		
 			this.bindHover(item.$elem);
 			
@@ -90,7 +90,7 @@
 				item : item,
 				me : this,
 			},function(event){
-				event.data.me.on('blur');
+				event.data.me.on('blur',event.data.item);
 			});
  
 			item.$elem.click({
@@ -115,7 +115,7 @@
 			});
 		},
 		focus : function(item){
-			ui.logger();
+			ui.logger(this);
 			if(item){
 				item.$input.focus();
 			}
@@ -138,7 +138,7 @@
 			this.isFocus=false;
 			this.currentItem=null;
 		},
-		checked:function(item){
+		checked : function(item){
 			if(!item){
 				item=this.items[0];
 			}
@@ -149,22 +149,32 @@
 			}
 		},
 		onUnChecked:function(item){
+			ui.logger(this);
+			if(item.checked!=false){
+				this.on('change','unchecked',item);
+			}
 			item.checked=false;
 			item.$elem.removeClass("checked");
 			item.$input.attr("name","");
 		},
 		onChecked:function(item){
+			ui.logger(this);
+			if(item.checked!=true){
+				this.on('change','checked',item);
+			}
 			item.checked=true;
 			item.$elem.addClass("checked");
 			item.$input.attr("name",item.name);
 		},
 		checkedAll : function(){
+			ui.logger(this);
 			var items=this.items;
 			for(var i=0,len=items.length;i<len;i++){
 				this.on("checked",items[i]);
 			}
 		},
 		unCheckedAll : function(){
+			ui.logger(this);
 			var items=this.items;
 			for(var i=0,len=items.length;i<len;i++){
 				this.on("unChecked",items[i]);
@@ -199,6 +209,21 @@
 				}
 			}
 			return values;
+		},
+		setValue:function(values){
+			ui.logger(this);
+			this.callSuperMethod();
+			values=values||[];
+			for(var i=0,len=this.items.length;i<len;i++){
+				var item=this.items[i];
+				for(var n=0,nlen=values.length;n<nlen;n++){
+					if(item.value==values[n]){
+						this.on("checked",item);
+					}else{
+						this.on("unChecked",item);
+					}
+				}
+			}
 		}
 	});
 

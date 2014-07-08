@@ -12,7 +12,7 @@
 			}
 		},
 		onRenderBefore:function(config){
-			ui.logger();
+			ui.logger(this);
 			var me=this;
 			var calendarConfig={};
 			
@@ -35,7 +35,7 @@
 			this.calendarConfig=calendarConfig;
 		},
 		onRender:function(config){
-			ui.logger();
+			ui.logger(this);
 			this.callSuperMethod();
 			if(this.width || this.height){
 				this.calendarConfig.autoSize=true;
@@ -49,11 +49,11 @@
 			delete this.calendarConfig;
 		},
 		onBindEvent:function(){
-			ui.logger();
+			ui.logger(this);
 			this.callSuperMethod();
 		},
 		onSelected:function(date){
-			ui.logger();
+			ui.logger(this);
 		}
 	});
 

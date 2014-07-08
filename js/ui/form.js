@@ -126,7 +126,7 @@
 			}
 		},
 		onRender:function(config){
-			ui.logger();
+			ui.logger(this);
 			this.callSuperMethod();
 			var elem=this.$elem[0];
 			this.from=elem.children[0];
@@ -160,7 +160,7 @@
 			}
 		},
 		onBindEvent:function(){
-			ui.logger();
+			ui.logger(this);
 		},
 		getItem:function(name){
 			return this.itemsMap['_'+name+'_'];
@@ -294,63 +294,59 @@
 		setLabel:function(label){
 			this.$label.text(label+"：");
 		},
-		setValue:function(value){
-			this.value=value;
-			this.trigger("setvalue",value);
-			this.$text.val(this.value);
-		},
 		onBindEventAfter:function(){
-			ui.logger();
+			ui.logger(this);
 			if(this.vtype){
 				ui.form.vtypes.register(this);
 			}
 		},
-		setData:function(elem,data){
-			$.data(elem,"_"+this.name+"_data_",data);
-		},	
-		getData:function(elem){
-			return $.data(elem,"_"+this.name+"_data_");
+		setValue:function(value){
+			ui.logger(this);
+			var oldValue=this.value;
+			this.value=value;
+			this.trigger("setvalue",this.value,oldValue);
 		},
 		getValue:function(){
-			return this.$text.val();
+			ui.logger(this);
+			return this.value;
 		},
 		blur : CF.emptyFunction,
 		onBlurBefore : function(){
-			ui.logger();
+			ui.logger(this);
 			if(this.isDisabled==true || this.isFocus==false){
 				return false;
 			}
 		},
 		onBlur : CF.emptyFunction,
 		onBlurAfter : function(){
-			ui.logger();
+			ui.logger(this);
 			this.$elem.removeClass("selected");
 			this.isFocus=false;
 		},
 		focus : function(){
-			ui.logger();
+			ui.logger(this);
 			this.on("focus");
 		},
 		onFocusBefore : function(){
-			ui.logger();
+			ui.logger(this);
 			if(this.isDisabled==true || this.isFocus){
 				return false;
 			}
 		},
 		onFocus : CF.emptyFunction,
 		onFocusAfter : function(){
-			ui.logger();
+			ui.logger(this);
 			ui.form.field.setActive(this);
 			this.$elem.removeClass("hover");
 			this.$elem.addClass("selected");
 			this.isFocus=true;
 		},
 		disabled : function(){
-			ui.logger();
+			ui.logger(this);
 			this.on("disabled");
 		},
 		onDisabledBefore : function(){
-			ui.logger();
+			ui.logger(this);
 			if(this.isDisabled==true){
 				return false;
 			}
@@ -363,11 +359,11 @@
 		onDisabled : CF.emptyFunction,
 		onDisabledAfter : CF.emptyFunction,
 		enabled : function(){
-			ui.logger();
+			ui.logger(this);
 			this.on("enabled");
 		},
 		onEnabledBefore:function(){
-			ui.logger();
+			ui.logger(this);
 			if(this.isDisabled==false){
 				return false;
 			}
@@ -377,9 +373,12 @@
 		onEnabled : CF.emptyFunction,
 		onEnabledAfter : CF.emptyFunction,
 		remove:function(){
-			ui.logger();
+			ui.logger(this);
 			ui.form.field.removeItem(this);
 			this.callSuperMethod();
+		},
+		onChange :function(){
+			ui.logger(this);
 		}
 	});
 

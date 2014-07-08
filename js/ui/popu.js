@@ -38,7 +38,7 @@
 				popu.setOffset(left,top);
 			},
 			setCurrentPopu : function(popu){
-				ui.logger();
+				ui.logger(this);
 				if(this.currentPopu && this.currentPopu!=popu){
 					this.currentPopu.on("hide");
 				}
@@ -46,14 +46,14 @@
 				this.initEventListener();
 			},
 			removeCurrentPopu:function(){
-				ui.logger();
+				ui.logger(this);
 				if(this.currentPopu){
 					this.currentPopu.on("hide");
 				}
 				this.currentPopu=null;
 			},
 			removePopu:function(popu){
-				ui.logger();
+				ui.logger(this);
 				if(popu==this.currentPopu){
 					this.currentPopu=null;
 				}
@@ -83,11 +83,11 @@
 			}
 		},
 		onRenderBefore:function(config){
-			ui.logger();
+			ui.logger(this);
 			config.html=this.getClass().getTemplate(config);
 		},
 		onRender:function(config){
-			ui.logger();
+			ui.logger(this);
 			config.boxcls=config.px+"-"+this._name_+"-popu";
 			var div=$.createElement(ui.popu.getTemplate(config));
 			if(this.$render){
@@ -123,7 +123,7 @@
 			}
 		},
 		onBindEvent:function(){
-			ui.logger();
+			ui.logger(this);
 			var me=this;
 			this.$elem.mousedown(function(event){
 				if(/^input$/i.test(event.target.tagName)){
@@ -134,7 +134,7 @@
 			});
 		},
 		resetOffset:function(){
-			ui.logger();
+			ui.logger(this);
 			if(this.$offsetElement){
 				ui.popu.setOffset({
 					popu : this,
@@ -145,28 +145,28 @@
 			}
 		},
 		onHideBefore : function(){
-			ui.logger();
+			ui.logger(this);
 			if(this.isHide==true){
 				return false;
 			}
 		},
 		onHide : function(){
-			ui.logger();
+			ui.logger(this);
 			this.isHide=true;
 			this.$elem.hide();
 		},
 		onHideAfter : function(){
-			ui.logger();
+			ui.logger(this);
 			ui.popu.removeCurrentPopu(this);
 		},
 		onShowBefore:function(){
-			ui.logger();
+			ui.logger(this);
 			if(this.isHide==false){
 				return false;
 			}
 		},
 		onShow :function(){
-			ui.logger();
+			ui.logger(this);
 			if(this.autoSetOffset!=false){
 				this.resetOffset();
 			}
@@ -175,11 +175,11 @@
 			this.lastShowTimestamp=$.timestamp();
 		},
 		onShowAfter:function(){
-			ui.logger();
+			ui.logger(this);
 			ui.popu.setCurrentPopu(this);
 		},
 		show : function(){
-			ui.logger();
+			ui.logger(this);
 			if(this.timeOutId){
 				clearTimeout(this.timeOutId);
 				this.timeOutId=null;
@@ -190,7 +190,7 @@
 			this.on("show");
 		},
 		hide : function(){
-			ui.logger();
+			ui.logger(this);
 			if(this.timeOutId || this.isHide==true){
 				return;
 			}
@@ -201,7 +201,7 @@
 			},500);
 		},
 		toggle : function(){
-			ui.logger();
+			ui.logger(this);
 			if(this.isHide==false){
 				this.on("hide");
 			}else{
@@ -209,14 +209,14 @@
 			}
 		},
 		setOffset : function(left,top){
-			ui.logger();
+			ui.logger(this);
 			this.$elem.css({
 				left : left,
 				top : top
 			});
 		},
 		remove:function(){
-			ui.logger();
+			ui.logger(this);
 			ui.popu.removePopu(this);
 			this.callSuperMethod();
 		}

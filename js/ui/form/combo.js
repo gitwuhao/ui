@@ -25,7 +25,7 @@
 			}
 		},
 		onRenderAfter:function(config){
-			ui.logger();
+			ui.logger(this);
 			var elem=this.$elem;
 			
 			this.$label=$("."+config._c_label+":first",elem);
@@ -51,7 +51,7 @@
 			}
 		},
 		onBindEvent:function(){
-			ui.logger();
+			ui.logger(this);
 			var me=this;
 
 			this.$label.mousedown(function(event){
@@ -68,8 +68,13 @@
 			});
 
 			this.$text.blur(function(event){
-				if(me.on('blur') && me.readonly==true){
-					this.readOnly=false;
+				if(me.on('blur')){
+					if(this.value!=me.value){
+						me.on('change');
+					}
+					if(me.readonly==true){
+						this.readOnly=false;
+					}
 				}
 			});
 
@@ -97,27 +102,21 @@
 			}
 		},
 		focus:function(){
-			ui.logger();
+			ui.logger(this);
 			if(this.on('focus')==false){
 				return;
 			}
 			this.callSuperMethod();
 		},
 		onBlur:function(){
-			ui.logger();
+			ui.logger(this);
 			var me=this;
 			if(this.list){
 				this.list.on("hide");
 			}
 		},
-		onSelected:function(item){
-			this.$text.val(item.label);
-			if(this.$value){
-				this.$value.val(item.value||"");
-			}
-		},
 		toggleList:function(){
-			ui.logger();
+			ui.logger(this);
 			var me=this;
 			if(this.items && !this.list){
 				var list={
@@ -133,8 +132,7 @@
 					$offsetElement : this.$combo,
 					$owner:this,
 					onItemSelectedAfter : function(item){
-						me.on("selected",item);
-						me.onFocusAfter();
+						me.on('selected',item);
 					}
 				});
 				this.list=new ComboList(listConfig);
@@ -143,12 +141,21 @@
 				this.list.toggle();
 			}
 		},
+		onSelected:function(item){
+			ui.logger(this);
+			if(item!=this.selectedItem){
+				this.on('change',item,this.selectedItem);
+			}
+			this.setValue(item.value);
+			this.onFocusAfter();
+			this.selectedItem=item;
+		},
 		onArrowClick: function(event){
-			ui.logger();
+			ui.logger(this);
 			this.toggleList();
 		},
 		remove:function(){
-			ui.logger();
+			ui.logger(this);
 			if(this.list && this.list.remove){
 				this.list.remove();
 			}
@@ -159,6 +166,18 @@
 		},
 		onEnabled:function(){
 			this.$text[0].disabled=false;
+		},
+		setValue:function(value){
+			ui.logger(this);
+			this.callSuperMethod();
+			for(var i=0,len=this.items.length;i<len;i++){
+				var item=this.items[i];
+				if(item.value==value){
+					this.$text.val(item.label);
+					this.$value.val(this.value);
+					return;
+				}
+			}
 		}
 	});
 
@@ -199,18 +218,18 @@
 			align:'trbl'
 		},
 		onRenderBefore:function(config){
-			ui.logger();
+			ui.logger(this);
 			config.html=this.getClass().getTemplate(config);
 		},
 		onRender:function(config){
-			ui.logger();
+			ui.logger(this);
 			this.callSuperMethod();
 			var $elem=this.$elem;
 			this.$list=$elem.children("."+config._c_combo_list);
 			this.$listitem=this.$list.children("li");
 		},
 		onBindEvent:function(){
-			ui.logger();
+			ui.logger(this);
 			this.callSuperMethod();
 			var me=this;
 			var items=this.items;
@@ -233,11 +252,11 @@
 			
 		},
 		onItemSelected:function(item){
-			ui.logger();
+			ui.logger(this);
 			this.on("hide");
 		},
 		remove:function(){
-			ui.logger();
+			ui.logger(this);
 			ui.popu.removeCurrentPopu(this);
 			this.callSuperMethod();
 		}

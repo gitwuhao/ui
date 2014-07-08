@@ -72,13 +72,13 @@
 			}
 		},
 		onRenderAfter:function(config){
-			ui.logger();
+			ui.logger(this);
 			var $elem=this.$elem;
 			this.$menu=$elem.children("."+config._c_menu);
 			this.$menuitem=this.$menu.children("li");
 		},
 		onBindEvent:function(){
-			ui.logger();
+			ui.logger(this);
 			
 			this.callSuperMethod();
 
@@ -134,36 +134,36 @@
 			return this.items['_'+name+'_'];
 		},
 		onSubMenuMouseOver:function(event){
-			ui.logger();
+			ui.logger(this);
 			this.triggerSubMenuHide();
 			this.parentMenu.show();
 			this.show();
 		},
 		onMenuMouseOver:function(event){
-			ui.logger();
+			ui.logger(this);
 			this.triggerSubMenuHide();
 			this.show();
 		},
 		onSubMenuShow:function(menu){
-			ui.logger();
+			ui.logger(this);
 			this.triggerSubMenuHide();
 			this.subMenu=menu;
 			menu.resetOffset();
 			menu.show();
 		},
 		onShowAfter:function(){
-			ui.logger();
+			ui.logger(this);
 			if(!this.parentMenu){
 				this.callSuperMethod();
 			}
 		},
 		onHide:function(){
-			ui.logger();
+			ui.logger(this);
 			this.triggerSubMenuHide();
 			this.callSuperMethod();
 		},
 		bindSubMenuTrigger:function(item){
-			ui.logger();
+			ui.logger(this);
 			var me=this;
 			item.$elem.hover(function(event){
 				var itemData=me.getMenuItemData(this);
@@ -182,7 +182,7 @@
 			});
 		},		
 		setOffset : function(left,top){
-			ui.logger();
+			ui.logger(this);
 			if(left==0 && top==0){
 				this.hide();
 				//console.info("offset:["+left+","+top+"]");
@@ -212,30 +212,30 @@
 			return menu;
 		},
 		onItemClick:function(){
-			ui.logger();
+			ui.logger(this);
 			this.triggerParentMenuHide();
 			this.on("hide");
 		},
 		triggerParentMenuHide:function(){
-			ui.logger();
+			ui.logger(this);
 			if(this.parentMenu){
 				this.parentMenu.on("hide");
 				this.parentMenu.triggerParentMenuHide();
 			}
 		},
 		triggerSubMenuHide:function(){
-			ui.logger();
+			ui.logger(this);
 			if(this.subMenu){
 				this.subMenu.on("hide");
 				this.subMenu.triggerSubMenuHide();
 			}
 		},
 		setMenuItemData:function(item){
-			ui.logger();
+			ui.logger(this);
 			item.$elem.data("_menu_item_data_",item);
 		},
 		getMenuItemData:function(elem){
-			ui.logger();
+			ui.logger(this);
 			var data=$.data(elem,"_menu_item_data_");
 			if(data){
 				return data;

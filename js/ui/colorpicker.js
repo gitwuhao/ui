@@ -38,10 +38,10 @@ For usage and examples: colpick.com/plugin
 			}
 		},
 		onRenderBefore:function(config){
-			ui.logger();
+			ui.logger(this);
 		},
 		onRenderAfter : function(config){
-			ui.logger();
+			ui.logger(this);
 			var me=this;
 
 			colpick.init.call(this.$elem,{
@@ -75,14 +75,14 @@ For usage and examples: colpick.com/plugin
 			return this.$hexField.val();
 		},
 		onChange:function(l){
-			ui.logger();
+			ui.logger(this);
 			if(this.config && this.config.onChange){
 				this.config.onChange(this.color);
 				this.config.color=this.color;
 			}
 		},
 		onSubmit:function(){
-			ui.logger();
+			ui.logger(this);
 			if(this.config && this.config.onSubmit){
 				this.config.onSubmit(this.color);
 				this.config.color=this.color;
@@ -90,7 +90,7 @@ For usage and examples: colpick.com/plugin
 		},
 		//rgbhex,full,hex
 		setLayout:function(layout){
-			ui.logger();
+			ui.logger(this);
 			var colorpicker=this.$colpick[0];
 			if(!layout){
 				layout="hex";
@@ -99,11 +99,11 @@ For usage and examples: colpick.com/plugin
 		},
 		/*FFFFFF*/
 		setColor:function(color){
-			ui.logger();
+			ui.logger(this);
 			colpick.setColor.call(this.$elem,color);
 		},
 		show:function(config){
-			ui.logger();
+			ui.logger(this);
 			this.autoSetOffset=true;
 			this.align=config.align;
 			this.$offsetElement=config.$offsetElement;
@@ -124,25 +124,25 @@ For usage and examples: colpick.com/plugin
 			
 		},
 		onShowAfter:function(){
-			ui.logger();
+			ui.logger(this);
 			this.callSuperMethod();
 			if(this.config){
 				this.config.isHide=false;
 			}
 		},
 		hide:function(){
-			ui.logger();
+			ui.logger(this);
 			this.on("hide");
 		},
 		onHideAfter : function(){
-			ui.logger();
+			ui.logger(this);
 			this.callSuperMethod();
 			if(this.config){
 				this.config.isHide=true;
 			}
 		},
 		toggle : function(config){
-			ui.logger();
+			ui.logger(this);
 			if(this.config==config && config.isHide==false){
 				this.hide();
 				return;

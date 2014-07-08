@@ -31,7 +31,7 @@
 			}
 		},
 		onRenderAfter:function(){
-			ui.logger();
+			ui.logger(this);
 			var $elem=this.$elem;
 			this.$button=$elem;
 			
@@ -51,7 +51,7 @@
 			this.bindHover(this.$elem);
 		},
 		onClick : function(event){
-			ui.logger();
+			ui.logger(this);
 		}
 	});
 

@@ -65,7 +65,7 @@
 			}
 		},
 		onRenderAfter:function(config){
-			ui.logger();
+			ui.logger(this);
 			var $tabpanel=this.$elem;
 			this.$tabbarbox=$tabpanel.children('.'+this._c_tabbar_box);
 			this.$tabviewbox=$tabpanel.children('.'+this._c_tabview_box);
@@ -101,7 +101,7 @@
 
 		},
 		onBindEvent:function(){
-			ui.logger();
+			ui.logger(this);
 			var tagList=this.$tabbarbox.children();
 			var tabViewList=this.$tabviewbox.children();
 			var items=this.items;
@@ -112,7 +112,7 @@
 			}
 		},
 		setCurrentTab : function(tab){
-			ui.logger();
+			ui.logger(this);
 			if(this.currentTab){
 				this.currentTab.isActive=false;
 				this.currentTab.hide();
@@ -187,7 +187,7 @@
 			}
 		},
 		remove : function(tab){
-			ui.logger();
+			ui.logger(this);
 			var items=this.items;
 			if(tab){
 				delete items[tab.index];
@@ -241,7 +241,7 @@
 			})()
 		},
 		onRender : function(config){
-			ui.logger();
+			ui.logger(this);
 			this.index=this.getClass().getTabIndex();
 
 			var $tabbarbox=this.$tabbarbox;
@@ -287,7 +287,7 @@
 			delete this.src;
 		},
 		onBindEvent:function(){
-			ui.logger();
+			ui.logger(this);
 
 			this.$tag.bindHover();
 
@@ -300,26 +300,26 @@
 
 		},
 		hide:function(){
-			ui.logger();
+			ui.logger(this);
 			this.on("hide");
 		},
 		show:function(){
-			ui.logger();
+			ui.logger(this);
 			this.on("show");
 		},
 		onHide:function(){
-			ui.logger();
+			ui.logger(this);
 			this.$tabview.hide();
 			this.$tag.removeClass("selected");
 		},
 		onShow:function(){
-			ui.logger();
+			ui.logger(this);
 			this.onRenderTabView();
 			this.$tabview.show();
 			this.$tag.addClass("selected");
 		},
 		remove:function(){
-			ui.logger();
+			ui.logger(this);
 			this.$tag.remove();
 			this.$tabview.remove();
 			this.callSuperMethod();

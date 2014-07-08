@@ -23,7 +23,7 @@
 			}
 		},
 		onRenderAfter:function(config){
-			ui.logger();
+			ui.logger(this);
 			var elem=this.$elem;
 			
 			this.$label=$("."+config._c_label+":first",elem);
@@ -42,7 +42,7 @@
 			}
 		},
 		onBindEvent:function(){
-			ui.logger();
+			ui.logger(this);
 			var me=this;
 
 			this.$label.mousedown(function(event){
@@ -59,9 +59,14 @@
 			});
 
 			this.$text.blur(function(event){
-				if(me.on('blur') && me.readonly==true){
-					this.readOnly=false;
-				}
+				if(me.on('blur')){
+					if(this.value!=me.value){
+						me.on('change');
+					}
+					if(me.readonly==true){
+						this.readOnly=false;
+					}
+				} 
 			});
 
 
@@ -102,25 +107,24 @@
 			*/
 		},
 		focus:function(){
-			ui.logger();
+			ui.logger(this);
 			if(this.on('focus')==false){
 				return;
 			}
 			this.callSuperMethod();
 		},
 		onArrowClick: function(event){
-			ui.logger();
+			ui.logger(this);
 			this.togglePopu();
 		},
 		togglePopu:function(){
-			ui.logger();
+			ui.logger(this);
 			var me=this;
 			if(!this.datepicker){
 				this.datepicker=new ui.datepicker({
 					cls : "combo",
 					onSelected : function(date){
-						me.$text.val(date);
-						me.onFocusAfter();
+						me.on('selected',date);
 					},
 					autoSetOffset : true,
 					align : 'lb',
@@ -130,15 +134,22 @@
 			}
 			this.datepicker.toggle();
 		},
+		onSelected:function(date){
+			ui.logger(this);
+			if(date!=this.value){
+				this.on('change',date,this.value);
+			}
+			this.setValue(date);
+		},
 		onBlur:function(){
-			ui.logger();
+			ui.logger(this);
 			var me=this;
 			if(this.datepicker){
 				this.datepicker.on("hide");
 			}
 		},
 		remove:function(){
-			ui.logger();
+			ui.logger(this);
 			if(this.list && this.list.remove){
 				this.list.remove();
 			}
@@ -149,6 +160,12 @@
 		},
 		onEnabled:function(){
 			this.$text[0].disabled=false;
+		},
+		setValue:function(value){
+			ui.logger(this);
+			this.callSuperMethod();
+			this.$text.val(this.value);
+			
 		}
 	});
 

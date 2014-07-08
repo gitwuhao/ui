@@ -57,11 +57,11 @@
 		//buttons : null,
 		//popups : null,
 		onRender:function(config){
-			ui.logger();
+			ui.logger(this);
 			this.callSuperMethod();
 		},
 		onRenderAfter:function(config){
-			ui.logger();
+			ui.logger(this);
 			var $toolbar=this.$elem;
 			this.$buttonbar=$toolbar.children('.'+this._c_button_box);
 			this.$popup=$toolbar.children('.'+this._c_popup_box);

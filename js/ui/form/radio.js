@@ -40,7 +40,7 @@
 			}
 		},
 		onRenderAfter:function(config){
-			ui.logger();
+			ui.logger(this);
 			var elem=this.$elem;
 
 			var children=$('.'+this._c_radio_group,elem);
@@ -59,7 +59,7 @@
 
 		},
 		onBindEvent:function(){
-			ui.logger();
+			ui.logger(this);
 			var me=this;
 			var items=this.items;
 
@@ -74,7 +74,7 @@
 			}
 		},
 		bindItemEvent:function(item){
-			ui.logger();
+			ui.logger(this);
 			
 			this.bindHover(item.$elem);
 			
@@ -109,7 +109,7 @@
 			});
 		},
 		focus : function(item){
-			ui.logger();
+			ui.logger(this);
 			if(item){
 				this.currentItem=item;
 			}
@@ -140,21 +140,33 @@
 			}
 		},
 		onUnChecked:function(item){
+			ui.logger(this);
+			var checked=item.checked;
 			item.checked=false;
 			item.$elem.removeClass("checked");
 			item.$input.attr("name","");
+	
+			if(checked!=false){
+				this.on('change',item);
+			}
 		},
 		onChecked:function(item){
+			ui.logger(this);
 			if(this.checkedItem && this.checkedItem!=item){
 				this.on('unChecked',this.checkedItem);
 			}else if(this.checkedItem && this.checkedItem==item && item.checked){
 				return;
 			}
+			var checked=item.checked;
 			item.checked=true;
 			item.$elem.addClass("checked");
 			item.$input.attr("name",item.name);
 			this.currentItem=item;
 			this.checkedItem=item;
+			
+			if(checked!=true){
+				this.on('change',item);
+			}
 		},
 		onDisabled:function(){
 			var items=this.items;
@@ -170,6 +182,18 @@
 		},
 		getValue:function(){
 			return this.checkedItem.value;
+		},
+		setValue:function(value){
+			ui.logger(this);
+			this.callSuperMethod();
+			for(var i=0,len=this.items.length;i<len;i++){
+				var item=this.items[i];
+				if(item.value==value){
+					this.on("checked",item);
+				}else{
+					this.on("unChecked",item);
+				}
+			}
 		}
 	});
 

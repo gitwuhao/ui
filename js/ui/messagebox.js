@@ -38,7 +38,7 @@
 			}
 		},
 		onRenderBefore:function(config){
-			ui.logger();
+			ui.logger(this);
 			var html=['<div class="',config._c_message_box,'">',
 					  '<div class="',config._c_icon,' ',MessageBox.INFO,'"></div>',
 					  '<div class="',config._c_message_text,'"></div>',
@@ -70,7 +70,7 @@
 			};
 		},
 		onRenderAfter:function(){
-			ui.logger();
+			ui.logger(this);
 			this.callSuperMethod();
 			
 			var $elem=this.$elem;
@@ -86,7 +86,7 @@
 
 		},
 		reconfig:function(config){
-			ui.logger();
+			ui.logger(this);
 			
 			this.setConfig(config);
 			
@@ -117,7 +117,7 @@
 			}
 		},
 		show:function(config){
-			ui.logger();
+			ui.logger(this);
 			this.reconfig(config);
 			this.$mask.show();
 			this.$elem.show();
@@ -131,7 +131,7 @@
 		
 		},
 		progress:function(config){
-			ui.logger();
+			ui.logger(this);
 			config.type="progress";
 			this.setConfig(config);
 			this.$elem[0].className=this._c_window+" "+this._c_progress;
@@ -139,7 +139,7 @@
 			this.getSuper().show.call(this,config);
 		},
 		getQuickTip:function(){
-			ui.logger();
+			ui.logger(this);
 			if(this.$quickTip){
 				return;
 			}
@@ -173,7 +173,7 @@
 			});
 		},
 		setQuickTipOffset:function(target){
-			ui.logger();
+			ui.logger(this);
 			var $target=$(target);
 			var offset=$target.offsetElement(document.body);
 			var left=offset.left;
@@ -237,7 +237,7 @@
 
 		},
 		delConfirm:function(config){
-			ui.logger();
+			ui.logger(this);
 			
 			config.type="quickTip";
 			this.setConfig(config);
@@ -255,13 +255,13 @@
 			this.$elem.show();
 		},
 		handle:function(type){
-			ui.logger();
+			ui.logger(this);
 			if(this.config.handle){
 				this.config.handle(type);
 			}
 		},
 		setConfig:function(config){
-			ui.logger();
+			ui.logger(this);
 			this.config=config;
 		}
 	});
