@@ -141,14 +141,9 @@
 		},
 		onUnChecked:function(item){
 			ui.logger(this);
-			var checked=item.checked;
 			item.checked=false;
 			item.$elem.removeClass("checked");
 			item.$input.attr("name","");
-	
-			if(checked!=false){
-				this.on('change',item);
-			}
 		},
 		onChecked:function(item){
 			ui.logger(this);

@@ -10,7 +10,7 @@
 			_c_popu_box : ui.cssPrefix+'-popu',
 			getTemplate: function(config){
 				return ['<div class="',this._c_popu_box," ",(config.boxcls||""),
-							" ",(config.cls||""),'">',
+							" ",(config.cls||""),' border-box">',
 							(config.html||''),
 						'</div>'].join('');
 			},
