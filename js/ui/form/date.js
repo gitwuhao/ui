@@ -135,7 +135,7 @@
 			ui.logger(this);
 			var value=this.value;
 			this.setValue(date);
-			if(value!=this.value  && this.value){
+			if(value!=this.value){
 				this.on('change',this.value);
 			}
 		},
