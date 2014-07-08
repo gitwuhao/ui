@@ -58,7 +58,11 @@
 		caller=arguments.callee.caller;
 		arg=caller.arguments;
 		_owner_=arguments.callee.caller._owner_;
-		callerName=ref._owner_name_+'::'+caller._owner_._owner_name_+'.'+caller._name_;
+		callerName=ref._owner_name_+'::'
+		if(ref._owner_name_!=caller._owner_._owner_name_){
+			callerName= callerName + caller._owner_._owner_name_+'.';
+		}
+		callerName=callerName + caller._name_;
 		CF.logger(callerName,arg);
 	};
 
