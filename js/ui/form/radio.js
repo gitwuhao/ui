@@ -42,21 +42,17 @@
 		onRenderAfter:function(config){
 			ui.logger(this);
 			var elem=this.$elem;
-
 			var children=$('.'+this._c_radio_group,elem);
-
 			var items=this.items;
 			for(var i=0,len=items.length;i<len;i++){
 				var item=items[i];
 				item.$elem=$(children[i]);
 				item.$input=item.$elem.children("input:first");
 			}
-
 			
 			if(this.isDisabled){
 				this.disabled();
 			}
-
 		},
 		onBindEvent:function(){
 			ui.logger(this);
