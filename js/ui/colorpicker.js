@@ -75,7 +75,6 @@ For usage and examples: colpick.com/plugin
 			return this.$hexField.val();
 		},
 		onChange:function(){
-			ui.logger(this);
 			if(this.config && this.config.onChange){
 				this.config.onChange(this.color);
 				this.config.color=this.color;

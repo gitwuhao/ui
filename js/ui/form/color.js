@@ -85,7 +85,7 @@
 			var me=this;
 			if(!this.colorpicker){
 				this.colorpicker=ui.colorpicker.getInstance({
-					align : 'lb',
+					align : 'rb',
 					$owner : this,
 					$offsetElement : this.$text,
 					onChange:function(color){
@@ -109,14 +109,14 @@
 		onBlur:function(){
 			ui.logger(this);
 			var me=this;
-			if(this.datepicker){
-				this.datepicker.on("hide");
+			if(this.colorpicker){
+				this.colorpicker.hide();
 			}
 		},
 		remove:function(){
 			ui.logger(this);
-			if(this.list && this.list.remove){
-				this.list.remove();
+			if(this.colorpicker && this.colorpicker.remove){
+				this.colorpicker.remove();
 			}
 			this.callSuperMethod();
 		},

@@ -14,28 +14,38 @@
 							(config.html||''),
 						'</div>'].join('');
 			},
-			setOffset:function(config){
-				var popu=config.popu,
-					$offsetElement=config.$offsetElement,
-					offsetParent=config.offsetParent,
-					align=config.align;
+			setOffset:function(popu){
+				var $offsetElement=popu.$offsetElement,
+					offsetParent=popu.offsetParent,
+					align=popu.align,
+					offset,
+					left,
+					top,
+					right,
+					bottom;
 				
-				var offset=$offsetElement.offsetElement(offsetParent);
-				var left=offset.left;
-				var top=offset.top;
+				offset=$offsetElement.offsetElement(offsetParent);
+				left=offset.left;
+				top=offset.top;
 
 				if(align){
 					//right
 					if(align.indexOf("r")>-1){
-						left=left + $offsetElement.outerWidth(true);
+						right=left + $offsetElement.outerWidth(true);
 					}
 
 					//bottom
 					if(align.indexOf("b")>-1){
-						top=top + $offsetElement.outerHeight(true);
+						bottom=top + $offsetElement.outerHeight(true);
 					}
+
 				}
-				popu.setOffset(left,top);
+				popu.setOffset({
+					left: left,
+					top : top ,
+					right : right ,
+					bottom : bottom
+				});
 			},
 			setCurrentPopu : function(popu){
 				ui.logger(this);
@@ -136,12 +146,7 @@
 		resetOffset:function(){
 			ui.logger(this);
 			if(this.$offsetElement){
-				ui.popu.setOffset({
-					popu : this,
-					$offsetElement : this.$offsetElement,
-					offsetParent : this.offsetParent,
-					align : this.align
-				});
+				ui.popu.setOffset(this);
 			}
 		},
 		onHideBefore : function(){
@@ -208,8 +213,30 @@
 				this.on("show");
 			}
 		},
-		setOffset : function(left,top){
+		setOffset : function(offset){
 			ui.logger(this);
+			var left=offset.left,top=offset.top;
+			if(this.align){
+				//right
+				if(this.align.indexOf("r")>-1){
+					left=offset.right;
+				}
+				//bottom
+				if(this.align.indexOf("b")>-1){
+					top=offset.bottom;
+				}
+			}
+			var width=this.$elem.width();
+			var height=this.$elem.height();
+
+			var winHeight=window.innerHeight;
+			var winWidth=window.innerWidth;
+			if(left + width >winWidth){
+				left= left - width;
+			}
+			if(top + height >winHeight){
+				top= top - height;
+			}
 			this.$elem.css({
 				left : left,
 				top : top
