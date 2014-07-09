@@ -86,7 +86,10 @@
 				
 				$.getDoc().mousedown(function(event,owner){
 					var currentPopu=me.currentPopu;
-					if(!currentPopu || event.target==me.triggerOwner || (owner && (currentPopu==owner ||  currentPopu.$owner==owner))){
+					if(!currentPopu || 
+						event.target==me.triggerOwner ||
+						(owner && (currentPopu==owner ||  currentPopu.$owner==owner))
+					){
 						me.triggerOwner=null;
 						return;
 					}
@@ -162,6 +165,9 @@
 			if(this.isHide==true){
 				return false;
 			}
+			if($.timestamp() - this.lastShowTimestamp<500){
+				return false;
+			}
 		},
 		onHide : function(){
 			ui.logger(this);
@@ -204,14 +210,17 @@
 		},
 		hide : function(){
 			ui.logger(this);
+			
+
 			if(this.timeOutId || this.isHide==true){
 				return;
 			}
 			var me=this;
+
 			
-			this.timeOutId=setTimeout(function(){
+			//this.timeOutId=setTimeout(function(){
 				me.on("hide");
-			},500);
+			//},500);
 		},
 		toggle : function(){
 			ui.logger(this);
