@@ -94,7 +94,7 @@
 			if(!this.colorpicker){
 				var me=this;
 				this.colorpicker=ui.colorpicker.getInstance({
-					align : 'rb',
+					align : this.align || 'lb',
 					$owner : this,
 					color : this.value,
 					$offsetElement : this.$text,

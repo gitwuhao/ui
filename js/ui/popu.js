@@ -180,12 +180,12 @@
 		},
 		onShow :function(){
 			ui.logger(this);
-			if(this.autoSetOffset!=false){
-				this.resetOffset();
-			}
 			this.isHide=false;
 			this.$elem.show();
 			this.lastShowTimestamp=$.timestamp();
+			if(this.autoSetOffset!=false){
+				this.resetOffset();
+			}
 		},
 		onShowAfter:function(){
 			ui.logger(this);
@@ -224,6 +224,10 @@
 		setOffset : function(offset){
 			ui.logger(this);
 			var left=offset.left,top=offset.top;
+			
+			var width=this.$elem.outerWidth(true);
+			var height=this.$elem.outerHeight(true);
+
 			if(this.align){
 				//right
 				if(this.align.indexOf("r")>-1){
@@ -233,17 +237,20 @@
 				if(this.align.indexOf("b")>-1){
 					top=offset.bottom;
 				}
+
+				
+				if(this.align.indexOf("c")>-1){
+					left=offset.left - (width/2);
+				}
 			}
-			var width=this.$elem.width();
-			var height=this.$elem.height();
 
 			var winHeight=window.innerHeight;
 			var winWidth=window.innerWidth;
-			if(offset.left + width >winWidth){
+			if(left + width >winWidth){
 				left= offset.right - width;
 			}
-			if(offset.top + height >winHeight){
-				top= offset.top - height;
+			if(top + height >winHeight){
+				top= offset.top - height ;
 			}
 			this.$elem.css({
 				left : left,
