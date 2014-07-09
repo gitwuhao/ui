@@ -216,10 +216,11 @@
 			ui.logger(this);
 			this.callSuperMethod();
 			values=values||[];
-			for(var i=0,len=this.items.length;i<len;i++){
-				var item=this.items[i];
-				for(var n=0,nlen=values.length;n<nlen;n++){
-					if(item.value==values[n]){
+			for(var n=0,nlen=values.length;n<nlen;n++){
+				var value=values[n];
+				for(var i=0,len=this.items.length;i<len;i++){
+					var item=this.items[i];
+					if(item.value==value){
 						this.on("checked",item);
 					}else{
 						this.on("unChecked",item);
