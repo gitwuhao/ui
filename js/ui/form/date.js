@@ -141,7 +141,6 @@
 		},
 		onBlur:function(){
 			ui.logger(this);
-			var me=this;
 			if(this.datepicker){
 				this.datepicker.on("hide");
 			}

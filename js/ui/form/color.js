@@ -53,11 +53,11 @@
 			});
 
 			this.$text.blur(function(event){
-				if(me.on('blur')){
+				if(me.isDisabled!=true  && !ui.popu.filterBlurEvent(event) && me.on('blur')){
 					if(me.readonly==true){
 						this.readOnly=false;
 					}
-				} 
+				}
 			});
  
 			this.$text.mousedown(function(event){
@@ -82,8 +82,8 @@
 		},
 		togglePopu:function(){
 			ui.logger(this);
-			var me=this;
 			if(!this.colorpicker){
+				var me=this;
 				this.colorpicker=ui.colorpicker.getInstance({
 					align : 'rb',
 					$owner : this,
@@ -108,7 +108,6 @@
 		},
 		onBlur:function(){
 			ui.logger(this);
-			var me=this;
 			if(this.colorpicker){
 				this.colorpicker.hide();
 			}

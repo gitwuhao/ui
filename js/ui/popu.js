@@ -7,6 +7,7 @@
 	ui.extend(ui.popu,ui.widget,{
 		_name_ : "popu",
 		statics:{
+			__is_popu__ : $.randomChar(10),
 			_c_popu_box : ui.cssPrefix+'-popu',
 			getTemplate: function(config){
 				return ['<div class="',this._c_popu_box," ",(config.boxcls||""),
@@ -28,18 +29,10 @@
 				left=offset.left;
 				top=offset.top;
 
-				if(align){
-					//right
-					if(align.indexOf("r")>-1){
-						right=left + $offsetElement.outerWidth(true);
-					}
+				right=left + $offsetElement.outerWidth(true);
+	
+				bottom=top + $offsetElement.outerHeight(true);
 
-					//bottom
-					if(align.indexOf("b")>-1){
-						bottom=top + $offsetElement.outerHeight(true);
-					}
-
-				}
 				popu.setOffset({
 					left: left,
 					top : top ,
@@ -70,6 +63,18 @@
 			},
 			filterTriggerOwner:function(target){
 				this.triggerOwner=target;
+			},
+			filterBlurEvent : function(event){
+				var relatedTarget=event.relatedTarget;
+				var __is_popu__=this.__is_popu__;
+				while(relatedTarget && relatedTarget.offsetParent){
+					var data=$.data(relatedTarget);
+					if(data[__is_popu__]){
+						return true;
+					}
+					relatedTarget=relatedTarget.offsetParent;
+				}
+				return false;
 			},
 			initEventListener : function(){
 				var me=this;
@@ -131,6 +136,9 @@
 				}
 				this.resetOffset();
 			}
+
+
+			this.$elem.data(ui.popu.__is_popu__,true);
 		},
 		onBindEvent:function(){
 			ui.logger(this);
@@ -231,11 +239,11 @@
 
 			var winHeight=window.innerHeight;
 			var winWidth=window.innerWidth;
-			if(left + width >winWidth){
-				left= left - width;
+			if(offset.left + width >winWidth){
+				left= offset.right - width;
 			}
-			if(top + height >winHeight){
-				top= top - height;
+			if(offset.top + height >winHeight){
+				top= offset.top - height;
 			}
 			this.$elem.css({
 				left : left,
