@@ -221,13 +221,13 @@
 			var items=this.items;
 			for(var i=0,len=items.length;i<len;i++){
 				var item=items[i];
-				var key;
-				if(item.cls){
-					key=item.cls;
-				}else if(item.name){
+				var key=null;
+				if(item.name){
 					key=item.name;
 				}else if(item.id){
 					key=item.id;
+				}else if(item.cls){
+					key=item.cls;
 				}
 
 				if(key){
