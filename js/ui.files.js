@@ -7,6 +7,7 @@
 		path+'datepicker.js',
 		path+'form.js',
 		path+'form/text.js',
+		path+'form/color.js',
 		path+'form/combo.js',
 		path+'form/date.js',
 		path+'form/radio.js',

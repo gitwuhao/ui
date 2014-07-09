@@ -50,7 +50,7 @@ For usage and examples: colpick.com/plugin
 				submit: 1,
 				submitText: '确认',
 				onChange: function (hsb,hex,rgb,el) {
-					this.color="#"+hex;
+					me.color="#"+hex;
 					me.onChange();
 				},
 				onSubmit: function (hsb,hex,rgb,el) {
@@ -74,7 +74,7 @@ For usage and examples: colpick.com/plugin
 		getHexFieldValue:function(){
 			return this.$hexField.val();
 		},
-		onChange:function(l){
+		onChange:function(){
 			ui.logger(this);
 			if(this.config && this.config.onChange){
 				this.config.onChange(this.color);
