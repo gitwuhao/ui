@@ -59,9 +59,18 @@
 					}
 				}
 			});
+
+
+			this.$text.on("paste",function(event){
+				var color=$.getHexColor($.getClipboardTextData(event));
+				if(color){
+					me.setValue(color);
+					ui.colorpicker.setColor(color);
+				}
+			});
  
 			this.$text.mousedown(function(event){
-				if(me.isDisabled!=true ){
+				if(me.isDisabled!=true){
 					if(!me.isFocus){
 						this.readOnly=false;
 					}else{
@@ -127,7 +136,6 @@
 			this.$text[0].disabled=false;
 		},
 		setColor:function(color){
-			ui.logger(this);
 			this.$text.css('background-color',color);
 		},
 		setValue:function(value){

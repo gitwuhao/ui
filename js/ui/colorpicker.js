@@ -111,7 +111,7 @@ For usage and examples: colpick.com/plugin
 			if(config.color){
 				this.setColor(config.color);
 			}else{
-				this.setColor('FF0000');
+				this.setColor('000000');
 			}
 			if(config.layout){
 				this.setLayout(config.layout);
@@ -179,14 +179,8 @@ For usage and examples: colpick.com/plugin
 				removes : ui.widget.remove
 			};
 		},
-		show:function(config){
-			getInstance().show(config);
-		},
-		hide:function(config){
-			getInstance().hide(config);
-		},
-		toggle:function(config){
-			getInstance().toggle(config);
+		setColor:function(color){
+			getInstance().setColor(color);
 		}
 	});
 
