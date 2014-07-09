@@ -162,7 +162,9 @@
 		},
 		setValue:function(value){
 			ui.logger(this);
-			this.callSuperMethod();
+			if(this.callSuperMethod()==false){
+				return;
+			}
 			this.$text.val(this.value);
 		}
 	});

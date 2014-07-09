@@ -214,7 +214,9 @@
 		},
 		setValue:function(values){
 			ui.logger(this);
-			this.callSuperMethod();
+			if(this.callSuperMethod()==false){
+				return;
+			}
 			values=values||[];
 			for(var n=0,nlen=values.length;n<nlen;n++){
 				var value=values[n];

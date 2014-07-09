@@ -302,6 +302,9 @@
 		},
 		setValue:function(value){
 			ui.logger(this);
+			if(value==undefined){
+				return false;
+			}
 			var oldValue=this.value;
 			this.value=value;
 			this.trigger("setvalue",this.value,oldValue);

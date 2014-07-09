@@ -176,7 +176,9 @@
 		},
 		setValue:function(value){
 			ui.logger(this);
-			this.callSuperMethod();
+			if(this.callSuperMethod()==false){
+				return;
+			}
 			for(var i=0,len=this.items.length;i<len;i++){
 				var item=this.items[i];
 				if(item.value==value){
