@@ -227,6 +227,7 @@
 				var tagName=target.tagName;
 
 				/*过滤文本框、编辑框的 ctrl+z  ctrl+y */
+				/*
 				if(	/^textarea$/i.test(tagName) || 
 					(/^input$/i.test(tagName) && /^text$/i.test(target.type)) ||
 					target.isContentEditable  ){
@@ -234,6 +235,11 @@
 						return false;
 					}
 					return;
+				}
+				*/
+				
+				if(document.execCommand(cmd)){
+					return false;
 				}
 				ui.UndoManager[cmd]();
 			}
