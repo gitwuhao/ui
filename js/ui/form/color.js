@@ -34,6 +34,9 @@
 			if(this.isDisabled){
 				this.disabled();
 			}
+			if(this.value){
+				this.setColor(this.value);
+			}
 		},
 		onBindEvent:function(){
 			ui.logger(this);
