@@ -215,6 +215,26 @@
 				}
 			});
 		},
+		itemsToMap:function(){
+			ui.logger(this);
+			this.itemsMap={};
+			var items=this.items;
+			for(var i=0,len=items.length;i<len;i++){
+				var item=items[i];
+				var key;
+				if(item.cls){
+					key=item.cls;
+				}else if(item.name){
+					key=item.name;
+				}else if(item.id){
+					key=item.id;
+				}
+
+				if(key){
+					this.itemsMap['_'+key+'_']=item;
+				}
+			}
+		},
 		remove:function(){
 			ui.logger(this);
 			var item=this.item;
