@@ -87,6 +87,7 @@
 				this.colorpicker=ui.colorpicker.getInstance({
 					align : 'rb',
 					$owner : this,
+					color : this.value,
 					$offsetElement : this.$text,
 					onChange:function(color){
 						me.setColor(color);
