@@ -54,11 +54,15 @@ For usage and examples: colpick.com/plugin
 					me.onChange();
 				},
 				onSubmit: function (hsb,hex,rgb,el) {
-					var hexFieldValue=me.getHexFieldValue();
-					if($.trim(hexFieldValue)==""){
+					if(hsb==null){
 						me.color="";
 					}else{
-						me.color=colorpicker.toHexColor(hexFieldValue);
+						var hexFieldValue=me.getHexFieldValue();
+						if($.trim(hexFieldValue)==""){
+							me.color="";
+						}else{
+							me.color=colorpicker.toHexColor(hexFieldValue);
+						}
 					}
 					me.onSubmit();
 					me.hide();
@@ -204,7 +208,7 @@ For usage and examples: colpick.com/plugin
 							'</div>',
 						'</div>',
 						'<div class="colpick_new_color"></div>',
-						'<div class="colpick_current_color"></div>',
+						'<div class="colpick_clean_color"></div>',
 						'<div class="colpick_hex_field">',
 							'<div class="colpick_field_letter">#</div>',
 							'<input type="text" maxlength="6" size="6" />',
@@ -307,7 +311,7 @@ For usage and examples: colpick.com/plugin
 			},
 			//Set current and new colors
 			setCurrentColor = function (hsb, cal) {
-				$(cal).data('colpick').currentColor.css('backgroundColor', '#' + hsbToHex(hsb));
+				//$(cal).data('colpick').currentColor.css('backgroundColor', '#' + hsbToHex(hsb));
 			},
 			setNewColor = function (hsb, cal) {
 				$(cal).data('colpick').newColor.css('backgroundColor', '#' + hsbToHex(hsb));
@@ -540,16 +544,12 @@ For usage and examples: colpick.com/plugin
 				}
 				return hex;
 			},
-			restoreOriginal = function () {
+			cleanColor = function () {
 				var cal = $(this).parent();
-				var col = cal.data('colpick').origColor;
-				cal.data('colpick').color = col;
-				fillRGBFields(col, cal.get(0));
-				fillHexFields(col, cal.get(0));
-				fillHSBFields(col, cal.get(0));
-				setSelector(col, cal.get(0));
-				setHue(col, cal.get(0));
-				setNewColor(col, cal.get(0));
+				setCurrentColor({b: 0,h: 0,s: 0}, cal.get(0));
+				var submit=cal.data('colpick').onSubmit;
+				var elem=cal.data('colpick').el;
+				submit(null,null,null,elem);
 			};
 		return {
 			init: function (opt) {
@@ -586,7 +586,7 @@ For usage and examples: colpick.com/plugin
 						cal.find('div.colpick_submit').html(options.submitText).click(clickSubmit);
 						//Setup input fields
 						options.fields = cal.find('input').change(change).blur(blur).focus(focus);
-						cal.find('div.colpick_field_arrs').mousedown(downIncrement).end().find('div.colpick_current_color').click(restoreOriginal);
+						cal.find('div.colpick_field_arrs').mousedown(downIncrement).end().find('div.colpick_clean_color').click(cleanColor);
 						//Setup hue selector
 						options.selector = cal.find('div.colpick_color').on('mousedown touchstart',downSelector);
 						options.selectorIndic = options.selector.find('div.colpick_selector_outer');
@@ -618,7 +618,7 @@ For usage and examples: colpick.com/plugin
 						//}
 						cal.find('div.colpick_hue').on('mousedown touchstart',downHue);
 						options.newColor = cal.find('div.colpick_new_color');
-						options.currentColor = cal.find('div.colpick_current_color');
+						options.currentColor = cal.find('div.colpick_clean_color');
 						//Store options and fill with default color
 						cal.data('colpick', options);
 						fillRGBFields(options.color, cal.get(0));

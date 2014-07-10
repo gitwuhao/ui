@@ -101,9 +101,6 @@
 					$owner : this,
 					color : this.value,
 					$offsetElement : this.$text,
-					onChange:function(color){
-						me.setColor(color);
-					},
 					onSubmit:function(color){
 						me.setValue(color);
 					}
