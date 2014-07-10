@@ -143,8 +143,9 @@
 			if(this.callSuperMethod()==false){
 				return;
 			}
-			this.setColor(value);
+			this.setColor(this.value);
 			this.$text.val(this.value);
+			this.on('change',this.value);
 		}
 	});
 
