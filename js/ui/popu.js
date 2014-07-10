@@ -256,10 +256,16 @@
 			var winHeight=window.innerHeight;
 			var winWidth=window.innerWidth;
 			if(left + width >winWidth){
-				left= offset.right - width;
+				var _left_= offset.right - width;
+				if(_left_>0){
+					left=_left_;
+				}
 			}
 			if(top + height >winHeight){
-				top= offset.top - height ;
+				var _top_= offset.top - height ;
+				if(_top_>0){
+					top=_top_;
+				}
 			}
 			this.$elem.css({
 				left : left,
