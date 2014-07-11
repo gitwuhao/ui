@@ -102,7 +102,9 @@
 					color : this.value,
 					$offsetElement : this.$text,
 					onSubmit:function(color){
-						me.setValue(color);
+						if(me.setValue(color)!=false){
+							me.on('change',me.value);
+						}
 					}
 				});
 			}
@@ -138,16 +140,13 @@
 		setColor:function(color){
 			this.$text.css('background-color',color);
 		},
-		setValue:function(value,isDefaultValue){
+		setValue:function(value){
 			ui.logger(this);
 			if(this.callSuperMethod()==false){
-				return;
+				return false;
 			}
 			this.setColor(this.value);
 			this.$text.val(this.value);
-			if(isDefaultValue!=true){
-				this.on('change',this.value);
-			}
 		}
 	});
 

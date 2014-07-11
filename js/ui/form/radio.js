@@ -63,7 +63,7 @@
 				var item=items[i];
 				this.bindItemEvent(item);
 				if(item.checked){
-					me.onChecked(item);
+					this.on('checked',item);
 				}else{
 					item.checked=false;
 				}
@@ -100,7 +100,9 @@
 				var me=event.data.me;
 				if(me.isDisabled!=true){
 					me.focus(_item_);
-					me.on('checked',_item_);
+					if(me.on('checked',_item_)!=false){		
+						me.on('change',_item_);
+					}
 				}
 			});
 		},
@@ -128,25 +130,18 @@
 			}
 			this.isFocus=false;
 		},
-		checked:function(item){
-			if(item){
-				this.on("checked",item);
-			}else{
-				this.on("checked",this.items[0]);
-			}
-		},
 		onUnChecked:function(item){
 			ui.logger(this);
 			item.checked=false;
 			item.$elem.removeClass("checked");
 			item.$input.attr("name","");
 		},
-		onChecked:function(item,isDefaultValue){
+		onChecked:function(item){
 			ui.logger(this);
 			if(this.checkedItem && this.checkedItem!=item){
 				this.on('unChecked',this.checkedItem);
 			}else if(this.checkedItem && this.checkedItem==item && item.checked){
-				return;
+				return false;
 			}
 			var checked=item.checked;
 			item.checked=true;
@@ -154,10 +149,6 @@
 			item.$input.attr("name",item.name);
 			this.currentItem=item;
 			this.checkedItem=item;
-			
-			if(isDefaultValue!=true && checked!=true){
-				this.on('change',item);
-			}
 		},
 		onDisabled:function(){
 			var items=this.items;
@@ -182,9 +173,9 @@
 			for(var i=0,len=this.items.length;i<len;i++){
 				var item=this.items[i];
 				if(item.value==value){
-					this.on("checked",item,true);
+					this.on("checked",item);
 				}else{
-					this.on("unChecked",item,true);
+					this.on("unChecked",item);
 				}
 			}
 		}

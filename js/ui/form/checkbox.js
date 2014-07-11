@@ -103,8 +103,7 @@
 					if(event.shiftKey){
 						me.checkedAll();
 					}else if(event.ctrlKey){
-						me.unCheckedAll();
-						me.checked(_item_);
+						me.unCheckedAll(_item_);
 					}else if(event.altKey){
 						me.reverseChecked();
 					}else{
@@ -138,33 +137,38 @@
 			this.isFocus=false;
 			this.currentItem=null;
 		},
-		checked : function(item){
-			if(!item){
-				item=this.items[0];
-			}
-			if(item.checked){
-				this.on("unChecked",item);
-			}else{
-				this.on("checked",item);
-			}
-		},
-		onUnChecked:function(item,isDefaultValue){
+		onUnChecked:function(item){
 			ui.logger(this);
 			var checked=item.checked;
+			if(!item.$input[0].name && !item.$elem.hasClass('checked')){
+				return false;
+			}
 			item.checked=false;
 			item.$elem.removeClass("checked");
 			item.$input.attr("name","");
-			if(isDefaultValue!=true && checked!=false){
-				this.on('change',item);
-			}
 		},
-		onChecked:function(item,isDefaultValue){
+		onChecked:function(item){
 			ui.logger(this);
 			var checked=item.checked;
+			if(item.$input[0].name && item.$elem.hasClass('checked')){
+				return false;
+			}
 			item.checked=true;
 			item.$elem.addClass("checked");
 			item.$input.attr("name",item.name);
-			if(isDefaultValue!=true && checked!=true){
+		},
+		checked : function(item){
+			ui.logger(this);
+			if(!item){
+				item=this.items[0];
+			}
+			var result=null;
+			if(item.checked){
+				result=this.on("unChecked",item);
+			}else{
+				result=this.on("checked",item);
+			}
+			if(result!=false){
 				this.on('change',item);
 			}
 		},
@@ -172,20 +176,35 @@
 			ui.logger(this);
 			var items=this.items;
 			for(var i=0,len=items.length;i<len;i++){
-				this.on("checked",items[i]);
+				var item=items[i];
+				if(this.on("checked",item)!=false){
+					this.on('change',item);
+				}
 			}
 		},
-		unCheckedAll : function(){
+		unCheckedAll : function(item){
 			ui.logger(this);
 			var items=this.items;
 			for(var i=0,len=items.length;i<len;i++){
-				this.on("unChecked",items[i]);
+				var _item_=items[i];
+				var result=null;
+				if(item==_item_){
+					result=this.on("checked",_item_);
+				}else{
+					result=this.on("unChecked",_item_);
+				}
+				if(result!=false){
+					this.on('change',_item_);
+				}
 			}
 		},
 		reverseChecked:function(){
 			var items=this.items;
 			for(var i=0,len=items.length;i<len;i++){
-				this.checked(items[i]);
+				var item=items[i];
+				if(this.checked(item)!=false){
+					this.on('change',item);
+				}
 			}
 		},
 		onDisabled:function(){
@@ -223,9 +242,9 @@
 				for(var i=0,len=this.items.length;i<len;i++){
 					var item=this.items[i];
 					if(item.value==value){
-						this.on("checked",item,true);
+						this.on("checked",item);
 					}else{
-						this.on("unChecked",item,true);
+						this.on("unChecked",item);
 					}
 				}
 			}
