@@ -102,21 +102,14 @@
 					color : this.value,
 					$offsetElement : this.$text,
 					onSubmit:function(color){
-						if(me.setValue(color)!=false){
+						var oldValue=me.value;
+						if(oldValue!=color && me.setValue(color)!=false){
 							me.on('change',me.value);
 						}
 					}
 				});
 			}
 			this.colorpicker.toggle();
-		},
-		onSelected:function(date){
-			ui.logger(this);
-			var value=this.value;
-			this.setValue(date);
-			if(value!=this.value){
-				this.on('change',this.value);
-			}
 		},
 		onBlur:function(){
 			ui.logger(this);
