@@ -67,7 +67,7 @@
 			this.$text.on("paste",function(event){
 				var color=$.getHexColor($.getClipboardTextData(event));
 				if(color){
-					me.change(color);
+					me.changeColor(color);
 					ui.colorpicker.setColor(color);
 				}
 			});
@@ -102,13 +102,13 @@
 					color : this.value,
 					$offsetElement : this.$text,
 					onSubmit:function(color){
-						me.change(color);
+						me.changeColor(color);
 					}
 				});
 			}
 			this.colorpicker.toggle();
 		},
-		change:function(color){
+		changeColor:function(color){
 			ui.logger(this);
 			var oldValue=this.value;
 			if(oldValue!=color && this.setValue(color)!=false){
