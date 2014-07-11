@@ -100,6 +100,7 @@
 				var me=event.data.me;
 				if(me.isDisabled!=true){
 					me.focus(_item_);
+					me.on('click',_item_);
 					if(me.on('checked',_item_)!=false){		
 						me.on('change',_item_);
 					}
