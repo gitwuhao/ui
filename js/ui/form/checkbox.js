@@ -227,7 +227,7 @@
 			for(var i=0,len=items.length;i<len;i++){
 				item=items[i];
 				if(item.checked){
-					values.push(item);
+					values.push(item.value);
 				}
 			}
 			return values;
