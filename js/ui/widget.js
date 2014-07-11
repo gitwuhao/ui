@@ -215,6 +215,9 @@
 		},
 		itemsToMap:function(){
 			ui.logger(this);
+			if(!this.items || this.items.length==0){
+				return;
+			}
 			this.itemsMap={};
 			var items=this.items;
 			for(var i=0,len=items.length;i<len;i++){
@@ -232,6 +235,11 @@
 					this.itemsMap['_'+key+'_']=item;
 				}
 			}
+			if(!this.getItem){
+				this.getItem=function(icon){
+					return this.itemsMap['_'+icon+'_'];
+				};
+			}			
 		},
 		remove:function(){
 			ui.logger(this);
