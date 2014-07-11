@@ -237,7 +237,9 @@
 			if(this.callSuperMethod()==false){
 				return;
 			}
-			values=values||[];
+			if(!values || values.length==0){
+				values=['__|__'];
+			}
 			for(var n=0,nlen=values.length;n<nlen;n++){
 				var value=values[n];
 				for(var i=0,len=this.items.length;i<len;i++){
