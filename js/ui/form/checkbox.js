@@ -66,7 +66,7 @@
 				var item=items[i];
 				this.bindItemEvent(item);
 				if(item.checked){
-					me.onChecked(item);
+					me.on("checked",item);
 				}else{
 					item.checked=false;
 				}
@@ -148,23 +148,23 @@
 				this.on("checked",item);
 			}
 		},
-		onUnChecked:function(item){
+		onUnChecked:function(item,isDefaultValue){
 			ui.logger(this);
 			var checked=item.checked;
 			item.checked=false;
 			item.$elem.removeClass("checked");
 			item.$input.attr("name","");
-			if(checked!=false){
+			if(isDefaultValue!=true && checked!=false){
 				this.on('change',item);
 			}
 		},
-		onChecked:function(item){
+		onChecked:function(item,isDefaultValue){
 			ui.logger(this);
 			var checked=item.checked;
 			item.checked=true;
 			item.$elem.addClass("checked");
 			item.$input.attr("name",item.name);
-			if(checked!=true){
+			if(isDefaultValue!=true && checked!=true){
 				this.on('change',item);
 			}
 		},
@@ -223,9 +223,9 @@
 				for(var i=0,len=this.items.length;i<len;i++){
 					var item=this.items[i];
 					if(item.value==value){
-						this.on("checked",item);
+						this.on("checked",item,true);
 					}else{
-						this.on("unChecked",item);
+						this.on("unChecked",item,true);
 					}
 				}
 			}

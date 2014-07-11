@@ -141,7 +141,7 @@
 			item.$elem.removeClass("checked");
 			item.$input.attr("name","");
 		},
-		onChecked:function(item){
+		onChecked:function(item,isDefaultValue){
 			ui.logger(this);
 			if(this.checkedItem && this.checkedItem!=item){
 				this.on('unChecked',this.checkedItem);
@@ -155,7 +155,7 @@
 			this.currentItem=item;
 			this.checkedItem=item;
 			
-			if(checked!=true){
+			if(isDefaultValue!=true && checked!=true){
 				this.on('change',item);
 			}
 		},
@@ -182,9 +182,9 @@
 			for(var i=0,len=this.items.length;i<len;i++){
 				var item=this.items[i];
 				if(item.value==value){
-					this.on("checked",item);
+					this.on("checked",item,true);
 				}else{
-					this.on("unChecked",item);
+					this.on("unChecked",item,true);
 				}
 			}
 		}

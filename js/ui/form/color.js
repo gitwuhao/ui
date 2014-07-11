@@ -138,14 +138,16 @@
 		setColor:function(color){
 			this.$text.css('background-color',color);
 		},
-		setValue:function(value){
+		setValue:function(value,isDefaultValue){
 			ui.logger(this);
 			if(this.callSuperMethod()==false){
 				return;
 			}
 			this.setColor(this.value);
 			this.$text.val(this.value);
-			this.on('change',this.value);
+			if(isDefaultValue!=true){
+				this.on('change',this.value);
+			}
 		}
 	});
 
