@@ -233,6 +233,7 @@
 
 				if(key){
 					this.itemsMap['_'+key+'_']=item;
+					item.$owner=this;
 				}
 			}
 			if(!this.getItem){

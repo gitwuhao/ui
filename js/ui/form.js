@@ -138,24 +138,21 @@
 				rows=this.from.children[0].children;
 			}
 			var items=this.items;
-			this.itemsMap={};
 			for(var i=0,len=items.length;i<len;i++){
 				var item=items[i];
-				var item=this.getClass().getFormItem(item,rows[i]);
-				item.$owner=this;
-				items[i]=item;
-				if(item.name){
-					this.itemsMap['_'+item.name+'_']=item;
-				}
+				item=this.getClass().getFormItem(item,rows[i]);
+				this.items[i]=item;
 			}
+			this.itemsToMap();
 
 			if(this.buttons){
 				items=this.buttons;
 				var buttonList=$("."+this._c_button_box,this.$elem).children();
 				for(var i=0,len=buttonList.length;i<len;i++){
 					var item=this.buttons[i];
-					items[i]=this.getClass().getButtonItem(item,buttonList[i]);
-					items[i].$owner=this;
+					item=this.getClass().getButtonItem(item,buttonList[i]);
+					item.$owner=this;
+					this.buttons[i]=item;
 				}
 			}
 		},
