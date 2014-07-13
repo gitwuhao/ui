@@ -1,0 +1,56 @@
+.x-ui-qtp-box{
+	color: #000;
+	width: 200px;
+	height: 50px;
+	padding: 15px;
+	position: absolute;
+	bottom: 110px;
+	left: 50px;
+	z-index: 999999;
+	opacity: 0.8;
+}
+.x-ui-qtp-bg{
+	border-radius: 5px;
+	background-color: #FFF;
+	box-shadow: 0px 0px 3px 1px #CCC;
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+.x-ui-qtp-arrow-box .x-ui-icon {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+/*	display: none;*/
+}
+.x-ui-qtp-arrow-box .top{
+	background-position: -440px -140px;
+	left: 50px;
+	top: 0px;
+}
+.x-ui-qtp-arrow-box .bottom{
+	background-position: -420px -140px;
+	bottom: 0px;
+	left: 50px;
+}
+.x-ui-qtp-arrow-box .left{
+	background-position: -420px -160px;
+	left: 0px;
+	top: 30%;
+}
+.x-ui-qtp-arrow-box .right{
+	background-position: -440px -160px;
+	right: 0px;
+	top: 30%;
+}
+.x-ui-qtp-content{
+	position: relative;
+	top: -100%;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	text-align: center;
+}
+.x-ui-qtp-content span{
+	line-height: 50px;
+}
