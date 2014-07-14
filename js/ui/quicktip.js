@@ -36,7 +36,7 @@
 			ui.logger(this);
 			if(!this.handle){
 				$.setTimeout(function(){
-					//this.on('hide');
+					this.on('hide');
 				},this.time,this);
 
 
@@ -44,7 +44,7 @@
 				this.$box.click({
 					me : this
 				},function(event){
-					event.data.me.on('click');	
+					event.data.me.on('click');
 				});
 			}
 
@@ -106,7 +106,7 @@
 
 			this.$elem.css({
 				left : point.center||point.right,
-				top : point.top
+				top : point.top + 5
 			});
 		},
 		onClick : function(){
@@ -117,13 +117,18 @@
 		},
 		onHide:function(){
 			ui.logger(this);
-			this.$elem.addClass('easeout');
-			$.setTimeout(this.remove,1000,this);
+			if(this.$elem){
+				this.$elem.addClass('easeout');
+				$.setTimeout(this.remove,1000,this);
+			}
 		},
 		remove:function(){
 			ui.logger(this);
+			if(this.targetContent){
+				$(this.targetContent).trigger('mousewheel');
+			}
 			this.callSuperMethod();
-			
+
 		}
 	});
 

@@ -50,11 +50,3 @@ div.x-ui-icon {
 	outline:none;
 	padding:0px;
 }
-.easeout{
-	opacity: 0;
-	-webkit-animation: animations 1s ease-out;
-}
-@-webkit-keyframes animations{
-	0%{opacity:1;}
-	100%{opacity:0;}
-}
