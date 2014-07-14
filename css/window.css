@@ -157,43 +157,43 @@
 }
 */
 /*++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
-
-.x-ui-qtip{
+/*
+.x-ui-qtp{
 	background: none;
 	box-shadow: none;
 	padding: 0px;
 }
-.x-ui-qtip-box{
+.x-ui-qtp-box{
 	display: none;
 }
 
-.x-ui-qtip-arrow-box .x-ui-icon{
+.x-ui-qtp-arrow-box .x-ui-icon{
 	position: absolute;
 	width: 30px;
 	height: 30px;
 	display: none;
 }
-.x-ui-qtip-arrow-box .top{
+.x-ui-qtp-arrow-box .top{
 	background-position: -462px -186px;
 	left: 50px;
 	top: 0px;
 }
-.x-ui-qtip-arrow-box .right{
+.x-ui-qtp-arrow-box .right{
 	right: 0px;
 	top: 30%;
 	background-position: -423px -185px;
 }
-.x-ui-qtip-arrow-box .bottom{
+.x-ui-qtp-arrow-box .bottom{
 	background-position: -422px -145px;
 	bottom: 0px;
 	left: 50px;
 }
-.x-ui-qtip-arrow-box .left{
+.x-ui-qtp-arrow-box .left{
 	background-position: -463px -145px;
 	left: 0px;
 	top: 30%;
 }
-.x-ui-qtip-body{
+.x-ui-qtp-body{
 	margin: 20px;
 	background-color: #FFF;
 	border-radius: 4px;
@@ -208,12 +208,13 @@
 	padding: 10px 20px;
 	cursor: pointer;
 }
-.x-ui-qtip .x-ui-qtip-box{
+.x-ui-qtp .x-ui-qtp-box{
 	display: block;
 }
-.x-ui-qtip .x-ui-win-header,.x-ui-qtip .x-ui-message-box,.x-ui-qtip .x-ui-progress-box,.x-ui-qtip .x-ui-button-box,.x-ui-qtip .x-ui-win-button-box{
+.x-ui-qtp .x-ui-win-header,.x-ui-qtp .x-ui-message-box,.x-ui-qtp .x-ui-progress-box,.x-ui-qtp .x-ui-button-box,.x-ui-qtp .x-ui-win-button-box{
 	display: none;
 }
-.x-ui-qtip .x-ui-win-body{
+.x-ui-qtp .x-ui-win-body{
 	background: none;
 }
+*/

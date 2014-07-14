@@ -1,13 +1,11 @@
-.x-ui-qtp-box{
+.x-ui-qtip-box{
 	padding: 15px;
 	color: #000;
 	position: absolute;
-	bottom: 110px;
-	left: 50px;
 	z-index: 999999;
 	opacity: 0.7;
 }
-.x-ui-qtp-content{
+.x-ui-qtip-content{
 	padding: 10px;
 	overflow: hidden;
 	text-align: center;
@@ -17,31 +15,31 @@
 	min-height: 30px;
 	min-width: 100px;
 }
-.x-ui-qtp-content span{
+.x-ui-qtip-content span{
 /*	line-height: 50px;*/
 }
-.x-ui-qtp-arrow-box .x-ui-icon {
+.x-ui-qtip-arrow-box .x-ui-icon {
 	position: absolute;
 	width: 20px;
 	height: 20px;
 /*	display: none;*/
 }
-.x-ui-qtp-arrow-box .top{
+.x-ui-qtip-arrow-box .top{
 	background-position: -440px -140px;
 	left: 50px;
 	top: 0px;
 }
-.x-ui-qtp-arrow-box .bottom{
+.x-ui-qtip-arrow-box .bottom{
 	background-position: -420px -140px;
 	bottom: 0px;
 	left: 50px;
 }
-.x-ui-qtp-arrow-box .left{
+.x-ui-qtip-arrow-box .left{
 	background-position: -420px -160px;
 	left: 0px;
 	top: 30%;
 }
-.x-ui-qtp-arrow-box .right{
+.x-ui-qtip-arrow-box .right{
 	background-position: -440px -160px;
 	right: 0px;
 	top: 30%;

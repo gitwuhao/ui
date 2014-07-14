@@ -14,10 +14,10 @@
 				_c_message_text: '-message-text',
 				_c_progress_box: '-progress-box',
 				//_c_icon: '-icon',
-				_c_qtip: '-qtip',
-				_c_qtip_box: '-qtip-box',
-				_c_qtip_arrow_box: '-qtip-arrow-box',
-				_c_qtip_body: '-qtip-body'
+				_c_qtp: '-qtp',
+				_c_qtp_box: '-qtp-box',
+				_c_qtp_arrow_box: '-qtp-arrow-box',
+				_c_qtp_body: '-qtp-body'
 			},
 			OK: [0],
 			YES: [1],
@@ -143,14 +143,14 @@
 			if(this.$quickTip){
 				return;
 			}
-			var html=['<div class="',this._c_qtip_box,'">',
-				'<div class="',this._c_qtip_arrow_box,'">',
+			var html=['<div class="',this._c_qtp_box,'">',
+				'<div class="',this._c_qtp_arrow_box,'">',
 					'<div class="',this._c_icon,' top"></div>',
 					'<div class="',this._c_icon,' right"></div>',
 					'<div class="',this._c_icon,' bottom"></div>',
 					'<div class="',this._c_icon,' left"></div>',
 				'</div>',
-				'<div class="',this._c_qtip_body,'">',
+				'<div class="',this._c_qtp_body,'">',
 				'</div>',
 			'</div>'];
 			
@@ -158,7 +158,7 @@
 			this.$body.append(quickTip);
 			this.$quickTip=$(quickTip);
 			
-			this.$quickTipArrowBox=this.$quickTip.children('.'+this._c_qtip_arrow_box+':first');
+			this.$quickTipArrowBox=this.$quickTip.children('.'+this._c_qtp_arrow_box+':first');
 			this.$quickTipArrowTop=this.$quickTipArrowBox.children('.top:first');
 			this.$quickTipArrowRight=this.$quickTipArrowTop.next();
 			this.$quickTipArrowBottom=this.$quickTipArrowRight.next();
@@ -241,7 +241,7 @@
 			
 			config.type="quickTip";
 			this.setConfig(config);
-			this.$elem[0].className=this._c_window+" "+this._c_qtip;
+			this.$elem[0].className=this._c_window+" "+this._c_qtp;
 			this.getQuickTip();
 			
 			this.$quickTipBody.html(config.html);

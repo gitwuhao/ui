@@ -34,10 +34,6 @@
 			}
 		},
 		//menu : null,
-		onRender:function(config){
-			ui.logger(this);
-			this.callSuperMethod();
-		},
 		onRenderAfter:function(config){
 			ui.logger(this);
 			var $splitbutton=this.$elem;

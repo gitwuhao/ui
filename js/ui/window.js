@@ -309,5 +309,38 @@
 			$.getBody().css("overflow","hidden");
 		}
 	});
+
+
+	ui.mask={
+		getMask : function(){
+			if(!this.$mask){
+				var mask=jQuery.createElement('<div class="',this.px,'-mask"></div>');
+				$.getBody().append(mask);
+				this.$mask=$(mask);
+			}
+			return this.$mask;
+		},
+		clearBodyScroll:function(){
+			var style=document.body.style;
+			this.BodyOverflow={
+				overflow : style.overflow,
+				overflowX : style.overflowX,
+				overflowY : style.overflowY,
+			};
+			style.overflow=style.overflowX=style.overflowY="hidden";
+		},
+		resetBodyScroll:function(){
+			if(this.BodyOverflow){
+				var style=document.body.style;
+				style.overflow = this.BodyOverflow.overflow;
+				style.overflowX = this.BodyOverflow.overflowX;
+				style.overflowY = this.BodyOverflow.overflowY;
+				this.BodyOverflow=null;
+			}
+		}
+	};
+
+
+
 	
 })(CF,jQuery,ui);

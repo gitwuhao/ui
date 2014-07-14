@@ -24,7 +24,8 @@
 		path+'undo.js',
 		path+'delicon.js',
 		path+'texteditor.js',
-		path+'loading.js'
+		path+'loading.js',
+		path+'quicktip.js'
 	];
 
 })();
