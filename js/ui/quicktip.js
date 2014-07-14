@@ -2,7 +2,6 @@
 
 	var QuickTip=function(){
 		this.callSuperMethod();
-		this.setOffset();
 	};
 
 	ui.extend(QuickTip,ui.widget,{
@@ -31,13 +30,16 @@
 			this.$content=this.$box.children('.'+this._c_qtip_content);
 			this.$arrowbox=this.$box.children('.'+this._c_qtip_arrow_box);
 			this.$arrow=this.$arrowbox.children(":first");
+			this.setOffset();
 		},
 		onBindEvent:function(){
 			ui.logger(this);
 			if(!this.handle){
 				$.setTimeout(function(){
-					this.on('hide');
+					//this.on('hide');
 				},this.time,this);
+
+
 			}else{
 				this.$box.click({
 					me : this
@@ -45,11 +47,19 @@
 					event.data.me.on('click');	
 				});
 			}
+
+			if(this.targetContent){
+				$(this.targetContent).one('mousewheel',{
+					me:this,
+				},function(event){
+					event.data.me.on('hide');
+				});
+			}
 		},
 		setOffset:function(){
 			ui.logger(this);
 			var $target=$(this.target);
-			var offset=$target.offsetElement(document.body);
+			var offset=$target.offset();
 			var left=offset.left;
 			var top=offset.top;
 
@@ -58,47 +68,45 @@
 			
 			var width=this.$elem.outerWidth();
 			var height=this.$elem.outerHeight();
+			
+			var arrowWidth=20;
+			var arrowHeight=20;
 
 			var targetWidth=$target.outerWidth();
 			var targetHeight=$target.outerHeight();
 
-			var align,qLeft,qTop,$arrow,arrowLeft;
+			var left=offset.left + (targetWidth/2),
+				top=0;
+			var point={};
+
+			if(left + (width/2) < maxWidth){
+				arrowLeft=(width - arrowWidth) /2;
+				point.center=left - arrowLeft;
+			}else if(offset.left + width > maxWidth){
+				arrowLeft=width / 2;
+				point.right=maxWidth - targetWidth;
+			}else{
+				arrowLeft=width / 2;
+				point.right=offset.left + targetWidth;
+			}
+
 			
-			if(top - height > 0){
-				qTop = top - height;
+			if(offset.top - height>0){
+				point.top=offset.top - height;
 				this.$arrow.addClass('bottom');
 			}else{
-				qTop= top + targetHeight;
+				point.top=offset.top + height;
 				this.$arrow.addClass('top');
 			}
- 
+		
 
-			if(left + width>maxWidth){
-				qLeft = maxWidth - width;
-			}else if(left  - 10 - width < 0){
-				qLeft = 0;
-			}else{
-				qLeft = left;
-			}
-
-
-			if(width>targetWidth){
-				arrowLeft=(width - this.$arrow.width())/2;
-			}else{
-				arrowLeft=(targetWidth/2);
-			}
-			
 			this.$arrow.css({
 				left : arrowLeft
 			});
 
-			if(qLeft + arrowLeft > left + targetWidth){
-				qLeft=left - arrowLeft;
-			}
-
 			this.$elem.css({
-				left : qLeft,
-				top : qTop
+				left : point.center||point.right,
+				top : point.top
 			});
 		},
 		onClick : function(){
@@ -109,12 +117,13 @@
 		},
 		onHide:function(){
 			ui.logger(this);
-			
-			//this.remove();
+			this.$elem.addClass('easeout');
+			$.setTimeout(this.remove,1000,this);
 		},
 		remove:function(){
 			ui.logger(this);
 			this.callSuperMethod();
+			
 		}
 	});
 

@@ -1,11 +1,11 @@
 .x-ui-qtip-box{
-	padding: 15px;
-	color: #000;
 	position: absolute;
 	z-index: 999999;
+	padding: 15px;
 	opacity: 0.7;
 }
 .x-ui-qtip-content{
+	color: #000;
 	padding: 10px;
 	overflow: hidden;
 	text-align: center;
@@ -14,6 +14,8 @@
 	box-shadow: 0px 0px 3px 1px #CCC;
 	min-height: 30px;
 	min-width: 100px;
+	max-width: 200px;
+	max-height: 50px;
 }
 .x-ui-qtip-content span{
 /*	line-height: 50px;*/
