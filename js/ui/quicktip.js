@@ -22,7 +22,7 @@
 						   '</div>'];
 				return html.join('');
 			},
-			index : 0,	
+			index : 1,	
 			timeStamp : -1,
 			events : {
 				length : 0,
@@ -100,7 +100,7 @@
 			ui.logger(this);
 			if(!this.handle){
 				$.setTimeout(function(){
-				//	this.on('hide');
+					this.on('hide');
 				},this.time,this);
 			}else{
 				this.$box.click({
@@ -128,13 +128,13 @@
 			var offset=this.$elem.offset();
 
 			QuickTip.addListener(this,function(event,param){
-				if(event.pageX > param.left && param.left + param.width  + 10 < event.pageX){
+				if(event.pageX > param.left && param.left + param.width  + 100 < event.pageX){
 				
-				}else if(event.pageY > param.top && param.top + param.height +10 < event.pageY){
+				}else if(event.pageY > param.top && param.top + param.height +100 < event.pageY){
 				
-				}else if(event.pageX < param.left && param.left - 10 > event.pageX){
+				}else if(event.pageX < param.left && param.left - 100 > event.pageX){
 				
-				}else if(event.pageY < param.top && param.top - 10 > event.pageY){
+				}else if(event.pageY < param.top && param.top - 100 > event.pageY){
 				
 				}else{
 					return;
