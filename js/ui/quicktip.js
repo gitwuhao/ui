@@ -214,20 +214,16 @@
 				}
 				arrowPoint.left=((width- arrowWidth)/2);
 			}
-
-		
 			offset={};
 			if(this.offset.right){
 				offset.right=maxWidth - point.left - width;
 			}else{
 				offset.left=point.left;
 			}
-
 			if(this.offset.bottom){
 				offset.bottom=maxHeight - point.top - height ;
 			}else{
 				offset.top=point.top;
-			
 			}
 			this.$elem.addClass(align);
 			this.$arrow.addClass(align);
@@ -248,8 +244,8 @@
 				return;
 			}
 			if(this.$elem){
-				this.$elem.addClass('easeout');
-				$.setTimeout(this.remove,1000,this);
+				//this.$elem.addClass('easeout');
+				//$.setTimeout(this.remove,1000,this);
 			}
 		},
 		remove:function(){
