@@ -248,12 +248,9 @@
 				return;
 			}
 			if(this.$elem){
-				this.$elem.addClass('easeout');
-				$.setTimeout(this.remove,1000,this);
+				//this.$elem.addClass('easeout');
+				//$.setTimeout(this.remove,1000,this);
 			}
-		},
-		mousemoveHandle : function(event){
-			ui.logger(this);
 		},
 		remove:function(){
 			ui.logger(this);
