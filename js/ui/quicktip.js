@@ -23,6 +23,10 @@
 				return html.join('');
 			}
 		},
+		//left、top
+		offset:'lt',
+		//top、center
+		align:'tc',
 		time : 5000,
 		onRenderAfter:function(config){
 			ui.logger(this);
@@ -38,8 +42,6 @@
 				$.setTimeout(function(){
 					this.on('hide');
 				},this.time,this);
-
-
 			}else{
 				this.$box.click({
 					me : this
@@ -60,8 +62,6 @@
 			ui.logger(this);
 			var $target=$(this.target);
 			var offset=$target.offset();
-			var left=offset.left;
-			var top=offset.top;
 
 			var maxWidth=window.innerWidth;
 			var maxHeight=window.innerHeight;
@@ -74,40 +74,76 @@
 
 			var targetWidth=$target.outerWidth();
 			var targetHeight=$target.outerHeight();
-
-			var left=offset.left + (targetWidth/2),
-				top=0;
-			var point={};
-
-			if(left + (width/2) < maxWidth){
-				arrowLeft=(width - arrowWidth) /2;
-				point.center=left - arrowLeft;
-			}else if(offset.left + width > maxWidth){
-				arrowLeft=width / 2;
-				point.right=maxWidth - targetWidth;
-			}else{
-				arrowLeft=width / 2;
-				point.right=offset.left + targetWidth;
-			}
-
 			
-			if(offset.top - height>0){
-				point.top=offset.top - height;
-				this.$arrow.addClass('bottom');
+			
+			var left=offset.left;
+			var top=offset.top;
+
+			var point={},
+				arrowPoint={},
+				align=this.align,
+				offset=this.offset;
+			this.align={};
+			this.align.center=align.indexOf("c")>-1;
+			this.align.left=align.indexOf("l")>-1;
+			this.align.right=align.indexOf("r")>-1;
+			this.align.bottom=align.indexOf("b")>-1;
+			this.align.top=align.indexOf("t")>-1;
+			
+			this.offset={};
+			this.offset.left=offset.indexOf("l")>-1;
+			this.offset.top=offset.indexOf("t")>-1;
+			this.offset.right=offset.indexOf("r")>-1;
+			this.offset.bottom=offset.indexOf("b")>-1;
+
+			if(this.align.left){
+				point.left = left - width;
+				align='right';
+			}else if(this.align.right){
+				point.left = left + targetWidth;
+				align='left';
+			}else if(this.align.bottom){
+				point.top = top + targetHeight;
+				align='top';
 			}else{
-				point.top=offset.top + height;
-				this.$arrow.addClass('top');
+				point.top = top - height;
+				align='bottom';
 			}
+			
+			if(this.align.left || this.align.right ){
+				if(this.align.center){
+					point.top = top + (targetHeight/2) - (height/2);
+				}else{
+					point.top = top;
+				}
+				arrowPoint.top=((height - arrowHeight)/2);
+			}else{
+				if(this.align.center){
+					point.left = left + (targetWidth/2) - (width/2);
+				}else{
+					point.left = left;
+				}
+				arrowPoint.left=((width- arrowWidth)/2);
+			}
+
 		
+			offset={};
+			if(this.offset.right){
+				offset.right=maxWidth - point.left - width;
+			}else{
+				offset.left=point.left;
+			}
 
-			this.$arrow.css({
-				left : arrowLeft
-			});
-
-			this.$elem.css({
-				left : point.center||point.right,
-				top : point.top + 5
-			});
+			if(this.offset.bottom){
+				offset.bottom=maxHeight - point.top - height ;
+			}else{
+				offset.top=point.top;
+			
+			}
+			this.$elem.addClass(align);
+			this.$arrow.addClass(align);
+			this.$arrow.css(arrowPoint);
+			this.$elem.css(offset);
 		},
 		onClick : function(){
 			ui.logger(this);
