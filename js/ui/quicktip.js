@@ -248,8 +248,8 @@
 				return;
 			}
 			if(this.$elem){
-				//this.$elem.addClass('easeout');
-				//$.setTimeout(this.remove,1000,this);
+				this.$elem.addClass('easeout');
+				$.setTimeout(this.remove,1000,this);
 			}
 		},
 		remove:function(){
