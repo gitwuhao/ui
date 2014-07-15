@@ -234,6 +234,7 @@
 			this.$arrow.css(arrowPoint);
 			this.$elem.css(offset);
 			this.addMouseMoveListener();
+			this.timestamp=$.timestamp();
 		},
 		onClick : function(){
 			ui.logger(this);
@@ -243,6 +244,9 @@
 		},
 		onHide:function(){
 			ui.logger(this);
+			if($.timestamp() - this.timestamp <1000){
+				return;
+			}
 			if(this.$elem){
 				this.$elem.addClass('easeout');
 				$.setTimeout(this.remove,1000,this);
