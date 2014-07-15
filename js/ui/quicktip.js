@@ -21,6 +21,63 @@
 							'</div>',
 						   '</div>'];
 				return html.join('');
+			},
+			index : 0,	
+			timeStamp : -1,
+			events : {
+				length : 0,
+			},
+			startListener : function(){
+				if(this.isStart==true){
+					return;
+				}
+				$.getBody().on('mousemove',{
+					me : this
+				},this.handle);
+				this.isStart=true;
+			},
+			stopListener : function(){
+				$.getBody().off('mousemove',this.handle);
+				this.isStart=false;
+			},
+			handle : function(event){
+				var me=event.data.me
+				var timeStamp=me.timeStamp;
+				if(timeStamp && event.timeStamp - timeStamp>500){
+					me.trigger(event);
+					me.timeStamp=event.timeStamp;
+				}
+			},
+			trigger:function(event){
+				var events=this.events;
+				for(var key in events){
+					var item=events[key];
+					if(item && item.handle && item.handle._isFunction_){
+						item.handle.call(item.scope,event,item.param);
+					}
+				}
+			},
+			addListener:function(ref,handle,param){
+				var id=this.index++;
+				ref.__QUICKTIP_ID__=id;
+				this.events[id]={
+					scope : ref,
+					param : param,
+					handle : handle
+				};
+				this.events.length++;
+				this.startListener();
+			},
+			removeListener:function(ref){
+				var id=ref.__QUICKTIP_ID__;
+				if(!id || !this.events[id]){
+					return;
+				}
+				delete this.events[id];
+				this.events.length--;
+				if(this.events.length==0){
+					this.stopListener();
+				}
 			}
 		},
 		//left、top
@@ -34,13 +91,16 @@
 			this.$content=this.$box.children('.'+this._c_qtip_content);
 			this.$arrowbox=this.$box.children('.'+this._c_qtip_arrow_box);
 			this.$arrow=this.$arrowbox.children(":first");
+			
+			this.width=this.$elem.outerWidth();
+			this.height=this.$elem.outerHeight();
 			this.setOffset();
 		},
 		onBindEvent:function(){
 			ui.logger(this);
 			if(!this.handle){
 				$.setTimeout(function(){
-					this.on('hide');
+				//	this.on('hide');
 				},this.time,this);
 			}else{
 				this.$box.click({
@@ -60,6 +120,33 @@
 				});
 			}
 		},
+		addMouseMoveListener:function(){
+			ui.logger(this);
+			if(this.handle){
+				return;
+			}
+			var offset=this.$elem.offset();
+
+			QuickTip.addListener(this,function(event,param){
+				if(event.pageX > param.left && param.left + param.width  + 10 < event.pageX){
+				
+				}else if(event.pageY > param.top && param.top + param.height +10 < event.pageY){
+				
+				}else if(event.pageX < param.left && param.left - 10 > event.pageX){
+				
+				}else if(event.pageY < param.top && param.top - 10 > event.pageY){
+				
+				}else{
+					return;
+				}
+				this.on('hide');
+			},{
+				left : offset.left,
+				top : offset.top,
+				width : this.width,
+				height : this.height
+			});
+		},
 		setOffset:function(){
 			ui.logger(this);
 			var $target=$(this.target);
@@ -68,8 +155,8 @@
 			var maxWidth=window.innerWidth;
 			var maxHeight=window.innerHeight;
 			
-			var width=this.$elem.outerWidth();
-			var height=this.$elem.outerHeight();
+			var width=this.width;
+			var height=this.height;
 			
 			var arrowWidth=20;
 			var arrowHeight=20;
@@ -146,6 +233,7 @@
 			this.$arrow.addClass(align);
 			this.$arrow.css(arrowPoint);
 			this.$elem.css(offset);
+			this.addMouseMoveListener();
 		},
 		onClick : function(){
 			ui.logger(this);
@@ -160,13 +248,16 @@
 				$.setTimeout(this.remove,1000,this);
 			}
 		},
+		mousemoveHandle : function(event){
+			ui.logger(this);
+		},
 		remove:function(){
 			ui.logger(this);
+			QuickTip.removeListener(this);
 			if(this.targetContent){
 				$(this.targetContent).trigger('mousewheel');
 			}
 			this.callSuperMethod();
-
 		}
 	});
 
