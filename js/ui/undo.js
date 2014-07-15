@@ -242,10 +242,10 @@
 				//if(document.execCommand(cmd)){
 				//	return false;
 				//}
-				if(__CURRENT_UNDO__[cmd]()){
-					return false;
-				}
+				__CURRENT_UNDO__[cmd]();
 			}
+			
+			return false;
 		}
 
 	});
