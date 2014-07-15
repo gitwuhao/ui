@@ -6,12 +6,12 @@
 	ui.UndoManager={
 		redo : function(callback){
 			if(currentUndo){
-				currentUndo.redo(callback);
+				return currentUndo.redo(callback);
 			}
 		},
 		undo : function(callback){
 			if(currentUndo){
-				currentUndo.undo(callback);
+				return currentUndo.undo(callback);
 			}
 		},
 		setCurrent : function(undo){
@@ -212,7 +212,8 @@
 
 
 	$.getDoc().keydown(function(event){
-		if(event.ctrlKey && ui.UndoManager.getCurrent()){
+		var __CURRENT_UNDO__=ui.UndoManager.getCurrent();
+		if(event.ctrlKey && __CURRENT_UNDO__){
 			var cmd='';
 			/*ctrl+z*/
 			if(event.keyCode==90){
@@ -238,10 +239,12 @@
 				}
 				*/
 				
-				if(document.execCommand(cmd)){
+				//if(document.execCommand(cmd)){
+				//	return false;
+				//}
+				if(__CURRENT_UNDO__[cmd]()){
 					return false;
 				}
-				ui.UndoManager[cmd]();
 			}
 		}
 
