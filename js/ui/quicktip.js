@@ -54,7 +54,9 @@
 				$(this.targetContent).one('mousewheel',{
 					me:this,
 				},function(event){
-					event.data.me.on('hide');
+					if(event.originalEvent){
+						event.data.me.on('hide');
+					}
 				});
 			}
 		},
@@ -154,8 +156,8 @@
 		onHide:function(){
 			ui.logger(this);
 			if(this.$elem){
-				this.$elem.addClass('easeout');
-				$.setTimeout(this.remove,1000,this);
+				//this.$elem.addClass('easeout');
+				//$.setTimeout(this.remove,1000,this);
 			}
 		},
 		remove:function(){
