@@ -101,6 +101,7 @@
 				var _item_=event.data.item;
 				var me=event.data.me;
 				if(me.isDisabled!=true){
+					me.focus(_item_);
 					if(event.shiftKey){
 						me.checkedAll();
 					}else if(event.ctrlKey){
@@ -110,7 +111,6 @@
 					}else{
 						me.checked(_item_);
 					}
-					me.focus(_item_);
 				}
 			});
 		},
