@@ -221,6 +221,8 @@
 			/*ctrl+y*/
 			}else if(event.keyCode==89){
 				cmd='redo';
+			}else{
+				return;
 			}
 
 			if(cmd){
