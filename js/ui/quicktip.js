@@ -36,26 +36,34 @@
 				},this.handle);
 					
 				this.isStart=true;
+
+				$.getBody().keydown({
+					me : this
+				},this.removeAll);
 			},
 			stopListener : function(){
 				$.getBody().off('mousemove',this.handle);
 				this.isStart=false;
 			},
-			removeAll : function(){
-				var events=this.events;
+			removeAll : function(event){
+				if(event.keyCode!=27){
+					return;
+				}
+				var me=event.data.me,
+					events=me.events;
 				for(var key in events){
 					var item=events[key];
 					if(item && item.scope){
 						item.scope.remove();
 					}
 				}
-				this.events={
+				me.events={
 					length: 0
 				};
 			},
 			handle : function(event){
-				var me=event.data.me
-				var timeStamp=me.timeStamp;
+				var me=event.data.me,
+					timeStamp=me.timeStamp;
 				if(timeStamp && event.timeStamp - timeStamp>500){
 					me.trigger(event);
 					me.timeStamp=event.timeStamp;
@@ -279,11 +287,5 @@
 		}
 	};
 	
-	
-	$.getBody().keydown(function(event){
-		if(event.keyCode==27){
-			QuickTip.removeAll();
-		}
-	});
 
 })(CF,jQuery,ui);
