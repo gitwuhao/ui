@@ -34,11 +34,24 @@
 				$.getBody().on('mousemove',{
 					me : this
 				},this.handle);
+					
 				this.isStart=true;
 			},
 			stopListener : function(){
 				$.getBody().off('mousemove',this.handle);
 				this.isStart=false;
+			},
+			removeAll : function(){
+				var events=this.events;
+				for(var key in events){
+					var item=events[key];
+					if(item && item.scope){
+						item.scope.remove();
+					}
+				}
+				this.events={
+					length: 0
+				};
 			},
 			handle : function(event){
 				var me=event.data.me
@@ -266,4 +279,11 @@
 		}
 	};
 	
+	
+	$.getBody().keydown(function(event){
+		if(event.keyCode==27){
+			QuickTip.removeAll();
+		}
+	});
+
 })(CF,jQuery,ui);
