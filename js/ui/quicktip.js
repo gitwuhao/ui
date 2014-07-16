@@ -61,6 +61,7 @@
 				me.events={
 					length: 0
 				};
+				me.stopListener();
 				return false;
 			},
 			handle : function(event){
