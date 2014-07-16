@@ -35,14 +35,15 @@
 					me : this
 				},this.handle);
 					
-				this.isStart=true;
-
-				$.getBody().keydown({
+				$.getBody().on('keydown',{
 					me : this
 				},this.removeAll);
+					
+				this.isStart=true;
 			},
 			stopListener : function(){
 				$.getBody().off('mousemove',this.handle);
+				$.getBody().off('keydown',this.removeAll);
 				this.isStart=false;
 			},
 			removeAll : function(event){
@@ -60,6 +61,7 @@
 				me.events={
 					length: 0
 				};
+				return false;
 			},
 			handle : function(event){
 				var me=event.data.me,
