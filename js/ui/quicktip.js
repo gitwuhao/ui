@@ -52,6 +52,9 @@
 				}
 				var me=event.data.me,
 					events=me.events;
+				if(events.length==0){
+					return;
+				}
 				for(var key in events){
 					var item=events[key];
 					if(item && item.scope){
