@@ -45,6 +45,7 @@
 			
 			$.it(config.arrowArray,function(index,item){
 				this['$'+item]=$(this.children[index]);
+				
 			},this);
 			delete this.children;
 
@@ -88,15 +89,7 @@
 			ui.logger(this);
 			return false;
 		},
-		onResizeMousemove:function(event){
-			ui.logger(this);
-			this.onMousemove(event);
-		},
-		onMouseup:function(event){
-			ui.logger(this);
-			this.dragover();
-		},
-		onMousemove:function(event){
+		onMove:function(event){
 			ui.logger(this);
 			var offset=this.offset;
 			var x = event.pageX - offset.x;
@@ -104,6 +97,14 @@
 			this.dragmove(x,y);
 			offset.x = event.pageX;
 			offset.y = event.pageY;
+		},
+		onMouseup:function(event){
+			ui.logger(this);
+			this.dragover();
+		},
+		onMousemove:function(event){
+			ui.logger(this);
+			this.onMove(event);
 		},
 		onKeypress:function(event){
 			ui.logger(this);
