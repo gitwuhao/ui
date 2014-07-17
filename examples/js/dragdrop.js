@@ -90,6 +90,18 @@ window.examples.dragdrop=function(){
 		}
 	});
 
+
+	
+
+	html=['<div class="floatbox">',
+			  '<div class="bg"></div>',
+			  '<div class="item" style="margin-top:-110px;">6</div>',
+			  '<div class="item" style="margin-top:-120px;margin-left:120px;">7</div>',
+		  '</div>'];
+
+	$.getBody().append(html.join(''));
+
+
 	$.getDoc().keydown(function(event){
 		if(event.keyCode==27){
 			ui.dragdrop.resize.hide();
