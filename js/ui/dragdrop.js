@@ -292,9 +292,9 @@
 		},
 		dragmove : function(x,y){
 			ui.logger(this);
-			var point=null;
-			var config=this.config;
-			var offset=this.$resizebox.offset();
+			var point=null,
+				config=this.config,
+				offset;
 
 			if(!config.parentBox){
 				point={
@@ -310,6 +310,7 @@
 			}
 
 			if(this.config.type=='resize'){
+				offset=this.$resizebox.offset();
 				this.$resizebox.css({
 					left : offset.left + point.x,
 					top : offset.top + point.y
