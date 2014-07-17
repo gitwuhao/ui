@@ -209,11 +209,17 @@
 		},
 		setConfig:function(config){
 			ui.logger(this);
-			if(config==null){
-				this.config=null;
-				this.stopListener();
+			if(this.config==config){
 				return false;
+			}else if(this.config){
+				this.config.$target.removeClass('dragdrop-target');
+				this.config=null;
+				if(config==null){
+					this.stopListener();
+					return false;
+				}
 			}
+			
 			if(!config.target){
 				return false;
 			}
@@ -222,6 +228,7 @@
 			if(this.config.parentBox){
 				this.startListener();
 			}
+			this.config.$target.addClass('dragdrop-target');
 			return true;
 		},
 		show : function(config){
