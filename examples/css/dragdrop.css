@@ -1,0 +1,30 @@
+.box{
+	position: absolute;
+	-webkit-user-select: none;
+	z-index: 100000;
+	width:500px;
+	height:500px;
+	border: 1px solid #B1B1B1;
+	right: 10px;
+}
+
+.box1{
+	position: absolute;
+	width:100px;
+	height:100px;
+	left:10px;
+	top:10px;
+	border: 1px solid #B1B1B1;
+}
+.box2{
+	position: absolute;
+	width:100px;
+	height:100px;
+	top:100px;
+	left:100px;
+	border: 1px solid #B1B1B1;
+}
+
+.icon-list{
+	display: none;
+}

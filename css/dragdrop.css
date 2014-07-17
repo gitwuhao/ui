@@ -1,0 +1,62 @@
+.x-ui-dd-resize-box{
+	position: absolute;
+	display: none;
+	-webkit-user-select: none;
+	z-index: 100000;
+}
+.x-ui-dd-resize-box .bg{
+	outline: 1px solid #B1B1B1;
+	cursor : move;
+	min-height: 50px;
+	min-width: 50px;
+}
+.x-ui-dd-resize-box .tl,.x-ui-dd-resize-box .tr,.x-ui-dd-resize-box .bl,.x-ui-dd-resize-box .br,.x-ui-dd-resize-box .tc,.x-ui-dd-resize-box .bc,.x-ui-dd-resize-box .lc,.x-ui-dd-resize-box .rc{
+	background-color: #FFFFFF;
+	width: 8px;
+	height: 8px;
+	position: absolute;
+	z-index: 99999;
+	outline: 1px solid #B1B1B1;
+}
+.x-ui-dd-resize-box .tl,.x-ui-dd-resize-box .tc,.x-ui-dd-resize-box .tr{
+	top: -5px;
+}
+.x-ui-dd-resize-box .tl,.x-ui-dd-resize-box .bl,.x-ui-dd-resize-box .lc{
+	left: -5px;
+}
+.x-ui-dd-resize-box .tr,.x-ui-dd-resize-box .br,.x-ui-dd-resize-box .rc{
+	right: -5px;
+}
+.x-ui-dd-resize-box .bl,.x-ui-dd-resize-box .bc,.x-ui-dd-resize-box .br{
+	bottom: -5px;
+}
+.x-ui-dd-resize-box .lc,.x-ui-dd-resize-box .rc{
+	top: 50%;
+}
+.x-ui-dd-resize-box .tc,.x-ui-dd-resize-box .bc{
+	left: 50%;
+}
+.lc,.rc,.lc-c *,.rc-c *{
+	cursor: w-resize;
+}
+.tl,.tl-c *{
+	cursor:nw-resize;
+}
+.tc,.bc,.tc-c,.bc-c,.tc-c *,.bc-c *{
+	cursor:n-resize;
+}
+.tr,.tr-c *{
+	cursor:ne-resize;
+}
+.bl,.bl-c *{
+	cursor:sw-resize;
+}
+.br,.br-c,.br-c *{
+	cursor:se-resize;
+}
+.x-ui-dd-replace-box{
+	position: absolute;
+	display: none;
+	opacity: 0.7;
+	z-index: 100000;
+}

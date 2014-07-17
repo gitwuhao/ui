@@ -42,6 +42,10 @@
 				this['$'+item]=$(this.children[index]);
 			},this);
 			delete this.children;
+
+			this.render=document.body;
+
+
 		},
 		startListener:function(){
 			ui.logger(this);
@@ -53,10 +57,15 @@
 		stopListener:function(){
 			ui.logger(this);
 			$.getDoc().off(this.__EVENTNAMESPACE__);
-		}
+		},
 		documentEventHandle:function(event){
 			ui.logger(this);
 			event.data.me.on(event.type,event);
+		},
+		resetSize:function(){
+			ui.logger(this);
+			
+		
 		},
 		setConfig:function(){
 			ui.logger(this);
@@ -84,8 +93,6 @@
 			if(!this.config){
 				return;
 			}
-
-			this.config.type='resize';
 		},
 		hide:function(config){
 			ui.logger(this);
@@ -104,6 +111,11 @@
 	};
 
 	ui.dragdrop={
+	
+	
+	};
+
+	ui.dragdrop.resize={
 		getInstance:function(config){
 			return{
 				config:config,
@@ -122,14 +134,43 @@
 				remove : ui.widget.remove
 			};
 		},
-		bindDrag:function(config){
-		
-		},
-		bindReplace:function(config){
-		
+		setRender:function(render){
+			if(instance.render==render){
+				return;
+			}
+			instance.$elem.appendTo(render);
+			instance.render=render;
 		},
 		hide:function(){
 		
+		}
+	};
+	
+	ui.dragdrop.replace={
+		getInstance:function(config){
+			return{
+				config:config,
+				show:function(){
+					getInstance().show(this.config);
+				},
+				hide:function(){
+					getInstance().hide(this.config);
+				},
+				drag:function(){
+					getInstance().drag(this.config);
+				},
+				setBody : function(html){
+				
+				},
+				remove : ui.widget.remove
+			};
+		},
+		setRender:function(render){
+			if(instance.render==render){
+				return;
+			}
+			instance.$elem.appendTo(render);
+			instance.render=render;
 		}
 	};
 	

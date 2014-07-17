@@ -25,7 +25,8 @@
 		path+'delicon.js',
 		path+'texteditor.js',
 		path+'loading.js',
-		path+'quicktip.js'
+		path+'quicktip.js',
+		path+'dragdrop.js'
 	];
 
 })();
