@@ -31,19 +31,19 @@
 				if(this.isStart==true){
 					return;
 				}
-				$.getBody().on('mousemove',{
+				$.getDoc().on('mousemove',{
 					me : this
 				},this.handle);
 					
-				$.getBody().on('keydown',{
+				$.getDoc().on('keydown',{
 					me : this
 				},this.removeAll);
 					
 				this.isStart=true;
 			},
 			stopListener : function(){
-				$.getBody().off('mousemove',this.handle);
-				$.getBody().off('keydown',this.removeAll);
+				$.getDoc().off('mousemove',this.handle);
+				$.getDoc().off('keydown',this.removeAll);
 				this.isStart=false;
 			},
 			removeAll : function(event){

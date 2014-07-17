@@ -47,13 +47,25 @@ window.examples.dragdrop=function(){
 		if(event.target!=this){
 			return;
 		}
-		ui.dragdrop.resize({
-			target : this
-		});
+		if(this.className=='box'){
+			ui.dragdrop.dragstart({
+				target : this,
+				event : event
+			});
+		}else{
+			ui.dragdrop.resize.show({
+				target : this
+			});
+			ui.dragdrop.dragstart({
+				target : this,
+				event : event,
+				type : 'resize'
+			});
+		}
 	});
 
 	$.getDoc().keydown(function(event){
-		if(event.keyCode!=27){
+		if(event.keyCode==27){
 			ui.dragdrop.resize.hide();
 		}
 	});

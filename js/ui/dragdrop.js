@@ -47,6 +47,19 @@
 			
 			this.resizeIconSize = 8;
 
+			this.offset={};
+
+		},
+		onBindEvent:function(){
+			ui.logger(this);
+			var events=['mousedown',''].join(this.__EVENTNAMESPACE__+' ');
+			this.$bg.on(events,{
+				me : this,
+			},function(event){
+				var me=event.data.me;
+				me.config.event=event;
+				me.dragstart(me.config);
+			});
 		},
 		startListener:function(){
 			ui.logger(this);
@@ -63,12 +76,23 @@
 			ui.logger(this);
 			event.data.me.on(event.type,event);
 		},
+		onMouseup:function(event){
+			ui.logger(this);
+			this.dragover();
+		},
+		onMousemove:function(event){
+			ui.logger(this);
+			var offset=this.offset;
+			var x = event.pageX - offset.x;
+			var y = event.pageY - offset.y;
+			this.dragmove(x,y);
+			offset.x = event.pageX;
+			offset.y = event.pageY;
+		},
 		setResizeBox:function(){
 			ui.logger(this);
-
 			var width=this.$bg.width();
 			var height=this.$bg.height();
-	
 			var l=(width-this.resizeIconSize)/2;
 			var t=(height-this.resizeIconSize)/2;
 
@@ -110,13 +134,6 @@
 		
 		
 		},
-		drag:function(config){
-			ui.logger(this);
-			if(this.setConfig(config)){
-			
-			}
-		
-		},
 		show:function(config){
 			ui.logger(this);
 			if(this.setConfig(config)){
@@ -131,6 +148,52 @@
 				});
 				this.config=null;
 			}
+		},
+		dragstart : function(config){
+			ui.logger(this);
+			if(!this.setConfig(config)){
+				return;
+			}
+			if(this.config.type=='resize'){
+				this.showResizeBox();
+			}
+			
+			this.offset.x = config.event.pageX;
+			this.offset.y = config.event.pageY;
+
+			this.startListener();
+		},
+		dragmove : function(x,y){
+			ui.logger(this);
+			var point=null;
+			if(this.config.move){
+				point=this.config.move(x,y);
+			}else{
+				point={
+					x : x,
+					y : y
+				};
+			}
+
+			var offset=this.$resizebox.offset();
+			this.$resizebox.css({
+				left : offset.left + point.x,
+				top : offset.top + point.y
+			});
+
+			if(this.config.setOffset){
+				this.config.setOffset(point);
+			}else{
+				offset=this.$resizebox.offset();
+				this.config.$target.css({
+					left : offset.left + point.x,
+					top : offset.top + point.y
+				});
+			}
+		},
+		dragover : function(){
+			ui.logger(this);
+			this.stopListener();
 		}
 	});
 
@@ -144,25 +207,10 @@
 	};
 
 	ui.dragdrop={
-		resize: function(config){
-			var obj={
-				config:config,
-				show:function(){
-					getInstance().show(this.config);
-				},
-				hide:function(){
-					getInstance().hide(this.config);
-				},
-				drag:function(){
-					getInstance().drag(this.config);
-				},
-				setBody : function(html){
-				
-				},
-				remove : ui.widget.remove
-			};
-			obj.show();
-			return obj;
+		resize : function(){
+		},
+		dragstart : function(config){
+			getInstance().dragstart(config);
 		}
 	};
 
@@ -174,7 +222,10 @@
 			getInstance().$elem.appendTo(render);
 			getInstance().render=render;
 		},
-		hide:function(){
+		show : function(config){
+			getInstance().show(config);
+		},
+		hide : function(){
 			getInstance().hide();
 		}
 	});
