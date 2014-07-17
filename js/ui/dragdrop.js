@@ -55,17 +55,6 @@
 			this.offset={};
 
 		},
-		onBindEvent:function(){
-			ui.logger(this);
-			var events=['mousedown',''].join(this.__EVENTNAMESPACE__+' ');
-			this.$bg.on(events,{
-				me : this,
-			},function(event){
-				var me=event.data.me;
-				me.config.event=event;
-				me.dragstart(me.config);
-			});
-		},
 		startContentListener:function(){
 			ui.logger(this);
 			var events=['selectstart','mouseup','mousemove',''].join(this.__EVENTNAMESPACE__+' ');
@@ -203,12 +192,22 @@
 			this.setResizeBox();
 
 			this.$bg.focus();
+
+			var events=['mousedown',''].join(this.__EVENTNAMESPACE__+' ');
+			this.$resizebox.on(events,{
+				me : this,
+			},function(event){
+				var me=event.data.me;
+				me.config.event=event;
+				me.dragstart(me.config);
+			});
 		},
 		hideResizeBox:function(){
 			ui.logger(this);
 			this.$resizebox.css({
 				display : ''
 			});
+			this.$resizebox.off(this.__EVENTNAMESPACE__);
 		},
 		setConfig:function(config){
 			ui.logger(this);
@@ -286,6 +285,8 @@
 			
 			this.offset.x = config.event.pageX;
 			this.offset.y = config.event.pageY;
+
+			delete config.event;
 
 			this.startContentListener();
 		},
