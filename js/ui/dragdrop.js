@@ -88,6 +88,10 @@
 			ui.logger(this);
 			return false;
 		},
+		onResizeMousemove:function(event){
+			ui.logger(this);
+			this.onMousemove(event);
+		},
 		onMouseup:function(event){
 			ui.logger(this);
 			this.dragover();
@@ -345,10 +349,9 @@
 	ui.dragdrop={
 		resize : function(){
 		},
-		dragstart : function(config){
-			getInstance().dragstart(config);
-		},
 		move : function(config){
+			config.type='move';
+			getInstance().dragstart(config);
 		},
 		sort : function(config){
 		},
