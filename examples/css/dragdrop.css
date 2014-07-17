@@ -25,6 +25,24 @@
 	background-color: #EEE;
 }
 
+.list{
+	-webkit-user-select: none;
+	border: 1px solid #B1B1B1;
+	overflow: hidden;
+	width:650px;
+	position: absolute;
+	top: 900px;
+	left: 100px;
+}
+.item{
+	float:left;
+	width : 100px;
+	height : 100px;
+	background-color: #F3F3F3;
+	margin: 0px 5px 5px 0px;
+	text-align: center;
+	line-height: 100px;
+}
 .icon-list{
 	display: none;
 }
