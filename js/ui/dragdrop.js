@@ -157,6 +157,48 @@
 				this.config=null;
 			}
 		},
+		getPoint:function(parentBox,x,y){
+			ui.logger(this);
+		
+			var $parentBox=$(parentBox),
+				$target=this.config.$target,
+				maxWidth=$parentBox.width(),
+				maxHeight=$parentBox.height();
+
+			var offset=$target.point();
+			var _l=offset.left;
+			var _t=offset.top;
+			var _w=$target.width();
+			var _h=$target.height();
+
+			if(x==this.__M_RIGHT__){
+				x=-maxWidth;
+			}else if(x==this.__M_LEFT__){
+				x=maxWidth;
+			}else if(y==this.__M_TOP__){
+				y=-maxHeight;
+			}else if(y==this.__M_BOTTOM__){
+				y=maxHeight;
+			}
+
+
+			if( _l + x < 0 ){
+				x = - _l;
+			}else if( _l + _w +  x > maxWidth ){
+				x = maxWidth - _l -  _w;
+			}
+			
+			if( _t + y < 0 ){
+				y = - _t;
+			}else if( _t + _h + y > maxHeight ){
+				y = maxHeight - _t - _h;
+			}
+			
+			return {
+				x : x,
+				y : y
+			};
+		},
 		dragstart : function(config){
 			ui.logger(this);
 			if(!this.setConfig(config)){
@@ -185,25 +227,7 @@
 					y : y
 				};
 			}else{
-				var pOffset=$(config.parentBox).offset();
-
-				if(x==this.__M_RIGHT__){
-
-				
-				}else if(x==this.__M_LEFT__){
-
-					
-				}else if(y==this.__M_TOP__){
-
-					
-				}else if(y==this.__M_BOTTOM__){
-				
-				}
-
-				if(offset.left + x > pOffset.left || offset.left + x > pOffset.left ){
-					
-				}
-
+				point=this.getPoint(config.parentBox,x,y);
 			}
 			
 			if(point.x==0 && point.y==0){

@@ -59,6 +59,7 @@ window.examples.dragdrop=function(){
 			ui.dragdrop.dragstart({
 				target : this,
 				event : event,
+				parentBox : this.parentElement,
 				type : 'resize'
 			});
 		}
