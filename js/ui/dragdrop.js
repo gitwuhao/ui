@@ -157,19 +157,17 @@
 				this.config=null;
 			}
 		},
-		getPoint:function(parentBox,x,y){
+		getPoint:function(x,y){
 			ui.logger(this);
-		
-			var $parentBox=$(parentBox),
+			var $parentBox=$(this.config.parentBox),
 				$target=this.config.$target,
 				maxWidth=$parentBox.width(),
-				maxHeight=$parentBox.height();
-
-			var offset=$target.point();
-			var _l=offset.left;
-			var _t=offset.top;
-			var _w=$target.width();
-			var _h=$target.height();
+				maxHeight=$parentBox.height(),
+				offset=$target.point(),
+				_l=offset.left,
+				_t=offset.top,
+				_w=$target.outerWidth(),
+				_h=$target.outerHeight();
 
 			if(x==this.__M_RIGHT__){
 				x=-maxWidth;
@@ -227,7 +225,7 @@
 					y : y
 				};
 			}else{
-				point=this.getPoint(config.parentBox,x,y);
+				point=this.getPoint(x,y);
 			}
 			
 			if(point.x==0 && point.y==0){
