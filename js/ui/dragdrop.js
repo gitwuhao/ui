@@ -54,7 +54,6 @@
 
 			this.offset={};
 
-
 		},
 		onBindEvent:function(){
 			ui.logger(this);
@@ -93,7 +92,7 @@
 		},
 		stopListener:function(){
 			ui.logger(this);
-			this.$bg[0].contentEditable='';
+			this.$bg[0].contentEditable=false;
 			this.$bg.off(this.__EVENTNAMESPACE__);
 		},
 		onSelectstart:function(event){
@@ -180,8 +179,11 @@
 			this.$lc.css("top",t);
 			this.$rc.css("top",t);
 		},
-		showResizeBox:function(){
+		showResizeBox:function(config){
 			ui.logger(this);
+			if(this.setConfig(config)==false){
+				return;
+			}
 			var $target=this.config.$target;
 			var width=$target.outerWidth();
 			var height=$target.outerHeight();
@@ -227,19 +229,6 @@
 			}
 			this.config.$target.addClass('dragdrop-target');
 		},
-		show : function(config){
-			ui.logger(this);
-			if(this.setConfig(config)!=false){
-				this.showResizeBox();
-			}
-		},
-		hide : function(){
-			ui.logger(this);
-			if(this.config){
-				this.hideResizeBox();
-				this.setConfig(null);
-			}
-		},
 		getPoint:function(x,y){
 			ui.logger(this);
 			var $parentBox=$(this.config.parentBox),
@@ -279,14 +268,19 @@
 				y : y
 			};
 		},
+		hide:function(){
+			ui.logger(this);
+			if(this.config.type=='resize'){
+				this.hideResizeBox();
+			}
+			this.setConfig(null);
+		},
 		dragstart : function(config){
 			ui.logger(this);
 			if(this.setConfig(config)==false){
 				return;
 			}
-			if(this.config.type=='resize'){
-				this.showResizeBox();
-			}else{
+			if(this.config.type!='resize'){
 				this.hideResizeBox();
 			}
 			
@@ -366,13 +360,13 @@
 			getInstance().$elem.appendTo(render);
 			getInstance().render=render;
 		},
-		show : function(config){
-			config.type='resize';
-			getInstance().show(config);
-		},
 		dragstart:function(config){
 			this.show(config);
 			getInstance().dragstart(config);
+		},
+		show : function(config){
+			config.type='resize';
+			getInstance().showResizeBox(config);
 		},
 		hide : function(){
 			getInstance().hide();
