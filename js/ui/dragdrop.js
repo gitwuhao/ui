@@ -285,7 +285,7 @@
 		},
 		dragstart : function(config){
 			ui.logger(this);
-			if(!this.setConfig(config)){
+			if(this.config!=config && !this.setConfig(config)){
 				return;
 			}
 			if(this.config.type=='resize'){
@@ -353,6 +353,12 @@
 		},
 		dragstart : function(config){
 			getInstance().dragstart(config);
+		},
+		move : function(config){
+		},
+		sort : function(config){
+		},
+		replace : function(config){
 		}
 	};
 
