@@ -102,6 +102,30 @@ window.examples.dragdrop=function(){
 	$.getBody().append(html.join(''));
 
 
+
+
+	html=['<table class="tableimage">',
+			  '<tbody><tr>',
+				'<td width="25%">',
+					'<a class="image-link selected">',
+					'<img src="http://www.oilan.com.cn/oD/images/T2o4xhXvlaXXXXXXXX_!!263817957.jpg" width="100%"></a>',
+				'</td>',
+				'<td width="25%"><a class="image-link">',
+					'<img src="http://www.oilan.com.cn/oD/images/T2Nvh2Xa0bXXXXXXXX_!!263817957.jpg" width="100%"></a>',
+				'</td>',
+				'<td width="25%"><a class="image-link">',
+					'<img src="http://www.oilan.com.cn/oD/images/T2vh7DXj4XXXXXXXXX_!!263817957.jpg" width="100%"></a>',
+				'</td>',
+				'<td width="25%"><a class="image-link">',
+					'<img src="http://www.oilan.com.cn/oD/images/T272M1Xd0aXXXXXXXX_!!263817957.jpg" width="100%"></a>',
+				'</td>',
+			  '</tr>',
+			'</tbody>',
+			'</table>'];
+
+	$.getBody().append(html.join(''));
+
+
 	$.getDoc().keydown(function(event){
 		if(event.keyCode==27){
 			ui.dragdrop.resize.hide();

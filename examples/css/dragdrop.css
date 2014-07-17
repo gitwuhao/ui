@@ -63,7 +63,18 @@
 	text-align: center;
 	line-height: 100px;
 }
-
+.tableimage{
+	width:750px;
+	border: none;
+	border-collapse: separate;
+	border-spacing: 5px;
+	top: 1500px;
+	left: 100px;
+	position: absolute;
+}
+.tableimage td{
+	border: 1px solid #CCC;
+}
 body{
-	height : 1500px;
+	height : 2500px;
 }
