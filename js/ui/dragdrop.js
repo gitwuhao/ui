@@ -33,6 +33,10 @@
 			}
 		},
 		__EVENTNAMESPACE__ : '.DD' + $.randomChar(5),
+		__M_RIGHT__ : 'R',
+		__M_LEFT__ : 'L',
+		__M_TOP__ : 'T',
+		__M_BOTTOM__ : 'B',
 		onRenderAfter:function(config){
 			ui.logger(this);
 			this.$resizebox=this.$elem;
@@ -74,7 +78,11 @@
 		},
 		documentEventHandle:function(event){
 			ui.logger(this);
-			event.data.me.on(event.type,event);
+			return event.data.me.on(event.type,event);
+		},
+		onSelectstart:function(event){
+			ui.logger(this);
+			return false;
 		},
 		onMouseup:function(event){
 			ui.logger(this);
@@ -121,6 +129,12 @@
 
 			this.setResizeBox();
 		},
+		hideResizeBox:function(){
+			ui.logger(this);
+			this.$resizebox.css({
+				display : ''
+			});
+		},
 		setConfig:function(config){
 			ui.logger(this);
 			if(!config.target){
@@ -130,22 +144,16 @@
 			this.config.$target=$(config.target);
 			return true;
 		},
-		initConfig:function(){
-		
-		
-		},
-		show:function(config){
+		show : function(config){
 			ui.logger(this);
 			if(this.setConfig(config)){
 				this.showResizeBox();
 			}
 		},
-		hide:function(){
+		hide : function(){
 			ui.logger(this);
 			if(this.config){
-				this.$resizebox.css({
-					display : ''
-				});
+				this.hideResizeBox();
 				this.config=null;
 			}
 		},
@@ -156,6 +164,8 @@
 			}
 			if(this.config.type=='resize'){
 				this.showResizeBox();
+			}else{
+				this.hideResizeBox();
 			}
 			
 			this.offset.x = config.event.pageX;
@@ -166,26 +176,50 @@
 		dragmove : function(x,y){
 			ui.logger(this);
 			var point=null;
-			if(this.config.move){
-				point=this.config.move(x,y);
-			}else{
+			var config=this.config;
+			var offset=this.$resizebox.offset();
+
+			if(!config.parentBox){
 				point={
 					x : x,
 					y : y
 				};
+			}else{
+				var pOffset=$(config.parentBox).offset();
+
+				if(x==this.__M_RIGHT__){
+
+				
+				}else if(x==this.__M_LEFT__){
+
+					
+				}else if(y==this.__M_TOP__){
+
+					
+				}else if(y==this.__M_BOTTOM__){
+				
+				}
+
+				if(offset.left + x > pOffset.left || offset.left + x > pOffset.left ){
+					
+				}
+
+			}
+			
+			if(point.x==0 && point.y==0){
+				return;
 			}
 
-			var offset=this.$resizebox.offset();
 			this.$resizebox.css({
 				left : offset.left + point.x,
 				top : offset.top + point.y
 			});
 
-			if(this.config.setOffset){
-				this.config.setOffset(point);
+			if(config.setOffset){
+				config.setOffset(point);
 			}else{
-				offset=this.$resizebox.offset();
-				this.config.$target.css({
+				offset=config.$target.point();
+				config.$target.css({
 					left : offset.left + point.x,
 					top : offset.top + point.y
 				});
