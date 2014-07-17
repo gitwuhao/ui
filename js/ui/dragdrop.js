@@ -309,10 +309,12 @@
 				return;
 			}
 
-			this.$resizebox.css({
-				left : offset.left + point.x,
-				top : offset.top + point.y
-			});
+			if(this.config.type=='resize'){
+				this.$resizebox.css({
+					left : offset.left + point.x,
+					top : offset.top + point.y
+				});
+			}
 
 			if(config.setOffset){
 				config.setOffset(point);
