@@ -40,6 +40,7 @@
 		onRenderAfter:function(config){
 			ui.logger(this);
 			this.$resizebox=this.$elem;
+			//this.$link=this.$resizebox.children();
 			this.children=this.$resizebox.children();
 			
 			$.it(config.arrowArray,function(index,item){
@@ -63,22 +64,37 @@
 				var me=event.data.me;
 				me.config.event=event;
 				me.dragstart(me.config);
+				return false;
 			});
 		},
-		startListener:function(){
+		startContentListener:function(){
 			ui.logger(this);
 			var events=['selectstart','mouseup','mousemove',''].join(this.__EVENTNAMESPACE__+' ');
 			$.getDoc().on(events,{
 				me : this,
-			},this.documentEventHandle);
+			},function(event){
+				return event.data.me.on(event.type,event);
+			});
 		},
-		stopListener:function(){
+		stopContentListener:function(){
 			ui.logger(this);
 			$.getDoc().off(this.__EVENTNAMESPACE__);
 		},
-		documentEventHandle:function(event){
+		startListener:function(){
 			ui.logger(this);
-			return event.data.me.on(event.type,event);
+			var events=['keydown',''].join(this.__EVENTNAMESPACE__+' ');
+			$.getBody().on(events,{
+				me : this,
+			},function(event){
+				if(event.target!=this){
+					return;
+				}
+				return event.data.me.on('keypress',event);	
+			});
+		},
+		stopListener:function(){
+			ui.logger(this);
+			$.getBody().off(this.__EVENTNAMESPACE__);
 		},
 		onSelectstart:function(event){
 			ui.logger(this);
@@ -96,6 +112,62 @@
 			this.dragmove(x,y);
 			offset.x = event.pageX;
 			offset.y = event.pageY;
+		},
+		onKeypress:function(event){
+			ui.logger(this);
+			var _min=1,
+				_max=10,
+				x=y=0,
+				shiftKey=event.shiftKey,
+				ctrlKey=event.ctrlKey,
+				altKey=event.altKey,
+				keyCode=event.keyCode;
+			switch(keyCode){
+				//left
+				case  37 :
+					if(shiftKey && altKey){
+						x=this.__M_LEFT__;
+					}else if(shiftKey){
+						x=-_max;
+					}else{
+						x=-_min;
+					}
+					break;
+				//up
+				case  38 :
+					if(shiftKey && altKey){
+						y=this.__M_TOP__;
+					}else if(shiftKey){
+						y=-_max;
+					}else{
+						y=-_min;
+					}
+					break;
+				//rigth
+				case  39 :
+					if(shiftKey && altKey){
+						x=this.__M_RIGHT__;
+					}else if(shiftKey){
+						x=_max;
+					}else{
+						x=_min;
+					}
+					break;
+				//down
+				case  40 :
+					if(shiftKey && altKey){
+						y=this.__M_BOTTOM__;
+					}else if(shiftKey){
+						y=_max;
+					}else{
+						y=_min;
+					}
+					break;
+				default:
+					return;
+			}
+			this.dragmove(x,y);
+			return false;
 		},
 		setResizeBox:function(){
 			ui.logger(this);
@@ -137,11 +209,19 @@
 		},
 		setConfig:function(config){
 			ui.logger(this);
+			if(config==null){
+				this.config=null;
+				this.stopListener();
+				return false;
+			}
 			if(!config.target){
 				return false;
 			}
 			this.config=config;
 			this.config.$target=$(config.target);
+			if(this.config.parentBox){
+				this.startListener();
+			}
 			return true;
 		},
 		show : function(config){
@@ -154,7 +234,7 @@
 			ui.logger(this);
 			if(this.config){
 				this.hideResizeBox();
-				this.config=null;
+				this.setConfig(null);
 			}
 		},
 		getPoint:function(x,y){
@@ -170,15 +250,14 @@
 				_h=$target.outerHeight();
 
 			if(x==this.__M_RIGHT__){
-				x=-maxWidth;
-			}else if(x==this.__M_LEFT__){
 				x=maxWidth;
+			}else if(x==this.__M_LEFT__){
+				x=-maxWidth;
 			}else if(y==this.__M_TOP__){
 				y=-maxHeight;
 			}else if(y==this.__M_BOTTOM__){
 				y=maxHeight;
 			}
-
 
 			if( _l + x < 0 ){
 				x = - _l;
@@ -211,7 +290,7 @@
 			this.offset.x = config.event.pageX;
 			this.offset.y = config.event.pageY;
 
-			this.startListener();
+			this.startContentListener();
 		},
 		dragmove : function(x,y){
 			ui.logger(this);
@@ -249,7 +328,7 @@
 		},
 		dragover : function(){
 			ui.logger(this);
-			this.stopListener();
+			this.stopContentListener();
 		}
 	});
 

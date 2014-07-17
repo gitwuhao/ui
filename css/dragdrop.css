@@ -4,6 +4,9 @@
 	-webkit-user-select: none;
 	z-index: 100000;
 }
+.x-ui-dd-resize-box a{
+	display: inline-block;
+}
 .x-ui-dd-resize-box .bg{
 	outline: 1px solid #B1B1B1;
 	cursor : move;
