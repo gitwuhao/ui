@@ -42,6 +42,21 @@ window.examples.dragdrop=function(){
 
 	$.getBody().append(html.join(''));
 
+
+	$('.box,.box1,.box2').mousedown(function(event){
+		if(event.target!=this){
+			return;
+		}
+		ui.dragdrop.resize({
+			target : this
+		});
+	});
+
+	$.getDoc().keydown(function(event){
+		if(event.keyCode!=27){
+			ui.dragdrop.resize.hide();
+		}
+	});
 };
 
 })();
