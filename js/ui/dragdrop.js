@@ -210,17 +210,16 @@
 		},
 		setConfig:function(config){
 			ui.logger(this);
+			if(this.config && config && this.config.target==config.target){
+				return;		
+			}else if(this.config){
+				this.config.$target.removeClass('dragdrop-target');
+				this.config=null;					
+			}
 			if(config==null){
-				if(this.config){
-					this.config.$target.removeClass('dragdrop-target');
-					this.config=null;					
-				}
 				this.stopListener();
 				return false;
-			}else if(this.config && this.config.target==config.target){
-				return;				
 			}
-
 			this.config=config;
 			this.config.$target=$(config.target);
 			if(this.config.parentBox){
