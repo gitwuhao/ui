@@ -12,6 +12,7 @@
 	cursor : move;
 	min-height: 50px;
 	min-width: 50px;
+	font-size: 0px;
 }
 .x-ui-dd-resize-box .tl,.x-ui-dd-resize-box .tr,.x-ui-dd-resize-box .bl,.x-ui-dd-resize-box .br,.x-ui-dd-resize-box .tc,.x-ui-dd-resize-box .bc,.x-ui-dd-resize-box .lc,.x-ui-dd-resize-box .rc{
 	background-color: #FFFFFF;

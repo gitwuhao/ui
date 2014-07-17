@@ -54,6 +54,7 @@
 
 			this.offset={};
 
+
 		},
 		onBindEvent:function(){
 			ui.logger(this);
@@ -64,7 +65,6 @@
 				var me=event.data.me;
 				me.config.event=event;
 				me.dragstart(me.config);
-				return false;
 			});
 		},
 		startContentListener:function(){
@@ -83,18 +83,18 @@
 		startListener:function(){
 			ui.logger(this);
 			var events=['keydown',''].join(this.__EVENTNAMESPACE__+' ');
-			$.getBody().on(events,{
+			this.$bg[0].contentEditable=true;
+			this.$bg.on(events,{
 				me : this,
 			},function(event){
-				if(event.target!=this){
-					return;
-				}
-				return event.data.me.on('keypress',event);	
+				event.data.me.on('keypress',event);
+				return false;
 			});
 		},
 		stopListener:function(){
 			ui.logger(this);
-			$.getBody().off(this.__EVENTNAMESPACE__);
+			this.$bg[0].contentEditable='';
+			this.$bg.off(this.__EVENTNAMESPACE__);
 		},
 		onSelectstart:function(event){
 			ui.logger(this);
@@ -167,7 +167,6 @@
 					return;
 			}
 			this.dragmove(x,y);
-			return false;
 		},
 		setResizeBox:function(){
 			ui.logger(this);
@@ -200,6 +199,8 @@
 			});
 
 			this.setResizeBox();
+
+			this.$bg.focus();
 		},
 		hideResizeBox:function(){
 			ui.logger(this);
@@ -209,31 +210,27 @@
 		},
 		setConfig:function(config){
 			ui.logger(this);
-			if(this.config==config){
-				return false;
-			}else if(this.config){
-				this.config.$target.removeClass('dragdrop-target');
-				this.config=null;
-				if(config==null){
-					this.stopListener();
-					return false;
+			if(config==null){
+				if(this.config){
+					this.config.$target.removeClass('dragdrop-target');
+					this.config=null;					
 				}
-			}
-			
-			if(!config.target){
+				this.stopListener();
 				return false;
+			}else if(this.config && this.config.target==config.target){
+				return;				
 			}
+
 			this.config=config;
 			this.config.$target=$(config.target);
 			if(this.config.parentBox){
 				this.startListener();
 			}
 			this.config.$target.addClass('dragdrop-target');
-			return true;
 		},
 		show : function(config){
 			ui.logger(this);
-			if(this.setConfig(config)){
+			if(this.setConfig(config)!=false){
 				this.showResizeBox();
 			}
 		},
@@ -285,7 +282,7 @@
 		},
 		dragstart : function(config){
 			ui.logger(this);
-			if(this.config!=config && !this.setConfig(config)){
+			if(this.setConfig(config)==false){
 				return;
 			}
 			if(this.config.type=='resize'){
@@ -371,7 +368,12 @@
 			getInstance().render=render;
 		},
 		show : function(config){
+			config.type='resize';
 			getInstance().show(config);
+		},
+		dragstart:function(config){
+			this.show(config);
+			getInstance().dragstart(config);
 		},
 		hide : function(){
 			getInstance().hide();

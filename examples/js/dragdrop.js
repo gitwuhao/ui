@@ -36,38 +36,34 @@ window.examples.dragdrop=function(){
 
 
 	html=['<div class="box">',
-			  '<div class="box1"></div>',
-			  '<div class="box2"></div>',
+			  '<div class="item1"></div>',
+			  '<div class="item2"></div>',
 		  '</div>'];
 
 	$.getBody().append(html.join(''));
 
 
-	$('.box,.box1,.box2').mousedown(function(event){
+	$('.box,.item1,.item2').mousedown(function(event){
 		if(event.target!=this){
 			return;
 		}
-		if(this.className=='box'){
+		if(this.className.indexOf('box')>-1){
 			ui.dragdrop.dragstart({
 				target : this,
 				event : event
 			});
 		}else{
-			ui.dragdrop.resize.show({
-				target : this
-			});
-			ui.dragdrop.dragstart({
+			ui.dragdrop.resize.dragstart({
 				target : this,
 				event : event,
-				parentBox : this.parentElement,
-				type : 'resize'
+				parentBox : this.parentElement
 			});
 		}
 	});
 
 
 	html=['<div class="list">',
-			  '<div class="item">1</div>',
+			  '<div class="item" contenteditable="true">1</div>',
 			  '<div class="item">2</div>',
 			  '<div class="item">3</div>',
 			  '<div class="item">4</div>',
