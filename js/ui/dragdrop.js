@@ -56,7 +56,7 @@
 			this.offset={};
 
 		},
-		startContentListener:function(){
+		bindContentEvent:function(){
 			ui.logger(this);
 			var events=['selectstart','mouseup','mousemove',''].join(this.__EVENTNAMESPACE__+' ');
 			$.getDoc().on(events,{
@@ -65,25 +65,23 @@
 				return event.data.me.on(event.type,event);
 			});
 		},
-		stopContentListener:function(){
+		unbindContentEvent:function(){
 			ui.logger(this);
 			$.getDoc().off(this.__EVENTNAMESPACE__);
 		},
-		startListener:function(){
+		bindKeyPress:function(){
 			ui.logger(this);
 			var events=['keydown',''].join(this.__EVENTNAMESPACE__+' ');
-			this.$bg[0].contentEditable=true;
-			this.$bg.on(events,{
+			$.getBody().on(events,{
 				me : this,
 			},function(event){
 				event.data.me.on('keypress',event);
 				return false;
 			});
 		},
-		stopListener:function(){
+		unbindKeyPress:function(){
 			ui.logger(this);
-			this.$bg[0].contentEditable=false;
-			this.$bg.off(this.__EVENTNAMESPACE__);
+			$.getBody().off(this.__EVENTNAMESPACE__);
 		},
 		onSelectstart:function(event){
 			ui.logger(this);
@@ -223,13 +221,13 @@
 				this.config=null;					
 			}
 			if(config==null){
-				this.stopListener();
+				this.unbindKeyPress();
 				return false;
 			}
 			this.config=config;
 			this.config.$target=$(config.target);
 			if(this.config.parentBox){
-				this.startListener();
+				this.bindKeyPress();
 			}
 			this.config.$target.addClass('dragdrop-target');
 		},
@@ -293,7 +291,7 @@
 
 			delete config.event;
 
-			this.startContentListener();
+			this.bindContentEvent();
 		},
 		dragmove : function(x,y){
 			ui.logger(this);
@@ -334,7 +332,7 @@
 		},
 		dragover : function(){
 			ui.logger(this);
-			this.stopContentListener();
+			this.unbindContentEvent();
 		}
 	});
 
