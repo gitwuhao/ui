@@ -58,7 +58,7 @@
 		},
 		bindContentEvent:function(){
 			ui.logger(this);
-			var events=['selectstart','mouseup','mousemove',''].join(this.__EVENTNAMESPACE__+' ');
+			var events=['mouseup','mousemove',''].join(this.__EVENTNAMESPACE__+' ');
 			$.getDoc().on(events,{
 				me : this,
 			},function(event){
@@ -92,13 +92,13 @@
 			var offset=this.offset;
 			var x = event.pageX - offset.x;
 			var y = event.pageY - offset.y;
-			this.dragmove(x,y);
+			this.on('dragmove',x,y);
 			offset.x = event.pageX;
 			offset.y = event.pageY;
 		},
 		onMouseup:function(event){
 			ui.logger(this);
-			this.dragover();
+			this.on('dragover');
 		},
 		onMousemove:function(event){
 			ui.logger(this);
@@ -171,6 +171,15 @@
 			this.$lc.css("top",t);
 			this.$rc.css("top",t);
 		},
+		resizeboxEventDispatch:function(event){
+			ui.logger(this);
+			this.config.event=event;
+			if(/bg/i.test(event.target.className)){
+				this.on('dragstart',event.pageX,event.pageY);
+			}else{
+			
+			}
+		},
 		showResizeBox:function(config){
 			ui.logger(this);
 			if(this.setConfig(config)==false){
@@ -200,9 +209,7 @@
 			this.$resizebox.on(events,{
 				me : this,
 			},function(event){
-				var me=event.data.me;
-				me.config.event=event;
-				me.dragstart(me.config);
+				return event.data.me.resizeboxEventDispatch(event);
 			});
 		},
 		hideResizeBox:function(){
@@ -277,7 +284,7 @@
 			}
 			this.setConfig(null);
 		},
-		dragstart : function(config){
+		dragstart:function(config){
 			ui.logger(this);
 			if(this.setConfig(config)==false){
 				return;
@@ -285,15 +292,21 @@
 			if(this.config.type!='resize'){
 				this.hideResizeBox();
 			}
+			var event=config.event;
+			this.on('dragstart',event.pageX,event.pageY);
 			
-			this.offset.x = config.event.pageX;
-			this.offset.y = config.event.pageY;
-
 			delete config.event;
+
+		},
+		onDragstart : function(x,y){
+			ui.logger(this);
+
+			this.offset.x = x;
+			this.offset.y = y;
 
 			this.bindContentEvent();
 		},
-		dragmove : function(x,y){
+		onDragmove : function(x,y){
 			ui.logger(this);
 			var point=null,
 				config=this.config,
@@ -330,9 +343,13 @@
 				});
 			}
 		},
-		dragover : function(){
+		onDragover : function(){
 			ui.logger(this);
 			this.unbindContentEvent();
+		},
+		onResize : function(){
+			ui.logger(this);
+			
 		}
 	});
 
