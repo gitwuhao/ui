@@ -353,6 +353,8 @@
 			getInstance().dragstart(config);
 		},
 		sort : function(config){
+			config.type='sort';
+			getInstance().dragstart(config);
 		},
 		replace : function(config){
 		}
