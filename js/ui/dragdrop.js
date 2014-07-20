@@ -49,7 +49,6 @@
 		onRenderAfter:function(config){
 			ui.logger(this);
 			this.$resizebox=this.$elem;
-			//this.$link=this.$resizebox.children();
 			this.children=this.$resizebox.children();
 
 			$.it(config.arrowArray,function(index,item){
@@ -265,7 +264,7 @@
 			if(this.config && config && this.config.target==config.target){
 				return;
 			}else if(this.config){
-				this.config.$target.removeClass('dragdrop-target');
+				this.config.$target.removeClass('x-ui-dd-target');
 				this.config=null;
 			}
 			if(config==null){
@@ -277,7 +276,10 @@
 			if(this.config.parentBox){
 				this.bindKeyPress();
 			}
-			this.config.$target.addClass('dragdrop-target');
+			this.config.$target.addClass('x-ui-dd-target');
+			if(!this.config.type.resize){
+				this.hideResizeBox();
+			}
 		},
 		getPoint:function(point){
 			ui.logger(this);
@@ -332,11 +334,7 @@
 			if(this.setConfig(config)==false){
 				return;
 			}
-			/*
-			if(!this.config.type.resize){
-				this.hideResizeBox();
-			}
-			*/
+			
 			var event=config.event;
 			this.on('dragstart',event.pageX,event.pageY);
 
