@@ -45,20 +45,21 @@
 		__M_LEFT__ : 'L',
 		__M_TOP__ : 'T',
 		__M_BOTTOM__ : 'B',
+		__MIN_SIZE__ : 50,
 		onRenderAfter:function(config){
 			ui.logger(this);
 			this.$resizebox=this.$elem;
 			//this.$link=this.$resizebox.children();
 			this.children=this.$resizebox.children();
-			
+
 			$.it(config.arrowArray,function(index,item){
 				this['$'+item]=$(this.children[index]);
-				
+
 			},this);
 			delete this.children;
 
 			this.render=document.body;
-			
+
 			this.resizeIconSize = 8;
 
 			this.offset={};
@@ -134,7 +135,7 @@
 			var x = event.pageX - offset.x;
 			var y = event.pageY - offset.y;
 			if(this.type=='drag'){
-				this.on('dragmove',x,y);	
+				this.on('dragmove',x,y);
 			}else if(this.type=='resize'){
 				this.on('resizemove',x,y);
 			}
@@ -222,7 +223,7 @@
 			var width=$target.outerWidth();
 			var height=$target.outerHeight();
 			var offset=$target.offset();
-			
+
 			this.$resizebox.css({
 				left : offset.left,
 				top : offset.top,
@@ -241,7 +242,7 @@
 			if(this.setConfig(config)==false){
 				return;
 			}
-			
+
 			this.resetResizeBox();
 
 			this.$bg.focus();
@@ -263,10 +264,10 @@
 		setConfig:function(config){
 			ui.logger(this);
 			if(this.config && config && this.config.target==config.target){
-				return;		
+				return;
 			}else if(this.config){
 				this.config.$target.removeClass('dragdrop-target');
-				this.config=null;					
+				this.config=null;
 			}
 			if(config==null){
 				this.unbindKeyPress();
@@ -279,7 +280,7 @@
 			}
 			this.config.$target.addClass('dragdrop-target');
 		},
-		getPoint:function(x,y){
+		getPoint:function(point){
 			ui.logger(this);
 			var $parentBox=$(this.config.parentBox),
 				$target=this.config.$target,
@@ -291,32 +292,34 @@
 				_w=$target.outerWidth(),
 				_h=$target.outerHeight();
 
-			if(x==this.__M_RIGHT__){
-				x=maxWidth;
-			}else if(x==this.__M_LEFT__){
-				x=-maxWidth;
-			}else if(y==this.__M_TOP__){
-				y=-maxHeight;
-			}else if(y==this.__M_BOTTOM__){
-				y=maxHeight;
+			if(point.x==this.__M_RIGHT__){
+				point.x=maxWidth;
+			}else if(point.x==this.__M_LEFT__){
+				point.x=-maxWidth;
+			}else if(point.y==this.__M_TOP__){
+				point.y=-maxHeight;
+			}else if(point.y==this.__M_BOTTOM__){
+				point.y=maxHeight;
 			}
 
-			if( _l + x < 0 ){
-				x = - _l;
-			}else if( _l + _w +  x > maxWidth ){
-				x = maxWidth - _l -  _w;
+			if( _l + point.x < 0 ){
+				point.x = - _l;
+			}else if( _l + _w +  point.x > maxWidth ){
+				point.x = maxWidth - _l -  _w;
 			}
-			
-			if( _t + y < 0 ){
-				y = - _t;
-			}else if( _t + _h + y > maxHeight ){
-				y = maxHeight - _t - _h;
+
+			if( _t + point.y < 0 ){
+				point.y = - _t;
+			}else if( _t + _h + point.y > maxHeight ){
+				point.y = maxHeight - _t - _h;
 			}
-			
-			return {
-				x : x,
-				y : y
-			};
+
+			return point;
+		},
+		getRegion : function(region){
+			ui.logger(this);
+		
+			return region;
 		},
 		hide:function(){
 			ui.logger(this);
@@ -337,7 +340,7 @@
 			*/
 			var event=config.event;
 			this.on('dragstart',event.pageX,event.pageY);
-			
+
 			delete config.event;
 		},
 		dragstart : function(x,y){
@@ -347,9 +350,9 @@
 			this.offset.y = y;
 
 			this.bindContentEvent();
-			
+
 			DragDrop.disabledUserSelect();
-		
+
 		},
 		dragover : function(){
 			ui.logger(this);
@@ -366,21 +369,32 @@
 		},
 		onDragmove : function(x,y){
 			ui.logger(this);
-			var point=null,
+			var point={
+					x : x,
+					y : y
+				},
 				config=this.config,
 				offset;
 
-			if(!config.parentBox){
-				point={
-					x : x,
-					y : y
-				};
-			}else{
-				point=this.getPoint(x,y);
+
+			if(config.getPoint){
+				config.getPoint(point);
+			}else if(config.parentBox){
+				this.getPoint(point);
 			}
-			
+
+
 			if(point.x==0 && point.y==0){
 				return;
+			}
+
+
+			if(!config.getPoint){
+				offset=config.$target.point();
+				config.$target.css({
+					left : offset.left + point.x,
+					top : offset.top + point.y
+				});
 			}
 
 			offset=this.$resizebox.offset();
@@ -388,17 +402,7 @@
 				left : offset.left + point.x,
 				top : offset.top + point.y
 			});
-		
 
-			if(config.setOffset){
-				config.setOffset(point);
-			}else{
-				offset=config.$target.point();
-				config.$target.css({
-					left : offset.left + point.x,
-					top : offset.top + point.y
-				});
-			}
 		},
 		onDragover : function(){
 			ui.logger(this);
@@ -414,29 +418,61 @@
 			ui.logger(this);
 			var point=null,
 				config=this.config,
-				offset;
+				offset,
+				resizetype=this.resizetype,
+				region={
+					x:0,
+					y:0,
+					w:0,
+					h:0
+				},
+				$bg=this.$bg,
+				width=this.$bg.width(),
+				height=this.$bg.height();
+
+			if(resizetype=="lc"){
+				region.w=-x;
+				region.x=x;
+			}else if(resizetype=="rc"){
+				region.w=x;
+			}else if(resizetype=="tc"){
+				region.h=-y;
+				region.y=y;
+			}else if(resizetype=="bc"){
+				region.h=y;
+			}else if(resizetype=="tl"){
+				region.w=-x;
+				region.h=-y;
+				region.x=x;
+				region.y=y;
+			}else if(resizetype=="tr"){
+				region.w=x;
+				region.h=-y;
+				region.y=y;
+			}else if(resizetype=="bl"){
+				region.w=-x;
+				region.h=y;
+				region.x=x;
+			}else  if(resizetype=="br"){
+				region.w=x;
+				region.h=y;
+			}
+
+			if(width + region.w < this.__MIN_SIZE__ ){
+				region.w=0;
+				region.x=0;
+			}
+			if(height + region.h  < this.__MIN_SIZE__){
+				region.h=0;
+				region.y=0;
+			}
 
 			if(!config.parentBox){
-				point={
-					x : x,
-					y : y
-				};
+				
 			}else{
-				point=this.getPoint(x,y);
-			}
-			
-			if(point.x==0 && point.y==0){
-				return;
+				this.getRegion(region);
 			}
 
-			var $resizebox=this.$resizebox,
-				width=$resizebox.width(),
-				height=$resizebox.height();
-			$resizebox.css({
-				width : width + point.x,
-				height : height + point.y
-			});
-		
 
 			if(config.setResize){
 				config.setResize(point);
@@ -451,8 +487,26 @@
 			}
 
 
-			
+			if(region.x==0 && region.y==0){
+				return;
+			}
+
+
+			$bg.css({
+				width : width + region.w,
+				height : height +region.h
+			});
+
+
+			var offset=this.$resizebox.point();
+
+			this.$resizebox.css({
+				left : offset.left + x,
+				top : offset.top + y
+			});
+
 			this.resetResizeBox();
+
 		},
 		onResizeover : function(){
 			ui.logger(this);
@@ -509,7 +563,7 @@
 			getInstance().hide();
 		}
 	});
-	 
-	
+
+
 
 })(CF,jQuery,ui);
