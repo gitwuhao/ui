@@ -197,11 +197,8 @@
 			this.$lc.css("top",t);
 			this.$rc.css("top",t);
 		},
-		showResizeBox:function(config){
+		resetResizeBox : function(){
 			ui.logger(this);
-			if(this.setConfig(config)==false){
-				return;
-			}
 			var $target=this.config.$target;
 			var width=$target.outerWidth();
 			var height=$target.outerHeight();
@@ -219,6 +216,14 @@
 			});
 
 			this.setResizeBox();
+		},
+		showResizeBox:function(config){
+			ui.logger(this);
+			if(this.setConfig(config)==false){
+				return;
+			}
+			
+			this.resetResizeBox();
 
 			this.$bg.focus();
 
@@ -306,9 +311,11 @@
 			if(this.setConfig(config)==false){
 				return;
 			}
+			/*
 			if(!this.config.type.resize){
 				this.hideResizeBox();
 			}
+			*/
 			var event=config.event;
 			this.on('dragstart',event.pageX,event.pageY);
 			
@@ -357,13 +364,12 @@
 				return;
 			}
 
-			if(this.config.type.resize){
-				offset=this.$resizebox.offset();
-				this.$resizebox.css({
-					left : offset.left + point.x,
-					top : offset.top + point.y
-				});
-			}
+			offset=this.$resizebox.offset();
+			this.$resizebox.css({
+				left : offset.left + point.x,
+				top : offset.top + point.y
+			});
+		
 
 			if(config.setOffset){
 				config.setOffset(point);
@@ -404,15 +410,14 @@
 				return;
 			}
 
-			if(this.config.type.resize){
-				var $resizebox=this.$resizebox,
-					width=$resizebox.width(),
-					height=$resizebox.height();
-				$resizebox.css({
-					width : width + point.x,
-					height : height + point.y
-				});
-			}
+			var $resizebox=this.$resizebox,
+				width=$resizebox.width(),
+				height=$resizebox.height();
+			$resizebox.css({
+				width : width + point.x,
+				height : height + point.y
+			});
+		
 
 			if(config.setResize){
 				config.setResize(point);
@@ -425,6 +430,10 @@
 					height : height + point.y
 				});
 			}
+
+
+			
+			this.resetResizeBox();
 		},
 		onResizeover : function(){
 			ui.logger(this);
