@@ -99,26 +99,36 @@
 			ui.logger(this);
 			$.getBody().off(this.__EVENTNAMESPACE__);
 		},
-		onMove:function(event){
+		resizeBoxMouseDown:function(event){
+			ui.logger(this);
+			this.config.event=event;
+			var x=event.pageX,y=event.pageY;
+			if(/bg/i.test(event.target.className)){
+				this.on('dragstart',x,y);
+			}else{
+				this.on('resizestart',x,y);
+			}
+		},
+		onMouseup:function(event){
+			ui.logger(this);
+			if(this.config.type.move){
+				this.on('dragover');
+			}else if(this.config.type.resize){
+				this.on('resizeover');
+			}
+		},
+		onMousemove:function(event){
 			ui.logger(this);
 			var offset=this.offset;
 			var x = event.pageX - offset.x;
 			var y = event.pageY - offset.y;
-			if(this.config.type.move){
+			if(this.type=='drag'){
 				this.on('dragmove',x,y);	
-			}else if(this.config.type.resize){
-				this.on('resize',x,y);
+			}else if(this.type=='resize'){
+				this.on('resizemove',x,y);
 			}
 			offset.x = event.pageX;
 			offset.y = event.pageY;
-		},
-		onMouseup:function(event){
-			ui.logger(this);
-			this.on('dragover');
-		},
-		onMousemove:function(event){
-			ui.logger(this);
-			this.onMove(event);
 		},
 		onKeypress:function(event){
 			ui.logger(this);
@@ -187,15 +197,6 @@
 			this.$lc.css("top",t);
 			this.$rc.css("top",t);
 		},
-		resizeboxEventDispatch:function(event){
-			ui.logger(this);
-			this.config.event=event;
-			if(/bg/i.test(event.target.className)){
-				this.on('dragstart',event.pageX,event.pageY);
-			}else{
-			
-			}
-		},
 		showResizeBox:function(config){
 			ui.logger(this);
 			if(this.setConfig(config)==false){
@@ -225,7 +226,7 @@
 			this.$resizebox.on(events,{
 				me : this,
 			},function(event){
-				return event.data.me.resizeboxEventDispatch(event);
+				return event.data.me.resizeBoxMouseDown(event);
 			});
 		},
 		hideResizeBox:function(){
@@ -300,11 +301,7 @@
 			}
 			this.setConfig(null);
 		},
-		onResize:function(x,y){
-			ui.logger(this);
-		
-		},
-		dragstart:function(config){
+		drag : function(config){
 			ui.logger(this);
 			if(this.setConfig(config)==false){
 				return;
@@ -316,10 +313,8 @@
 			this.on('dragstart',event.pageX,event.pageY);
 			
 			delete config.event;
-			
-
 		},
-		onDragstart : function(x,y){
+		dragstart : function(x,y){
 			ui.logger(this);
 
 			this.offset.x = x;
@@ -328,6 +323,20 @@
 			this.bindContentEvent();
 			
 			DragDrop.disabledUserSelect();
+		
+		},
+		dragover : function(){
+			ui.logger(this);
+			this.unbindContentEvent();
+			DragDrop.enabledUserSelect();
+
+			delete this.type;
+		},
+		onDragstart : function(x,y){
+			ui.logger(this);
+
+			this.dragstart(x,y);
+			this.type='drag';
 		},
 		onDragmove : function(x,y){
 			ui.logger(this);
@@ -368,14 +377,58 @@
 		},
 		onDragover : function(){
 			ui.logger(this);
-			this.unbindContentEvent();
-			
-			DragDrop.enabledUserSelect();
-			
+			this.dragover();
 		},
-		onResize : function(){
+		onResizestart:function(x,y){
 			ui.logger(this);
+
+			this.dragstart(x,y);
+			this.type='resize';
+		},
+		onResizemove : function(x,y){
+			ui.logger(this);
+			var point=null,
+				config=this.config,
+				offset;
+
+			if(!config.parentBox){
+				point={
+					x : x,
+					y : y
+				};
+			}else{
+				point=this.getPoint(x,y);
+			}
 			
+			if(point.x==0 && point.y==0){
+				return;
+			}
+
+			if(this.config.type.resize){
+				var $resizebox=this.$resizebox,
+					width=$resizebox.width(),
+					height=$resizebox.height();
+				$resizebox.css({
+					width : width + point.x,
+					height : height + point.y
+				});
+			}
+
+			if(config.setResize){
+				config.setResize(point);
+			}else{
+				var $target=config.$target,
+					width=$target.width(),
+					height=$target.height();
+				$target.css({
+					width : width + point.x,
+					height : height + point.y
+				});
+			}
+		},
+		onResizeover : function(){
+			ui.logger(this);
+			this.dragover();
 		}
 	});
 
@@ -390,17 +443,17 @@
 
 	ui.dragdrop={
 		resize : function(config){
-			this.resize.dragstart(config);
+			this.resize.drag(config);
 		},
-		move : function(config){
+		drag : function(config){
 			config.type=config.type||{};
 			config.type.move=true;
-			getInstance().dragstart(config);
+			getInstance().drag(config);
 		},
 		sort : function(config){
 			config.type=config.type||{};
 			config.type.sort=true;
-			getInstance().dragstart(config);
+
 		},
 		replace : function(config){
 		}
@@ -414,9 +467,9 @@
 			getInstance().$elem.appendTo(render);
 			getInstance().render=render;
 		},
-		dragstart:function(config){
+		drag:function(config){
 			this.show(config);
-			getInstance().dragstart(config);
+			getInstance().drag(config);
 		},
 		show : function(config){
 			config.type=config.type||{};
@@ -427,34 +480,7 @@
 			getInstance().hide();
 		}
 	});
-	
-	ui.dragdrop.replace={
-		getInstance:function(config){
-			return{
-				config:config,
-				show:function(){
-					getInstance().show(this.config);
-				},
-				hide:function(){
-					getInstance().hide(this.config);
-				},
-				drag:function(){
-					getInstance().drag(this.config);
-				},
-				setBody : function(html){
-				
-				},
-				remove : ui.widget.remove
-			};
-		},
-		setRender:function(render){
-			if(instance.render==render){
-				return;
-			}
-			instance.$elem.appendTo(render);
-			instance.render=render;
-		}
-	};
+	 
 	
 
 })(CF,jQuery,ui);

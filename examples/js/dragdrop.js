@@ -48,7 +48,7 @@ window.examples.dragdrop=function(){
 			return;
 		}
 		if(this.className.indexOf('box')>-1){
-			ui.dragdrop.move({
+			ui.dragdrop.drag({
 				target : this,
 				event : event
 			});
