@@ -102,19 +102,30 @@
 		resizeBoxMouseDown:function(event){
 			ui.logger(this);
 			this.config.event=event;
-			var x=event.pageX,y=event.pageY;
-			if(/bg/i.test(event.target.className)){
+			var x=event.pageX,y=event.pageY,
+				className=event.target.className,
+				type=null;
+			if(/bg/i.test(className)){
 				this.on('dragstart',x,y);
 			}else{
-				this.on('resizestart',x,y);
-			}
-		},
-		onMouseup:function(event){
-			ui.logger(this);
-			if(this.config.type.move){
-				this.on('dragover');
-			}else if(this.config.type.resize){
-				this.on('resizeover');
+				if(/bc/i.test(className)){
+					type='bc';
+				}else if(/tc/i.test(className)){
+					type='tc';
+				}else if(/lc/i.test(className)){
+					type='lc';
+				}else if(/rc/i.test(className)){
+					type='rc';
+				}else if(/tl/i.test(className)){
+					type='tl';
+				}else if(/tr/i.test(className)){
+					type='tr';
+				}else if(/bl/i.test(className)){
+					type='bl';
+				}else if(/br/i.test(className)){
+					type='br';
+				}
+				this.on('resizestart',x,y,type);
 			}
 		},
 		onMousemove:function(event){
@@ -129,6 +140,14 @@
 			}
 			offset.x = event.pageX;
 			offset.y = event.pageY;
+		},
+		onMouseup:function(event){
+			ui.logger(this);
+			if(this.config.type.move){
+				this.on('dragover');
+			}else if(this.config.type.resize){
+				this.on('resizeover');
+			}
 		},
 		onKeypress:function(event){
 			ui.logger(this);
@@ -385,11 +404,11 @@
 			ui.logger(this);
 			this.dragover();
 		},
-		onResizestart:function(x,y){
+		onResizestart:function(x,y,resizetype){
 			ui.logger(this);
-
 			this.dragstart(x,y);
 			this.type='resize';
+			this.resizetype=resizetype;
 		},
 		onResizemove : function(x,y){
 			ui.logger(this);
@@ -438,6 +457,7 @@
 		onResizeover : function(){
 			ui.logger(this);
 			this.dragover();
+			delete this.resizetype;
 		}
 	});
 
