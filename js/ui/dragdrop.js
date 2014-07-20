@@ -232,9 +232,8 @@
 
 			this.$bg.css({
 				width : width,
-				height : width
+				height : height
 			});
-
 			this.setResizeBox();
 		},
 		showResizeBox:function(config){
@@ -493,22 +492,9 @@
 					});
 				}
 			}
-
-			$bg.css({
-				width : width + region.w,
-				height : height +region.h
-			});
-
-			if(region.x!=0 || region.y!=0){
-				offset=this.$resizebox.point();
-				this.$resizebox.css({
-					left : offset.left + region.x,
-					top : offset.top + region.y
-				});
-			}
 			
 			this.resetResizeBox();
-
+			
 		},
 		onResizeover : function(){
 			ui.logger(this);
