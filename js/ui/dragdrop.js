@@ -102,7 +102,8 @@
 		resizeBoxMouseDown:function(event){
 			ui.logger(this);
 			this.config.event=event;
-			var x=event.pageX,y=event.pageY,
+			var x=event.pageX,
+				y=event.pageY,
 				className=event.target.className,
 				type=null;
 			if(/bg/i.test(className)){
@@ -130,6 +131,13 @@
 		},
 		onMousemove:function(event){
 			ui.logger(this);
+			/*
+			var timeStamp=event.timeStamp;
+			if(this.lastMoveTimestamp > timeStamp - 50){
+				return;
+			}
+			this.lastMoveTimestamp=timeStamp;
+			*/
 			var offset=this.offset;
 			var x = event.pageX - offset.x;
 			var y = event.pageY - offset.y;
@@ -140,6 +148,7 @@
 			}
 			offset.x = event.pageX;
 			offset.y = event.pageY;
+
 		},
 		onMouseup:function(event){
 			ui.logger(this);
@@ -319,7 +328,32 @@
 		},
 		getRegion : function(region){
 			ui.logger(this);
-		
+			var $parentBox=$(this.config.parentBox),
+				$target=this.config.$target,
+				maxWidth=$parentBox.width(),
+				maxHeight=$parentBox.height(),
+				offset=$target.point(),
+				_l=offset.left,
+				_t=offset.top,
+				_w=$target.outerWidth(),
+				_h=$target.outerHeight();
+
+
+			if( _l + region.x < 0 ){
+				region.x = - _l;
+				region.w=0;
+			}else if( _l + _w +  region.w +  region.x > maxWidth ){
+				region.x = 0;
+				region.w=maxWidth - _l -  _w ;
+			}
+
+			if(_t + region.y < 0){
+				region.y=-_t;
+				region.h=0;
+			}else if(_t + _h + region.h + region.y > maxHeight){
+				region.y=0;
+				region.h=maxHeight - _t - _h;
+			}
 			return region;
 		},
 		hide:function(){
@@ -337,7 +371,6 @@
 			
 			var event=config.event;
 			this.on('dragstart',event.pageX,event.pageY);
-
 			delete config.event;
 		},
 		dragstart : function(x,y){
@@ -421,7 +454,7 @@
 					y:0,
 					w:0,
 					h:0
-				}
+				};
 
 			if(resizetype=="lc"){
 				region.w=-x;
