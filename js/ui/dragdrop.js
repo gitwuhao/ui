@@ -388,7 +388,6 @@
 				return;
 			}
 
-
 			if(!config.getPoint){
 				offset=config.$target.point();
 				config.$target.css({
@@ -425,10 +424,7 @@
 					y:0,
 					w:0,
 					h:0
-				},
-				$bg=this.$bg,
-				width=this.$bg.width(),
-				height=this.$bg.height();
+				}
 
 			if(resizetype=="lc"){
 				region.w=-x;
@@ -457,6 +453,9 @@
 				region.w=x;
 				region.h=y;
 			}
+			var $bg=this.$bg,
+				width=this.$bg.width(),
+				height=this.$bg.height();
 
 			if(width + region.w < this.__MIN_SIZE__ ){
 				region.w=0;
@@ -467,44 +466,47 @@
 				region.y=0;
 			}
 
-			if(!config.parentBox){
-				
-			}else{
+			if(config.getRegion){
+				config.getRegion(region);
+			}else if(config.parentBox){
 				this.getRegion(region);
 			}
 
-
-			if(config.setResize){
-				config.setResize(point);
-			}else{
-				var $target=config.$target,
-					width=$target.width(),
-					height=$target.height();
-				$target.css({
-					width : width + point.x,
-					height : height + point.y
-				});
-			}
-
-
-			if(region.x==0 && region.y==0){
+			if(region.x==0 && region.y==0 && region.w==0 && region.h==0){
 				return;
 			}
 
+			if(!config.getRegion){
+				var $target=config.$target,
+					_width=$target.width(),
+					_height=$target.height();
+				$target.css({
+					width : _width + region.w,
+					height : _height + region.h
+				});
+
+				if(region.x!=0 || region.y!=0){
+					offset=$target.point();
+					$target.css({
+						left : offset.left + region.x,
+						top : offset.top + region.y
+					});
+				}
+			}
 
 			$bg.css({
 				width : width + region.w,
 				height : height +region.h
 			});
 
-
-			var offset=this.$resizebox.point();
-
-			this.$resizebox.css({
-				left : offset.left + x,
-				top : offset.top + y
-			});
-
+			if(region.x!=0 || region.y!=0){
+				offset=this.$resizebox.point();
+				this.$resizebox.css({
+					left : offset.left + region.x,
+					top : offset.top + region.y
+				});
+			}
+			
 			this.resetResizeBox();
 
 		},
