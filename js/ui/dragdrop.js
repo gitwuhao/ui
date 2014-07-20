@@ -34,6 +34,8 @@
 			disabledUserSelect:function(){
 				var style=document.body.style;
 				style.webkitUserSelect='none';
+
+
 			},
 			enabledUserSelect:function(){
 				var style=document.body.style;
@@ -66,7 +68,7 @@
 		},
 		bindContentEvent:function(){
 			ui.logger(this);
-			var events=['selectstart','mouseup','mousemove',''].join(this.__EVENTNAMESPACE__+' ');
+			var events=['mouseup','mousemove',''].join(this.__EVENTNAMESPACE__+' ');
 			$.getDoc().on(events,{
 				me : this,
 			},function(event){
@@ -138,17 +140,23 @@
 			}
 			this.lastMoveTimestamp=timeStamp;
 			*/
+			if(event.offsetX>0 && event.offsetY>0){
+				//return;
+			}
 			var offset=this.offset;
 			var x = event.pageX - offset.x;
 			var y = event.pageY - offset.y;
+			
 			if(this.type=='drag'){
 				this.on('dragmove',x,y);
 			}else if(this.type=='resize'){
 				this.on('resizemove',x,y);
 			}
+
 			offset.x = event.pageX;
 			offset.y = event.pageY;
 
+			console.info('offset:[',event.offsetX,',',event.offsetY,']');
 		},
 		onMouseup:function(event){
 			ui.logger(this);
