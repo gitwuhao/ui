@@ -116,30 +116,25 @@
 		},
 		onMousemove:function(event){
 			ui.logger(this);
-			/*
-			var timeStamp=event.timeStamp;
-			if(this.lastMoveTimestamp > timeStamp - 50){
-				return;
-			}
-			this.lastMoveTimestamp=timeStamp;
-			*/
-			if(event.offsetX>0 && event.offsetY>0){
-				//return;
-			}
-			var offset=this.offset;
-			var x = event.pageX - offset.x;
-			var y = event.pageY - offset.y;
+			var offset=this.offset,
+				pageX=event.pageX,
+				pageY=event.pageY,
+				x = pageX - offset.x,
+				y = pageY - offset.y;
 			
 			if(this.type=='drag'){
 				this.on('dragmove',x,y);
-			}else if(this.type=='resize'){
+			}else if(this.type=='resize' && this.checkResize(event)){
 				this.on('resizemove',x,y);
 			}
 
-			offset.x = event.pageX;
-			offset.y = event.pageY;
+			offset.x = pageX;
+			offset.y = pageY;
+		},
+		checkResize:function(event){
+			ui.logger(this);
 
-			console.info('offset:[',event.offsetX,',',event.offsetY,']');
+			return false;
 		},
 		onMouseup:function(event){
 			ui.logger(this);
@@ -215,23 +210,33 @@
 			this.$bc.css("left",l);
 			this.$lc.css("top",t);
 			this.$rc.css("top",t);
-		},
-		resetResizeBox : function(){
+		},	
+		getTargetRegion : function(){
 			ui.logger(this);
 			var $target=this.config.$target;
 			var width=$target.outerWidth();
 			var height=$target.outerHeight();
 			var offset=$target.offset();
+			return {
+				left: offset.left,
+				top : offset.top,
+				width: width,
+				height: height
+			};
+		},
+		resetResizeBox : function(){
+			ui.logger(this);
+			var targetRegion=this.getTargetRegion();
 
 			this.$resizebox.css({
-				left : offset.left,
-				top : offset.top,
+				left : targetRegion.left,
+				top : targetRegion.top,
 				display : 'block'
 			});
 
 			this.$bg.css({
-				width : width,
-				height : height
+				width : targetRegion.width,
+				height : targetRegion.height
 			});
 			this.setResizeBox();
 		},
@@ -240,7 +245,6 @@
 			if(this.setConfig(config)==false){
 				return;
 			}
-
 			this.resetResizeBox();
 
 			this.$bg.focus();
@@ -314,7 +318,6 @@
 			}else if( _t + _h + point.y > maxHeight ){
 				point.y = maxHeight - _t - _h;
 			}
-
 			return point;
 		},
 		getRegion : function(region){
@@ -328,7 +331,6 @@
 				_t=offset.top,
 				_w=$target.outerWidth(),
 				_h=$target.outerHeight();
-
 
 			if( _l + region.x < 0 ){
 				region.x = - _l;
@@ -359,32 +361,26 @@
 			if(this.setConfig(config)==false){
 				return;
 			}
-			
 			var event=config.event;
 			this.on('dragstart',event.pageX,event.pageY);
 			delete config.event;
 		},
 		dragstart : function(x,y){
 			ui.logger(this);
-
 			this.offset.x = x;
 			this.offset.y = y;
-
 			this.bindContentEvent();
-
 			DragDrop.disabledUserSelect();
-
 		},
 		dragover : function(){
 			ui.logger(this);
 			this.unbindContentEvent();
 			DragDrop.enabledUserSelect();
-
+			delete this.targetRegion;
 			delete this.type;
 		},
 		onDragstart : function(x,y){
 			ui.logger(this);
-
 			this.dragstart(x,y);
 			this.type='drag';
 		},
@@ -396,7 +392,6 @@
 				},
 				config=this.config,
 				offset;
-
 
 			if(config.getPoint){
 				config.getPoint(point);
@@ -418,11 +413,11 @@
 			}
 
 			offset=this.$resizebox.offset();
+			
 			this.$resizebox.css({
 				left : offset.left + point.x,
 				top : offset.top + point.y
 			});
-
 		},
 		onDragover : function(){
 			ui.logger(this);
@@ -514,9 +509,8 @@
 					});
 				}
 			}
-			
+
 			this.resetResizeBox();
-			
 		},
 		onResizeover : function(){
 			ui.logger(this);
