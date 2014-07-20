@@ -53,8 +53,11 @@ window.examples.dragdrop=function(){
 				event : event
 			});
 		}else{
-			ui.dragdrop.resize.dragstart({
+			ui.dragdrop.resize({
 				target : this,
+				type : {
+					move : true
+				},
 				event : event,
 				parentBox : this.parentElement
 			});

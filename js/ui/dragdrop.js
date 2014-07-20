@@ -30,6 +30,14 @@
 				*/
 				html.push('</div>');
 				return html.join('');
+			},
+			disabledUserSelect:function(){
+				var style=document.body.style;
+				style.webkitUserSelect='none';
+			},
+			enabledUserSelect:function(){
+				var style=document.body.style;
+				style.webkitUserSelect='';
 			}
 		},
 		__EVENTNAMESPACE__ : '.DD' + $.randomChar(5),
@@ -58,7 +66,7 @@
 		},
 		bindContentEvent:function(){
 			ui.logger(this);
-			var events=['mouseup','mousemove',''].join(this.__EVENTNAMESPACE__+' ');
+			var events=['selectstart','mouseup','mousemove',''].join(this.__EVENTNAMESPACE__+' ');
 			$.getDoc().on(events,{
 				me : this,
 			},function(event){
@@ -68,6 +76,14 @@
 		unbindContentEvent:function(){
 			ui.logger(this);
 			$.getDoc().off(this.__EVENTNAMESPACE__);
+		},
+		onSelectstart:function(event){
+			ui.logger(this);
+			return false;
+		},
+		onDragstart:function(event){
+			ui.logger(this);
+			return false;
 		},
 		bindKeyPress:function(){
 			ui.logger(this);
@@ -83,16 +99,16 @@
 			ui.logger(this);
 			$.getBody().off(this.__EVENTNAMESPACE__);
 		},
-		onSelectstart:function(event){
-			ui.logger(this);
-			return false;
-		},
 		onMove:function(event){
 			ui.logger(this);
 			var offset=this.offset;
 			var x = event.pageX - offset.x;
 			var y = event.pageY - offset.y;
-			this.on('dragmove',x,y);
+			if(this.config.type.move){
+				this.on('dragmove',x,y);	
+			}else if(this.config.type.resize){
+				this.on('resize',x,y);
+			}
 			offset.x = event.pageX;
 			offset.y = event.pageY;
 		},
@@ -279,23 +295,28 @@
 		},
 		hide:function(){
 			ui.logger(this);
-			if(this.config.type=='resize'){
+			if(this.config.type.resize){
 				this.hideResizeBox();
 			}
 			this.setConfig(null);
+		},
+		onResize:function(x,y){
+			ui.logger(this);
+		
 		},
 		dragstart:function(config){
 			ui.logger(this);
 			if(this.setConfig(config)==false){
 				return;
 			}
-			if(this.config.type!='resize'){
+			if(!this.config.type.resize){
 				this.hideResizeBox();
 			}
 			var event=config.event;
 			this.on('dragstart',event.pageX,event.pageY);
 			
 			delete config.event;
+			
 
 		},
 		onDragstart : function(x,y){
@@ -305,6 +326,8 @@
 			this.offset.y = y;
 
 			this.bindContentEvent();
+			
+			DragDrop.disabledUserSelect();
 		},
 		onDragmove : function(x,y){
 			ui.logger(this);
@@ -325,7 +348,7 @@
 				return;
 			}
 
-			if(this.config.type=='resize'){
+			if(this.config.type.resize){
 				offset=this.$resizebox.offset();
 				this.$resizebox.css({
 					left : offset.left + point.x,
@@ -346,6 +369,9 @@
 		onDragover : function(){
 			ui.logger(this);
 			this.unbindContentEvent();
+			
+			DragDrop.enabledUserSelect();
+			
 		},
 		onResize : function(){
 			ui.logger(this);
@@ -363,14 +389,17 @@
 	};
 
 	ui.dragdrop={
-		resize : function(){
+		resize : function(config){
+			this.resize.dragstart(config);
 		},
 		move : function(config){
-			config.type='move';
+			config.type=config.type||{};
+			config.type.move=true;
 			getInstance().dragstart(config);
 		},
 		sort : function(config){
-			config.type='sort';
+			config.type=config.type||{};
+			config.type.sort=true;
 			getInstance().dragstart(config);
 		},
 		replace : function(config){
@@ -390,7 +419,8 @@
 			getInstance().dragstart(config);
 		},
 		show : function(config){
-			config.type='resize';
+			config.type=config.type||{};
+			config.type.resize=true;
 			getInstance().showResizeBox(config);
 		},
 		hide : function(){

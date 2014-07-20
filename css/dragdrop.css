@@ -1,8 +1,9 @@
 .x-ui-dd-resize-box{
 	position: absolute;
 	display: none;
-	-webkit-user-select: none;
 	z-index: 100000;
+	-webkit-user-select: none;
+	-webkit-user-drag: none;
 }
 .x-ui-dd-resize-box a{
 	display: inline-block;
