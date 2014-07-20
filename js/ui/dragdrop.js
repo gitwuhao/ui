@@ -17,25 +17,12 @@
 				$.it(config.arrowArray,function(index,item){
 					this.push('<div class="',item,'"></div>');
 				},html);
-				/*
-				<div class="tl"></div>
-				<div class="tc"></div>
-				<div class="tr"></div>
-				<div class="lc"></div>
-				<div class="bg"></div>
-				<div class="rc"></div>
-				<div class="bl"></div>
-				<div class="bc"></div>
-				<div class="br"></div>
-				*/
 				html.push('</div>');
 				return html.join('');
 			},
 			disabledUserSelect:function(){
 				var style=document.body.style;
 				style.webkitUserSelect='none';
-
-
 			},
 			enabledUserSelect:function(){
 				var style=document.body.style;
@@ -80,10 +67,6 @@
 			$.getDoc().off(this.__EVENTNAMESPACE__);
 		},
 		onSelectstart:function(event){
-			ui.logger(this);
-			return false;
-		},
-		onDragstart:function(event){
 			ui.logger(this);
 			return false;
 		},
@@ -219,7 +202,7 @@
 				default:
 					return;
 			}
-			this.dragmove(x,y);
+			this.on('dragmove',x,y);
 		},
 		setResizeBox:function(){
 			ui.logger(this);
