@@ -105,7 +105,7 @@
 				x = pageX - offset.x,
 				y = pageY - offset.y;
 			
-			this.config.event=event;
+			this.event=event;
 
 			if(this.type=='drag'){
 				this.on('dragmove',x,y);
@@ -256,9 +256,8 @@
 			if(this.setConfig(config)==false){
 				return;
 			}
-			var event=config.event;
-			this.on('dragstart',event.pageX,event.pageY);
-			delete config.event;
+			this.event=config.event;
+			this.on('dragstart',this.event.pageX,this.event.pageY);
 		},
 		dragstart : function(x,y){
 			ui.logger(this);
@@ -273,7 +272,8 @@
 			DragDrop.enabledUserSelect();
 			delete this.targetRegion;
 			delete this.type;
-			delete this.resizeConfig
+			delete this.resizeConfig;
+			delete this.event;
 		},
 		onDragstart : function(x,y){
 			ui.logger(this);
@@ -324,12 +324,60 @@
 				return;
 			}
 			this.initReplaceBox();
-			var event=config.event;
-			this.on('sortstart',event.pageX,event.pageY);
-			delete config.event;
-			
+			this.event=config.event;
+			this.on('sortstart',this.event.pageX,this.event.pageY);
 			if(config.type.resize){
 				this.showResizeBox(config);
+			}
+			
+			this.config.$parentBox=$(config.parentBox);
+		},
+		sortstart : function(){
+			ui.logger(this);
+			if(this.isResetReplaceBox){
+				return;
+			}
+			var region=this.getTargetRegion();
+			this.$replacebox.css({
+				width: region.width,
+				height: region.height,
+			});		
+			$.getBody().addClass(this._c_dd_sort);
+			this.isResetReplaceBox=true;
+			this.$replacebox.show();
+			this.bindSortContent();
+		},
+		bindSortContent:function(){
+			ui.logger(this);
+			var events=['mousemove',''].join(this.__EVENTNAMESPACE__+' ');
+			this.config.$parentBox.on(events,{
+				me : this,
+			},function(event){
+				return event.data.me.on('sortBoxMousemove',event);
+			});	
+		},
+		unbindSortContent:function(){
+			ui.logger(this);
+			this.config.$parentBox.off(this.__EVENTNAMESPACE__);
+		},
+		onSortBoxMousemove:function(event){
+			ui.logger(this);
+			var $target,
+				target=event.target,
+				parentBox=this.config.parentBox;
+			if(target==this.config.target){
+				return;
+			}else if(target.parentElement==parentBox){
+				$target=$(target);
+			}else{
+				$target=$(event.target).parentsUntil(parentBox);
+				if($target.length==1 && $target[0].parentElement==parentBox){
+				}else{
+					return;
+				}
+			}
+			if($target[0]!=this.config.target){
+				$target.before(this.config.target);
 			}
 		},
 		onSortstart : function(x,y){
@@ -343,7 +391,7 @@
 			if(!this.isResetReplaceBox && Math.abs(x) < 10 && Math.abs(y)<10){
 				return false;
 			}
-			var event=this.config.event;
+			var event=this.event;
 			
 			this.$resizebox.hide();
 
@@ -352,19 +400,7 @@
 				top:event.pageY + 22
 			});
 			
-			if(!this.isResetReplaceBox){
-				this.$replacebox.show();
-				var region=this.getTargetRegion();
-				this.$replacebox.css({
-					width: region.width,
-					height: region.height,
-				});
-				
-				this.isResetReplaceBox=true;
-				
-				$.getBody().addClass(this._c_dd_sort);
-
-			}
+			this.sortstart();
 
 		},
 		onSortover : function(){
@@ -373,6 +409,7 @@
 			this.dragover();
 			$.getBody().removeClass(this._c_dd_sort);
 			delete this.isResetReplaceBox;
+			this.unbindSortContent();
 		},
 		resizeBoxMouseDown:function(event){
 			ui.logger(this);
@@ -383,7 +420,7 @@
 				type=this.config.type,
 				isBG=/bg/i.test(className);
 
-			this.config.event=event;
+			this.event=event;
 
 			if(type.drag && isBG){
 				this.on('dragstart',x,y);
@@ -516,7 +553,7 @@
 					w:0,
 					h:0
 				},
-				shiftKey=config.event.shiftKey;
+				shiftKey=this.event.shiftKey;
 				
 			if(resizeType=="nw"){
 				region.w=-x;

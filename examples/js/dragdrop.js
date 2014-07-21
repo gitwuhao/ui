@@ -72,17 +72,17 @@ window.examples.dragdrop=function(){
 			  '<div class="item">4</div>',
 			  '<div class="item">5</div>',
 			  '<div class="item">6</div>',
-			  '<div class="item">7</div>',
-			  '<div class="item">8</div>',
-			  '<div class="item">9</div>',
+			  '<div class="item"><div><span>7</span></div></div>',
+			  '<div class="item"><div><span>8</span></div></div>',
+			  '<div class="item"><div><span>9</span></div></div>',
 		  '</div>'];
 
 	$.getBody().append(html.join(''));
 
 	$('.item,.list').mousedown(function(event){
-		if(event.target!=this){
-			return;
-		}
+		//if(event.target!=this){
+		//	return;
+		//}
 		if(this.className.indexOf('list')>-1){
 			ui.dragdrop.drag({
 				target : this,
@@ -97,6 +97,7 @@ window.examples.dragdrop=function(){
 				event : event,
 				parentBox : this.parentElement
 			});
+			return false;
 		}
 	});
 
