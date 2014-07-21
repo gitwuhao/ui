@@ -362,14 +362,20 @@
 		},
 		onSortBoxMousemove:function(event){
 			ui.logger(this);
-			if(this.config.sortBoxMove){
-				this.config.sortBoxMove(event);
+			var config=this.config;
+			if(event.timeStamp - config.lastSortTimeStamp < 300){
+				return;
+			}
+			config.lastSortTimeStamp=event.timeStamp;
+			if(config.sortBoxMove){
+				config.sortBoxMove(event);
 				return;
 			}
 			var $target,
+				srcTarget=config.target,
 				target=event.target,
-				parentBox=this.config.parentBox;
-			if(target==this.config.target){
+				parentBox=config.parentBox;
+			if(target==srcTarget){
 				return;
 			}else if(target.parentElement==parentBox){
 				$target=$(target);
@@ -381,10 +387,10 @@
 				}
 			}
 			var prev=$target.prev();
-			if(prev.length==1 && prev[0]==this.config.target){
-				$target.after(this.config.target);
+			if(prev.length==1 && prev[0]==srcTarget){
+				$target.after(srcTarget);
 			}else{
-				$target.before(this.config.target);
+				$target.before(srcTarget);
 			}
 		},
 		onSortstart : function(x,y){
