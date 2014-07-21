@@ -119,24 +119,20 @@
 				y = pageY - offset.y;
 			if(this.type=='drag'){
 				this.on('dragmove',x,y);
-			}else if(this.type=='resize' && this.checkResize(event,x,y)){
-				this.on('resizemove',x,y);
+			}else if(this.type=='resize'){
+				var _offset=this.resizeConfig.$target.offset();
+				if(_offset.left + x  - pageX != 0 ){
+					x=pageX - _offset.left;
+				}
+				if(_offset.top + y - pageY != 0 ){
+					y=pageY - _offset.top;
+				}
+				if(x!=y && x!=0){
+					this.on('resizemove',x,y);
+				}
 			}
 			offset.x = pageX;
 			offset.y = pageY;
-		},
-		checkResize:function(event,x,y){
-			ui.logger(this);
-			var offset=this.resizeConfig.$target.offset();
-			//console.info('offset:[',offset.left,'[',event.pageX,'],',offset.top,'[',event.pageY,']]');
-			if(Math.abs(offset.left + x  - event.pageX) < 5 ){
-			
-			}else if(Math.abs(offset.top + y - event.pageY) < 5){
-			
-			}else{
-				//return false;
-			}
-			return true;
 		},
 		onMouseup:function(event){
 			ui.logger(this);
