@@ -362,6 +362,10 @@
 		},
 		onSortBoxMousemove:function(event){
 			ui.logger(this);
+			if(this.config.sortBoxMove){
+				this.config.sortBoxMove(event);
+				return;
+			}
 			var $target,
 				target=event.target,
 				parentBox=this.config.parentBox;
@@ -370,13 +374,16 @@
 			}else if(target.parentElement==parentBox){
 				$target=$(target);
 			}else{
-				$target=$(event.target).parentsUntil(parentBox);
+				$target=$(target).parentsUntil(parentBox);
 				if($target.length==1 && $target[0].parentElement==parentBox){
 				}else{
 					return;
 				}
 			}
-			if($target[0]!=this.config.target){
+			var prev=$target.prev();
+			if(prev.length==1 && prev[0]==this.config.target){
+				$target.after(this.config.target);
+			}else{
 				$target.before(this.config.target);
 			}
 		},
