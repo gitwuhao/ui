@@ -81,8 +81,7 @@
 			$.getBody().on(events,{
 				me : this,
 			},function(event){
-				event.data.me.on('keypress',event);
-				return false;
+				return event.data.me.on('keypress',event);
 			});
 		},
 		unbindKeyPress:function(){
@@ -95,17 +94,17 @@
 				y=event.pageY,
 				target=event.target,
 				className=target.className,
-				type=null;
+				type=this.config.type,
+				isBG=/bg/i.test(className);
 
 			this.config.event=event;
 
-			if(/bg/i.test(className)){
+			if(type.drag && isBG){
 				this.on('dragstart',x,y);
-			}else{
-				var type=$.data(target,'resizeType');
+			}else if(type.resize && !isBG){
 				this.resizeConfig={
 					$target : $(target),
-					type : type
+					type : $.data(target,'resizeType')
 				};
 				this.on('resizestart',x,y);
 			}
@@ -196,6 +195,7 @@
 					return;
 			}
 			this.on('dragmove',x,y);
+			return false;
 		},
 		setResizeBox:function(){
 			ui.logger(this);
@@ -544,6 +544,9 @@
 
 		},
 		replace : function(config){
+		},
+		hide : function(){
+			getInstance().hide();
 		}
 	};
 
@@ -564,9 +567,7 @@
 			config.type.resize=true;
 			getInstance().showResizeBox(config);
 		},
-		hide : function(){
-			getInstance().hide();
-		}
+		hide : ui.dragdrop.hide
 	});
 
 
