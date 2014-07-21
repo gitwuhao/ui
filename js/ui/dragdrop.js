@@ -49,14 +49,12 @@
 					resizeType : item
 				});
 			},this);
+
 			delete this.children;
 
 			this.render=document.body;
-
 			this.resizeIconSize = 8;
-
 			this.offset={};
-
 		},
 		bindContentEvent:function(){
 			ui.logger(this);
@@ -116,6 +114,9 @@
 				pageY=event.pageY,
 				x = pageX - offset.x,
 				y = pageY - offset.y;
+			
+			this.config.event=event;
+
 			if(this.type=='drag'){
 				this.on('dragmove',x,y);
 			}else if(this.type=='resize'){
@@ -439,7 +440,9 @@
 					y:0,
 					w:0,
 					h:0
-				};
+				},
+				shiftKey=config.event.shiftKey;
+				
 			if(resizeType=="nw"){
 				region.w=-x;
 				region.h=-y;
@@ -478,6 +481,15 @@
 			if(height + region.h  < this.__MIN_SIZE__){
 				region.h=0;
 				region.y=0;
+			}
+			if(shiftKey){
+				var mW=width + region.w;
+				var mH=height + region.h;
+				if(mW > mH){
+					region.h = mW - height;
+				}else if(mW < mH){
+					region.w = mH - width;
+				}
 			}
 
 			if(config.getRegion){
