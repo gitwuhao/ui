@@ -15,7 +15,7 @@
 	min-width: 50px;
 	font-size: 0px;
 }
-.x-ui-dd-resize-box .tl,.x-ui-dd-resize-box .tr,.x-ui-dd-resize-box .bl,.x-ui-dd-resize-box .br,.x-ui-dd-resize-box .tc,.x-ui-dd-resize-box .bc,.x-ui-dd-resize-box .lc,.x-ui-dd-resize-box .rc{
+.x-ui-dd-resize-box .nw,.x-ui-dd-resize-box .ne,.x-ui-dd-resize-box .sw,.x-ui-dd-resize-box .se,.x-ui-dd-resize-box .n,.x-ui-dd-resize-box .s,.x-ui-dd-resize-box .w,.x-ui-dd-resize-box .e{
 	background-color: #FFFFFF;
 	width: 8px;
 	height: 8px;
@@ -23,42 +23,45 @@
 	z-index: 99999;
 	outline: 1px solid #B1B1B1;
 }
-.x-ui-dd-resize-box .tl,.x-ui-dd-resize-box .tc,.x-ui-dd-resize-box .tr{
+.x-ui-dd-resize-box .nw,.x-ui-dd-resize-box .n,.x-ui-dd-resize-box .ne{
 	top: -5px;
 }
-.x-ui-dd-resize-box .tl,.x-ui-dd-resize-box .bl,.x-ui-dd-resize-box .lc{
+.x-ui-dd-resize-box .nw,.x-ui-dd-resize-box .sw,.x-ui-dd-resize-box .w{
 	left: -5px;
 }
-.x-ui-dd-resize-box .tr,.x-ui-dd-resize-box .br,.x-ui-dd-resize-box .rc{
+.x-ui-dd-resize-box .ne,.x-ui-dd-resize-box .se,.x-ui-dd-resize-box .e{
 	right: -5px;
 }
-.x-ui-dd-resize-box .bl,.x-ui-dd-resize-box .bc,.x-ui-dd-resize-box .br{
+.x-ui-dd-resize-box .sw,.x-ui-dd-resize-box .s,.x-ui-dd-resize-box .se{
 	bottom: -5px;
 }
-.x-ui-dd-resize-box .lc,.x-ui-dd-resize-box .rc{
+.x-ui-dd-resize-box .w,.x-ui-dd-resize-box .e{
 	top: 50%;
 }
-.x-ui-dd-resize-box .tc,.x-ui-dd-resize-box .bc{
+.x-ui-dd-resize-box .n,.x-ui-dd-resize-box .s{
 	left: 50%;
 }
-.lc,.rc,.lc-c *,.rc-c *{
-	cursor: w-resize;
+.x-ui-dd-resize-box .w,.x-ui-dd-resize-box .e,.x-ui-dd-resize-w,.x-ui-dd-resize-w *,.x-ui-dd-resize-e,.x-ui-dd-resize-e *,.x-ui-dd-resize-w .x-ui-dd-resize-box div,.x-ui-dd-resize-e .x-ui-dd-resize-box div{
+	cursor:w-resize;
 }
-.tl,.tl-c *{
+.x-ui-dd-resize-box .nw,.x-ui-dd-resize-nw,.x-ui-dd-resize-nw *,.x-ui-dd-resize-nw .x-ui-dd-resize-box div{
 	cursor:nw-resize;
 }
-.tc,.bc,.tc-c,.bc-c,.tc-c *,.bc-c *{
+.x-ui-dd-resize-box .n,.x-ui-dd-resize-box .s,.x-ui-dd-resize-n,.x-ui-dd-resize-n *,.x-ui-dd-resize-s,.x-ui-dd-resize-s *,.x-ui-dd-resize-s .x-ui-dd-resize-box div,.x-ui-dd-resize-n .x-ui-dd-resize-box div{
 	cursor:n-resize;
 }
-.tr,.tr-c *{
+.x-ui-dd-resize-box .ne,.x-ui-dd-resize-ne,.x-ui-dd-resize-ne *,.x-ui-dd-resize-ne .x-ui-dd-resize-box div{
 	cursor:ne-resize;
 }
-.bl,.bl-c *{
+.x-ui-dd-resize-box .sw,.x-ui-dd-resize-sw,.x-ui-dd-resize-sw *,.x-ui-dd-resize-sw .x-ui-dd-resize-box div{
 	cursor:sw-resize;
 }
-.br,.br-c,.br-c *{
+.x-ui-dd-resize-box .se,.x-ui-dd-resize-se,.x-ui-dd-resize-se *,.x-ui-dd-resize-se .x-ui-dd-resize-box div{
 	cursor:se-resize;
 }
+
+
+
 .x-ui-dd-replace-box{
 	position: absolute;
 	display: none;

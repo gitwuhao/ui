@@ -8,11 +8,13 @@
 		_name_ : "DragDrop",
 		statics:{
 			css:{
+				_c_dd_resize: '-dd-resize',
 				_c_dd_box: '-dd-resize-box'
 			},
 			getTemplate: function(config){
 				ui.widget.applyCSS(config,this.css);
-				config.arrowArray=['tl','tc','tr','lc','bg','rc','bl','bc','br'];
+				//'tl','tc','tr','lc','bg','rc','bl','bc','br'
+				config.arrowArray=['nw','n','ne','w','bg','e','sw','s','se'];
 				var html=['<div class="',config._c_dd_box,'">'];
 				$.it(config.arrowArray,function(index,item){
 					this.push('<div class="',item,'"></div>');
@@ -41,8 +43,11 @@
 			this.children=this.$resizebox.children();
 
 			$.it(config.arrowArray,function(index,item){
-				this['$'+item]=$(this.children[index]);
-
+				var elem=this.children[index];
+				this['$'+item]=$(elem);
+				$.data(elem,{
+					resizeType : item
+				});
 			},this);
 			delete this.children;
 
@@ -86,32 +91,23 @@
 		},
 		resizeBoxMouseDown:function(event){
 			ui.logger(this);
-			this.config.event=event;
 			var x=event.pageX,
 				y=event.pageY,
-				className=event.target.className,
+				target=event.target,
+				className=target.className,
 				type=null;
+			
+			this.config.event=event;
+
 			if(/bg/i.test(className)){
 				this.on('dragstart',x,y);
 			}else{
-				if(/bc/i.test(className)){
-					type='bc';
-				}else if(/tc/i.test(className)){
-					type='tc';
-				}else if(/lc/i.test(className)){
-					type='lc';
-				}else if(/rc/i.test(className)){
-					type='rc';
-				}else if(/tl/i.test(className)){
-					type='tl';
-				}else if(/tr/i.test(className)){
-					type='tr';
-				}else if(/bl/i.test(className)){
-					type='bl';
-				}else if(/br/i.test(className)){
-					type='br';
-				}
-				this.on('resizestart',x,y,type);
+				var type=$.data(target,'resizeType');
+				this.resizeConfig={
+					$target : $(target),
+					type : type
+				};
+				this.on('resizestart',x,y);
 			}
 		},
 		onMousemove:function(event){
@@ -121,26 +117,32 @@
 				pageY=event.pageY,
 				x = pageX - offset.x,
 				y = pageY - offset.y;
-			
 			if(this.type=='drag'){
 				this.on('dragmove',x,y);
-			}else if(this.type=='resize' && this.checkResize(event)){
+			}else if(this.type=='resize' && this.checkResize(event,x,y)){
 				this.on('resizemove',x,y);
 			}
-
 			offset.x = pageX;
 			offset.y = pageY;
 		},
-		checkResize:function(event){
+		checkResize:function(event,x,y){
 			ui.logger(this);
-
-			return false;
+			var offset=this.resizeConfig.$target.offset();
+			//console.info('offset:[',offset.left,'[',event.pageX,'],',offset.top,'[',event.pageY,']]');
+			if(Math.abs(offset.left + x  - event.pageX) < 4 ){
+			
+			}else if(Math.abs(offset.top + y - event.pageY) < 4){
+			
+			}else{
+				return false;
+			}
+			return true;
 		},
 		onMouseup:function(event){
 			ui.logger(this);
-			if(this.config.type.move){
+			if(this.type=='drag'){
 				this.on('dragover');
-			}else if(this.config.type.resize){
+			}else if(this.type=='resize'){
 				this.on('resizeover');
 			}
 		},
@@ -205,11 +207,10 @@
 			var height=this.$bg.height();
 			var l=(width-this.resizeIconSize)/2;
 			var t=(height-this.resizeIconSize)/2;
-
-			this.$tc.css("left",l);
-			this.$bc.css("left",l);
-			this.$lc.css("top",t);
-			this.$rc.css("top",t);
+			this.$n.css("left",l);
+			this.$s.css("left",l);
+			this.$w.css("top",t);
+			this.$e.css("top",t);
 		},	
 		getTargetRegion : function(){
 			ui.logger(this);
@@ -378,6 +379,7 @@
 			DragDrop.enabledUserSelect();
 			delete this.targetRegion;
 			delete this.type;
+			delete this.resizeConfig
 		},
 		onDragstart : function(x,y){
 			ui.logger(this);
@@ -398,7 +400,6 @@
 			}else if(config.parentBox){
 				this.getPoint(point);
 			}
-
 
 			if(point.x==0 && point.y==0){
 				return;
@@ -423,49 +424,50 @@
 			ui.logger(this);
 			this.dragover();
 		},
-		onResizestart:function(x,y,resizetype){
+		onResizestart:function(x,y){
 			ui.logger(this);
 			this.dragstart(x,y);
 			this.type='resize';
-			this.resizetype=resizetype;
+			this.resizeConfig.className=this._c_dd_resize+'-'+this.resizeConfig.type;
+			this.$bg.css('cursor',this.resizeConfig.type+'-resize');
+			$.getBody().addClass(this.resizeConfig.className);
 		},
 		onResizemove : function(x,y){
 			ui.logger(this);
 			var point=null,
 				config=this.config,
 				offset,
-				resizetype=this.resizetype,
+				resizeType=this.resizeConfig.type,
 				region={
 					x:0,
 					y:0,
 					w:0,
 					h:0
 				};
-
-			if(resizetype=="lc"){
-				region.w=-x;
-				region.x=x;
-			}else if(resizetype=="rc"){
-				region.w=x;
-			}else if(resizetype=="tc"){
-				region.h=-y;
-				region.y=y;
-			}else if(resizetype=="bc"){
-				region.h=y;
-			}else if(resizetype=="tl"){
+			if(resizeType=="nw"){
 				region.w=-x;
 				region.h=-y;
 				region.x=x;
 				region.y=y;
-			}else if(resizetype=="tr"){
+			}else if(resizeType=="n"){
+				region.h=-y;
+				region.y=y;
+			}else if(resizeType=="ne"){
 				region.w=x;
 				region.h=-y;
 				region.y=y;
-			}else if(resizetype=="bl"){
+			}else if(resizeType=="w"){
+				region.w=-x;
+				region.x=x;
+			}else if(resizeType=="e"){
+				region.w=x;
+			}else if(resizeType=="sw"){
 				region.w=-x;
 				region.h=y;
 				region.x=x;
-			}else  if(resizetype=="br"){
+			}else if(resizeType=="s"){
+				region.h=y;
+			}else if(resizeType=="se"){
 				region.w=x;
 				region.h=y;
 			}
@@ -514,8 +516,11 @@
 		},
 		onResizeover : function(){
 			ui.logger(this);
+			this.$bg.css('cursor','');
+			$.getBody().removeClass(this.resizeConfig.className);	
 			this.dragover();
-			delete this.resizetype;
+			delete this.resizeCursor;
+
 		}
 	});
 
