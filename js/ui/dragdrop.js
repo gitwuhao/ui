@@ -96,7 +96,7 @@
 				target=event.target,
 				className=target.className,
 				type=null;
-			
+
 			this.config.event=event;
 
 			if(/bg/i.test(className)){
@@ -207,7 +207,7 @@
 			this.$s.css("left",l);
 			this.$w.css("top",t);
 			this.$e.css("top",t);
-		},	
+		},
 		getTargetRegion : function(){
 			ui.logger(this);
 			var $target=this.config.$target;
@@ -410,7 +410,7 @@
 			}
 
 			offset=this.$resizebox.offset();
-			
+
 			this.$resizebox.css({
 				left : offset.left + point.x,
 				top : offset.top + point.y
@@ -513,7 +513,7 @@
 		onResizeover : function(){
 			ui.logger(this);
 			this.$bg.css('cursor','');
-			$.getBody().removeClass(this.resizeConfig.className);	
+			$.getBody().removeClass(this.resizeConfig.className);
 			this.dragover();
 			delete this.resizeCursor;
 
