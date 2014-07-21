@@ -129,12 +129,12 @@
 			ui.logger(this);
 			var offset=this.resizeConfig.$target.offset();
 			//console.info('offset:[',offset.left,'[',event.pageX,'],',offset.top,'[',event.pageY,']]');
-			if(Math.abs(offset.left + x  - event.pageX) < 4 ){
+			if(Math.abs(offset.left + x  - event.pageX) < 5 ){
 			
-			}else if(Math.abs(offset.top + y - event.pageY) < 4){
+			}else if(Math.abs(offset.top + y - event.pageY) < 5){
 			
 			}else{
-				return false;
+				//return false;
 			}
 			return true;
 		},
@@ -335,15 +335,15 @@
 
 			if( _l + region.x < 0 ){
 				region.x = - _l;
-				region.w=0;
+				region.w=_l;
 			}else if( _l + _w +  region.w +  region.x > maxWidth ){
 				region.x = 0;
 				region.w=maxWidth - _l -  _w ;
 			}
 
 			if(_t + region.y < 0){
-				region.y=-_t;
-				region.h=0;
+				region.y= - _t;
+				region.h=_t;
 			}else if(_t + _h + region.h + region.y > maxHeight){
 				region.y=0;
 				region.h=maxHeight - _t - _h;
