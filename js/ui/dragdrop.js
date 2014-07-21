@@ -86,27 +86,6 @@
 			ui.logger(this);
 			$.getBody().off(this.__EVENTNAMESPACE__);
 		},
-		resizeBoxMouseDown:function(event){
-			ui.logger(this);
-			var x=event.pageX,
-				y=event.pageY,
-				target=event.target,
-				className=target.className,
-				type=this.config.type,
-				isBG=/bg/i.test(className);
-
-			this.config.event=event;
-
-			if(type.drag && isBG){
-				this.on('dragstart',x,y);
-			}else if(type.resize && !isBG){
-				this.resizeConfig={
-					$target : $(target),
-					type : $.data(target,'resizeType')
-				};
-				this.on('resizestart',x,y);
-			}
-		},
 		onMousemove:function(event){
 			ui.logger(this);
 			var offset=this.offset,
@@ -198,69 +177,6 @@
 			this.on('dragmove',x,y);
 			return false;
 		},
-		setResizeBox:function(){
-			ui.logger(this);
-			var width=this.$bg.width();
-			var height=this.$bg.height();
-			var l=(width-this.resizeIconSize)/2;
-			var t=(height-this.resizeIconSize)/2;
-			this.$n.css("left",l);
-			this.$s.css("left",l);
-			this.$w.css("top",t);
-			this.$e.css("top",t);
-		},
-		getTargetRegion : function(){
-			ui.logger(this);
-			var $target=this.config.$target;
-			var width=$target.outerWidth();
-			var height=$target.outerHeight();
-			var offset=$target.offset();
-			return {
-				left: offset.left,
-				top : offset.top,
-				width: width,
-				height: height
-			};
-		},
-		resetResizeBox : function(){
-			ui.logger(this);
-			var targetRegion=this.getTargetRegion();
-
-			this.$resizebox.css({
-				left : targetRegion.left,
-				top : targetRegion.top,
-				display : 'block'
-			});
-
-			this.$bg.css({
-				width : targetRegion.width,
-				height : targetRegion.height
-			});
-			this.setResizeBox();
-		},
-		showResizeBox:function(config){
-			ui.logger(this);
-			if(this.setConfig(config)==false){
-				return;
-			}
-			this.resetResizeBox();
-
-			this.$bg.focus();
-
-			var events=['mousedown',''].join(this.__EVENTNAMESPACE__+' ');
-			this.$resizebox.on(events,{
-				me : this,
-			},function(event){
-				return event.data.me.resizeBoxMouseDown(event);
-			});
-		},
-		hideResizeBox:function(){
-			ui.logger(this);
-			this.$resizebox.css({
-				display : ''
-			});
-			this.$resizebox.off(this.__EVENTNAMESPACE__);
-		},
 		setConfig:function(config){
 			ui.logger(this);
 			if(this.config && config && this.config.target==config.target){
@@ -317,42 +233,6 @@
 				point.y = maxHeight - _t - _h;
 			}
 			return point;
-		},
-		getRegion : function(region){
-			ui.logger(this);
-			var $parentBox=$(this.config.parentBox),
-				$target=this.config.$target,
-				maxWidth=$parentBox.width(),
-				maxHeight=$parentBox.height(),
-				offset=$target.point(),
-				_l=offset.left,
-				_t=offset.top,
-				_w=$target.outerWidth(),
-				_h=$target.outerHeight();
-
-			if( _l + region.x < 0 ){
-				region.x = - _l;
-				region.w=_l;
-			}else if( _l + _w +  region.w +  region.x > maxWidth ){
-				region.x = 0;
-				region.w=maxWidth - _l -  _w ;
-			}
-
-			if(_t + region.y < 0){
-				region.y= - _t;
-				region.h=_t;
-			}else if(_t + _h + region.h + region.y > maxHeight){
-				region.y=0;
-				region.h=maxHeight - _t - _h;
-			}
-			return region;
-		},
-		hide:function(){
-			ui.logger(this);
-			if(this.config.type.resize){
-				this.hideResizeBox();
-			}
-			this.setConfig(null);
 		},
 		drag : function(config){
 			ui.logger(this);
@@ -420,6 +300,135 @@
 		onDragover : function(){
 			ui.logger(this);
 			this.dragover();
+		},
+		sort : function(config){
+			ui.logger(this);
+			if(this.setConfig(config)==false){
+				return;
+			}
+			var event=config.event;
+			this.on('sortstart',event.pageX,event.pageY);
+			delete config.event;
+		},
+		resizeBoxMouseDown:function(event){
+			ui.logger(this);
+			var x=event.pageX,
+				y=event.pageY,
+				target=event.target,
+				className=target.className,
+				type=this.config.type,
+				isBG=/bg/i.test(className);
+
+			this.config.event=event;
+
+			if(type.drag && isBG){
+				this.on('dragstart',x,y);
+			}else if(type.resize && !isBG){
+				this.resizeConfig={
+					$target : $(target),
+					type : $.data(target,'resizeType')
+				};
+				this.on('resizestart',x,y);
+			}
+		},
+		setResizeBox:function(){
+			ui.logger(this);
+			var width=this.$bg.width();
+			var height=this.$bg.height();
+			var l=(width-this.resizeIconSize)/2;
+			var t=(height-this.resizeIconSize)/2;
+			this.$n.css("left",l);
+			this.$s.css("left",l);
+			this.$w.css("top",t);
+			this.$e.css("top",t);
+		},
+		getTargetRegion : function(){
+			ui.logger(this);
+			var $target=this.config.$target;
+			var width=$target.outerWidth();
+			var height=$target.outerHeight();
+			var offset=$target.offset();
+			return {
+				left: offset.left,
+				top : offset.top,
+				width: width,
+				height: height
+			};
+		},
+		resetResizeBox : function(){
+			ui.logger(this);
+			var targetRegion=this.getTargetRegion();
+
+			this.$resizebox.css({
+				left : targetRegion.left,
+				top : targetRegion.top,
+				display : 'block'
+			});
+
+			this.$bg.css({
+				width : targetRegion.width,
+				height : targetRegion.height
+			});
+			this.setResizeBox();
+		},
+		showResizeBox:function(config){
+			ui.logger(this);
+			if(this.setConfig(config)==false){
+				return;
+			}
+			this.resetResizeBox();
+
+			this.$bg.focus();
+
+			var events=['mousedown',''].join(this.__EVENTNAMESPACE__+' ');
+			this.$resizebox.on(events,{
+				me : this,
+			},function(event){
+				return event.data.me.resizeBoxMouseDown(event);
+			});
+		},
+		hideResizeBox:function(){
+			ui.logger(this);
+			this.$resizebox.css({
+				display : ''
+			});
+			this.$resizebox.off(this.__EVENTNAMESPACE__);
+		},
+		getRegion : function(region){
+			ui.logger(this);
+			var $parentBox=$(this.config.parentBox),
+				$target=this.config.$target,
+				maxWidth=$parentBox.width(),
+				maxHeight=$parentBox.height(),
+				offset=$target.point(),
+				_l=offset.left,
+				_t=offset.top,
+				_w=$target.outerWidth(),
+				_h=$target.outerHeight();
+
+			if( _l + region.x < 0 ){
+				region.x = - _l;
+				region.w=_l;
+			}else if( _l + _w +  region.w +  region.x > maxWidth ){
+				region.x = 0;
+				region.w=maxWidth - _l -  _w ;
+			}
+
+			if(_t + region.y < 0){
+				region.y= - _t;
+				region.h=_t;
+			}else if(_t + _h + region.h + region.y > maxHeight){
+				region.y=0;
+				region.h=maxHeight - _t - _h;
+			}
+			return region;
+		},
+		hide:function(){
+			ui.logger(this);
+			if(this.config.type.resize){
+				this.hideResizeBox();
+			}
+			this.setConfig(null);
 		},
 		onResizestart:function(x,y){
 			ui.logger(this);
@@ -553,9 +562,10 @@
 		sort : function(config){
 			config.type=config.type||{};
 			config.type.sort=true;
-
+			getInstance().sort(config);
 		},
 		replace : function(config){
+
 		},
 		hide : function(){
 			getInstance().hide();

@@ -56,7 +56,7 @@ window.examples.dragdrop=function(){
 			ui.dragdrop.resize({
 				target : this,
 				type : {
-					move : true
+					drag : true
 				},
 				event : event,
 				parentBox : this.parentElement
@@ -83,13 +83,20 @@ window.examples.dragdrop=function(){
 		if(event.target!=this){
 			return;
 		}
-		if(this.className=='list'){
-			ui.dragdrop.dragstart({
+		if(this.className.indexOf('list')>-1){
+			ui.dragdrop.drag({
 				target : this,
 				event : event
 			});
 		}else{
-
+			ui.dragdrop.resize.show({
+				target : this,
+				type : {
+					sort : true
+				},
+				event : event,
+				parentBox : this.parentElement
+			});
 		}
 	});
 
