@@ -89,10 +89,10 @@ window.examples.dragdrop=function(){
 				event : event
 			});
 		}else{
-			ui.dragdrop.resize.show({
+			ui.dragdrop.sort({
 				target : this,
 				type : {
-					sort : true
+					resize : true
 				},
 				event : event,
 				parentBox : this.parentElement
