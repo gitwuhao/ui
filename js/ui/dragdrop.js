@@ -327,7 +327,7 @@
 			if(!elemet){
 				return;
 			}
-			if(event.ctrlKey){
+			if(event.ctrlKey && !config.isTable){
 				this.on('sort',elemet);
 			}else{
 				if(elemet != srcTarget){
@@ -365,6 +365,7 @@
 				},100,this);
 			}
 			this.config.$parentBox = $(config.parentBox);
+			this.config.isTable=/^(table|tbody|tr)$/i.test(config.parentBox);
 			this.on('sortstart', this.event.pageX, this.event.pageY);
 		},
 		sortstart : function() {

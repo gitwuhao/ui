@@ -73,6 +73,20 @@
 
 		$.getBody().append(html.join(''));
 
+
+		$('.tableimage td').mousedown(function(event) {
+			//if(event.target!=this){
+			//	return;
+			//}
+
+			ui.dragdrop.sort({
+				target : this,
+				event : event,
+				parentBox : this.offsetParent
+			});
+		
+		});
+
 		$.getDoc().keydown(function(event) {
 			if (event.keyCode == 27) {
 				ui.dragdrop.resize.hide();
