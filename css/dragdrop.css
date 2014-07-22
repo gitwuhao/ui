@@ -74,6 +74,6 @@
 	opacity: 0.7;
 	z-index: 100000;
 	background-color: #FFF;
-	box-shadow: 1px 1px 3px #DDD;
+	box-shadow: 0px 0px 3px 1px #DDD;
 	border: 1px solid #CCC;
 }
