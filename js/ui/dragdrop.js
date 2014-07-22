@@ -11,6 +11,7 @@
 			css : {
 				_c_dd_resize : '-dd-resize',
 				_c_dd_sort : '-dd-sort',
+				_c_dd_sort_drag : '-dd-sort-drag',
 				_c_dd_drag : '-dd-drag',
 				_c_dd_replace : '-dd-replace',
 				_c_dd_replace_box : '-dd-replace-box',
@@ -91,6 +92,10 @@
 		},
 		onMousemove : function(event) {
 			ui.logger(this);
+			if(this.type == 'sort' && this.event && event.timeStamp - this.event.timeStamp < 50){
+				return;
+			}
+
 			var offset = this.offset, pageX = event.pageX, pageY = event.pageY, x = pageX - offset.x, y = pageY - offset.y;
 
 			this.event = event;
@@ -290,33 +295,6 @@
 			ui.logger(this);
 			this.dragover();
 		},
-		sort : function(config) {
-			ui.logger(this);
-			if (this.setConfig(config) == false) {
-				return;
-			}
-			this.initReplaceBox();
-			this.event = config.event;
-			this.on('sortstart', this.event.pageX, this.event.pageY);
-			if (config.type.resize) {
-				this.showResizeBox(config);
-			}
-			this.config.$parentBox = $(config.parentBox);
-		},
-		sortstart : function() {
-			ui.logger(this);
-			if (this.isResetReplaceBox) {
-				return;
-			}
-			var region = this.getTargetRegion();
-			this.$replacebox.css({
-				width : region.width,
-				height : region.height
-			});
-			this.isResetReplaceBox = true;
-			this.$replacebox.show();
-			this.bindSortContent();
-		},
 		bindSortContent : function() {
 			ui.logger(this);
 			var events = ['mousemove', ''].join(this.__EVENTNAMESPACE__ + ' ');
@@ -360,6 +338,37 @@
 				$target.before(srcTarget);
 			}
 		},
+		sort : function(config) {
+			ui.logger(this);
+			if (this.setConfig(config) == false) {
+				return;
+			}
+			this.initReplaceBox();
+			this.event = config.event;
+
+
+			if (config.type.resize) {
+				this.timeoutID=$.setTimeout(function(){
+					this.showResizeBox(config);
+				},100,this);
+			}
+			this.config.$parentBox = $(config.parentBox);
+			this.on('sortstart', this.event.pageX, this.event.pageY);
+		},
+		sortstart : function() {
+			ui.logger(this);
+			if (this.isResetReplaceBox) {
+				return;
+			}
+			var region = this.getTargetRegion();
+			this.$replacebox.css({
+				width : region.width,
+				height : region.height
+			});
+			this.isResetReplaceBox = true;
+			this.$replacebox.show();
+			this.bindSortContent();
+		},
 		onSortstart : function(x, y) {
 			ui.logger(this);
 			this.type = 'sort';
@@ -367,7 +376,10 @@
 		},
 		onSortmove : function(x, y) {
 			ui.logger(this);
-
+			if(this.timeoutID){
+				clearTimeout(this.timeoutID);
+				delete this.timeoutID;
+			}
 			if (!this.isResetReplaceBox && Math.abs(x) < 10 && Math.abs(y) < 10) {
 				return false;
 			}
@@ -379,15 +391,14 @@
 				left : event.pageX + 10,
 				top : event.pageY + 22
 			});
-
+			$.getBody().addClass(this._c_dd_sort_drag);
 			this.sortstart();
-
 		},
 		onSortover : function() {
 			ui.logger(this);
 			this.$replacebox.hide();
 			this.dragover();
-			$.getBody().removeClass(this._c_dd_sort);
+			$.getBody().removeClass(this._c_dd_sort_drag);
 			delete this.isResetReplaceBox;
 			this.unbindSortContent();
 		},
@@ -500,7 +511,7 @@
 			}
 			this.setConfig(null);
 		},
-		addBodyClass : function() {
+		getBodyClass : function() {
 			this.bodyClass = [];
 			if (this.type == 'resize') {
 				this.bodyClass.push(this._c_dd_resize,'-',this.resizeConfig.type,' ',this._c_dd_resize);
@@ -513,7 +524,10 @@
 			}
 			this.bodyClass.push('-', 'body');
 			this.bodyClass = this.bodyClass.join('');
-			$.getBody().addClass(this.bodyClass);
+			return this.bodyClass;
+		},
+		addBodyClass : function() {
+			$.getBody().addClass(this.getBodyClass());
 		},
 		removeBodyClass : function() {
 			$.getBody().removeClass(this.bodyClass);

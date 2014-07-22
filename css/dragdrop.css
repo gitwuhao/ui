@@ -65,7 +65,7 @@
 .x-ui-dd-drag-body,.x-ui-dd-drag-body *,.x-ui-dd-sort-body,.x-ui-dd-sort-body *,.x-ui-dd-replace-body,.x-ui-dd-replace-body *{
 	cursor:default;
 }
-.x-ui-dd-sort-body .x-ui-dd-target{
+.x-ui-dd-sort-drag .x-ui-dd-target{
 	visibility:hidden;
 }
 .x-ui-dd-replace-box{
