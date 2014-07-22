@@ -371,6 +371,7 @@
 			if (this.isResetReplaceBox) {
 				return;
 			}
+			
 			var region = this.getTargetRegion();
 			this.$replacebox.css({
 				width : region.width,
@@ -387,10 +388,12 @@
 		},
 		onSortmove : function(x, y) {
 			ui.logger(this);
+			
 			if(this.__SORT_TIMEOUT_ID__){
 				clearTimeout(this.__SORT_TIMEOUT_ID__);
 				delete this.__SORT_TIMEOUT_ID__;
 			}
+
 			if (!this.isResetReplaceBox && Math.abs(x) < 10 && Math.abs(y) < 10) {
 				return false;
 			}
