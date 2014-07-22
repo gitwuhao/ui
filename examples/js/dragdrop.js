@@ -9,11 +9,7 @@
 
 		div.style.display = 'block';
 
-		html = ['<div class="x-ui-dd-replace-box">', '<a class="image-link selected">', '<img src="http://www.oilan.com.cn/oD/images/T2o4xhXvlaXXXXXXXX_!!263817957.jpg" width="100%" />', '</a>', '</div>'];
-
-		div = $.createElement(html.join(''));
-		$.getBody().append(div);
-
+ 
 		div.style.display = 'block';
 		div.style.left = '100px';
 		div.style.top = '100px';

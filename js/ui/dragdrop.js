@@ -13,8 +13,7 @@
 				_c_dd_sort : '-dd-sort',
 				_c_dd_sort_drag : '-dd-sort-drag',
 				_c_dd_drag : '-dd-drag',
-				_c_dd_replace : '-dd-replace',
-				_c_dd_replace_box : '-dd-replace-box',
+				_c_dd_sort_box : '-dd-sort-box',
 				_c_dd_resize_box : '-dd-resize-box'
 			},
 			getTemplate : function(config) {
@@ -53,12 +52,12 @@
 			this.resizeIconSize = 8;
 			this.offset = {};
 		},
-		initReplaceBox : function() {
+		initSortbox : function() {
 			ui.logger(this);
-			var div = $.createElement(['<div class="', this._c_dd_replace_box, '"></div>'].join(''));
+			var div = $.createElement(['<div class="', this._c_dd_sort_box, '"></div>'].join(''));
 			$.getBody().append(div);
-			this.$replacebox = $(div);
-			this.initReplaceBox = CF.emptyFunction;
+			this.$sortbox = $(div);
+			this.initSortbox = CF.emptyFunction;
 		},
 		bindContentEvent : function() {
 			ui.logger(this);
@@ -348,15 +347,15 @@
 			} else {
 				$target.before(srcTarget);
 			}
+			//event.shiftKey
 		},
 		sort : function(config) {
 			ui.logger(this);
 			if (this.setConfig(config) == false) {
 				return;
 			}
-			this.initReplaceBox();
+			this.initSortbox();
 			this.event = config.event;
-
 
 			if (config.type.resize) {
 				this.__SORT_TIMEOUT_ID__=$.setTimeout(function(){
@@ -368,17 +367,17 @@
 		},
 		sortstart : function() {
 			ui.logger(this);
-			if (this.isResetReplaceBox) {
+			if (this.isResetsortbox) {
 				return;
 			}
 			
 			var region = this.getTargetRegion();
-			this.$replacebox.css({
+			this.$sortbox.css({
 				width : region.width,
 				height : region.height
 			});
-			this.isResetReplaceBox = true;
-			this.$replacebox.show();
+			this.isResetsortbox = true;
+			this.$sortbox.show();
 			this.bindSortContent();
 		},
 		onSortstart : function(x, y) {
@@ -394,14 +393,14 @@
 				delete this.__SORT_TIMEOUT_ID__;
 			}
 
-			if (!this.isResetReplaceBox && Math.abs(x) < 10 && Math.abs(y) < 10) {
+			if (!this.isResetsortbox && Math.abs(x) < 10 && Math.abs(y) < 10) {
 				return false;
 			}
 			var event = this.event;
 
 			this.$resizebox.hide();
 
-			this.$replacebox.css({
+			this.$sortbox.css({
 				left : event.pageX + 10,
 				top : event.pageY + 22
 			});
@@ -410,10 +409,10 @@
 		},
 		onSortover : function() {
 			ui.logger(this);
-			this.$replacebox.hide();
+			this.$sortbox.hide();
 			this.dragover();
 			$.getBody().removeClass(this._c_dd_sort_drag);
-			delete this.isResetReplaceBox;
+			delete this.isResetsortbox;
 			this.unbindSortContent();
 		},
 		resizeBoxMouseDown : function(event) {
@@ -432,7 +431,7 @@
 				this.on('resizestart', x, y);
 			}
 		},
-		setResizeBox : function() {
+		setResizeCursorOffset : function() {
 			ui.logger(this);
 			var width = this.$bg.width();
 			var height = this.$bg.height();
@@ -456,7 +455,7 @@
 				height : height
 			};
 		},
-		resetResizeBox : function() {
+		setResizeBoxOffset : function() {
 			ui.logger(this);
 			var targetRegion = this.getTargetRegion();
 
@@ -470,14 +469,14 @@
 				width : targetRegion.width,
 				height : targetRegion.height
 			});
-			this.setResizeBox();
+			this.setResizeCursorOffset();
 		},
 		showResizeBox : function(config) {
 			ui.logger(this);
 			if (this.setConfig(config) == false) {
 				return;
 			}
-			this.resetResizeBox();
+			this.setResizeBoxOffset();
 
 			this.$bg.focus();
 
@@ -539,8 +538,6 @@
 				this.bodyClass.push(this._c_dd_sort);
 			} else if (this.type == 'drag') {
 				this.bodyClass.push(this._c_dd_drag);
-			} else if (this.type == 'replace') {
-				this.bodyClass.push(this._c_dd_replace);
 			}
 			this.bodyClass.push('-', 'body');
 			this.bodyClass = this.bodyClass.join('');
@@ -632,7 +629,7 @@
 					});
 				}
 			}
-			this.resetResizeBox();
+			this.setResizeBoxOffset();
 		},
 		onResizeover : function() {
 			ui.logger(this);
@@ -664,9 +661,6 @@
 			config.type = config.type || {};
 			config.type.sort = true;
 			getInstance().sort(config);
-		},
-		replace : function(config) {
-
 		},
 		hide : function() {
 			getInstance().hide();
