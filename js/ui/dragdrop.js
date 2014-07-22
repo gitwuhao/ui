@@ -320,16 +320,27 @@
 		},
 		onSortBoxMousemove : function(event) {
 			ui.logger(this);
+			if(event.shiftKey){
+				this.on('replace',event);
+			}else{
+				this.on('sort',event);
+			}
+		},
+		onReplace:function(event){
+			ui.logger(this);
+			
+		},
+		onSort:function(event){
+			ui.logger(this);
 			var config = this.config;
-			//if (event.timeStamp - config.lastSortTimeStamp < 100) {
-			//	return;
-			//}
-			//config.lastSortTimeStamp = event.timeStamp;
 			if (config.sortBoxMove) {
 				config.sortBoxMove(event);
 				return;
 			}
-			var $target, srcTarget = config.target, target = event.target, parentBox = config.parentBox;
+			var $target,
+				srcTarget = config.target,
+				target = event.target,
+				parentBox = config.parentBox;
 			if (target == srcTarget) {
 				return;
 			} else if (target.parentElement == parentBox) {
@@ -341,13 +352,13 @@
 					return;
 				}
 			}
+
 			var prev = $target.prev();
 			if (prev.length == 1 && prev[0] == srcTarget) {
 				$target.after(srcTarget);
 			} else {
 				$target.before(srcTarget);
 			}
-			//event.shiftKey
 		},
 		sort : function(config) {
 			ui.logger(this);
