@@ -9,7 +9,7 @@
 	display: inline-block;
 }
 .x-ui-dd-resize-box .bg{
-	outline: 1px solid #B1B1B1;
+	outline: 1px dashed #000;
 	cursor : move;
 	min-height: 50px;
 	min-width: 50px;
@@ -21,7 +21,7 @@
 	height: 8px;
 	position: absolute;
 	z-index: 99999;
-	outline: 1px solid #B1B1B1;
+	outline: 1px solid #000;
 }
 .x-ui-dd-resize-box .nw,.x-ui-dd-resize-box .n,.x-ui-dd-resize-box .ne{
 	top: -5px;
@@ -59,15 +59,15 @@
 .x-ui-dd-resize-box .se,.x-ui-dd-resize-se,.x-ui-dd-resize-se *,.x-ui-dd-resize-se .x-ui-dd-resize-box div{
 	cursor:se-resize;
 }
-
-.x-ui-dd-sort{
+.x-ui-dd-drag-body,.x-ui-dd-drag-body *,.x-ui-dd-resize-body,.x-ui-dd-resize-body *,.x-ui-dd-sort-body,.x-ui-dd-sort-body *,.x-ui-dd-replace-body,.x-ui-dd-replace-body *{
+	-webkit-user-select: none;
+}
+.x-ui-dd-drag-body,.x-ui-dd-drag-body *,.x-ui-dd-sort-body,.x-ui-dd-sort-body *,.x-ui-dd-replace-body,.x-ui-dd-replace-body *{
 	cursor:default;
 }
-
-.x-ui-dd-sort .x-ui-dd-target{
+.x-ui-dd-sort-body .x-ui-dd-target{
 	visibility:hidden;
 }
-
 .x-ui-dd-replace-box{
 	position: absolute;
 	display: none;
