@@ -92,18 +92,22 @@
 		},
 		onMousemove : function(event) {
 			ui.logger(this);
-			if(this.type == 'sort' && this.event && event.timeStamp - this.event.timeStamp < 50){
+			if(this.__SORT_TIMEOUT_ID__ && this.event && event.timeStamp - this.event.timeStamp < 50){
 				return;
 			}
 
-			var offset = this.offset, pageX = event.pageX, pageY = event.pageY, x = pageX - offset.x, y = pageY - offset.y;
+			var offset = this.offset,
+				pageX = event.pageX,
+				pageY = event.pageY,
+				x = pageX - offset.x,
+				y = pageY - offset.y;
 
 			this.event = event;
 
 			if (this.type == 'drag') {
 				this.on('dragmove', x, y);
 			} else if (this.type == 'resize') {
-				var _offset = this.resizeConfig.$target.offset();
+				var _offset = this.config.$cursortarget.offset();
 				if (_offset.left + x - pageX != 0) {
 					x = pageX - _offset.left;
 				}
@@ -205,7 +209,15 @@
 		},
 		getPoint : function(point) {
 			ui.logger(this);
-			var $parentBox = $(this.config.parentBox), $target = this.config.$target, maxWidth = $parentBox.width(), maxHeight = $parentBox.height(), offset = $target.point(), _l = offset.left, _t = offset.top, _w = $target.outerWidth(), _h = $target.outerHeight();
+			var $parentBox = $(this.config.parentBox),
+				$target = this.config.$target,
+				maxWidth = $parentBox.width(),
+				maxHeight = $parentBox.height(),
+				offset = $target.point(),
+				_l = offset.left,
+				_t = offset.top,
+				_w = $target.outerWidth(),
+				_h = $target.outerHeight();
 
 			if (point.x == this.__M_RIGHT__) {
 				point.x = maxWidth;
@@ -250,7 +262,6 @@
 			this.unbindContentEvent();
 			delete this.targetRegion;
 			delete this.type;
-			delete this.resizeConfig;
 			delete this.event;
 			this.removeBodyClass();
 		},
@@ -311,10 +322,10 @@
 		onSortBoxMousemove : function(event) {
 			ui.logger(this);
 			var config = this.config;
-			if (event.timeStamp - config.lastSortTimeStamp < 300) {
-				return;
-			}
-			config.lastSortTimeStamp = event.timeStamp;
+			//if (event.timeStamp - config.lastSortTimeStamp < 100) {
+			//	return;
+			//}
+			//config.lastSortTimeStamp = event.timeStamp;
 			if (config.sortBoxMove) {
 				config.sortBoxMove(event);
 				return;
@@ -348,7 +359,7 @@
 
 
 			if (config.type.resize) {
-				this.timeoutID=$.setTimeout(function(){
+				this.__SORT_TIMEOUT_ID__=$.setTimeout(function(){
 					this.showResizeBox(config);
 				},100,this);
 			}
@@ -376,9 +387,9 @@
 		},
 		onSortmove : function(x, y) {
 			ui.logger(this);
-			if(this.timeoutID){
-				clearTimeout(this.timeoutID);
-				delete this.timeoutID;
+			if(this.__SORT_TIMEOUT_ID__){
+				clearTimeout(this.__SORT_TIMEOUT_ID__);
+				delete this.__SORT_TIMEOUT_ID__;
 			}
 			if (!this.isResetReplaceBox && Math.abs(x) < 10 && Math.abs(y) < 10) {
 				return false;
@@ -413,10 +424,8 @@
 			} else if (type.sort && isBG) {
 				this.on('sortstart', x, y);
 			} else if (type.resize && !isBG) {
-				this.resizeConfig = {
-					$target : $(target),
-					type : $.data(target, 'resizeType')
-				};
+				this.config.$cursortarget = $(target);
+				this.config.resizetype = $.data(target, 'resizeType');
 				this.on('resizestart', x, y);
 			}
 		},
@@ -485,7 +494,15 @@
 		},
 		getRegion : function(region) {
 			ui.logger(this);
-			var $parentBox = $(this.config.parentBox), $target = this.config.$target, maxWidth = $parentBox.width(), maxHeight = $parentBox.height(), offset = $target.point(), _l = offset.left, _t = offset.top, _w = $target.outerWidth(), _h = $target.outerHeight();
+			var $parentBox = $(this.config.parentBox),
+				$target = this.config.$target,
+				maxWidth = $parentBox.width(),
+				maxHeight = $parentBox.height(),
+				offset = $target.point(),
+				_l = offset.left,
+				_t = offset.top,
+				_w = $target.outerWidth(),
+				_h = $target.outerHeight();
 
 			if (_l + region.x < 0) {
 				region.x = -_l;
@@ -514,7 +531,7 @@
 		getBodyClass : function() {
 			this.bodyClass = [];
 			if (this.type == 'resize') {
-				this.bodyClass.push(this._c_dd_resize,'-',this.resizeConfig.type,' ',this._c_dd_resize);
+				this.bodyClass.push(this._c_dd_resize,'-',this.config.resizetype,' ',this._c_dd_resize);
 			} else if (this.type == 'sort') {
 				this.bodyClass.push(this._c_dd_sort);
 			} else if (this.type == 'drag') {
@@ -537,16 +554,21 @@
 			ui.logger(this);
 			this.type = 'resize';
 			this.dragstart(x, y);
-			this.$bg.css('cursor', this.resizeConfig.type + '-resize');
+			this.$bg.css('cursor', this.config.resizetype + '-resize');
 		},
 		onResizemove : function(x, y) {
 			ui.logger(this);
-			var point = null, config = this.config, offset, resizeType = this.resizeConfig.type, region = {
-				x : 0,
-				y : 0,
-				w : 0,
-				h : 0
-			}, shiftKey = this.event.shiftKey;
+			var point = null,
+				config = this.config,
+				offset,
+				resizeType = this.config.resizetype,
+				region = {
+					x : 0,
+					y : 0,
+					w : 0,
+					h : 0
+				}, 
+				shiftKey = this.event.shiftKey;
 
 			if (resizeType == "nw") {
 				region.w = -x;
