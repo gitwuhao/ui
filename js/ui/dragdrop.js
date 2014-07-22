@@ -320,44 +320,35 @@
 		},
 		onSortBoxMousemove : function(event) {
 			ui.logger(this);
-			if(event.shiftKey){
-				this.on('replace',event);
-			}else{
-				this.on('sort',event);
-			}
-		},
-		onReplace:function(event){
-			ui.logger(this);
-			
-		},
-		onSort:function(event){
-			ui.logger(this);
-			var config = this.config;
-			if (config.sortBoxMove) {
-				config.sortBoxMove(event);
-				return;
-			}
-			var $target,
+			var $target=$(event.target),
+				config = this.config,
 				srcTarget = config.target,
-				target = event.target,
-				parentBox = config.parentBox;
-			if (target == srcTarget) {
+				elemet=$target.isParent(config.parentBox);
+			if(!elemet){
 				return;
-			} else if (target.parentElement == parentBox) {
-				$target = $(target);
-			} else {
-				$target = $(target).parentsUntil(parentBox);
-				if ($target.length == 1 && $target[0].parentElement == parentBox) {
-				} else {
-					return;
+			}
+			if(event.ctrlKey){
+				this.on('sort',elemet);
+			}else{
+				if(elemet != srcTarget){
+					this.on('replace',elemet);
 				}
 			}
-
-			var prev = $target.prev();
+		},
+		onReplace:function(elemet){
+			ui.logger(this);
+			this.replaceElemet=elemet;
+		},
+		onSort:function(elemet){
+			ui.logger(this);
+			var config = this.config,
+				$elemet=$(elemet),
+				srcTarget = config.target,
+				prev = $elemet.prev();
 			if (prev.length == 1 && prev[0] == srcTarget) {
-				$target.after(srcTarget);
+				$elemet.after(srcTarget);
 			} else {
-				$target.before(srcTarget);
+				$elemet.before(srcTarget);
 			}
 		},
 		sort : function(config) {
@@ -381,7 +372,7 @@
 			if (this.isResetsortbox) {
 				return;
 			}
-			
+
 			var region = this.getTargetRegion();
 			this.$sortbox.css({
 				width : region.width,
@@ -398,7 +389,7 @@
 		},
 		onSortmove : function(x, y) {
 			ui.logger(this);
-			
+
 			if(this.__SORT_TIMEOUT_ID__){
 				clearTimeout(this.__SORT_TIMEOUT_ID__);
 				delete this.__SORT_TIMEOUT_ID__;
@@ -425,6 +416,11 @@
 			$.getBody().removeClass(this._c_dd_sort_drag);
 			delete this.isResetsortbox;
 			this.unbindSortContent();
+
+			if(this.replaceElemet){
+				$(this.replaceElemet).replaceNode(this.config.target);
+				delete this.replaceElemet;
+			}
 		},
 		resizeBoxMouseDown : function(event) {
 			ui.logger(this);
@@ -578,7 +574,7 @@
 					y : 0,
 					w : 0,
 					h : 0
-				}, 
+				},
 				shiftKey = this.event.shiftKey;
 
 			if (resizeType == "nw") {
