@@ -74,17 +74,12 @@
 		$.getBody().append(html.join(''));
 
 
-		$('.tableimage td').mousedown(function(event) {
-			//if(event.target!=this){
-			//	return;
-			//}
-
+		$('.tableimage td').mousedown(function(event){
 			ui.dragdrop.sort({
 				target : this,
 				event : event,
 				parentBox : this.offsetParent
 			});
-		
 		});
 
 		$.getDoc().keydown(function(event) {

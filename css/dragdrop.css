@@ -61,6 +61,7 @@
 }
 .x-ui-dd-drag-body,.x-ui-dd-drag-body *,.x-ui-dd-resize-body,.x-ui-dd-resize-body *,.x-ui-dd-sort-body,.x-ui-dd-sort-body *,.x-ui-dd-replace-body,.x-ui-dd-replace-body *{
 	-webkit-user-select: none;
+	-webkit-user-drag:none;
 }
 .x-ui-dd-drag-body,.x-ui-dd-drag-body *,.x-ui-dd-sort-body,.x-ui-dd-sort-body *,.x-ui-dd-replace-body,.x-ui-dd-replace-body *{
 	cursor:default;
