@@ -78,7 +78,18 @@
 			ui.dragdrop.resize({
 				target : this,
 				event : event,
-				parentBox : this.parentElement
+				parentBox : this.parentElement,
+				setPoint : function(point){
+					var $target=this.$target;
+					$target.css({
+						'margin-left': $target.getMarginLeft() + point.x + 'px',
+						'margin-top': $target.getMarginTop() + point.y + 'px'
+					});
+				},
+				getRegion : function(region){
+					var c=1;
+
+				}
 			});
 		});
 

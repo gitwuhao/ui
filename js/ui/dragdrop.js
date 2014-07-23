@@ -286,12 +286,15 @@
 				return;
 			}
 
-			if (!config.getPoint) {
+			if (config.setPoint) {
+				config.setPoint(point);
+			}else{
 				offset = config.$target.point();
 				config.$target.css({
 					left : offset.left + point.x,
 					top : offset.top + point.y
 				});
+			
 			}
 
 			offset = this.$resizebox.offset();
