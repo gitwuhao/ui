@@ -58,7 +58,7 @@
 
 		html = ['<div class="image-map" style="overflow: hidden; margin: 0px 0px 5px;',
 					' border: 1px solid #ddd; width: 738px; height: 218px;">',
-				'<div class="image-map-bg" style="float: left; overflow: hidden;">',
+				'<div class="image-map-bg" style="float: left; overflow: hidden;width: 100%;">',
 				'<img src="http://img01.taobaocdn.com/imgextra/i1/1646439371/T2bOCoXUxXXXXXXXXX-1646439371.jpg" style="width: 100%; vertical-align: top; height: 218px; border: 0px;"/>',
 				'</div>',
 				'<div class="link-fitem" style="width: 140px;height: 60px;margin-top: -65px; margin-left: 0px; float: left;">',
@@ -78,6 +78,9 @@
 			ui.dragdrop.resize({
 				target : this,
 				event : event,
+				type : {
+					drag : true
+				},
 				parentBox : this.parentElement,
 				setPoint : function(point){
 					var $target=this.$target;
@@ -86,9 +89,14 @@
 						'margin-top': $target.getMarginTop() + point.y + 'px'
 					});
 				},
-				getRegion : function(region){
-					var c=1;
-
+				setRegion : function(region){
+					var $target=this.$target;
+					$target.css({
+						'margin-left': $target.getMarginLeft() + region.x + 'px',
+						'margin-top': $target.getMarginTop() + region.y + 'px',
+						'width': $target.width() + region.w + 'px',
+						'height': $target.height() + region.h + 'px'
+					});
 				}
 			});
 			return false;

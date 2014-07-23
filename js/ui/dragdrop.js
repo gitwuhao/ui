@@ -276,9 +276,7 @@
 				y : y
 			}, config = this.config, offset;
 
-			if (config.getPoint) {
-				config.getPoint(point);
-			} else if (config.parentBox) {
+			if (config.parentBox) {
 				this.getPoint(point);
 			}
 
@@ -446,7 +444,12 @@
 		},
 		resizeBoxMouseDown : function(event) {
 			ui.logger(this);
-			var x = event.pageX, y = event.pageY, target = event.target, className = target.className, type = this.config.type, isBG = /bg/i.test(className);
+			var x = event.pageX,
+				y = event.pageY,
+				target = event.target,
+				className = target.className,
+				type = this.config.type,
+				isBG = /bg/i.test(className);
 
 			this.event = event;
 
@@ -652,27 +655,27 @@
 				return;
 			}
 
-			if (config.getRegion) {
-				config.getRegion(region);
-			} else if (config.parentBox) {
+			if (config.parentBox) {
 				this.getRegion(region);
 			}
 			if (region.x == 0 && region.y == 0 && region.w == 0 && region.h == 0) {
 				return;
 			}
-			if (!config.getRegion) {
-				var $target = config.$target, _width = $target.width(), _height = $target.height();
+
+
+			if (config.setRegion) {
+				config.setRegion(region);
+			}else{
+				var $target = config.$target,
+					_width = $target.width(),
+					_height = $target.height(),
+					offset = $target.point();
 				$target.css({
 					width : _width + region.w,
-					height : _height + region.h
+					height : _height + region.h,
+					left : offset.left + region.x,
+					top : offset.top + region.y
 				});
-				if (region.x != 0 || region.y != 0) {
-					offset = $target.point();
-					$target.css({
-						left : offset.left + region.x,
-						top : offset.top + region.y
-					});
-				}
 			}
 			this.setResizeBoxOffset();
 		},
