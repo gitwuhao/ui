@@ -328,7 +328,9 @@
 				return;
 			}
 			if(event.ctrlKey && !config.isTable){
-				this.on('sort',elemet);
+				if(elemet.parentElement==srcTarget.parentElement){
+					this.on('sort',elemet);
+				}
 			}else{
 				if(elemet != srcTarget){
 					this.on('replace',elemet);
@@ -373,7 +375,6 @@
 			if (this.isResetsortbox) {
 				return;
 			}
-
 			var region = this.getTargetRegion();
 			this.$sortbox.css({
 				width : region.width,
@@ -419,7 +420,12 @@
 			this.unbindSortContent();
 
 			if(this.replaceElemet){
-				$(this.replaceElemet).replaceNode(this.config.target);
+				var config=this.config;
+				if(config.onReplace){
+					config.onReplace(this.replaceElemet);
+				}else{
+					$(this.replaceElemet).replaceNode(this.config.target);
+				}
 				delete this.replaceElemet;
 			}
 		},
