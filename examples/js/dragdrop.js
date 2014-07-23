@@ -108,6 +108,9 @@
 			//if(event.target!=this){
 			//	return;
 			//}
+
+			
+
 			ui.dragdrop.sort({
 				target : this,
 				type : {
@@ -125,7 +128,8 @@
 					this.$target.css({
 						width : this.$target.width() + region.w
 					});
-				}
+				},
+				isFloatAlign : true
 			});
 		});
 

@@ -5,6 +5,12 @@
 	-webkit-user-select: none;
 	-webkit-user-drag: none;
 }
+.x-ui-dd-resize-box.float-left .nw,.x-ui-dd-resize-box.float-left .n,.x-ui-dd-resize-box.float-left .ne,.x-ui-dd-resize-box.float-left .w,.x-ui-dd-resize-box.float-left .sw{
+	display: none;
+}
+.x-ui-dd-resize-box.float-right .nw,.x-ui-dd-resize-box.float-right .n,.x-ui-dd-resize-box.float-right .ne,.x-ui-dd-resize-box.float-right .e,.x-ui-dd-resize-box.float-right .se{
+	display: none;
+}
 .x-ui-dd-resize-box a{
 	display: inline-block;
 }
@@ -69,6 +75,7 @@
 .x-ui-dd-sort-drag .x-ui-dd-target{
 	visibility:hidden;
 }
+
 .x-ui-dd-sort-box{
 	position: absolute;
 	display: none;

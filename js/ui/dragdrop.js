@@ -371,7 +371,7 @@
 
 			if (config.type.resize) {
 				this.__SORT_TIMEOUT_ID__=$.setTimeout(function(){
-					this.showResizeBox(config);
+					this.showResize(config);
 				},100,this);
 			}
 			this.config.$parentBox = $(config.parentBox);
@@ -493,7 +493,7 @@
 			});
 			this.setResizeCursorOffset();
 		},
-		showResizeBox : function(config) {
+		showResize : function(config) {
 			ui.logger(this);
 			if (this.setConfig(config) == false) {
 				return;
@@ -508,6 +508,15 @@
 			}, function(event) {
 				return event.data.me.resizeBoxMouseDown(event);
 			});
+
+
+			this.$resizebox.attr('class',this._c_dd_resize_box);
+
+			if(config.isFloatAlign){
+				var style=window.getComputedStyle(config.target);
+				this.$resizebox.addClass('float-'+style.float);
+			}
+
 		},
 		hideResizeBox : function() {
 			ui.logger(this);
@@ -709,7 +718,7 @@
 		show : function(config) {
 			config.type = config.type || {};
 			config.type.resize = true;
-			getInstance().showResizeBox(config);
+			getInstance().showResize(config);
 		},
 		hide : ui.dragdrop.hide
 	});
