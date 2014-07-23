@@ -332,14 +332,10 @@
 			if(!elemet){
 				return;
 			}
-			if(!event.ctrlKey && !config.isTable){
-				if(elemet.parentElement==srcTarget.parentElement){
-					this.on('sort',elemet);
-				}
-			}else{
-				if(elemet != srcTarget){
-					this.on('replace',elemet);
-				}
+			if(event.ctrlKey){
+				this.on('replace',elemet);
+			}else if(elemet.parentElement==srcTarget.parentElement){
+				this.on('sort',elemet);
 			}
 		},
 		onReplace:function(elemet){
