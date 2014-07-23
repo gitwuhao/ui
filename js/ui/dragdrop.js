@@ -561,6 +561,13 @@
 			if (this.setConfig(config) == false) {
 				return;
 			}
+
+			
+			if(config.render != this.render) {
+				this.$elem.appendTo(config.render);
+				this.render = config.render;
+			}
+
 			this.setResizeBoxOffset();
 
 			this.$bg.focus();
@@ -581,6 +588,9 @@
 			}else if(config.isAutoWidth){
 				this.$resizebox.addClass('auto-width');
 			}
+
+
+
 
 		},
 		hideResizeBox : function() {
@@ -768,13 +778,6 @@
 	};
 
 	CF.merger(ui.dragdrop.resize, {
-		setRender : function(render) {
-			if (getInstance().render == render) {
-				return;
-			}
-			getInstance().$elem.appendTo(render);
-			getInstance().render = render;
-		},
 		drag : function(config) {
 			this.show(config);
 			getInstance().drag(config);
