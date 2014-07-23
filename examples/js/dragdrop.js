@@ -116,7 +116,15 @@
 				event : event,
 				parentBox : this.parentElement,
 				getRegion : function(region){
-					var c=1;
+					var $img=this.$target.children('img');
+
+					$img.css({
+						height : $img.height() + region.h
+					});
+
+					this.$target.css({
+						width : this.$target.width() + region.w
+					});
 				}
 			});
 		});

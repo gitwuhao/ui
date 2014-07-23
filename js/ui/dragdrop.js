@@ -343,14 +343,22 @@
 		},
 		onSort:function(elemet){
 			ui.logger(this);
+			if(config.onSortBefore && config.onSortBefore(elemet)==false){
+				return;
+			}
 			var config = this.config,
 				$elemet=$(elemet),
 				srcTarget = config.target,
 				prev = $elemet.prev();
+			
+
 			if (prev.length == 1 && prev[0] == srcTarget) {
 				$elemet.after(srcTarget);
 			} else {
 				$elemet.before(srcTarget);
+			}
+			if(config.onSortAfter){
+				config.onSortAfter(elemet);
 			}
 		},
 		sort : function(config) {
