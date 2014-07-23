@@ -56,6 +56,33 @@
 		});
 
 
+		html = ['<div class="image-map" style="overflow: hidden; margin: 0px 0px 5px;',
+					' border: 1px solid #ddd; width: 738px; height: 218px;">',
+				'<div class="image-map-bg" style="float: left; overflow: hidden;">',
+				'<img src="http://img01.taobaocdn.com/imgextra/i1/1646439371/T2bOCoXUxXXXXXXXXX-1646439371.jpg" style="width: 100%; vertical-align: top; height: 218px; border: 0px;"/>',
+				'</div>',
+				'<div class="link-fitem" style="width: 140px;height: 60px;margin-top: -65px; margin-left: 0px; float: left;">',
+				'</div>',
+				'<div class="link-fitem" style="width: 120px;height: 60px;margin-top: -65px; margin-left: 297px; float: left;">',
+				'</div>',
+				'<div class="link-fitem" style="width: 120px;height: 60px;margin-top: -65px; margin-left: 444px; float: left;">',
+				'</div>',
+				'<div class="link-fitem" style="width: 120px;height: 60px;margin-top: -65px; margin-left: 595px; float: left;">',
+				'</div>',
+			'</div>'];
+		
+
+		$.getBody().append(html.join(''));
+
+		$('.image-map .link-fitem').mousedown(function(event) {
+			ui.dragdrop.resize({
+				target : this,
+				event : event,
+				parentBox : this.parentElement
+			});
+		});
+
+
 		html = ['<div class="imagebox"><table class="tableimage">',
 			'<tbody>',
 				'<tr>', 
@@ -90,7 +117,7 @@
 				'</tr>',
 			'</tbody>',
 			'</table>',
-			'<div class="image-grid" style="overflow: hidden; margin: 0px 0px 5px 5px;"><a style="width: 344px; float: left; overflow: hidden; margin: 0px 5px 5px 0px; border: 1px solid rgb(204, 204, 204); text-decoration: none;" _href="http://item.taobao.com/item.htm?id=27018556087"><img src="http://img03.taobaocdn.com/imgextra/i3/1646439371/TB2o5XsXpXXXXcyXpXXXXXXXXXX-1646439371.jpg" style="width: 100%; vertical-align: top; height: 138px; border: 0px;"></a><a style="width: 160px; float: left; overflow: hidden; margin: 0px 0px 5px; border: 1px solid rgb(204, 204, 204); text-decoration: none;" _href="http://item.taobao.com/item.htm?id=27018556087"><img src="http://img03.taobaocdn.com/imgextra/i3/1646439371/TB2GY7yXXXXXXaQXFXXXXXXXXXX-1646439371.jpg" style="width: 100%; vertical-align: top; height: 138px; border: 0px;"></a><a style="width: 220px; float: right; overflow: hidden; margin: 0px 5px 5px 5px; border: 1px solid rgb(204, 204, 204); text-decoration: none;/* height: 140px; */clear: right;" _href="http://item.taobao.com/item.htm?id=27018556087"><img src="http://img04.taobaocdn.com/imgextra/i4/1646439371/TB2YnmhXVXXXXXqXpXXXXXXXXXX-1646439371.jpg" style="width: 100%; vertical-align: top; height: 283px; border: 0px;"></a><a style="width: 168px; float: left; overflow: hidden; margin: 0px 5px 0px 0px; border: 1px solid rgb(204, 204, 204); text-decoration: none;clear: left;" _href="http://item.taobao.com/item.htm?id=27018556087"><img src="http://img03.taobaocdn.com/imgextra/i3/1646439371/TB2ezFwXpXXXXaSXFXXXXXXXXXX-1646439371.jpg" style="width: 100%; vertical-align: top; height: 137px; border: 0px;"></a><a style="width: 169px; float: left; overflow: hidden; margin: 0px 5px 0px 0px; border: 1px solid rgb(204, 204, 204); text-decoration: none;" _href="http://item.taobao.com/item.htm?id=27018556087"><img src="http://img02.taobaocdn.com/imgextra/i2/1646439371/TB2dy0NXXXXXXcVapXXXXXXXXXX-1646439371.jpg" style="width: 100%; vertical-align: top; height: 137px; border: 0px;"></a><a style="width: 160px; float: left; overflow: hidden; margin: 0px; border: 1px solid rgb(204, 204, 204); text-decoration: none;" _href="http://item.taobao.com/item.htm?id=27018556087"><img src="http://img01.taobaocdn.com/imgextra/i1/1646439371/TB2g_ZDXXXXXXXTXFXXXXXXXXXX-1646439371.jpg" style="width: 100%; vertical-align: top; height: 138px; border: 0px;"></a></div>',
+			'<div class="image-grid" style="overflow: hidden; margin: 0px 0px 5px 5px;"><a style="width: 344px; float: left; overflow: hidden; margin: 0px 5px 5px 0px; border: 1px solid rgb(204, 204, 204);" _href="http://item.taobao.com/item.htm?id=27018556087"><img src="http://img03.taobaocdn.com/imgextra/i3/1646439371/TB2o5XsXpXXXXcyXpXXXXXXXXXX-1646439371.jpg" style="width: 100%; vertical-align: top; height: 138px; border: 0px;"></a><a style="width: 160px; float: left; overflow: hidden; margin: 0px 0px 5px; border: 1px solid rgb(204, 204, 204);" _href="http://item.taobao.com/item.htm?id=27018556087"><img src="http://img03.taobaocdn.com/imgextra/i3/1646439371/TB2GY7yXXXXXXaQXFXXXXXXXXXX-1646439371.jpg" style="width: 100%; vertical-align: top; height: 138px; border: 0px;"></a><a style="width: 220px; float: right; overflow: hidden; margin: 0px 5px 5px 5px; border: 1px solid rgb(204, 204, 204);/* height: 140px; */clear: right;" _href="http://item.taobao.com/item.htm?id=27018556087"><img src="http://img04.taobaocdn.com/imgextra/i4/1646439371/TB2YnmhXVXXXXXqXpXXXXXXXXXX-1646439371.jpg" style="width: 100%; vertical-align: top; height: 283px; border: 0px;"></a><a style="width: 168px; float: left; overflow: hidden; margin: 0px 5px 0px 0px; border: 1px solid rgb(204, 204, 204);clear: left;" _href="http://item.taobao.com/item.htm?id=27018556087"><img src="http://img03.taobaocdn.com/imgextra/i3/1646439371/TB2ezFwXpXXXXaSXFXXXXXXXXXX-1646439371.jpg" style="width: 100%; vertical-align: top; height: 137px; border: 0px;"></a><a style="width: 169px; float: left; overflow: hidden; margin: 0px 5px 0px 0px; border: 1px solid rgb(204, 204, 204);" _href="http://item.taobao.com/item.htm?id=27018556087"><img src="http://img02.taobaocdn.com/imgextra/i2/1646439371/TB2dy0NXXXXXXcVapXXXXXXXXXX-1646439371.jpg" style="width: 100%; vertical-align: top; height: 137px; border: 0px;"></a><a style="width: 160px; float: left; overflow: hidden; margin: 0px; border: 1px solid rgb(204, 204, 204);" _href="http://item.taobao.com/item.htm?id=27018556087"><img src="http://img01.taobaocdn.com/imgextra/i1/1646439371/TB2g_ZDXXXXXXXTXFXXXXXXXXXX-1646439371.jpg" style="width: 100%; vertical-align: top; height: 138px; border: 0px;"></a></div>',
 			'</div>'];
 
 		$.getBody().append(html.join(''));
@@ -109,9 +136,6 @@
 			//if(event.target!=this){
 			//	return;
 			//}
-
-			
-
 			ui.dragdrop.sort({
 				target : this,
 				type : {
@@ -134,6 +158,8 @@
 			});
 		});
 
+
+		
 		$.getDoc().keydown(function(event) {
 			if (event.keyCode == 27) {
 				ui.dragdrop.resize.hide();

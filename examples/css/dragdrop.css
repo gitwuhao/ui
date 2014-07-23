@@ -46,7 +46,14 @@
 .icon-list{
 	display: none;
 }
-
+.image-map{
+	top: 1200px;
+	position: absolute;
+	overflow: hidden;
+}
+.image-map .link-fitem{
+	border: 1px dashed #0085FF;
+}
 .floatbox{
 	top: 1200px;
 }
