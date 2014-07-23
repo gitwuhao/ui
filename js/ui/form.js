@@ -352,7 +352,7 @@
 			}
 			this.isDisabled=true;
 			this.$elem.addClass("disabled");
-
+			this.$elem.removeClass("selected");
 			ui.form.field.removeItem(this);
 			this.isFocus=false;
 		},
