@@ -114,7 +114,10 @@
 					resize : true
 				},
 				event : event,
-				parentBox : this.parentElement
+				parentBox : this.parentElement,
+				getRegion : function(region){
+					var c=1;
+				}
 			});
 		});
 

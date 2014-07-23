@@ -621,6 +621,11 @@
 				region.h = 0;
 				region.y = 0;
 			}
+
+			if (region.x == 0 && region.y == 0 && region.w == 0 && region.h == 0) {
+				return;
+			}
+
 			if (config.getRegion) {
 				config.getRegion(region);
 			} else if (config.parentBox) {
