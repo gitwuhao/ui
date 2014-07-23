@@ -662,7 +662,6 @@
 				return;
 			}
 
-
 			if (config.setRegion) {
 				config.setRegion(region);
 			}else{
