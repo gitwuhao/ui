@@ -434,14 +434,20 @@
 			delete this.isResetsortbox;
 			this.unbindSortContent();
 
+
+			var config=this.config;
+
 			if(this.replaceElemet){
-				var config=this.config;
 				if(config.onReplace){
 					config.onReplace(this.replaceElemet);
 				}else{
-					$(this.replaceElemet).replaceNode(this.config.target);
+					$(this.replaceElemet).replaceNode(config.target);
 				}
 				delete this.replaceElemet;
+			}
+
+			if(config.onSortover){
+				config.onSortover();
 			}
 		},
 		resizeBoxMouseDown : function(event) {
