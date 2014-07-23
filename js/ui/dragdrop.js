@@ -62,20 +62,11 @@
 		bindContentEvent : function() {
 			ui.logger(this);
 			var events = ['mouseup', 'mousemove', ''].join(this.__EVENTNAMESPACE__ + ' ');
-
 			$.getDoc().on(events, {
 				me : this
 			}, function(event) {
 				return event.data.me.on(event.type, event);
 			});
-			if(this.config.isLockBody){
-				$.getDoc().on(['scroll', ''].join(this.__EVENTNAMESPACE__ + ' '),
-					function(event) {
-						return false;
-					}
-				);	
-			}
-	
 		},
 		unbindContentEvent : function() {
 			ui.logger(this);
@@ -342,6 +333,9 @@
 			if(!elemet){
 				return;
 			}
+			
+			delete this.replaceElemet;
+
 			if(event.ctrlKey){
 				this.on('replace',elemet);
 			}else if(elemet.parentElement==srcTarget.parentElement){
@@ -480,7 +474,6 @@
 			delete this.isResetsortbox;
 			this.unbindSortContent();
 
-
 			var config=this.config;
 
 			if(this.replaceElemet){
@@ -490,10 +483,12 @@
 					$(this.replaceElemet).replaceNode(config.target);
 				}
 				delete this.replaceElemet;
+			}else if(config.onSortover){
+				config.onSortover();
 			}
 
-			if(config.onSortover){
-				config.onSortover();
+			if(config.onOver){
+				config.onOver();
 			}
 		},
 		resizeBoxMouseDown : function(event) {
