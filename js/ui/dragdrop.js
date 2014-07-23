@@ -136,7 +136,11 @@
 		},
 		onKeypress : function(event) {
 			ui.logger(this);
-			var _min = 1, _max = 10, x = y = 0, shiftKey = event.shiftKey, ctrlKey = event.ctrlKey, altKey = event.altKey, keyCode = event.keyCode;
+			var _min = 1, _max = 10, x = y = 0,
+				shiftKey = event.shiftKey,
+				ctrlKey = event.ctrlKey,
+				altKey = event.altKey,
+				keyCode = event.keyCode;
 			switch (keyCode) {
 				// left
 				case 37 :
@@ -328,7 +332,7 @@
 			if(!elemet){
 				return;
 			}
-			if(event.ctrlKey && !config.isTable){
+			if(!event.ctrlKey && !config.isTable){
 				if(elemet.parentElement==srcTarget.parentElement){
 					this.on('sort',elemet);
 				}
@@ -378,7 +382,8 @@
 			var config = this.config,
 				$elemet,
 				srcTarget,
-				prev;
+				prev,
+				type;
 
 			if(config.onSortBefore && config.onSortBefore(elemet)==false){
 				return;
@@ -389,12 +394,13 @@
 			prev = $elemet.prev();
 
 			if (prev.length == 1 && prev[0] == srcTarget) {
-				$elemet.after(srcTarget);
+				type='after';
 			} else {
-				$elemet.before(srcTarget);
+				type='before';
 			}
+			$elemet[type](srcTarget);
 			if(config.onSortAfter){
-				config.onSortAfter(elemet);
+				config.onSortAfter(elemet,type);
 			}
 		},
 		onSortstart : function(x, y) {
