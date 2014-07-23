@@ -11,6 +11,12 @@
 .x-ui-dd-resize-box.float-right .nw,.x-ui-dd-resize-box.float-right .n,.x-ui-dd-resize-box.float-right .ne,.x-ui-dd-resize-box.float-right .e,.x-ui-dd-resize-box.float-right .se{
 	display: none;
 }
+.x-ui-dd-resize-box.auto-width *{
+	display: none;
+}
+.x-ui-dd-resize-box.auto-width .s,.x-ui-dd-resize-box .bg{
+	display: block;
+}
 .x-ui-dd-resize-box a{
 	display: inline-block;
 }

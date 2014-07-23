@@ -341,26 +341,6 @@
 			ui.logger(this);
 			this.replaceElemet=elemet;
 		},
-		onSort:function(elemet){
-			ui.logger(this);
-			if(config.onSortBefore && config.onSortBefore(elemet)==false){
-				return;
-			}
-			var config = this.config,
-				$elemet=$(elemet),
-				srcTarget = config.target,
-				prev = $elemet.prev();
-			
-
-			if (prev.length == 1 && prev[0] == srcTarget) {
-				$elemet.after(srcTarget);
-			} else {
-				$elemet.before(srcTarget);
-			}
-			if(config.onSortAfter){
-				config.onSortAfter(elemet);
-			}
-		},
 		sort : function(config) {
 			ui.logger(this);
 			if (this.setConfig(config) == false) {
@@ -391,6 +371,30 @@
 			this.isResetsortbox = true;
 			this.$sortbox.show();
 			this.bindSortContent();
+		},
+		onSort:function(elemet){
+			ui.logger(this);
+			var config = this.config,
+				$elemet,
+				srcTarget,
+				prev;
+
+			if(config.onSortBefore && config.onSortBefore(elemet)==false){
+				return;
+			}
+			
+			$elemet=$(elemet);
+			srcTarget = config.target;
+			prev = $elemet.prev();
+
+			if (prev.length == 1 && prev[0] == srcTarget) {
+				$elemet.after(srcTarget);
+			} else {
+				$elemet.before(srcTarget);
+			}
+			if(config.onSortAfter){
+				config.onSortAfter(elemet);
+			}
 		},
 		onSortstart : function(x, y) {
 			ui.logger(this);
@@ -515,6 +519,8 @@
 			if(config.isFloatAlign){
 				var style=window.getComputedStyle(config.target);
 				this.$resizebox.addClass('float-'+style.float);
+			}else if(config.isAutoWidth){
+				this.$resizebox.addClass('auto-width');
 			}
 
 		},

@@ -48,7 +48,8 @@
 						resize : true
 					},
 					event : event,
-					parentBox : this.parentElement
+					parentBox : this.parentElement,
+					isAutoWidth : true
 				});
 				return false;
 			}
