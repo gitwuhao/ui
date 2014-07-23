@@ -358,6 +358,11 @@
 			this.config.$parentBox = $(config.parentBox);
 			this.config.isTable=/^(table|tbody|tr)$/i.test(config.parentBox);
 			this.on('sortstart', this.event.pageX, this.event.pageY);
+
+			this.$sortbox.attr('class',this._c_dd_sort_box);
+			if(config.cls){
+				this.$sortbox.addClass(config.cls);
+			}
 		},
 		sortstart : function() {
 			ui.logger(this);
