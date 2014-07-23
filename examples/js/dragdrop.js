@@ -1,18 +1,7 @@
 (function() {
 	window.examples.dragdrop = function() {
 
-		var html = ['<div class="x-ui-dd-resize-box">', '<div class="tl"></div>', '<div class="tc"></div>', '<div class="tr"></div>', '<div class="lc"></div>', '<div class="bg"></div>', '<div class="rc"></div>', '<div class="bl"></div>', '<div class="bc"></div>', '<div class="br"></div>', '</div>'];
-
-		var div = $.createElement(html.join(''));
-
-		$.getBody().append(div);
-
-		div.style.display = 'block';
-
- 
-		div.style.display = 'block';
-		div.style.left = '100px';
-		div.style.top = '100px';
+		var html,div;
 
 		html = ['<div class="box">', '<div class="item1"></div>', '<div class="item2"></div>', '</div>'];
 
@@ -65,13 +54,6 @@
 			}
 		});
 
-		html = ['<div class="floatbox">',
-					'<div class="bg"></div>',
-					'<div class="item" style="margin-top:-110px;">6</div>',
-					'<div class="item" style="margin-top:-120px;margin-left:120px;">7</div>',
-				'</div>'];
-
-		$.getBody().append(html.join(''));
 
 		html = ['<div class="imagebox"><table class="tableimage">',
 			'<tbody>',
