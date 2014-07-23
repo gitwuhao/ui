@@ -381,6 +381,10 @@
 			this.isResetsortbox = true;
 			this.$sortbox.show();
 			this.bindSortContent();
+
+			if(this.config.sortstart){
+				this.config.sortstart();
+			}
 		},
 		onSort:function(elemet){
 			ui.logger(this);
