@@ -62,11 +62,20 @@
 		bindContentEvent : function() {
 			ui.logger(this);
 			var events = ['mouseup', 'mousemove', ''].join(this.__EVENTNAMESPACE__ + ' ');
+
 			$.getDoc().on(events, {
 				me : this
 			}, function(event) {
 				return event.data.me.on(event.type, event);
 			});
+			if(this.config.isLockBody){
+				$.getDoc().on(['scroll', ''].join(this.__EVENTNAMESPACE__ + ' '),
+					function(event) {
+						return false;
+					}
+				);	
+			}
+	
 		},
 		unbindContentEvent : function() {
 			ui.logger(this);
@@ -99,14 +108,15 @@
 				pageX = event.pageX,
 				pageY = event.pageY,
 				x = pageX - offset.x,
-				y = pageY - offset.y;
+				y = pageY - offset.y,
+				config = this.config;
 
 			this.event = event;
 
 			if (this.type == 'drag') {
 				this.on('dragmove', x, y);
 			} else if (this.type == 'resize') {
-				var _offset = this.config.$cursortarget.offset();
+				var _offset = config.$cursortarget.offset();
 				if (_offset.left + x - pageX != 0) {
 					x = pageX - _offset.left;
 				}
@@ -201,12 +211,12 @@
 				return false;
 			}
 			this.config = config;
-			this.config.$target = $(config.target);
-			if (this.config.parentBox) {
+			config.$target = $(config.target);
+			if (config.parentBox) {
 				this.bindKeyPress();
 			}
-			this.config.$target.addClass('x-ui-dd-target');
-			if (!this.config.type.resize) {
+			config.$target.addClass('x-ui-dd-target');
+			if (!config.type.resize) {
 				this.hideResizeBox();
 			}
 		},
@@ -423,11 +433,42 @@
 			var event = this.event;
 
 			this.$resizebox.hide();
+			
+			if(this.config.isLockBody){
+				var $parentBox=$.getBody(),
+					$target = this.$sortbox,
+					maxWidth = $parentBox.width(),
+					maxHeight = $parentBox.height(),
+					offset = $target.offset(),
+					_l = event.pageX + 10,
+					_t = event.pageY + 22,
+					_w = $target.outerWidth(),
+					_h = $target.outerHeight();
 
-			this.$sortbox.css({
-				left : event.pageX + 10,
-				top : event.pageY + 22
-			});
+				if (_l < 0) {
+					x = -_l;
+				} else if (_l + _w  > maxWidth) {
+					_l = maxWidth  - _w - 10;
+					x = 0;
+				}
+
+				if (_t  < 0) {
+					y = -_t;
+				} else if (_t + _h > maxHeight) {
+					y = maxHeight - _t - _h;
+				}
+
+				this.$sortbox.css({
+					left : _l + x,
+					top : _t + y
+				});
+			}else{
+				this.$sortbox.css({
+					left : event.pageX + 10,
+					top : event.pageY + 22
+				});
+			}
+
 			$.getBody().addClass(this._c_dd_sort_drag);
 			this.sortstart();
 		},
