@@ -32,7 +32,6 @@
 	width: 8px;
 	height: 8px;
 	position: absolute;
-	z-index: 99999;
 	outline: 1px solid #000;
 }
 .x-ui-dd-resize-box .nw,.x-ui-dd-resize-box .n,.x-ui-dd-resize-box .ne{
