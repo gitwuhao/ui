@@ -242,7 +242,8 @@
 				_l = offset.left,
 				_t = offset.top,
 				_w = $target.outerWidth(),
-				_h = $target.outerHeight();
+				_h = $target.outerHeight(),
+				b=config.marginBorder || 0;
 
 			if (point.x == this.__M_RIGHT__) {
 				point.x = maxWidth;
@@ -254,14 +255,14 @@
 				point.y = maxHeight;
 			}
 
-			if (_l + point.x < 0) {
-				point.x = -_l;
-			} else if (_l + _w + point.x > maxWidth) {
+			if (_l + point.x - b < 0) {
+				point.x = -_l + b;
+			} else if (_l + _w + point.x  > maxWidth) {
 				point.x = maxWidth - _l - _w;
 			}
 
-			if (_t + point.y < 0) {
-				point.y = -_t;
+			if (_t + point.y - b< 0) {
+				point.y = -_t + b;
 			} else if (_t + _h + point.y > maxHeight) {
 				point.y = maxHeight - _t - _h;
 			}
