@@ -26,6 +26,26 @@
 				}, html);
 				html.push('</div>');
 				return html.join('');
+			},
+			getOffsetParentPoint : function(element,parent){
+				var point={
+						left : element.offsetLeft,
+						top : element.offsetTop
+					};
+				parent = parent || document.body;
+
+				if(element.offsetParent==parent){
+					return point;
+				}
+				while(true){
+					if(element == parent){
+						break;
+					}
+					element=element.parentElement;
+					point.left -= element.offsetLeft;
+					point.top -= element.offsetTop;
+				}
+				return point;
 			}
 		},
 		__EVENTNAMESPACE__ : '.DD' + $.randomChar(5),
@@ -218,7 +238,7 @@
 				$target = config.$target,
 				maxWidth = $parentBox.width(),
 				maxHeight = $parentBox.height(),
-				offset = $target.getOffsetParentPoint(config.parentBox),
+				offset = DragDrop.getOffsetParentPoint(config.target,config.parentBox),
 				_l = offset.left,
 				_t = offset.top,
 				_w = $target.outerWidth(),
@@ -293,7 +313,7 @@
 			if (config.setPoint) {
 				config.setPoint(point);
 			}else{
-				offset = config.$target.getOffsetParentPoint(config.parentBox);
+				offset = DragDrop.getOffsetParentPoint(config.target,config.parentBox);
 				config.$target.css({
 					left : offset.left + point.x,
 					top : offset.top + point.y
@@ -303,7 +323,7 @@
 			if(this.render==document.body){
 				offset = this.$resizebox.offset();
 			}else{
-				offset = this.$resizebox.getOffsetParentPoint(this.render.offsetParent);
+				offset = DragDrop.getOffsetParentPoint(this.$resizebox[0],this.render.offsetParent);
 			}
 
 
@@ -338,7 +358,7 @@
 			if(!elemet){
 				return;
 			}
-			
+
 			delete this.replaceElemet;
 
 			if(event.ctrlKey){
@@ -402,7 +422,7 @@
 			if(config.onSortBefore && config.onSortBefore(elemet)==false){
 				return;
 			}
-			
+
 			$elemet=$(elemet);
 			srcTarget = config.target;
 			prev = $elemet.prev();
@@ -436,7 +456,7 @@
 			var event = this.event;
 
 			this.$resizebox.hide();
-			
+
 			if(this.config.isLockBody){
 				var $parentBox=$.getBody(),
 					$target = this.$sortbox,
@@ -541,7 +561,7 @@
 			if(this.render==document.body){
 				offset = $target.offset();
 			}else{
-				offset = $target.getOffsetParentPoint(this.render.offsetParent);
+				offset = DragDrop.getOffsetParentPoint($target[0],this.render.offsetParent);
 			}
 			return {
 				left : offset.left,
@@ -573,7 +593,7 @@
 			if (this.setConfig(config) == false) {
 				return;
 			}
-			
+
 			if(config.render && config.render != this.render) {
 				this.$elem.appendTo(config.render);
 				this.render = config.render;
@@ -614,11 +634,12 @@
 				$target = config.$target,
 				maxWidth = $parentBox.width(),
 				maxHeight = $parentBox.height(),
-				offset = $target.getOffsetParentPoint(config.parentBox),
+				offset = DragDrop.getOffsetParentPoint($target[0],config.parentBox),
 				_l = offset.left,
 				_t = offset.top,
 				_w = $target.outerWidth(),
 				_h = $target.outerHeight();
+
 
 			if (_l + region.x < 0) {
 				region.x = -_l;
@@ -739,7 +760,7 @@
 				var $target = config.$target,
 					_width = $target.width(),
 					_height = $target.height(),
-					offset = $target.getOffsetParentPoint(config.parentBox);
+					offset = DragDrop.getOffsetParentPoint($target[0],config.parentBox);
 				$target.css({
 					width : _width + region.w,
 					height : _height + region.h,
