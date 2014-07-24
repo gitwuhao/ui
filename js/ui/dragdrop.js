@@ -619,7 +619,7 @@
 				_t = offset.top,
 				_w = $target.outerWidth(),
 				_h = $target.outerHeight();
-			var p=$target.offsetElement($parentBox[0]);
+
 			if (_l + region.x < 0) {
 				region.x = -_l;
 				region.w = _l;
