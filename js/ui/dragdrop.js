@@ -513,6 +513,10 @@
 				}
 				delete this.replaceElemet;
 			}
+
+			if(config.onSortOver){
+				config.onSortOver();
+			}
 		},
 		resizeBoxMouseDown : function(event) {
 			ui.logger(this);
