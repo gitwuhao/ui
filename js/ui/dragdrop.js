@@ -363,7 +363,7 @@
 
 			if(event.ctrlKey){
 				this.on('replace',elemet);
-			}else if(elemet.parentElement==srcTarget.parentElement){
+			}else if(elemet.parentElement==srcTarget.parentElement && elemet!=srcTarget){
 				this.on('sort',elemet);
 			}
 		},
@@ -433,8 +433,8 @@
 				type='before';
 			}
 			$elemet[type](srcTarget);
-			if(config.onSortAfter){
-				config.onSortAfter(elemet,type);
+			if(config.onSort){
+				config.onSort(elemet,type);
 			}
 		},
 		onSortstart : function(x, y) {
