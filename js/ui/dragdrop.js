@@ -300,7 +300,12 @@
 				});
 			}
 
-			offset = this.$resizebox.offset();
+			if(this.render==document.body){
+				offset = this.$resizebox.offset();
+			}else{
+				offset = this.$resizebox.getOffsetParentPoint(this.render.offsetParent);
+			}
+
 
 			this.$resizebox.css({
 				left : offset.left + point.x,
@@ -529,10 +534,15 @@
 		},
 		getTargetRegion : function() {
 			ui.logger(this);
-			var $target = this.config.$target;
-			var width = $target.outerWidth();
-			var height = $target.outerHeight();
-			var offset = $target.offset();
+			var $target = this.config.$target,
+				width = $target.outerWidth(),
+				height = $target.outerHeight(),
+				offset=null;
+			if(this.render==document.body){
+				offset = $target.offset();
+			}else{
+				offset = $target.getOffsetParentPoint(this.render.offsetParent);
+			}
 			return {
 				left : offset.left,
 				top : offset.top,
