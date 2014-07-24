@@ -163,7 +163,7 @@
 				},
 				event : event,
 				parentBox : this.parentElement,
-				getRegion : function(region){
+				setRegion : function(region){
 					var $img=this.$target.children('img');
 
 					$img.css({

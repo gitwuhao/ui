@@ -79,7 +79,8 @@
 	cursor:default;
 }
 .x-ui-dd-sort-drag .x-ui-dd-target{
-	visibility:hidden;
+	/*visibility:hidden;*/
+	opacity: 0.5;
 }
 
 .x-ui-dd-sort-box{

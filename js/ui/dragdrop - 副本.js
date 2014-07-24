@@ -213,12 +213,11 @@
 		},
 		getPoint : function(point) {
 			ui.logger(this);
-			var config=this.config,
-				$parentBox = $(config.parentBox),
-				$target = config.$target,
+			var $parentBox = $(this.config.parentBox),
+				$target = this.config.$target,
 				maxWidth = $parentBox.width(),
 				maxHeight = $parentBox.height(),
-				offset = $target.getOffsetParentPoint(config.parentBox),
+				offset = $target.point(),
 				_l = offset.left,
 				_t = offset.top,
 				_w = $target.outerWidth(),
@@ -293,7 +292,7 @@
 			if (config.setPoint) {
 				config.setPoint(point);
 			}else{
-				offset = config.$target.getOffsetParentPoint(config.parentBox);
+				offset = config.$target.point();
 				config.$target.css({
 					left : offset.left + point.x,
 					top : offset.top + point.y
@@ -602,12 +601,11 @@
 		},
 		getRegion : function(region) {
 			ui.logger(this);
-			var config=this.config,
-				$parentBox = $(config.parentBox),
-				$target = config.$target,
+			var $parentBox = $(this.config.parentBox),
+				$target = this.config.$target,
 				maxWidth = $parentBox.width(),
 				maxHeight = $parentBox.height(),
-				offset = $target.getOffsetParentPoint(config.parentBox),
+				offset = $target.point(),
 				_l = offset.left,
 				_t = offset.top,
 				_w = $target.outerWidth(),
@@ -732,7 +730,7 @@
 				var $target = config.$target,
 					_width = $target.width(),
 					_height = $target.height(),
-					offset = $target.getOffsetParentPoint(config.parentBox);
+					offset = $target.point();
 				$target.css({
 					width : _width + region.w,
 					height : _height + region.h,
