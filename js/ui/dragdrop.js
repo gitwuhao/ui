@@ -563,9 +563,9 @@
 				width = $target.outerWidth(),
 				height = $target.outerHeight(),
 				offset=null;
-			if(this.render==document.body){
+			if(this.type=='sort' || this.render==document.body){
 				offset = $target.offset();
-			}else{
+			}else if(this.render!=document.body){
 				offset = DragDrop.getOffsetParentPoint($target[0],this.render.offsetParent);
 			}
 			return {
