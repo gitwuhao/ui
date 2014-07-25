@@ -370,13 +370,39 @@
 			delete this.replaceElemet;
 			if(event.ctrlKey){
 				this.on('replace',elemet);
-			}else if(elemet.parentElement==srcTarget.parentElement && elemet!=srcTarget){
+			}else if(elemet!=srcTarget && (elemet.parentElement==srcTarget.parentElement || config.onSort)){
 				this.on('sort',elemet);
 			}
 		},
 		onReplace:function(elemet){
 			ui.logger(this);
 			this.replaceElemet=elemet;
+		},
+		onSort:function(elemet){
+			ui.logger(this);
+			var config = this.config,
+				$elemet,
+				srcTarget,
+				prev,
+				type;
+
+			if(config.onSortBefore && config.onSortBefore(elemet)==false){
+				return;
+			}
+
+			$elemet=$(elemet);
+			srcTarget = config.target;
+			prev = $elemet.prev();
+
+			if (prev.length == 1 && prev[0] == srcTarget) {
+				type='after';
+			} else {
+				type='before';
+			}
+			$elemet[type](srcTarget);
+			if(config.onSort){
+				config.onSort(elemet,type);
+			}
 		},
 		sort : function(config) {
 			ui.logger(this);
@@ -416,32 +442,6 @@
 
 			if(this.config.sortstart){
 				this.config.sortstart();
-			}
-		},
-		onSort:function(elemet){
-			ui.logger(this);
-			var config = this.config,
-				$elemet,
-				srcTarget,
-				prev,
-				type;
-
-			if(config.onSortBefore && config.onSortBefore(elemet)==false){
-				return;
-			}
-
-			$elemet=$(elemet);
-			srcTarget = config.target;
-			prev = $elemet.prev();
-
-			if (prev.length == 1 && prev[0] == srcTarget) {
-				type='after';
-			} else {
-				type='before';
-			}
-			$elemet[type](srcTarget);
-			if(config.onSort){
-				config.onSort(elemet,type);
 			}
 		},
 		onSortstart : function(x, y) {
