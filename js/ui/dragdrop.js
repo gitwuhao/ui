@@ -111,9 +111,6 @@
 		},
 		onMousemove : function(event) {
 			ui.logger(this);
-			if(this.__SORT_TIMEOUT_ID__ && this.event && event.timeStamp - this.event.timeStamp < 50){
-				return;
-			}
 
 			var offset = this.offset,
 				pageX = event.pageX,
@@ -121,14 +118,22 @@
 				x = pageX - offset.x,
 				y = pageY - offset.y,
 				config = this.config;
-
+			
 			this.event = event;
 
 			if (this.type == 'drag') {
 				this.on('dragmove', x, y);
 			} else if (this.type == 'resize') {
 				if(config.onResizemove){
-					config.onResizemove(x,y);
+					var w=config.$target.width();
+					var h=config.$target.height();
+					if (w + x < this.__MIN_SIZE__) {
+						x=0;
+					}
+					if (h + y < this.__MIN_SIZE__) {
+						y=0;
+					}
+					config.onResizemove(x,y,w,h);
 					this.setResizeBoxOffset();
 				}else{
 					var _offset = config.$cursortarget.offset();
@@ -294,6 +299,7 @@
 			delete this.targetRegion;
 			delete this.type;
 			delete this.event;
+			delete this.__SORT_TIMEOUT_ID__;
 			this.removeBodyClass();
 		},
 		onDragstart : function(x, y) {
@@ -372,12 +378,18 @@
 				return;
 			}
 
+			if(event.timeStamp - this.lastSortTime < 100){
+				return;
+			}
+
 			delete this.replaceElemet;
 			if(event.ctrlKey){
 				this.on('replace',elemet);
 			}else if(elemet!=srcTarget && (elemet.parentElement==srcTarget.parentElement || config.onSort)){
 				this.on('sort',elemet);
 			}
+			
+			this.lastSortTime=event.timeStamp;
 		},
 		onReplace:function(elemet){
 			ui.logger(this);
@@ -392,7 +404,7 @@
 				type;
 
 			if(config.onSortBefore && config.onSortBefore(elemet)==false){
-				return;
+				return false;
 			}
 
 			$elemet=$(elemet);
@@ -401,13 +413,18 @@
 
 			if (prev.length == 1 && prev[0] == srcTarget) {
 				type='after';
+				prev=prev[0];
 			} else {
 				type='before';
 			}
-			$elemet[type](srcTarget);
+			
+			if(prev!=srcTarget){
+				$elemet[type](srcTarget);
+			}
 			if(config.onSort){
 				config.onSort(elemet,type);
 			}
+			
 		},
 		sort : function(config) {
 			ui.logger(this);
@@ -420,6 +437,7 @@
 			if (config.type.resize) {
 				this.__SORT_TIMEOUT_ID__=$.setTimeout(function(){
 					this.showResize(config);
+					delete this.__SORT_TIMEOUT_ID__;
 				},100,this);
 			}
 			this.config.$parentBox = $(config.parentBox);
@@ -456,7 +474,6 @@
 		},
 		onSortmove : function(x, y) {
 			ui.logger(this);
-
 			if(this.__SORT_TIMEOUT_ID__){
 				clearTimeout(this.__SORT_TIMEOUT_ID__);
 				delete this.__SORT_TIMEOUT_ID__;
