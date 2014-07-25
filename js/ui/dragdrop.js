@@ -113,29 +113,25 @@
 			ui.logger(this);
 
 			var offset = this.offset,
-				pageX = event.pageX,
-				pageY = event.pageY,
-				x = pageX - offset.x,
-				y = pageY - offset.y,
+				pageX,
+				pageY,
+				x,
+				y,
 				config = this.config;
-			
+
+			pageX = event.pageX,
+			pageY = event.pageY,
+			x = pageX - offset.x,
+			y = pageY - offset.y,
+
 			this.event = event;
+
+			offset.x = pageX;
+			offset.y = pageY;
 
 			if (this.type == 'drag') {
 				this.on('dragmove', x, y);
-			} else if (this.type == 'resize') {
-				if(config.onResizemove){
-					var w=config.$target.width();
-					var h=config.$target.height();
-					if (w + x < this.__MIN_SIZE__) {
-						x=0;
-					}
-					if (h + y < this.__MIN_SIZE__) {
-						y=0;
-					}
-					config.onResizemove(x,y,w,h);
-					this.setResizeBoxOffset();
-				}else{
+			} else if (this.type == 'resize') {			
 					var _offset = config.$cursortarget.offset();
 					if (_offset.left + x - pageX != 0) {
 						x = pageX - _offset.left;
@@ -144,17 +140,26 @@
 						y = pageY - _offset.top;
 					}
 					if (x != y && x != 0) {
-						this.on('resizemove', x, y);
+						if(config.onResizemove){
+							var w=config.$target.width();
+							var h=config.$target.height();
+							if (w + x < this.__MIN_SIZE__) {
+								x=this.__MIN_SIZE__ - w ;
+							}
+							if (h + y < this.__MIN_SIZE__) {
+								y=this.__MIN_SIZE__ - h;
+							}
+							config.onResizemove(x,y,w,h);
+							this.setResizeBoxOffset();
+						}else{
+							this.on('resizemove', x, y);
+						}
 					}
-				}
-
 			} else if (this.type == 'sort') {
 				if (this.on('sortmove', x, y) == false) {
 					return;
 				}
 			}
-			offset.x = pageX;
-			offset.y = pageY;
 		},
 		onMouseup : function(event) {
 			ui.logger(this);
