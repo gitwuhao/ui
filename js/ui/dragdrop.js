@@ -140,20 +140,7 @@
 						y = pageY - _offset.top;
 					}
 					if (x != y && x != 0) {
-						if(config.onResizemove){
-							var w=config.$target.width();
-							var h=config.$target.height();
-							if (w + x < this.__MIN_SIZE__) {
-								x=this.__MIN_SIZE__ - w ;
-							}
-							if (h + y < this.__MIN_SIZE__) {
-								y=this.__MIN_SIZE__ - h;
-							}
-							config.onResizemove(x,y,w,h);
-							this.setResizeBoxOffset();
-						}else{
-							this.on('resizemove', x, y);
-						}
+						this.on('resizemove', x, y);
 					}
 			} else if (this.type == 'sort') {
 				if (this.on('sortmove', x, y) == false) {
@@ -734,6 +721,8 @@
 		onResizemove : function(x, y) {
 			ui.logger(this);
 
+
+
 			var point = null,
 				config = this.config,
 				offset,
@@ -745,6 +734,20 @@
 					h : 0
 				},
 				shiftKey = this.event.shiftKey;
+
+			if(config.onResizemove){
+				var w=config.$target.width();
+				var h=config.$target.height();
+				if (w + x < this.__MIN_SIZE__) {
+					x=this.__MIN_SIZE__ - w ;
+				}
+				if (h + y < this.__MIN_SIZE__) {
+					y=this.__MIN_SIZE__ - h;
+				}
+				config.onResizemove(x,y,w,h);
+				this.setResizeBoxOffset();
+				return;
+			}
 
 			if (resizeType == "nw") {
 				region.w = -x;
