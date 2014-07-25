@@ -355,13 +355,19 @@
 			var $target=$(event.target),
 				config = this.config,
 				srcTarget = config.target,
+				elemet;
+
+			if(config.onSortBoxMove){
+				elemet=config.onSortBoxMove(event);
+			}else{
 				elemet=$target.isParent(config.parentBox);
+			}
+			
 			if(!elemet){
 				return;
 			}
 
 			delete this.replaceElemet;
-
 			if(event.ctrlKey){
 				this.on('replace',elemet);
 			}else if(elemet.parentElement==srcTarget.parentElement && elemet!=srcTarget){
@@ -738,7 +744,9 @@
 				region.w = x;
 				region.h = y;
 			}
-			var $bg = this.$bg, width = this.$bg.width(), height = this.$bg.height();
+			var $bg = this.$bg,
+				width = this.$bg.width(),
+				height = this.$bg.height();
 
 			if (width + region.w < this.__MIN_SIZE__) {
 				region.w = 0;
