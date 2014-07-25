@@ -546,9 +546,11 @@
 			} else if (type.sort && isBG) {
 				this.on('sortstart', x, y);
 			} else if (type.resize && !isBG) {
-				this.config.$cursortarget = $(target);
-				this.config.resizetype = $.data(target, 'resizeType');
-				this.on('resizestart', x, y);
+				if(window.getComputedStyle(target).cursor!='default'){
+					this.config.$cursortarget = $(target);
+					this.config.resizetype = $.data(target, 'resizeType');
+					this.on('resizestart', x, y);
+				}
 			}
 		},
 		setResizeCursorOffset : function() {
