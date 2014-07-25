@@ -27,7 +27,7 @@
 	display: none;
 }
 .x-ui-dd-resize-box.auto-width .nw,.x-ui-dd-resize-box.auto-width .n,.x-ui-dd-resize-box.auto-width .ne,.x-ui-dd-resize-box.auto-width .w,.x-ui-dd-resize-box.auto-width .e,.x-ui-dd-resize-box.auto-width .sw,.x-ui-dd-resize-box.auto-width .se{
-	outline: 1px solid #000;
+	outline: 1px solid #666;
 	background-color:transparent;
 	cursor:default;
 }
