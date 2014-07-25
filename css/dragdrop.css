@@ -26,7 +26,7 @@
 .x-ui-dd-resize-box.float-right .nw,.x-ui-dd-resize-box.float-right .n,.x-ui-dd-resize-box.float-right .ne,.x-ui-dd-resize-box.float-right .e,.x-ui-dd-resize-box.float-right .se{
 	display: none;
 }
-.x-ui-dd-resize-box.auto-width .nw,.x-ui-dd-resize-box.auto-width .ne,.x-ui-dd-resize-box.auto-width .w,.x-ui-dd-resize-box.auto-width .e,.x-ui-dd-resize-box.auto-width .sw,.x-ui-dd-resize-box.auto-width .se{
+.x-ui-dd-resize-box.auto-width .nw,.x-ui-dd-resize-box.auto-width .n,.x-ui-dd-resize-box.auto-width .ne,.x-ui-dd-resize-box.auto-width .w,.x-ui-dd-resize-box.auto-width .e,.x-ui-dd-resize-box.auto-width .sw,.x-ui-dd-resize-box.auto-width .se{
 	outline: 1px solid #000;
 	background-color:transparent;
 	cursor:default;
