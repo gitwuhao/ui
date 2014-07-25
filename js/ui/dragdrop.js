@@ -127,16 +127,22 @@
 			if (this.type == 'drag') {
 				this.on('dragmove', x, y);
 			} else if (this.type == 'resize') {
-				var _offset = config.$cursortarget.offset();
-				if (_offset.left + x - pageX != 0) {
-					x = pageX - _offset.left;
+				if(config.onResizemove){
+					config.onResizemove(x,y);
+					this.setResizeBoxOffset();
+				}else{
+					var _offset = config.$cursortarget.offset();
+					if (_offset.left + x - pageX != 0) {
+						x = pageX - _offset.left;
+					}
+					if (_offset.top + y - pageY != 0) {
+						y = pageY - _offset.top;
+					}
+					if (x != y && x != 0) {
+						this.on('resizemove', x, y);
+					}
 				}
-				if (_offset.top + y - pageY != 0) {
-					y = pageY - _offset.top;
-				}
-				if (x != y && x != 0) {
-					this.on('resizemove', x, y);
-				}
+
 			} else if (this.type == 'sort') {
 				if (this.on('sortmove', x, y) == false) {
 					return;
@@ -209,24 +215,23 @@
 			this.on('dragmove', x, y);
 			return false;
 		},
+		cleanConfig:function(){
+			ui.logger(this);
+			this.config = null;
+			this.unbindKeyPress();
+		},
 		setConfig : function(config) {
 			ui.logger(this);
 			if (this.config && config && this.config.target == config.target) {
 				return;
-			} else if (this.config) {
-				this.config.$target.removeClass('x-ui-dd-target');
-				this.config = null;
 			}
-			if (config == null) {
-				this.unbindKeyPress();
-				return false;
-			}
+			this.cleanConfig();
+
 			this.config = config;
 			config.$target = $(config.target);
 			if (config.type.drag) {
 				this.bindKeyPress();
 			}
-			config.$target.addClass('x-ui-dd-target');
 			if (!config.type.resize) {
 				this.hideResizeBox();
 			}
@@ -362,7 +367,7 @@
 			}else{
 				elemet=$target.isParent(config.parentBox);
 			}
-			
+
 			if(!elemet){
 				return;
 			}
@@ -563,7 +568,7 @@
 				width = $target.outerWidth(),
 				height = $target.outerHeight(),
 				offset=null;
-			if(this.type=='sort' || this.render==document.body){
+			if(!this.config.type.resize || this.render==document.body){
 				offset = $target.offset();
 			}else if(this.render!=document.body){
 				offset = DragDrop.getOffsetParentPoint($target[0],this.render.offsetParent);
@@ -605,8 +610,6 @@
 			}
 
 			this.setResizeBoxOffset();
-
-			this.$bg.focus();
 
 			var events = ['mousedown', ''].join(this.__EVENTNAMESPACE__ + ' ');
 			this.$resizebox.on(events, {
@@ -665,10 +668,8 @@
 		},
 		hide : function() {
 			ui.logger(this);
-			if (this.config && this.config.type.resize) {
-				this.hideResizeBox();
-			}
-			this.setConfig(null);
+			this.hideResizeBox();
+			this.cleanConfig();
 		},
 		getBodyClass : function() {
 			this.bodyClass = [];
@@ -685,16 +686,19 @@
 		},
 		addBodyClass : function() {
 			$.getBody().addClass(this.getBodyClass());
-			if(this.config.dragstart){
-				this.config.dragstart();
+			var config=this.config;
+			config.$target.addClass('x-ui-dd-target');
+			if(config.dragstart){
+				config.dragstart();
 			}
 		},
 		removeBodyClass : function() {
 			$.getBody().removeClass(this.bodyClass);
 			this.bodyClass = null;
-			
-			if(this.config.dragover){
-				this.config.dragover();
+			var config=this.config;
+			config.$target.removeClass('x-ui-dd-target');
+			if(config.dragover){
+				config.dragover();
 			}
 		},
 		onResizestart : function(x, y) {
@@ -705,6 +709,7 @@
 		},
 		onResizemove : function(x, y) {
 			ui.logger(this);
+
 			var point = null,
 				config = this.config,
 				offset,
