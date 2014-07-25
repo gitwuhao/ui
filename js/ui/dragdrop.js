@@ -665,7 +665,7 @@
 		},
 		hide : function() {
 			ui.logger(this);
-			if (this.config.type.resize) {
+			if (this.config && this.config.type.resize) {
 				this.hideResizeBox();
 			}
 			this.setConfig(null);
