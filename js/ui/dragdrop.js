@@ -119,11 +119,15 @@
 				y,
 				config = this.config;
 
-			pageX = event.pageX,
-			pageY = event.pageY,
-			x = pageX - offset.x,
-			y = pageY - offset.y,
+			pageX = event.pageX;
+			pageY = event.pageY;
+			x = pageX - offset.x;
+			y = pageY - offset.y;
 
+			if(x == 0 && y == 0){
+				return;
+			}
+			
 			this.event = event;
 
 			offset.x = pageX;
