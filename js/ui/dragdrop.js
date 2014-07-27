@@ -91,6 +91,14 @@
 		unbindContentEvent : function() {
 			ui.logger(this);
 			$.getDoc().off(this.__EVENTNAMESPACE__);
+
+			$.getBody().one('mousedown' + this.__EVENTNAMESPACE__, {
+				me : this
+			}, function(event) {
+				if(event.data.me.config && event.data.me.config.event.target!=event.target){
+					event.data.me.hideResizeBox();
+				}
+			});
 		},
 		onSelectstart : function(event) {
 			ui.logger(this);
@@ -352,7 +360,6 @@
 			}else{
 				offset = DragDrop.getOffsetParentPoint(this.$resizebox[0],this.render.offsetParent);
 			}
-
 
 			this.$resizebox.css({
 				left : offset.left + point.x,
