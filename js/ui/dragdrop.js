@@ -236,6 +236,25 @@
 			if (!config.type.resize) {
 				this.hideResizeBox();
 			}
+
+			margin=config.margin;
+			if(margin>0){
+				margin={
+					top : margin,
+					right : margin,
+					bottom : margin,
+					left : margin	
+				};
+			}else{
+				margin=margin || {};
+				margin={
+					top : margin.top||0,
+					right : margin.right||0,
+					bottom : margin.bottom||0,
+					left : margin.left||0
+				};
+			}
+			config.margin=margin;
 		},
 		getPoint : function(point) {
 			ui.logger(this);
@@ -249,7 +268,7 @@
 				_t = offset.top,
 				_w = $target.outerWidth(),
 				_h = $target.outerHeight(),
-				b=config.marginBorder || 0;
+				margin=config.margin;
 
 			if (point.x == this.__M_RIGHT__) {
 				point.x = maxWidth;
@@ -261,16 +280,16 @@
 				point.y = maxHeight;
 			}
 
-			if (_l + point.x - b < 0) {
-				point.x = -_l + b;
-			} else if (_l + _w + point.x  > maxWidth) {
-				point.x = maxWidth - _l - _w;
+			if (_l + point.x - margin.left < 0) {
+				point.x = -_l + margin.left;
+			} else if (_l + _w + point.x + margin.right  > maxWidth) {
+				point.x = maxWidth - _l - _w - margin.right;
 			}
 
-			if (_t + point.y - b< 0) {
-				point.y = -_t + b;
-			} else if (_t + _h + point.y > maxHeight) {
-				point.y = maxHeight - _t - _h;
+			if (_t + point.y -  margin.top< 0) {
+				point.y = -_t + margin.top;
+			} else if (_t + _h + point.y + margin.bottom  > maxHeight) {
+				point.y = maxHeight - _t - _h - margin.bottom;
 			}
 			return point;
 		},
@@ -664,20 +683,20 @@
 				_h = $target.outerHeight();
 
 
-			if (_l + region.x < 0) {
-				region.x = -_l;
-				region.w = _l;
-			} else if (_l + _w + region.w + region.x > maxWidth) {
+			if (_l + region.x - margin.left < 0) {
+				region.x = -_l + margin.left;
+				region.w = Math.abs(region.x);
+			} else if (_l + _w + region.w + region.x + margin.right > maxWidth) {
 				region.x = 0;
-				region.w = maxWidth - _l - _w;
+				region.w = maxWidth - _l - _w - margin.right;
 			}
 
-			if (_t + region.y < 0) {
-				region.y = -_t;
-				region.h = _t;
-			} else if (_t + _h + region.h + region.y > maxHeight) {
+			if (_t + region.y - margin.top < 0) {
+				region.y = -_t + margin.top;
+				region.h = Math.abs(region.y);
+			} else if (_t + _h + region.h + region.y + margin.bottom  > maxHeight) {
 				region.y = 0;
-				region.h = maxHeight - _t - _h;
+				region.h = maxHeight - _t - _h - margin.bottom;
 			}
 			return region;
 		},
