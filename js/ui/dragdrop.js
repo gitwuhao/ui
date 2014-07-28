@@ -517,13 +517,14 @@
 			if(this.__SORT_TIMEOUT_ID__){
 				clearTimeout(this.__SORT_TIMEOUT_ID__);
 				delete this.__SORT_TIMEOUT_ID__;
-			}else if (!this.isResetsortbox) {
-				var startOffset=this.config.sortStartOffset;
-				if(startOffset && startOffset.left==event.pageX && startOffset.top==event.pageY ){
-					return false;
-				}
+//			}else if (!this.isResetsortbox) {
 			}
 
+			var startOffset=this.config.sortStartOffset;
+			if(startOffset && (Math.abs(startOffset.left - event.pageX)>5 || Math.abs(startOffset.top - event.pageY)>5 )){
+			}else{
+				return false;
+			}
 
 			this.$resizebox.hide();
 
