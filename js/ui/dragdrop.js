@@ -400,16 +400,21 @@
 			if(!elemet){
 				return;
 			}
-
+/*
 			if(event.timeStamp - this.lastSortTime < 100){
 				return;
 			}
-
+*/
+			config.event=event;
 			delete this.replaceElemet;
 			if(event.ctrlKey){
 				this.on('replace',elemet);
-			}else if(elemet!=srcTarget && (elemet.parentElement==srcTarget.parentElement || config.onSort)){
-				this.on('sort',elemet);
+			}else if(elemet!=srcTarget){
+				if(config.onSort){
+					config.onSort(elemet);
+				}else if(elemet.parentElement==srcTarget.parentElement){
+					this.on('sort',elemet);
+				}
 			}
 			
 			this.lastSortTime=event.timeStamp;
@@ -429,7 +434,7 @@
 			if(config.onSortBefore && config.onSortBefore(elemet)==false){
 				return false;
 			}
-
+			
 			$elemet=$(elemet);
 			srcTarget = config.target;
 			prev = $elemet.prev();
@@ -444,10 +449,9 @@
 			if(prev!=srcTarget){
 				$elemet[type](srcTarget);
 			}
-			if(config.onSort){
-				config.onSort(elemet,type);
+			if(config.onSortAfter){
+				config.onSortAfter(elemet,type);
 			}
-			
 		},
 		sort : function(config) {
 			ui.logger(this);
