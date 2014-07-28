@@ -227,6 +227,9 @@
 		},
 		cleanConfig:function(){
 			ui.logger(this);
+			if(this.config && this.config.deActive){
+				this.config.deActive();
+			}
 			this.config = null;
 			this.unbindKeyPress();
 		},
@@ -400,11 +403,11 @@
 			if(!elemet){
 				return;
 			}
-/*
-			if(event.timeStamp - this.lastSortTime < 100){
+
+			if(event.timeStamp - this.lastSortTime < 50){
 				return;
 			}
-*/
+
 			config.event=event;
 			delete this.replaceElemet;
 			if(event.ctrlKey){
