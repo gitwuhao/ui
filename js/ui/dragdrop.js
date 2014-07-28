@@ -475,6 +475,7 @@
 			if(config.cls){
 				this.$sortbox.addClass(config.cls);
 			}
+
 		},
 		sortstart : function() {
 			ui.logger(this);
@@ -493,22 +494,33 @@
 			if(this.config.sortstart){
 				this.config.sortstart();
 			}
+			delete this.config.startOffset;
 		},
 		onSortstart : function(x, y) {
 			ui.logger(this);
 			this.type = 'sort';
 			this.dragstart(x, y);
+
+			this.config.sortStartOffset={
+				left : x,
+				top : y,
+			};
 		},
 		onSortmove : function(x, y) {
 			ui.logger(this);
+			
+			var event = this.event;
+
 			if(this.__SORT_TIMEOUT_ID__){
 				clearTimeout(this.__SORT_TIMEOUT_ID__);
 				delete this.__SORT_TIMEOUT_ID__;
-			}else if (!this.isResetsortbox && (Math.abs(x) < 1 || Math.abs(y) < 1)) {
-				return false;
+			}else if (!this.isResetsortbox) {
+				var startOffset=this.config.sortStartOffset;
+				if(startOffset && startOffset.left==event.pageX && startOffset.top==event.pageY ){
+					return false;
+				}
 			}
 
-			var event = this.event;
 
 			this.$resizebox.hide();
 
