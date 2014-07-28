@@ -159,6 +159,7 @@
 					return;
 				}
 			}
+			return false;
 		},
 		onMouseup : function(event) {
 			ui.logger(this);
@@ -499,11 +500,10 @@
 			if(this.__SORT_TIMEOUT_ID__){
 				clearTimeout(this.__SORT_TIMEOUT_ID__);
 				delete this.__SORT_TIMEOUT_ID__;
-			}
-
-			if (!this.isResetsortbox && Math.abs(x) < 10 && Math.abs(y) < 10) {
+			}else if (!this.isResetsortbox && (Math.abs(x) < 1 || Math.abs(y) < 1)) {
 				return false;
 			}
+
 			var event = this.event;
 
 			this.$resizebox.hide();
@@ -591,6 +591,8 @@
 					this.on('resizestart', x, y);
 				}
 			}
+
+			event.stopBubble(this);
 		},
 		setResizeCursorOffset : function() {
 			ui.logger(this);
