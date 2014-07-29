@@ -70,7 +70,7 @@
 			handle : function(event){
 				var me=event.data.me,
 					timeStamp=me.timeStamp;
-				if(timeStamp && event.timeStamp - timeStamp>500){
+				if(timeStamp && event.timeStamp - timeStamp > 100){
 					me.trigger(event);
 					me.timeStamp=event.timeStamp;
 				}
@@ -129,6 +129,7 @@
 				$.setTimeout(function(){
 					this.on('hide');
 				},this.time,this);
+				
 			}else{
 				this.$box.click({
 					me : this
@@ -155,19 +156,47 @@
 			var offset=this.$elem.offset();
 
 			QuickTip.addListener(this,function(event,param){
-				if(event.pageX > param.left && param.left + param.width  + 100 < event.pageX){
-				
-				}else if(event.pageY > param.top && param.top + param.height +100 < event.pageY){
-				
-				}else if(event.pageX < param.left && param.left - 100 > event.pageX){
-				
-				}else if(event.pageY < param.top && param.top - 100 > event.pageY){
-				
-				}else{
+				if(!this.lastEvent){
+					this.lastEvent=event;
 					return;
 				}
-				this.on('hide');
+				
+				if(event.pageX > param.left + param.width &&
+					this.lastEvent.pageX < event.pageX){
+					param.index++;
+				}else if(event.pageY > param.top + param.height &&
+					this.lastEvent.pageY < event.pageY){
+					param.index++;
+				}else if(event.pageX < param.left &&
+					this.lastEvent.pageX > event.pageX){
+					param.index++;
+				}else if(event.pageY < param.top &&
+					this.lastEvent.pageY > event.pageY){
+					param.index++;
+				}else{
+					if(param.index < 0){
+						param.index = 0;
+					}else{
+						param.index--;
+					}
+				}
+
+				this.lastEvent=event;
+
+				if(param.index>0){
+					if(param.index > 5 ){
+					}else if(event.pageX > param.left && param.left + param.width  + 100 < event.pageX){
+					}else if(event.pageY > param.top && param.top + param.height + 100 < event.pageY){
+					}else if(event.pageX < param.left && param.left - 100 > event.pageX){
+					}else if(event.pageY < param.top && param.top - 100 > event.pageY){
+					}else{
+						return;
+					}
+					this.on('hide');
+				}
+	
 			},{
+				index : 0 ,
 				left : offset.left,
 				top : offset.top,
 				width : this.width,
@@ -271,8 +300,8 @@
 				return;
 			}
 			if(this.$elem){
-				//this.$elem.addClass('easeout');
-				//$.setTimeout(this.remove,1000,this);
+				this.$elem.addClass('easeout');
+				$.setTimeout(this.remove,1000,this);
 			}
 		},
 		remove:function(){
