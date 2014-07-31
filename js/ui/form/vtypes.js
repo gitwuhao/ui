@@ -64,7 +64,7 @@
 				this.setValue(this.value);
 
 				if(value!=this.value){
-					this.on('change',this.value);
+					this.on('spinUp',v);
 				}
 			};
 
@@ -86,7 +86,7 @@
 				this.setValue(this.value);
 
 				if(value!=this.value){
-					this.on('change',this.value);
+					this.on('spinDown',v);
 				}
 			};
 			
