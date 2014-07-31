@@ -230,6 +230,7 @@
 			if(this.config && this.config.deActive){
 				this.config.deActive();
 			}
+			this.dragover();
 			this.config = null;
 			this.unbindKeyPress();
 		},
@@ -759,9 +760,11 @@
 			$.getBody().removeClass(this.bodyClass);
 			this.bodyClass = null;
 			var config=this.config;
-			config.$target.removeClass('x-ui-dd-target');
-			if(config.dragover){
-				config.dragover();
+			if(config && config.$target){
+				config.$target.removeClass('x-ui-dd-target');
+				if(config.dragover){
+					config.dragover();
+				}
 			}
 		},
 		onResizestart : function(x, y) {
@@ -772,8 +775,6 @@
 		},
 		onResizemove : function(x, y) {
 			ui.logger(this);
-
-
 
 			var point = null,
 				config = this.config,
@@ -833,11 +834,11 @@
 				height = this.$bg.height();
 
 			if (width + region.w < this.__MIN_SIZE__) {
-				region.w = 0;
+				region.w = this.__MIN_SIZE__ - width;
 				region.x = 0;
 			}
 			if (height + region.h < this.__MIN_SIZE__) {
-				region.h = 0;
+				region.h = this.__MIN_SIZE__ - height;
 				region.y = 0;
 			}
 
