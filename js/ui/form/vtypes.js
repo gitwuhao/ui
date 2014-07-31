@@ -91,17 +91,21 @@
 					this.on('spinDown',v);
 				}
 			};
+
+			if(!item.unit){
 			
-			item.$icon.addClass(item.px+'-spinner-icon');
-			
-			item.addEventListener('iconmousedown',function(event){
-				var height=event.target.offsetHeight/2;
-				if( height > event.offsetY){
-					this.spinUp(event);
-				}else{
-					this.spinDown(event);
-				}
-			});
+				item.$icon.addClass(item.px+'-spinner-icon');
+				
+				item.addEventListener('iconmousedown',function(event){
+					var height=event.target.offsetHeight/2;
+					if( height > event.offsetY){
+						this.spinUp(event);
+					}else{
+						this.spinDown(event);
+					}
+				});
+
+			}
 
 			item.addEventListener('mousewheel',function(event){
 				if(event.originalEvent.wheelDelta>0){
@@ -137,14 +141,14 @@
 				}else if(!event.shiftKey &&
 					((event.keyCode>=96 && event.keyCode<=105) ||
 					(event.keyCode>=48 && event.keyCode<=57))){
-
+					return;
+				}
 				//}else if(event.shiftKey || 
 				//	 (event.keyCode>=65 && event.keyCode<=90) || 
 				//	 (event.keyCode>=187 && event.keyCode<=222)){
-					return;
-				 }else{
-					//event.stopBubble(this);
-				 }
+				//}else{
+				//	event.stopBubble(this);
+				//}
 				//console.info(event.keyCode);
 				
 				event.preventDefault();
@@ -154,11 +158,10 @@
 
 			
 			item.addEventListener('setvalue',function(value){
-				if(value){
+				if(isNaN(value)){
+					value="";
+				}else{
 					value=parseInt(value);
-					if(isNaN(value)){
-						value="";
-					}
 				}
 				this.value=value;
 			});
