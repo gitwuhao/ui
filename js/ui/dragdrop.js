@@ -836,11 +836,19 @@
 
 			if (width + region.w < this.__MIN_SIZE__) {
 				region.w = this.__MIN_SIZE__ - width;
-				region.x = -region.w;
+				if(region.x > 0){
+					region.x = -region.w;
+				}else{
+					region.x = 0;
+				}
 			}
 			if (height + region.h < this.__MIN_SIZE__) {
 				region.h = this.__MIN_SIZE__ - height;
-				region.y = -region.h;
+				if(region.y > 0){
+					region.y = -region.h;
+				}else{
+					region.y = 0;
+				}
 			}
 
 			if (region.x == 0 && region.y == 0 && region.w == 0 && region.h == 0) {
