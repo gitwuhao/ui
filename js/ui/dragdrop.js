@@ -523,11 +523,15 @@
 			
 			var event = this.event;
 
+
+			this.$resizebox.hide();
+
 			if(this.__SORT_TIMEOUT_ID__){
 				clearTimeout(this.__SORT_TIMEOUT_ID__);
 				delete this.__SORT_TIMEOUT_ID__;
 //			}else if (!this.isResetsortbox) {
 			}
+
 
 			var startOffset=this.config.sortStartOffset;
 			if(startOffset && (Math.abs(startOffset.left - event.pageX)>5 || Math.abs(startOffset.top - event.pageY)>5 )){
@@ -535,7 +539,7 @@
 				return false;
 			}
 
-			this.$resizebox.hide();
+
 
 			if(this.config.isLockBody){
 				var $parentBox=$.getBody(),
@@ -687,14 +691,16 @@
 			}
 
 			this.setResizeBoxOffset();
-
-			var events = ['mousedown', ''].join(this.__EVENTNAMESPACE__ + ' ');
-			this.$resizebox.on(events, {
-				me : this
-			}, function(event) {
-				return event.data.me.resizeBoxMouseDown(event);
-			});
-
+			
+			if(!this.isResizeBoxEventListener){
+				var events = ['mousedown', ''].join(this.__EVENTNAMESPACE__ + ' ');
+				this.$resizebox.on(events, {
+					me : this
+				}, function(event) {
+					return event.data.me.resizeBoxMouseDown(event);
+				});
+				this.isResizeBoxEventListener=true;
+			}
 			this.$resizebox.attr('class',this._c_dd_resize_box);
 
 			if(config.isFloatAlign){
@@ -704,6 +710,7 @@
 				this.$resizebox.addClass('auto-width');
 			}
 
+
 		},
 		hideResizeBox : function() {
 			ui.logger(this);
@@ -711,6 +718,7 @@
 				display : ''
 			});
 			this.$resizebox.off(this.__EVENTNAMESPACE__);
+			delete this.isResizeBoxEventListener;
 		},
 		getRegion : function(region) {
 			ui.logger(this);
