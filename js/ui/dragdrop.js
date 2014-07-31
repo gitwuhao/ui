@@ -710,7 +710,8 @@
 				_l = offset.left,
 				_t = offset.top,
 				_w = $target.outerWidth(),
-				_h = $target.outerHeight();
+				_h = $target.outerHeight(),
+				margin=config.margin;
 
 
 			if (_l + region.x - margin.left < 0) {
@@ -835,11 +836,11 @@
 
 			if (width + region.w < this.__MIN_SIZE__) {
 				region.w = this.__MIN_SIZE__ - width;
-				region.x = 0;
+				region.x = -region.w;
 			}
 			if (height + region.h < this.__MIN_SIZE__) {
 				region.h = this.__MIN_SIZE__ - height;
-				region.y = 0;
+				region.y = -region.h;
 			}
 
 			if (region.x == 0 && region.y == 0 && region.w == 0 && region.h == 0) {
