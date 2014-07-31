@@ -60,6 +60,7 @@
 					this.value += v;
 				}else{
 					this.value=this.maxValue;
+					v=0;
 				}
 				this.setValue(this.value);
 
@@ -69,9 +70,9 @@
 			};
 
 			item.spinDown=function(event){
-				var v=this.iValue;
+				var v=-this.iValue;
 				if(event.shiftKey){
-					v=this.shiftIValue;
+					v=-this.shiftIValue;
 				}else if(event.altKey){
 				
 				}
@@ -79,9 +80,10 @@
 				this.value=$.toNumber(this.value);
 				var value=this.value;
 				if(this.minValue < this.value){
-					this.value-=v;
+					this.value += v;
 				}else{
 					this.value=this.minValue;
+					v=0;
 				}
 				this.setValue(this.value);
 

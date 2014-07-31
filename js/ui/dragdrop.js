@@ -29,8 +29,8 @@
 			},
 			getOffsetParentPoint : function(element,parent){
 				var point={
-						left : element.offsetLeft,
-						top : element.offsetTop
+						left : element.offsetLeft - element.clientLeft,
+						top : element.offsetTop - element.clientTop
 					};
 				parent = parent || document.body;
 
@@ -42,10 +42,16 @@
 						break;
 					}
 					element=element.parentElement;
-					point.left -= element.offsetLeft;
-					point.top -= element.offsetTop;
+					point.left = point.left - element.offsetLeft - element.clientLeft - (element.offsetWidth - element.clientWidth);
+					point.top = point.top - element.offsetTop - element.clientTop - (element.offsetHeight - element.clientHeight);
 				}
 				return point;
+			},
+			getOffsetParentPoint2 : function(element,parent){
+				return {
+					left : element.offsetLeft - element.clientLeft,
+					top : element.offsetTop - element.clientTop
+				};
 			}
 		},
 		__EVENTNAMESPACE__ : '.DD' + $.randomChar(5),
@@ -901,18 +907,6 @@
 			if(!this.config){
 				return;
 			}
-			var region=this.getTargetRegion();
-
-			if(h > 0){
-				h = h - region.height;
-			}else{
-				h=0;
-			}
-			if(w > 0){
-				w = w - region.width;
-			}else{
-				w=0;
-			}
 			this.setRegion({
 				x : 0,
 				y : 0,
@@ -925,19 +919,6 @@
 			if(!this.config){
 				return;
 			}
-			var region=this.getTargetRegion();
-
-			if(x > 0){
-				x = x - region.left;
-			}else{
-				x=0;
-			}
-			if(y > 0){
-				y = y - region.top;
-			}else{
-				y=0;
-			}
-
 			this.onDragmove( x , y );
 		}
 	});
