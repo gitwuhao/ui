@@ -43,17 +43,40 @@
 			item.value=item.defaultValue;
 			item.maxValue=item.maxValue || 999;
 			item.minValue=item.minValue || 0;
-			item.spinUp=function(){
-				if(this.maxValue > this.value){
-					this.value++;
+			item.iValue=item.iValue || 1;
+			item.shiftIValue=item.shiftIValue || 10;
+
+
+			item.spinUp=function(event){
+				var v=this.iValue;
+				if(event.shiftKey){
+					v=this.shiftIValue;
+				}else if(event.altKey){
+				
+				}
+				this.value=$.toNumber(this.value);
+				if(this.maxValue > this.value + v){
+					this.value += v;
 					this.setValue(this.value);
+				}else{
+					this.value=this.maxValue;
 				}
 			};
 
-			item.spinDown=function(){
-				if(this.minValue < this.value){
-					this.value--;
+			item.spinDown=function(event){
+				var v=this.iValue;
+				if(event.shiftKey){
+					v=this.shiftIValue;
+				}else if(event.altKey){
+				
+				}
+				
+				this.value=$.toNumber(this.value);
+				if(this.minValue < this.value - v){
+					this.value-=v;
 					this.setValue(this.value);
+				}else{
+					this.value=this.minValue;
 				}
 			};
 			
@@ -62,9 +85,9 @@
 			item.addEventListener('iconmousedown',function(event){
 				var height=event.target.offsetHeight/2;
 				if( height > event.offsetY){
-					this.spinUp();
+					this.spinUp(event);
 				}else{
-					this.spinDown();
+					this.spinDown(event);
 				}
 			});
 
@@ -76,11 +99,11 @@
 			*/
 			item.addEventListener('mousewheel',function(event){
 				if(event.originalEvent.wheelDelta>0){
-					this.spinUp();
+					this.spinUp(event);
 				}else{
-					this.spinDown();
+					this.spinDown(event);
 				}
-				this.focus();
+				//this.focus();
 			});
 		},
 		'int' : function(item){
@@ -98,9 +121,9 @@
 					 event.ctrlKey  || event.altKey ){
 					return;
 				 }else if(event.keyCode==38 && this.spinUp){
-					this.spinUp(); 
+					this.spinUp(event); 
 				 }else if(event.keyCode==40 && this.spinDown){
-					 this.spinDown();
+					 this.spinDown(event);
 				}else if(!event.shiftKey && (event.keyCode>=48 && event.keyCode<=57)){
 
 				//}else if(event.shiftKey || 
