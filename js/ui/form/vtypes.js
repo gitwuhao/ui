@@ -55,12 +55,17 @@
 				
 				}
 				this.value=$.toNumber(this.value);
+				var value=this.value;
 				if(this.maxValue > this.value){
 					this.value += v;
 				}else{
 					this.value=this.maxValue;
 				}
 				this.setValue(this.value);
+
+				if(value!=this.value){
+					this.on('change',this.value);
+				}
 			};
 
 			item.spinDown=function(event){
@@ -72,12 +77,17 @@
 				}
 				
 				this.value=$.toNumber(this.value);
+				var value=this.value;
 				if(this.minValue < this.value){
 					this.value-=v;
 				}else{
 					this.value=this.minValue;
 				}
 				this.setValue(this.value);
+
+				if(value!=this.value){
+					this.on('change',this.value);
+				}
 			};
 			
 			item.$icon.addClass(item.px+'-spinner-icon');
