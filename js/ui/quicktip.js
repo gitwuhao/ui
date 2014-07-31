@@ -126,10 +126,12 @@
 		onBindEvent:function(){
 			ui.logger(this);
 			if(!this.handle){
+				
+				/*
 				$.setTimeout(function(){
 					this.on('hide');
 				},this.time,this);
-				
+				*/
 			}else{
 				this.$box.click({
 					me : this

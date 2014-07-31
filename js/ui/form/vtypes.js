@@ -38,7 +38,7 @@
 			*/
 
 		},
-		spin:function(item){
+		spin : function(item){
 			item.defaultValue=item.defaultValue || 0;
 			item.value=item.defaultValue;
 			item.maxValue=item.maxValue || 999;
@@ -55,12 +55,12 @@
 				
 				}
 				this.value=$.toNumber(this.value);
-				if(this.maxValue > this.value + v){
+				if(this.maxValue > this.value){
 					this.value += v;
-					this.setValue(this.value);
 				}else{
 					this.value=this.maxValue;
 				}
+				this.setValue(this.value);
 			};
 
 			item.spinDown=function(event){
@@ -72,12 +72,12 @@
 				}
 				
 				this.value=$.toNumber(this.value);
-				if(this.minValue < this.value - v){
+				if(this.minValue < this.value){
 					this.value-=v;
-					this.setValue(this.value);
 				}else{
 					this.value=this.minValue;
 				}
+				this.setValue(this.value);
 			};
 			
 			item.$icon.addClass(item.px+'-spinner-icon');
@@ -91,22 +91,20 @@
 				}
 			});
 
-
-			/*
-			*
-			*addEvent()
-			*
-			*/
 			item.addEventListener('mousewheel',function(event){
 				if(event.originalEvent.wheelDelta>0){
 					this.spinUp(event);
 				}else{
 					this.spinDown(event);
 				}
-				//this.focus();
 			});
+			
+			this.int(item);
 		},
 		'int' : function(item){
+			if(item.isIntVType){
+				return;
+			}
 			item.defaultValue=item.defaultValue || 0;
 			item.value=item.defaultValue;
 			item.maxValue=item.maxValue || 999;
@@ -121,19 +119,23 @@
 					 event.ctrlKey  || event.altKey ){
 					return;
 				 }else if(event.keyCode==38 && this.spinUp){
-					this.spinUp(event); 
+					this.spinUp(event);
 				 }else if(event.keyCode==40 && this.spinDown){
-					 this.spinDown(event);
+					this.spinDown(event);
 				}else if(!event.shiftKey && (event.keyCode>=48 && event.keyCode<=57)){
 
 				//}else if(event.shiftKey || 
 				//	 (event.keyCode>=65 && event.keyCode<=90) || 
 				//	 (event.keyCode>=187 && event.keyCode<=222)){
-					
+					return;
 				 }else{
-					event.stopBubble(this);
+					//event.stopBubble(this);
 				 }
 				//console.info(event.keyCode);
+				
+				event.preventDefault();
+				event.stopPropagation();
+
 			});
 
 			
@@ -146,7 +148,8 @@
 				}
 				this.value=value;
 			});
-
+			
+			item.isIntVType=true;
 	
 		},	
 		pxToPercent:function(item){
