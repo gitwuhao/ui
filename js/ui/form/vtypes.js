@@ -132,7 +132,9 @@
 					this.spinUp(event);
 				 }else if(event.keyCode==40 && this.spinDown){
 					this.spinDown(event);
-				}else if(!event.shiftKey && (event.keyCode>=48 && event.keyCode<=57)){
+				}else if(!event.shiftKey &&
+					((event.keyCode>=96 && event.keyCode<=105) ||
+					(event.keyCode>=48 && event.keyCode<=57))){
 
 				//}else if(event.shiftKey || 
 				//	 (event.keyCode>=65 && event.keyCode<=90) || 

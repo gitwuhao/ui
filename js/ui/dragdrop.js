@@ -365,11 +365,13 @@
 			}else{
 				offset = DragDrop.getOffsetParentPoint(this.$resizebox[0],this.render.offsetParent);
 			}
-
-			this.$resizebox.css({
-				left : offset.left + point.x,
-				top : offset.top + point.y
-			});
+			
+			if(config.type.resize){
+				this.$resizebox.css({
+					left : offset.left + point.x,
+					top : offset.top + point.y
+				});
+			}
 		},
 		onDragover : function() {
 			ui.logger(this);
@@ -628,6 +630,9 @@
 		},
 		getTargetRegion : function() {
 			ui.logger(this);
+			if(!this.config){
+				return;
+			}
 			var $target = this.config.$target,
 				width = $target.outerWidth(),
 				height = $target.outerHeight(),
@@ -637,6 +642,7 @@
 			}else if(this.render!=document.body){
 				offset = DragDrop.getOffsetParentPoint($target[0],this.render.offsetParent);
 			}
+
 			return {
 				left : offset.left,
 				top : offset.top,
@@ -660,6 +666,7 @@
 				width : targetRegion.width,
 				height : targetRegion.height
 			});
+			
 			this.setResizeCursorOffset();
 		},
 		showResize : function(config) {
@@ -777,9 +784,7 @@
 		onResizemove : function(x, y) {
 			ui.logger(this);
 
-			var point = null,
-				config = this.config,
-				offset,
+			var config = this.config,
 				resizeType = this.config.resizetype,
 				region = {
 					x : 0,
@@ -830,6 +835,14 @@
 				region.w = x;
 				region.h = y;
 			}
+
+			this.setRegion(region);
+
+			this.setResizeBoxOffset();
+		},
+		setRegion : function(region){
+			var config = this.config;
+
 			var $bg = this.$bg,
 				width = this.$bg.width(),
 				height = this.$bg.height();
@@ -876,13 +889,56 @@
 					top : offset.top + region.y
 				});
 			}
-			this.setResizeBoxOffset();
 		},
 		onResizeover : function() {
 			ui.logger(this);
 			this.$bg.css('cursor', '');
 			this.dragover();
 			delete this.resizeCursor;
+		},
+		setSizing : function( w , h ){
+			ui.logger(this);
+			if(!this.config){
+				return;
+			}
+			var region=this.getTargetRegion();
+
+			if(h > 0){
+				h = h - region.height;
+			}else{
+				h=0;
+			}
+			if(w > 0){
+				w = w - region.width;
+			}else{
+				w=0;
+			}
+			this.setRegion({
+				x : 0,
+				y : 0,
+				w : w,
+				h : h
+			});
+		},
+		setOffset : function( x , y ){
+			ui.logger(this);
+			if(!this.config){
+				return;
+			}
+			var region=this.getTargetRegion();
+
+			if(x > 0){
+				x = x - region.left;
+			}else{
+				x=0;
+			}
+			if(y > 0){
+				y = y - region.top;
+			}else{
+				y=0;
+			}
+
+			this.onDragmove( x , y );
 		}
 	});
 
@@ -911,6 +967,15 @@
 		},
 		hide : function() {
 			getInstance().hide();
+		},
+		setSizing : function( w , h ){
+			getInstance().setSizing(w,h);
+		},
+		setOffset : function( x , y ){
+			getInstance().setOffset(x,y);
+		},
+		getTargetRegion : function(){
+			return getInstance().getTargetRegion();
 		}
 	};
 
