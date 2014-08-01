@@ -179,6 +179,9 @@
 		},
 		onKeypress : function(event) {
 			ui.logger(this);
+			if(/^input$/i.test(event.target.tagName)){
+				return;
+			}
 			var _min = 1, _max = 10, x = y = 0,
 				shiftKey = event.shiftKey,
 				ctrlKey = event.ctrlKey,
