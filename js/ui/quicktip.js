@@ -175,49 +175,62 @@
 				if(event.pageX > param.left 
 					&& param.left + param.width < event.pageX){
 					offset.right=true;
-				}else if(event.pageY > param.top 
+				}
+				
+				if(event.pageY > param.top 
 					&& param.top + param.height < event.pageY){
 					offset.bottom=true;
-				}else if(event.pageX < param.left 
+				}
+				
+				if(event.pageX < param.left 
 					&& param.left > event.pageX){
 					offset.left=true;
-				}else if(event.pageY < param.top && param.top > event.pageY){
-					offset.top=true;
-				}else{
-					if(param.opacity!=90){
-						param.index=90;
-					}
-					offset=null;
 				}
+				
+				if(event.pageY < param.top && param.top > event.pageY){
+					offset.top=true;
+				}
+
 				if(offset){
 					
 					function getValue(v){
 						var value=parseInt(Math.abs(v)/2);
-						if(v < 0){
+						if(v < 0 && value >0){
 							value = -value;
 						}
 						return value;
 					};
 					var _x=getValue(x),
-						_y=getValue(y);
+						_y=getValue(y),
+						value=0;
 
-					if(offset.left){
-						param.index += getValue(x);
-					}else if(offset.top){
-						param.index += getValue(y);
-					}else if(offset.right){
-						param.index -= getValue(x);
-					}else if(offset.bottom){
-						param.index -= getValue(y);
+					if(offset.left && _x < _y){
+						value=_x;
 					}
 
+					if(offset.top && _y < _x){
+						value=_y;
+					}
+					
+					if(offset.right && _x > _y){
+						value=_x;
+					}
+
+					if(offset.bottom && _x > _y){
+						value=_y;
+					}
+
+					//param.index = value;
+					
+					param.lastEvent=event;
+
+					console.info("[",param,"],offset:",offset,",x:",x,",y:",y,"[",event.pageX,",",event.pageY,"]");
 
 					if(param.opacity==param.index){
 						return;
 					}
 				}
 				
-				console.info("param:"+param.index,",offset:",offset,",x:",x,",",y,"y:");
 				param.lastEvent=event;
 				if(param.index <= 0){	
 					this.remove();
