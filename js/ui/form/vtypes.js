@@ -17,6 +17,23 @@
 				}
 			}
 		},
+		__IS_MOUSE_WHEEL__:'__IS_MOUSE_WHEEL__',
+		bindMouseWheel : function($text,handle,arg){
+			$text.data(ui.form.vtypes.__IS_MOUSE_WHEEL__,{
+				handle: handle,
+				arg : arg
+			});
+			if(this.isBindMouseWheelEventListener){
+				return;
+			}
+			$.getBody().on("mousewheel",function(event){
+				var target=document.activeElement,
+					_data_=$.data(target,ui.form.vtypes.__IS_MOUSE_WHEEL__);
+				if(_data_ && _data_.handle){
+					return _data_.handle(event,_data_.arg);
+				}
+			});
+		},
 /*		enterToTab:function(item){
 			item.addEventListener('textkeydown',function(event){
 				 if(event.keyCode==13){
@@ -103,12 +120,21 @@
 
 			}
 
-			item.addEventListener('mousewheel',function(event){
+			item.addEventListener('spinwheel',function(event){
 				if(event.originalEvent.wheelDelta>0){
 					this.spinUp(event);
 				}else{
 					this.spinDown(event);
 				}
+			});
+
+			this.bindMouseWheel(item.$text,function(event,arg){
+				if(arg.me.isDisabled==true){
+					return false;
+				}
+				arg.me.trigger("spinwheel",event);
+			},{
+				me :item
 			});
 
 			this.int(item);

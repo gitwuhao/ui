@@ -113,13 +113,6 @@
 				}
 			});
 
-			
-			this.$elem.bind("mousewheel",function(event){
-				if(me.isDisabled!=true && me.hasEventListener('mousewheel')){
-					me.trigger("mousewheel",event);
-					event.stopBubble(me);
-				}
-			});
 
 			this.$icon.mousedown(function(event){
 				if(me.isDisabled!=true){
