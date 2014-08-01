@@ -76,7 +76,7 @@
 				}
 			},
 			trigger:function(event){
-				if(location['__quick_tip_listener__']!='true'){
+				if(localStorage['__quick_tip_listener__']!='true'){
 					return;
 				}
 				var events=this.events;
@@ -162,47 +162,73 @@
 			var offset=this.$elem.offset();
 			
 			QuickTip.addListener(this,function(event,param){
-				if(!this.lastEvent){
-					this.lastEvent=event;
+				if(!param.lastEvent){
+					param.lastEvent=event;
 					return;
 				}
-				
-				if(event.pageX > param.left + param.width &&
-					this.lastEvent.pageX < event.pageX){
-					param.index++;
-				}else if(event.pageY > param.top + param.height &&
-					this.lastEvent.pageY < event.pageY){
-					param.index++;
-				}else if(event.pageX < param.left &&
-					this.lastEvent.pageX > event.pageX){
-					param.index++;
-				}else if(event.pageY < param.top &&
-					this.lastEvent.pageY > event.pageY){
-					param.index++;
+
+				var x=event.pageX - param.lastEvent.pageX,
+					y=event.pageY - param.lastEvent.pageY,
+					offset={
+					};
+
+				if(event.pageX > param.left 
+					&& param.left + param.width < event.pageX){
+					offset.right=true;
+				}else if(event.pageY > param.top 
+					&& param.top + param.height < event.pageY){
+					offset.bottom=true;
+				}else if(event.pageX < param.left 
+					&& param.left > event.pageX){
+					offset.left=true;
+				}else if(event.pageY < param.top && param.top > event.pageY){
+					offset.top=true;
 				}else{
-					if(param.index < 0){
-						param.index = 0;
-					}else{
-						param.index--;
+					if(param.opacity!=90){
+						param.index=90;
 					}
+					offset=null;
 				}
+				if(offset){
+					
+					function getValue(v){
+						var value=parseInt(Math.abs(v)/2);
+						if(v < 0){
+							value = -value;
+						}
+						return value;
+					};
+					var _x=getValue(x),
+						_y=getValue(y);
 
-				this.lastEvent=event;
+					if(offset.left){
+						param.index += getValue(x);
+					}else if(offset.top){
+						param.index += getValue(y);
+					}else if(offset.right){
+						param.index -= getValue(x);
+					}else if(offset.bottom){
+						param.index -= getValue(y);
+					}
 
-				if(param.index>0){
-					if(param.index > 5 ){
-					}else if(event.pageX > param.left && param.left + param.width  + 100 < event.pageX){
-					}else if(event.pageY > param.top && param.top + param.height + 100 < event.pageY){
-					}else if(event.pageX < param.left && param.left - 100 > event.pageX){
-					}else if(event.pageY < param.top && param.top - 100 > event.pageY){
-					}else{
+
+					if(param.opacity==param.index){
 						return;
 					}
-					this.on('hide');
 				}
-	
+				
+				console.info("param:"+param.index,",offset:",offset,",x:",x,",",y,"y:");
+				param.lastEvent=event;
+				if(param.index <= 0){	
+					this.remove();
+					return;
+				}else if(param.index > 90){
+					param.index=90;
+				}
+				param.opacity=param.index;
+				this.$elem.css('opacity',param.opacity/100);
 			},{
-				index : 0 ,
+				index : 90 ,
 				left : offset.left,
 				top : offset.top,
 				width : this.width,
