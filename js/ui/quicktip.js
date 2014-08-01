@@ -70,10 +70,10 @@
 			handle : function(event){
 				var me=event.data.me,
 					timeStamp=me.timeStamp;
-				if(timeStamp && event.timeStamp - timeStamp > 100){
+				//if(timeStamp && event.timeStamp - timeStamp > 50){
 					me.trigger(event);
 					me.timeStamp=event.timeStamp;
-				}
+				//}
 			},
 			trigger:function(event){
 				if(localStorage['__quick_tip_listener__']!='true'){
@@ -169,30 +169,35 @@
 
 				var x=event.pageX - param.lastEvent.pageX,
 					y=event.pageY - param.lastEvent.pageY,
-					offset={
-					};
+					index=0,
+					offset={};
 
 				if(event.pageX > param.left 
 					&& param.left + param.width < event.pageX){
 					offset.right=true;
+					index++;
 				}
 				
 				if(event.pageY > param.top 
 					&& param.top + param.height < event.pageY){
 					offset.bottom=true;
+					index++;
 				}
 				
 				if(event.pageX < param.left 
 					&& param.left > event.pageX){
 					offset.left=true;
+					index++;
 				}
 				
 				if(event.pageY < param.top && param.top > event.pageY){
 					offset.top=true;
+					index++;
 				}
-
-				if(offset){
-					
+				
+				if(index==0){
+					param.index=90;
+				}else{
 					function getValue(v){
 						var value=parseInt(Math.abs(v)/2);
 						if(v < 0 && value >0){
@@ -204,34 +209,47 @@
 						_y=getValue(y),
 						value=0;
 
-					if(offset.left && _x < _y){
-						value=_x;
+					if(offset.left){
+						//if(_x != 0){
+							value=_x;
+						//}else{
+						//	value=_y;
+						//}
 					}
 
-					if(offset.top && _y < _x){
-						value=_y;
+					if(offset.top){
+						//if(_y != 0){
+							value=_y;
+						//}else{
+						//	value=_x;
+						//}
 					}
 					
-					if(offset.right && _x > _y){
-						value=_x;
-					}
-
-					if(offset.bottom && _x > _y){
-						value=_y;
-					}
-
-					//param.index = value;
+					if(offset.right){
+						//if(_x != 0){
+							value -=_x;
+						//}else{
+						//	value -=_y;
+						//}
 					
-					param.lastEvent=event;
+					}
 
-					console.info("[",param,"],offset:",offset,",x:",x,",y:",y,"[",event.pageX,",",event.pageY,"]");
-
+					if(offset.bottom){
+						//if(_y != 0){
+							value -=_y;
+						//}else{
+						//	value -=_x;
+						//}
+					}
+					param.index += value;
+					
 					if(param.opacity==param.index){
 						return;
 					}
 				}
-				
+
 				param.lastEvent=event;
+
 				if(param.index <= 0){	
 					this.remove();
 					return;
