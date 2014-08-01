@@ -353,7 +353,7 @@
 			}
 
 			if (point.x == 0 && point.y == 0) {
-				return;
+				return false;
 			}
 
 			if (config.setPoint) {
@@ -378,6 +378,7 @@
 					top : offset.top + point.y
 				});
 			}
+			return true;
 		},
 		onDragover : function() {
 			ui.logger(this);
@@ -850,16 +851,15 @@
 				region.h = y;
 			}
 
-			this.setRegion(region);
-
-			this.setResizeBoxOffset();
+			if(this.setRegion(region)){
+				this.setResizeBoxOffset();		
+			};
 		},
 		setRegion : function(region){
-			var config = this.config;
-
-			var $bg = this.$bg,
-				width = this.$bg.width(),
-				height = this.$bg.height();
+			var config = this.config,
+				$target = config.$target,
+				width = $target.width(),
+				height = $target.height();
 
 			if (width + region.w < this.__MIN_SIZE__) {
 				region.w = this.__MIN_SIZE__ - width;
@@ -879,30 +879,28 @@
 			}
 
 			if (region.x == 0 && region.y == 0 && region.w == 0 && region.h == 0) {
-				return;
+				return false;
 			}
 
 			if (config.parentBox) {
 				this.getRegion(region);
 			}
 			if (region.x == 0 && region.y == 0 && region.w == 0 && region.h == 0) {
-				return;
+				return false;
 			}
 
 			if (config.setRegion) {
 				config.setRegion(region);
 			}else{
-				var $target = config.$target,
-					_width = $target.width(),
-					_height = $target.height(),
-					offset = DragDrop.getOffsetParentPoint($target[0],config.parentBox);
+				var offset = DragDrop.getOffsetParentPoint($target[0],config.parentBox);
 				$target.css({
-					width : _width + region.w,
-					height : _height + region.h,
+					width : width + region.w,
+					height : height + region.h,
 					left : offset.left + region.x,
 					top : offset.top + region.y
 				});
 			}
+			return true;
 		},
 		onResizeover : function() {
 			ui.logger(this);
@@ -915,7 +913,7 @@
 			if(!this.config){
 				return;
 			}
-			this.setRegion({
+			return this.setRegion({
 				x : 0,
 				y : 0,
 				w : w,
@@ -927,7 +925,7 @@
 			if(!this.config){
 				return;
 			}
-			this.onDragmove( x , y );
+			return this.onDragmove( x , y );
 		}
 	});
 
@@ -958,13 +956,10 @@
 			getInstance().hide();
 		},
 		setSizing : function( w , h ){
-			getInstance().setSizing(w,h);
+			return getInstance().setSizing(w,h);
 		},
 		setOffset : function( x , y ){
-			getInstance().setOffset(x,y);
-		},
-		getTargetRegion : function(){
-			return getInstance().getTargetRegion();
+			return getInstance().setOffset(x,y);
 		}
 	};
 
