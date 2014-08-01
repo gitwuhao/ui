@@ -46,12 +46,6 @@
 					point.top = point.top - element.offsetTop - element.clientTop - (element.offsetHeight - element.clientHeight);
 				}
 				return point;
-			},
-			getOffsetParentPoint2 : function(element,parent){
-				return {
-					left : element.offsetLeft - element.clientLeft,
-					top : element.offsetTop - element.clientTop
-				};
 			}
 		},
 		__EVENTNAMESPACE__ : '.DD' + $.randomChar(5),
