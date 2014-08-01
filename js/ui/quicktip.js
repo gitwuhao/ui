@@ -76,6 +76,9 @@
 				}
 			},
 			trigger:function(event){
+				if(location['__quick_tip_listener__']!='true'){
+					return;
+				}
 				var events=this.events;
 				for(var key in events){
 					var item=events[key];
@@ -139,7 +142,7 @@
 					event.data.me.on('click');
 				});
 			}
-
+/*
 			if(this.targetContent){
 				$(this.targetContent).one('mousewheel',{
 					me:this,
@@ -149,6 +152,7 @@
 					}
 				});
 			}
+*/
 		},
 		addMouseMoveListener:function(){
 			ui.logger(this);
@@ -156,7 +160,7 @@
 				return;
 			}
 			var offset=this.$elem.offset();
-
+			
 			QuickTip.addListener(this,function(event,param){
 				if(!this.lastEvent){
 					this.lastEvent=event;
