@@ -154,6 +154,7 @@
 					 event.keyCode==9 ||
 					 event.keyCode==37 ||
 					 event.keyCode==39 ||
+					 event.keyCode==27 ||
 					 event.ctrlKey  || event.altKey ){
 					return;
 				 }else if(event.keyCode==38 && this.spinUp){
