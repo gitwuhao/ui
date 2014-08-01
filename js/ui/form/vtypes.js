@@ -1,5 +1,5 @@
 (function(CF,$,ui){
-	 
+
 	ui.form.vtypes={
 		_type_ : "ui.form",
 		_name_ : "vtypes",
@@ -30,7 +30,7 @@
 					this.$text.blur();
 				 }
 			});
-			
+
 			/*
 			item.addEventListener('textblur',function(event){
 				this.on('change');
@@ -52,50 +52,46 @@
 				if(event.shiftKey){
 					v=this.shiftIValue;
 				}else if(event.altKey){
-				
+
 				}
 				this.value=$.toNumber(this.value);
 				var value=this.value;
-				if(this.maxValue > this.value){
-					this.value += v;
-				}else{
-					this.value=this.maxValue;
-					v=0;
+				if(this.maxValue <= this.value + v){
+					v=this.maxValue - this.value;
 				}
-				this.setValue(this.value);
-
+				value+=v;
 				if(value!=this.value){
-					this.on('spinUp',v);
+					if(this.on('spinUp',v,value)!=false){
+						this.setValue(value);
+					}
 				}
 			};
 
 			item.spinDown=function(event){
-				var v=-this.iValue;
+				var v=this.iValue;
 				if(event.shiftKey){
-					v=-this.shiftIValue;
+					v=this.shiftIValue;
 				}else if(event.altKey){
-				
+
 				}
-				
+
 				this.value=$.toNumber(this.value);
 				var value=this.value;
-				if(this.minValue < this.value){
-					this.value += v;
-				}else{
-					this.value=this.minValue;
-					v=0;
+				if(this.minValue >= this.value - v){
+					v=this.value - this.minValue;
 				}
-				this.setValue(this.value);
-
+				value-=v;
 				if(value!=this.value){
-					this.on('spinDown',v);
+					if(this.on('spinDown',-v,value)!=false){
+						this.setValue(value);
+					}
 				}
 			};
 
 			if(!item.unit){
-			
+
 				item.$icon.addClass(item.px+'-spinner-icon');
-				
+
 				item.addEventListener('iconmousedown',function(event){
 					var height=event.target.offsetHeight/2;
 					if( height > event.offsetY){
@@ -114,7 +110,7 @@
 					this.spinDown(event);
 				}
 			});
-			
+
 			this.int(item);
 		},
 		'int' : function(item){
@@ -125,13 +121,13 @@
 			item.value=item.defaultValue;
 			item.maxValue=item.maxValue || 999;
 			item.minValue=item.minValue || 0;
-			
+
 			item.addEventListener('textkeydown',function(event){
-				 if(event.keyCode==6 || 
-					 event.keyCode==8 || 
-					 event.keyCode==9 || 
-					 event.keyCode==37 || 
-					 event.keyCode==39 || 
+				 if(event.keyCode==6 ||
+					 event.keyCode==8 ||
+					 event.keyCode==9 ||
+					 event.keyCode==37 ||
+					 event.keyCode==39 ||
 					 event.ctrlKey  || event.altKey ){
 					return;
 				 }else if(event.keyCode==38 && this.spinUp){
@@ -143,20 +139,20 @@
 					(event.keyCode>=48 && event.keyCode<=57))){
 					return;
 				}
-				//}else if(event.shiftKey || 
-				//	 (event.keyCode>=65 && event.keyCode<=90) || 
+				//}else if(event.shiftKey ||
+				//	 (event.keyCode>=65 && event.keyCode<=90) ||
 				//	 (event.keyCode>=187 && event.keyCode<=222)){
 				//}else{
 				//	event.stopBubble(this);
 				//}
 				//console.info(event.keyCode);
-				
+
 				event.preventDefault();
 				event.stopPropagation();
 
 			});
 
-			
+
 			item.addEventListener('setvalue',function(value){
 				if(isNaN(value)){
 					value="";
@@ -165,10 +161,10 @@
 				}
 				this.value=value;
 			});
-			
+
 			item.isIntVType=true;
-	
-		},	
+
+		},
 		pxToPercent:function(item){
 			item.$icon.addClass('px-to-percent');
 			item.addEventListener('iconmousedown',function(event){
@@ -203,7 +199,7 @@
 					this.setValue(this.percentValue);
 				}
 			});
-			
+
 			item.addEventListener('setvalue',function(value){
 				if(this.unit=="%" && value>100){
 					this.value=100;
@@ -234,13 +230,13 @@
 				}
 			});
 
-			
+
 			item.addEventListener('iconmousedown',function(event){
 				if(this.isClearState){
 					this.setValue("");
 				}
 			});
-			
+
 
 			item.addEventListener('setvalue',function(value){
 				if(value==""){
