@@ -47,7 +47,6 @@
 		},
 		onBindEvent:function(){
 			ui.logger(this);
-			var me=this;
 
 			this.bindHover(this.$item);
 			
@@ -74,15 +73,24 @@
 			});
 
 			if(this.value){
-				this.checked(this.value);
+				this.on('checked');
 			}else{
 				this.value=false;
 			}
-			
 		},
 		focus : function(){
 			ui.logger(this);
 			this.$input.focus();
+		},
+		onChecked:function(){
+			ui.logger(this);
+			if(this.value==true){
+				this.$item.addClass("checked");
+			}else{
+				this.$item.removeClass("checked");
+				this.value=false;
+			}
+			this.$input.val(''+this.value);
 		},
 		checked : function(value){
 			ui.logger(this);
@@ -91,13 +99,8 @@
 			}else{
 				this.value=value;
 			}
-			if(this.value==true){
-				this.$item.addClass("checked");
-			}else{
-				this.$item.removeClass("checked");
-				this.value=false;
-			}
-			this.$input.val(''+this.value);
+			this.on('checked');
+			this.on('change',this.value);
 		},
 		onFocusAfter:function(item){
 			this.$item.addClass("selected");
@@ -121,7 +124,8 @@
 			if(this.callSuperMethod()==false){
 				return;
 			}
-			this.checked(value);
+			this.value=value;
+			this.on('checked');
 		}
 	});
 
