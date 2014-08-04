@@ -240,7 +240,7 @@
 		setConfig : function(config) {
 			ui.logger(this);
 			if (this.config && config && this.config.target == config.target) {
-				return;
+				return false;
 			}
 			this.cleanConfig();
 
@@ -314,8 +314,10 @@
 			if (this.setConfig(config) == false) {
 				return;
 			}
-			this.event = config.event;
-			this.on('dragstart', this.event.pageX, this.event.pageY);
+			if(config.event){
+				this.event = config.event;
+				this.on('dragstart', this.event.pageX, this.event.pageY);
+			}
 		},
 		dragstart : function(x, y) {
 			ui.logger(this);
@@ -380,6 +382,11 @@
 		onDragover : function() {
 			ui.logger(this);
 			this.dragover();
+			/*
+			if(config.dragover){
+				config.dragover();
+			}
+			*/
 		},
 		bindSortContent : function() {
 			ui.logger(this);
@@ -938,16 +945,19 @@
 	ui.dragdrop = {
 		resize : function(config) {
 			this.resize.drag(config);
+			return config;
 		},
 		drag : function(config) {
 			config.type = config.type || {};
 			config.type.move = true;
 			getInstance().drag(config);
+			return config;
 		},
 		sort : function(config) {
 			config.type = config.type || {};
 			config.type.sort = true;
 			getInstance().sort(config);
+			return config;
 		},
 		hide : function() {
 			getInstance().hide();
@@ -964,13 +974,17 @@
 		drag : function(config) {
 			this.show(config);
 			getInstance().drag(config);
+			return config;
 		},
 		show : function(config) {
 			config.type = config.type || {};
 			config.type.resize = true;
 			getInstance().showResize(config);
+			return config;
 		},
-		hide : ui.dragdrop.hide
+		hide :  function() {
+			getInstance().hideResizeBox();
+		}
 	});
 
 })(CF, jQuery, ui);
