@@ -93,9 +93,10 @@
 			$.getDoc().off(this.__EVENTNAMESPACE__);
 
 			$.getBody().one('mousedown' + this.__EVENTNAMESPACE__, {
-				me : this
+				me : this,
 			}, function(event) {
-				if(event.data.me.config && event.data.me.config.event.target!=event.target){
+				var config=event.data.me.config;
+				if(config && config.event && config.event.target!=event.target){
 					event.data.me.hideResizeBox();
 				}
 			});
@@ -240,6 +241,7 @@
 		setConfig : function(config) {
 			ui.logger(this);
 			if (this.config && config && this.config.target == config.target) {
+				this.config.event=config.event;
 				return;
 			}
 			this.cleanConfig();
@@ -960,6 +962,27 @@
 				return;
 			}
 			return this.onDragmove( x , y );
+		},
+		resetSizing : function( width , height ){
+			ui.logger(this);
+			if(!this.config){
+				return;
+			}
+			var region = this.getTargetRegion();
+			return this.setRegion({
+				x : 0,
+				y : 0,
+				w : width - region.width,
+				h : height - region.height
+			});
+		},
+		resetOffset : function( x , y ){
+			ui.logger(this);
+			if(!this.config){
+				return;
+			}
+			var region = this.getTargetRegion();
+			return this.onDragmove( x - region.left , y - region.top );
 		}
 	});
 
@@ -997,6 +1020,12 @@
 		},
 		setOffset : function( x , y ){
 			return getInstance().setOffset(x,y);
+		},
+		resetSizing : function( w , h ){
+			return getInstance().resetSizing(w,h);
+		},
+		resetOffset : function( x , y ){
+			return getInstance().resetOffset(x,y);
 		}
 	};
 

@@ -78,9 +78,9 @@
 				}
 				value+=v;
 				if(value!=this.value){
-					if(this.on('spinUp',v,value)!=false){
-						this.setValue(value);
-					}
+					this.setValue(value);
+					this.on('change',value);
+					this.on('spinUp',v,value);
 				}
 			};
 
@@ -91,7 +91,6 @@
 				}else if(event.altKey){
 
 				}
-
 				this.value=$.toNumber(this.value);
 				var value=this.value;
 				if(this.minValue >= this.value - v){
@@ -99,6 +98,7 @@
 				}
 				value-=v;
 				if(value!=this.value){
+					this.on('change',value);
 					if(this.on('spinDown',-v,value)!=false){
 						this.setValue(value);
 					}
