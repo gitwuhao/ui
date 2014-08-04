@@ -323,6 +323,10 @@
 			this.offset.y = y;
 			this.bindContentEvent();
 			this.addBodyClass();
+			var config=this.config;
+			if(config.dragstart){
+				config.dragstart();
+			}
 		},
 		dragover : function() {
 			ui.logger(this);
@@ -331,19 +335,29 @@
 			delete this.type;
 			delete this.event;
 			delete this.__SORT_TIMEOUT_ID__;
+			var config=this.config;
+			if(config && config.dragover){
+				config.dragover();
+			}
 			this.removeBodyClass();
 		},
 		onDragstart : function(x, y) {
 			ui.logger(this);
 			this.type = 'drag';
 			this.dragstart(x, y);
+			var config=this.config;
+			if(config.onDragstart){
+				config.onDragstart();
+			}
 		},
 		onDragmove : function(x, y) {
 			ui.logger(this);
 			var point = {
 				x : x,
 				y : y
-			}, config = this.config, offset;
+			},
+			config = this.config,
+			offset;
 
 			if (config.parentBox) {
 				this.getPoint(point);
@@ -375,16 +389,19 @@
 					top : offset.top + point.y
 				});
 			}
+		
+			if(config.onDragmove){
+				config.onDragmove();
+			}
 			return true;
 		},
 		onDragover : function() {
 			ui.logger(this);
 			this.dragover();
-			/*
-			if(config.dragover){
-				config.dragover();
+			var config=this.config;
+			if(config.onDragover){
+				config.onDragover();
 			}
-			*/
 		},
 		bindSortContent : function() {
 			ui.logger(this);
@@ -514,15 +531,22 @@
 			this.type = 'sort';
 			this.dragstart(x, y);
 
-			this.config.sortStartOffset={
+
+			
+			var config=this.config;
+			config.sortStartOffset={
 				left : x,
 				top : y,
 			};
+			if(config.onSortstart){
+				config.onSortstart();
+			}
 		},
 		onSortmove : function(x, y) {
 			ui.logger(this);
 			
-			var event = this.event;
+			var event = this.event,
+				config=this.config;
 
 
 			this.$resizebox.hide();
@@ -534,7 +558,7 @@
 			}
 
 
-			var startOffset=this.config.sortStartOffset;
+			var startOffset=config.sortStartOffset;
 			if(startOffset && (Math.abs(startOffset.left - event.pageX)>5 || Math.abs(startOffset.top - event.pageY)>5 )){
 			}else{
 				return false;
@@ -579,6 +603,10 @@
 
 			$.getBody().addClass(this._c_dd_sort_drag);
 			this.sortstart();
+
+			if(config.onSortmove){
+				config.onSortmove();
+			}
 		},
 		onSortover : function() {
 			ui.logger(this);
@@ -599,8 +627,8 @@
 				delete this.replaceElemet;
 			}
 
-			if(config.onSortOver){
-				config.onSortOver();
+			if(config.onSortover){
+				config.onSortover();
 			}
 		},
 		resizeBoxMouseDown : function(event) {
@@ -769,12 +797,9 @@
 			return this.bodyClass;
 		},
 		addBodyClass : function() {
-			$.getBody().addClass(this.getBodyClass());
 			var config=this.config;
+			$.getBody().addClass(this.getBodyClass());
 			config.$target.addClass('x-ui-dd-target');
-			if(config.dragstart){
-				config.dragstart();
-			}
 		},
 		removeBodyClass : function() {
 			$.getBody().removeClass(this.bodyClass);
@@ -782,9 +807,6 @@
 			var config=this.config;
 			if(config && config.$target){
 				config.$target.removeClass('x-ui-dd-target');
-				if(config.dragover){
-					config.dragover();
-				}
 			}
 		},
 		onResizestart : function(x, y) {
@@ -792,6 +814,12 @@
 			this.type = 'resize';
 			this.dragstart(x, y);
 			this.$bg.css('cursor', this.config.resizetype + '-resize');
+
+			
+			var config=this.config;
+			if(config.onResizestart){
+				config.onResizestart();
+			}
 		},
 		onResizemove : function(x, y) {
 			ui.logger(this);
@@ -851,6 +879,21 @@
 			if(this.setRegion(region)){
 				this.setResizeBoxOffset();		
 			};
+
+			if(config.onResizemove){
+				config.onResizemove();
+			}
+		},
+		onResizeover : function() {
+			ui.logger(this);
+			this.$bg.css('cursor', '');
+			this.dragover();
+			delete this.resizeCursor;
+			
+			var config=this.config;
+			if(config.onResizeover){
+				config.onResizeover();
+			}
 		},
 		setRegion : function(region){
 			var config = this.config,
@@ -898,12 +941,6 @@
 				});
 			}
 			return true;
-		},
-		onResizeover : function() {
-			ui.logger(this);
-			this.$bg.css('cursor', '');
-			this.dragover();
-			delete this.resizeCursor;
 		},
 		setSizing : function( w , h ){
 			ui.logger(this);

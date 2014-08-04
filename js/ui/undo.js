@@ -204,6 +204,9 @@
 		getNextCommand : function(){
 			return this.undoCommands[this.index + 1];
 		},
+		getLastCommand : function(){
+			return this.undoCommands[this.undoCommands.length-1];
+		},
 		getCommand : function(){
 			return this.undoCommands[this.index];
 		}
