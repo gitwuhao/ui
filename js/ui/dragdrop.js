@@ -240,7 +240,7 @@
 		setConfig : function(config) {
 			ui.logger(this);
 			if (this.config && config && this.config.target == config.target) {
-				return false;
+				return;
 			}
 			this.cleanConfig();
 
@@ -311,9 +311,7 @@
 		},
 		drag : function(config) {
 			ui.logger(this);
-			if (this.setConfig(config) == false) {
-				return;
-			}
+			this.setConfig(config);
 			if(config.event){
 				this.event = config.event;
 				this.on('dragstart', this.event.pageX, this.event.pageY);
@@ -472,9 +470,7 @@
 		},
 		sort : function(config) {
 			ui.logger(this);
-			if (this.setConfig(config) == false) {
-				return;
-			}
+			this.setConfig(config);
 			this.initSortbox();
 			this.event = config.event;
 
@@ -686,10 +682,7 @@
 		},
 		showResize : function(config) {
 			ui.logger(this);
-			if (this.setConfig(config) == false) {
-				return;
-			}
-
+			this.setConfig(config);
 			if(config.render && config.render != this.render) {
 				this.$elem.appendTo(config.render);
 				this.render = config.render;
