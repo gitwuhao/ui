@@ -128,10 +128,10 @@
 			});
 
 			this.bindMouseWheel(item.$text,function(event,arg){
-				if(arg.me.isDisabled==true){
+				if(arg.me.isDisabled!=true){
+					arg.me.trigger("spinwheel",event);
 					return false;
 				}
-				arg.me.trigger("spinwheel",event);
 			},{
 				me :item
 			});
