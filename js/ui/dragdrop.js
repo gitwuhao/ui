@@ -166,7 +166,7 @@
 						}
 					}
 			} else if (this.type == 'sort') {
-				if (this.on('sortmove', x, y) != false) {
+				if (this.on('sortmove', x, y)!=false) {
 					if(config.onSortmove){
 						config.onSortmove();
 					}
