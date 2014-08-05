@@ -29,8 +29,8 @@
 			},
 			getOffsetParentPoint : function(element,parent){
 				var point={
-						left : element.offsetLeft - element.clientLeft,
-						top : element.offsetTop - element.clientTop
+						left : element.offsetLeft,
+						top : element.offsetTop
 					};
 				parent = parent || document.body;
 
