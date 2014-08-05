@@ -836,7 +836,7 @@
 				},
 				shiftKey = this.event.shiftKey;
 
-			if(config.onResizemove){
+			if(config.onResize){
 				var w=config.$target.width();
 				var h=config.$target.height();
 				if (w + x < this.__MIN_SIZE__) {
@@ -845,7 +845,7 @@
 				if (h + y < this.__MIN_SIZE__) {
 					y=this.__MIN_SIZE__ - h;
 				}
-				config.onResizemove(x,y,w,h);
+				config.onResize(x,y,w,h);
 				this.setResizeBoxOffset();
 				return;
 			}
