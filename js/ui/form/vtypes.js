@@ -80,6 +80,7 @@
 				if(value!=this.value){
 					if(this.on('spinUp',v,value)!=false){
 						this.setValue(value);
+						this.on('change',value);
 					}
 				}
 			};
@@ -100,6 +101,7 @@
 				if(value!=this.value){
 					if(this.on('spinDown',-v,value)!=false){
 						this.setValue(value);
+						this.on('change',value);
 					}
 				}
 			};
