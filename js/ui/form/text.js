@@ -126,7 +126,7 @@
 				this.$text.keydown(function(event){
 					if(me.isDisabled!=true){
 						if(event.shiftKey && event.keyCode==8){
-							me.setValue("");
+							this.value='';
 						}else{
 							me.trigger("textkeydown",event);
 						}
