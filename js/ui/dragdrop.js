@@ -453,7 +453,7 @@
 
 			config.event=event;
 			delete this.replaceElemet;
-			if(event.ctrlKey){
+			if(event.altKey){
 				this.on('replaceElemet',elemet);
 			}else if(elemet!=srcTarget){
 				if(config.onSort){
