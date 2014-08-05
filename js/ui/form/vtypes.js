@@ -78,9 +78,9 @@
 				}
 				value+=v;
 				if(value!=this.value){
-					this.setValue(value);
-					this.on('change',value);
-					this.on('spinUp',v,value);
+					if(this.on('spinUp',v,value)!=false){
+						this.setValue(value);
+					}
 				}
 			};
 
@@ -98,7 +98,6 @@
 				}
 				value-=v;
 				if(value!=this.value){
-					this.on('change',value);
 					if(this.on('spinDown',-v,value)!=false){
 						this.setValue(value);
 					}
