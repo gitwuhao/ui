@@ -143,7 +143,12 @@
 			offset.y = pageY;
 
 			if (this.type == 'drag') {
-				this.on('dragmove', x, y);
+				if(this.on('dragmove', x, y)!=false){
+					if(config.onDragmove){
+						config.onDragmove();
+					}	
+					ui.dragdrop.trigger('dragmove',config);
+				}
 			} else if (this.type == 'resize') {			
 					var _offset = config.$cursortarget.offset();
 					if (_offset.left + x - pageX != 0) {
@@ -153,11 +158,19 @@
 						y = pageY - _offset.top;
 					}
 					if (x != y && x != 0) {
-						this.on('resizemove', x, y);
+						if(this.on('resizemove', x, y)!=false){
+							if(config.onResizemove){
+								config.onResizemove();
+							}
+							ui.dragdrop.trigger('resizemove',config);
+						}
 					}
 			} else if (this.type == 'sort') {
-				if (this.on('sortmove', x, y) == false) {
-					return;
+				if (this.on('sortmove', x, y) != false) {
+					if(config.onSortmove){
+						config.onSortmove();
+					}
+					ui.dragdrop.trigger('sortmove',this.config);
 				}
 			}
 			return false;
@@ -393,10 +406,6 @@
 				});
 			}
 		
-			if(config.onDragmove){
-				config.onDragmove();
-			}
-			ui.dragdrop.trigger('dragmove',this.config);
 			return true;
 		},
 		onDragover : function() {
@@ -603,11 +612,6 @@
 
 			$.getBody().addClass(this._c_dd_sort_drag);
 			this.sortstart();
-
-			if(config.onSortmove){
-				config.onSortmove();
-			}
-			ui.dragdrop.trigger('sortmove',this.config);
 		},
 		onSortover : function() {
 			ui.logger(this);
@@ -849,7 +853,7 @@
 				}
 				config.onResize(x,y,w,h);
 				this.setResizeBoxOffset();
-				return;
+				return false;
 			}
 
 			if (resizeType == "nw") {
@@ -884,11 +888,6 @@
 				this.setResizeBoxOffset();		
 			}
 
-			if(config.onResizemove){
-				config.onResizemove();
-			}
-					
-			ui.dragdrop.trigger('resizemove',this.config);
 		},
 		onResizeover : function() {
 			ui.logger(this);
@@ -967,27 +966,6 @@
 				return;
 			}
 			return this.onDragmove( x , y );
-		},
-		resetSizing : function( width , height ){
-			ui.logger(this);
-			if(!this.config){
-				return;
-			}
-			var region = this.getTargetRegion();
-			return this.setRegion({
-				x : 0,
-				y : 0,
-				w : width - region.width,
-				h : height - region.height
-			});
-		},
-		resetOffset : function( x , y ){
-			ui.logger(this);
-			if(!this.config){
-				return;
-			}
-			var region = this.getTargetRegion();
-			return this.onDragmove( x - region.left , y - region.top );
 		}
 	});
 
@@ -1025,12 +1003,6 @@
 		},
 		setOffset : function( x , y ){
 			return getInstance().setOffset(x,y);
-		},
-		resetSizing : function( w , h ){
-			return getInstance().resetSizing(w,h);
-		},
-		resetOffset : function( x , y ){
-			return getInstance().resetOffset(x,y);
 		}
 	};
 
