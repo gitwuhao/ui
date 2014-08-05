@@ -351,6 +351,7 @@
 			if(config.onDragstart){
 				config.onDragstart();
 			}
+			ui.dragdrop.trigger('dragstart',this.config);
 		},
 		onDragmove : function(x, y) {
 			ui.logger(this);
@@ -395,6 +396,7 @@
 			if(config.onDragmove){
 				config.onDragmove();
 			}
+			ui.dragdrop.trigger('dragmove',this.config);
 			return true;
 		},
 		onDragover : function() {
@@ -404,6 +406,7 @@
 			if(config.onDragover){
 				config.onDragover();
 			}
+			ui.dragdrop.trigger('dragover',this.config);
 		},
 		bindSortContent : function() {
 			ui.logger(this);
@@ -411,7 +414,7 @@
 			this.config.$parentBox.on(events, {
 				me : this
 			}, function(event) {
-				return event.data.me.on('sortBoxMousemove', event);
+				event.data.me.on('sortBoxMousemove', event);
 			});
 		},
 		unbindSortContent : function() {
@@ -442,22 +445,23 @@
 			config.event=event;
 			delete this.replaceElemet;
 			if(event.ctrlKey){
-				this.on('replace',elemet);
+				this.on('replaceElemet',elemet);
 			}else if(elemet!=srcTarget){
 				if(config.onSort){
 					config.onSort(elemet);
 				}else if(elemet.parentElement==srcTarget.parentElement){
-					this.on('sort',elemet);
+					this.on('sortElemet',elemet);
 				}
 			}
 			
 			this.lastSortTime=event.timeStamp;
+			ui.dragdrop.trigger('dragmove',this.config);
 		},
-		onReplace:function(elemet){
+		onReplaceElemet:function(elemet){
 			ui.logger(this);
 			this.replaceElemet=elemet;
 		},
-		onSort:function(elemet){
+		onSortElemet:function(elemet){
 			ui.logger(this);
 			var config = this.config,
 				$elemet,
@@ -523,9 +527,6 @@
 			this.$sortbox.show();
 			this.bindSortContent();
 
-			if(this.config.sortstart){
-				this.config.sortstart();
-			}
 			delete this.config.startOffset;
 		},
 		onSortstart : function(x, y) {
@@ -533,8 +534,6 @@
 			this.type = 'sort';
 			this.dragstart(x, y);
 
-
-			
 			var config=this.config;
 			config.sortStartOffset={
 				left : x,
@@ -543,6 +542,7 @@
 			if(config.onSortstart){
 				config.onSortstart();
 			}
+			ui.dragdrop.trigger('sortstart',this.config);
 		},
 		onSortmove : function(x, y) {
 			ui.logger(this);
@@ -556,17 +556,15 @@
 			if(this.__SORT_TIMEOUT_ID__){
 				clearTimeout(this.__SORT_TIMEOUT_ID__);
 				delete this.__SORT_TIMEOUT_ID__;
-//			}else if (!this.isResetsortbox) {
 			}
 
-
 			var startOffset=config.sortStartOffset;
-			if(startOffset && (Math.abs(startOffset.left - event.pageX)>5 || Math.abs(startOffset.top - event.pageY)>5 )){
+			if(startOffset && 
+				(Math.abs(startOffset.left - event.pageX)>5 ||
+				 Math.abs(startOffset.top - event.pageY)>5 )){
 			}else{
 				return false;
 			}
-
-
 
 			if(this.config.isLockBody){
 				var $parentBox=$.getBody(),
@@ -609,6 +607,7 @@
 			if(config.onSortmove){
 				config.onSortmove();
 			}
+			ui.dragdrop.trigger('sortmove',this.config);
 		},
 		onSortover : function() {
 			ui.logger(this);
@@ -632,6 +631,8 @@
 			if(config.onSortover){
 				config.onSortover();
 			}
+			
+			ui.dragdrop.trigger('sortover',this.config);
 		},
 		resizeBoxMouseDown : function(event) {
 			ui.logger(this);
@@ -738,7 +739,6 @@
 				this.$resizebox.addClass('auto-width');
 			}
 
-
 		},
 		hideResizeBox : function() {
 			ui.logger(this);
@@ -822,6 +822,8 @@
 			if(config.onResizestart){
 				config.onResizestart();
 			}
+			
+			ui.dragdrop.trigger('resizestart',this.config);
 		},
 		onResizemove : function(x, y) {
 			ui.logger(this);
@@ -880,11 +882,13 @@
 
 			if(this.setRegion(region)){
 				this.setResizeBoxOffset();		
-			};
+			}
 
 			if(config.onResizemove){
 				config.onResizemove();
 			}
+					
+			ui.dragdrop.trigger('resizemove',this.config);
 		},
 		onResizeover : function() {
 			ui.logger(this);
@@ -896,6 +900,7 @@
 			if(config.onResizeover){
 				config.onResizeover();
 			}
+			ui.dragdrop.trigger('resizeover',this.config);
 		},
 		setRegion : function(region){
 			var config = this.config,
@@ -1045,5 +1050,8 @@
 			getInstance().hideResizeBox();
 		}
 	});
+
+
+	CF.extendEventListener(ui.dragdrop);
 
 })(CF, jQuery, ui);
