@@ -53,6 +53,8 @@
 		__M_LEFT__ : 'L',
 		__M_TOP__ : 'T',
 		__M_BOTTOM__ : 'B',
+		__M_MIDDLE__ : 'M',
+		__M_CENTER__ : 'C',
 		__MIN_SIZE__ : 20,
 		onRenderAfter : function(config) {
 			ui.logger(this);
@@ -236,6 +238,18 @@
 						y = _min;
 					}
 					break;
+				//center
+				case 67 :
+					if (shiftKey && altKey) {
+						x = this.__M_CENTER__;
+						break;
+					}
+				//middle
+				case 77 :
+					if (shiftKey && altKey) {
+						y = this.__M_MIDDLE__;
+						break;
+					}
 				default :
 					return;
 			}
@@ -303,10 +317,14 @@
 
 			if (point.x == this.__M_RIGHT__) {
 				point.x = maxWidth;
+			} else if (point.x == this.__M_CENTER__) {
+				point.x = ((maxWidth - _w)/2) - _l;
 			} else if (point.x == this.__M_LEFT__) {
 				point.x = -maxWidth;
 			} else if (point.y == this.__M_TOP__) {
 				point.y = -maxHeight;
+			} else if (point.y == this.__M_MIDDLE__) {
+				point.y = ((maxHeight - _h)/2) - _t;
 			} else if (point.y == this.__M_BOTTOM__) {
 				point.y = maxHeight;
 			}
