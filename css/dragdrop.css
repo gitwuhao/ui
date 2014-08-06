@@ -9,8 +9,8 @@
 .x-ui-dd-resize-box .bg{
 /*	outline: 1px dashed #000;*/
 	cursor : move;
-	min-height: 50px;
-	min-width: 50px;
+	min-height: 20px;
+	min-width: 20px;
 	font-size: 0px;
 }
 

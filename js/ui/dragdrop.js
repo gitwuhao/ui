@@ -53,7 +53,7 @@
 		__M_LEFT__ : 'L',
 		__M_TOP__ : 'T',
 		__M_BOTTOM__ : 'B',
-		__MIN_SIZE__ : 50,
+		__MIN_SIZE__ : 20,
 		onRenderAfter : function(config) {
 			ui.logger(this);
 			this.$resizebox = this.$elem;
