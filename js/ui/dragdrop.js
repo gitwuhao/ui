@@ -49,13 +49,7 @@
 			}
 		},
 		__EVENTNAMESPACE__ : '.DD' + $.randomChar(5),
-		__M_RIGHT__ : 'R',
-		__M_LEFT__ : 'L',
-		__M_TOP__ : 'T',
-		__M_BOTTOM__ : 'B',
-		__M_MIDDLE__ : 'M',
-		__M_CENTER__ : 'C',
-		__MIN_SIZE__ : 20,
+
 		onRenderAfter : function(config) {
 			ui.logger(this);
 			this.$resizebox = this.$elem;
@@ -201,7 +195,7 @@
 				// left
 				case 37 :
 					if (shiftKey && altKey) {
-						x = this.__M_LEFT__;
+						x = ui.dragdrop.__M_LEFT__;
 					} else if (shiftKey) {
 						x = -_max;
 					} else {
@@ -211,7 +205,7 @@
 				// up
 				case 38 :
 					if (shiftKey && altKey) {
-						y = this.__M_TOP__;
+						y = ui.dragdrop.__M_TOP__;
 					} else if (shiftKey) {
 						y = -_max;
 					} else {
@@ -221,7 +215,7 @@
 				// rigth
 				case 39 :
 					if (shiftKey && altKey) {
-						x = this.__M_RIGHT__;
+						x = ui.dragdrop.__M_RIGHT__;
 					} else if (shiftKey) {
 						x = _max;
 					} else {
@@ -231,7 +225,7 @@
 				// down
 				case 40 :
 					if (shiftKey && altKey) {
-						y = this.__M_BOTTOM__;
+						y = ui.dragdrop.__M_BOTTOM__;
 					} else if (shiftKey) {
 						y = _max;
 					} else {
@@ -241,13 +235,13 @@
 				//center
 				case 67 :
 					if (shiftKey && altKey) {
-						x = this.__M_CENTER__;
+						x = ui.dragdrop.__M_CENTER__;
 						break;
 					}
 				//middle
 				case 77 :
 					if (shiftKey && altKey) {
-						y = this.__M_MIDDLE__;
+						y = ui.dragdrop.__M_MIDDLE__;
 						break;
 					}
 				default :
@@ -315,17 +309,17 @@
 				_h = $target.outerHeight(),
 				margin=config.margin;
 
-			if (point.x == this.__M_RIGHT__) {
+			if (point.x == ui.dragdrop.__M_RIGHT__) {
 				point.x = maxWidth;
-			} else if (point.x == this.__M_CENTER__) {
+			} else if (point.x == ui.dragdrop.__M_CENTER__) {
 				point.x = ((maxWidth - _w)/2) - _l;
-			} else if (point.x == this.__M_LEFT__) {
+			} else if (point.x == ui.dragdrop.__M_LEFT__) {
 				point.x = -maxWidth;
-			} else if (point.y == this.__M_TOP__) {
+			} else if (point.y == ui.dragdrop.__M_TOP__) {
 				point.y = -maxHeight;
-			} else if (point.y == this.__M_MIDDLE__) {
+			} else if (point.y == ui.dragdrop.__M_MIDDLE__) {
 				point.y = ((maxHeight - _h)/2) - _t;
-			} else if (point.y == this.__M_BOTTOM__) {
+			} else if (point.y == ui.dragdrop.__M_BOTTOM__) {
 				point.y = maxHeight;
 			}
 
@@ -863,11 +857,11 @@
 			if(config.onResize){
 				var w=config.$target.width();
 				var h=config.$target.height();
-				if (w + x < this.__MIN_SIZE__) {
-					x=this.__MIN_SIZE__ - w ;
+				if (w + x < ui.dragdrop.__MIN_SIZE__) {
+					x=ui.dragdrop.__MIN_SIZE__ - w ;
 				}
-				if (h + y < this.__MIN_SIZE__) {
-					y=this.__MIN_SIZE__ - h;
+				if (h + y < ui.dragdrop.__MIN_SIZE__) {
+					y=ui.dragdrop.__MIN_SIZE__ - h;
 				}
 				config.onResize(x,y,w,h);
 				this.setResizeBoxOffset();
@@ -925,16 +919,16 @@
 				width = $target.width(),
 				height = $target.height();
 
-			if (width + region.w < this.__MIN_SIZE__) {
-				region.w = this.__MIN_SIZE__ - width;
+			if (width + region.w < ui.dragdrop.__MIN_SIZE__) {
+				region.w = ui.dragdrop.__MIN_SIZE__ - width;
 				if(region.x > 0){
 					region.x = -region.w;
 				}else{
 					region.x = 0;
 				}
 			}
-			if (height + region.h < this.__MIN_SIZE__) {
-				region.h = this.__MIN_SIZE__ - height;
+			if (height + region.h < ui.dragdrop.__MIN_SIZE__) {
+				region.h = ui.dragdrop.__MIN_SIZE__ - height;
 				if(region.y > 0){
 					region.y = -region.h;
 				}else{
@@ -997,6 +991,13 @@
 	};
 
 	ui.dragdrop = {
+		__M_RIGHT__ : 'R',
+		__M_LEFT__ : 'L',
+		__M_TOP__ : 'T',
+		__M_BOTTOM__ : 'B',
+		__M_MIDDLE__ : 'M',
+		__M_CENTER__ : 'C',
+		__MIN_SIZE__ : 20,
 		resize : function(config) {
 			this.resize.drag(config);
 			return config;
