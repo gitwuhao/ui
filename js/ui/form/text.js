@@ -97,8 +97,10 @@
 			var me=this;
 
 			this.$label.mousedown(function(event){
-				me.on('focus',event,this);
-				event.stopBubble(me);
+				if(me.isDisabled!=true){
+					me.$text.focus();
+					event.stopBubble(me);
+				}
 			});
 
 			this.$text.focus(function(event){
