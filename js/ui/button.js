@@ -10,20 +10,27 @@
 			css:{
 				_c_button :  '-button',
 				_c_icon :   '-icon',
+				_c_icon_button :   '-icon-button',
 				_c_label :  '-label'
 			},
 			getTemplate: function(config){
 				ui.widget.applyCSS(config,this.css);
-				var html=['<div class="',config._c_button,' ',(config.cls||''),'" '];
+				var html=['<div class="',config._c_button,' ',(config.cls||'')],
+					label=config.label;
+
+				if(config.icon==true || !label){
+					config.icon=true;
+					html.push(' ',config._c_icon_button,'');
+				}
+				html.push('" ');
+
 				if(config.title){
 					html.push(' title="',config.title,'"');
-				}	
-				html.push('>');
-				var label=config.label;
-				if(config.icon==true || !label){
-					html.push('<div class="',config._c_icon,'"></div>');
 				}
-				if(label){
+				html.push('>');
+				if(config.icon==true){
+					html.push('<div class="',config._c_icon,'"></div>');
+				}else if(label){
 					html.push('<div class="',config._c_label,'">',label,'</div>');
 				}
 				html.push('</div>');
