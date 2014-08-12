@@ -209,6 +209,16 @@
 		},
 		getCommand : function(){
 			return this.undoCommands[this.index];
+		},
+		setCommandIndex : function(command){
+			if(command.index){
+				var cmd=this.undoCommands[command.index];
+				if(cmd==command){
+					this.index=command.index;
+					return true;
+				}	
+			}
+			return false;
 		}
 	};
 
