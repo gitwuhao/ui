@@ -116,9 +116,16 @@
 				return false;
 			}
 			this.isExecuting = true;
-
+		
+			var before=action+'Before';
+			if(command[before]){
+				command[before]();
+			}
 			command[action]();
-
+			var after=action+'After';
+			if(command[after]){
+				command[after]();
+			}
 			this.isExecuting = false;
 
 			return true;
