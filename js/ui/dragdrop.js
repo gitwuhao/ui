@@ -1022,6 +1022,17 @@
 		},
 		setOffset : function( x , y ){
 			return getInstance().setOffset(x,y);
+		},
+		scrollTop : function(box,element){
+			var offsetTop=box.offsetTop,
+				scrollTop=box.scrollTop,
+				scrollHeight=box.scrollHeight,
+				clientHeight=box.clientHeight;
+			if(element.offsetTop + element.offsetHeight > scrollTop + offsetTop + clientHeight){
+				box.scrollTop=scrollTop + element.offsetHeight ;
+			}else if(element.offsetTop < scrollTop + offsetTop){
+				box.scrollTop=scrollTop - element.offsetHeight ;
+			}
 		}
 	};
 
