@@ -182,10 +182,12 @@
 
 
 			item.addEventListener('setvalue',function(value){
-				if(!isNaN(value) || value=='0'){
-					value=parseInt(value);
-				}else{
+				if(value=='0'){
+					value=0;
+				}else if(isNaN(value) || value=='' || /^\s*$/.test(value)){
 					value='';
+				}else{
+					value=parseInt(value);
 				}
 				this.value=value;
 			});
