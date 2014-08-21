@@ -3,6 +3,8 @@
 	var QuickTip=function(){
 		this.callSuperMethod();
 	};
+	
+	var _index_=parseInt('1'+((Date.now()+'').match(/(\d{3}$)/)[0]));
 
 	ui.extend(QuickTip,ui.widget,{
 		_name_ : "QuickTip",
@@ -12,9 +14,13 @@
 				_c_qtip_content: '-qtip-content',
 				_c_qtip_arrow_box: '-qtip-arrow-box'
 			},
+			getID : function(){
+				return 'Q'+(_index_++)+'TIP';
+			},
 			getTemplate: function(config){
 				ui.widget.applyCSS(config,this.css);
-				var html=['<div class="',config._c_qtip_box,' ',(config.cls||''),' border-box uns">',
+				config.id=this.getID();
+				var html=['<div class="',config._c_qtip_box,' ',(config.cls||''),' border-box uns" id="',config.id,'">',
 							'<div class="',config._c_qtip_content,'">',config.html,'</div>',
 							'<div class="',config._c_qtip_arrow_box,'">',
 								'<div class="',config.px,'-icon"></div>',
@@ -314,7 +320,7 @@
 				point.top = top + targetHeight;
 				align='top';
 			}else{
-				point.top = top - height;
+				point.top = top - height - arrowHeight;
 				align='bottom';
 			}
 			
@@ -382,6 +388,7 @@
 	ui.quicktip={
 		show : function(config){
 			new QuickTip(config);
+			return config;
 		}
 	};
 	
