@@ -131,6 +131,8 @@
 			this.width=this.$elem.outerWidth();
 			this.height=this.$elem.outerHeight();
 			this.setOffset();
+
+			this.$elem.data(ui.quicktip.KEY,this);
 		},
 		onBindEvent:function(){
 			ui.logger(this);
@@ -320,7 +322,7 @@
 				point.top = top + targetHeight;
 				align='top';
 			}else{
-				point.top = top - height - arrowHeight;
+				point.top = top - height;
 				align='bottom';
 			}
 			
@@ -384,11 +386,17 @@
 	});
 
 	CF.merger(QuickTip.prototype,ui.mask);
-
+	
 	ui.quicktip={
 		show : function(config){
 			new QuickTip(config);
-			return config;
+		},
+		KEY : '__QUICK_TIP__',
+		remove  : function(id){
+			var data=$('#'+id).data(this.KEY);
+			if(data){
+				data.remove();
+			}
 		}
 	};
 	
