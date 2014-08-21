@@ -116,7 +116,6 @@
 		},
 		onMousemove : function(event) {
 			ui.logger(this);
-
 			var offset = this.offset,
 				pageX,
 				pageY,
@@ -137,6 +136,12 @@
 
 			offset.x = pageX;
 			offset.y = pageY;
+
+			if(config.event.type=='mousedown' && event.timeStamp - 100 < config.event.timeStamp){
+				return;
+			}
+
+			config.event=event;
 
 			if (this.type == 'drag') {
 				if(this.on('dragmove', x, y)!=false){
