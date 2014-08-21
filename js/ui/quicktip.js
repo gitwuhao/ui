@@ -82,7 +82,7 @@
 				//}
 			},
 			trigger:function(event){
-				if(localStorage['__quick_tip_listener__']!='true'){
+				if(localStorage['__quick_tip_listener__']=='false'){
 					return;
 				}
 				var events=this.events;
@@ -329,6 +329,10 @@
 			if(this.align.left || this.align.right ){
 				if(this.align.center){
 					point.top = top + (targetHeight/2) - (height/2);
+					if(point.top < 0 ){
+						height = height + point.top - 3;
+						point.top = 3;
+					}
 				}else{
 					point.top = top;
 				}
