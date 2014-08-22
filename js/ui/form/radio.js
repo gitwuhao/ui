@@ -101,7 +101,8 @@
 				if(me.isDisabled!=true){
 					me.focus(_item_);
 					me.on('click',_item_);
-					if(me.on('checked',_item_)!=false){		
+					if(me.on('checked',_item_)!=false){	
+						me.setValue(me.currentItem.value);
 						me.on('change',_item_);
 					}
 				}
@@ -168,7 +169,7 @@
 		},
 		setValue:function(value){
 			ui.logger(this);
-			if(this.callSuperMethod()==false){
+			if(this.callSuperMethod()==false || (this.checkedItem && this.checkedItem.value==value)){
 				return;
 			}
 			for(var i=0,len=this.items.length;i<len;i++){
