@@ -81,15 +81,23 @@
 					me.timeStamp=event.timeStamp;
 				//}
 			},
+			isDebug : function(){
+				return localStorage['__quick_tip_listener__']=='false';
+			},
 			trigger:function(event){
-				if(localStorage['__quick_tip_listener__']=='false'){
+				if(this.isDebug()){
 					return;
 				}
-				var events=this.events;
+				var events=this.events,
+					isOverScreen=false;
+				
+				if(event.screenY >= window.innerHeight || event.screenX >= window.innerWidth){
+					isOverScreen=true;
+				}
 				for(var key in events){
 					var item=events[key];
 					if(item && item.handle && item.handle._isFunction_){
-						item.handle.call(item.scope,event,item.param);
+						item.handle.call(item.scope,event,item.param,isOverScreen);
 					}
 				}
 			},
@@ -162,18 +170,34 @@
 			}
 */
 		},
-		addMouseMoveListener:function(){
+		addMouseMoveListener : function(){
 			ui.logger(this);
 			if(this.handle){
 				return;
+			}else if(this.time>1000){
+				this._TIME_OUT_ID_=$.setTimeout(function(){
+					this.hide();
+				},this.time,this);
+				return;
 			}
+
 			var offset=this.$elem.offset();
 			
-			QuickTip.addListener(this,function(event,param){
-				if(!param.lastEvent){
+			QuickTip.addListener(this,function(event,param,isOverScreen){
+				if(isOverScreen){
+					this.hide();
+					return;
+				}else if(!param.lastEvent){
 					param.lastEvent=event;
 					return;
+				}else if(this._TIME_OUT_ID_){
+					window.clearTimeout(this._TIME_OUT_ID_);
+					delete this._TIME_OUT_ID_;
 				}
+				
+				this._TIME_OUT_ID_=$.setTimeout(function(){
+					this.hide();
+				},2000,this);
 
 				var x=event.pageX - param.lastEvent.pageX,
 					y=event.pageY - param.lastEvent.pageY,
@@ -266,6 +290,8 @@
 				}
 				param.opacity=param.index;
 				this.$elem.css('opacity',param.opacity/100);
+
+				
 			},{
 				index : 90 ,
 				left : offset.left,
@@ -360,7 +386,10 @@
 			this.$arrow.addClass(align);
 			this.$arrow.css(arrowPoint);
 			this.$elem.css(offset);
-			this.addMouseMoveListener();
+
+			if(!QuickTip.isDebug()){
+				this.addMouseMoveListener();
+			}
 			this.timestamp=$.timestamp();
 		},
 		onClick : function(){
@@ -374,6 +403,10 @@
 			if($.timestamp() - this.timestamp <1000){
 				return;
 			}
+			this.hide();
+		},
+		hide : function(){
+			ui.logger(this);
 			if(this.$elem){
 				this.$elem.addClass('easeout');
 				$.setTimeout(this.remove,1000,this);
