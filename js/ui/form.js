@@ -302,9 +302,9 @@
 			if(value==undefined){
 				return false;
 			}
-			var oldValue=this.value;
+			this.oldValue=this.value;
 			this.value=value;
-			this.trigger("setvalue",this.value,oldValue);
+			this.trigger("setvalue",this.value,this.oldValue);
 		},
 		getValue:function(){
 			ui.logger(this);
