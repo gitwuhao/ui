@@ -197,7 +197,7 @@
 				
 				this._TIME_OUT_ID_=$.setTimeout(function(){
 					this.hide();
-				},2000,this);
+				},3000,this);
 
 				var x=event.pageX - param.lastEvent.pageX,
 					y=event.pageY - param.lastEvent.pageY,
