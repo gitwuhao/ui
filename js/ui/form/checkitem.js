@@ -21,7 +21,7 @@
 				var html=[];
 				html.push('<div class="',config._c_checkbox_group,'"');
 				html.push('><input type="text" name="',(config.name||''),'" class="',config._c_icon,
-							'" value="',config.value,'"/>');
+							'" />');
 				if(config.text){
 					html.push('<span>',config.text,'</span>');
 				}
