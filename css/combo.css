@@ -21,6 +21,7 @@
 }
 .x-ui-combo-list-item{
 	margin: 0px;
+	white-space: nowrap;
 	font-size: 12px;
 	padding: 1px 6px;
 	line-height: 22px;

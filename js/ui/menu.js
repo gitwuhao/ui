@@ -181,17 +181,17 @@
 				return false;
 			});
 		},		
-		setOffset : function(left,top){
+		setOffset : function(offset){
 			ui.logger(this);
-			if(left==0 && top==0){
+			if(offset.left==0 && offset.top==0){
 				this.hide();
 				//console.info("offset:["+left+","+top+"]");
 				//因鼠标在menuitem上快速移动，导致hide timeout状态不同步
 				//当前菜单显示，上级菜单隐藏的bug
 			}else{
 				this.$elem.css({
-					left : left,
-					top : top
+					left : offset.left,
+					top : offset.bottom
 				});
 			}
 		},

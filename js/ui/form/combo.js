@@ -44,8 +44,11 @@
 			}
 
 			this._css_combo=config._c_text;
-
-			
+			if(config.autoWidthForList==false){
+				this.autoWidthForList=false;
+			}else{
+				this.autoWidthForList=true;
+			}
 			if(this.isDisabled){
 				this.disabled();
 			}
@@ -124,7 +127,7 @@
 					boxcls : this._css_combo+"-popu",
 					icon:false,
 					autoSetOffset:true,
-					autoWidth:true,
+					autoWidth : this.autoWidthForList,
 					align:'lb',
 					$offsetElement : this.$combo,
 					$owner:this,
@@ -133,6 +136,7 @@
 					}
 				});
 				this.list=new ComboList(listConfig);
+				this.on('comboListInit');
 			}
 			if(this.list){
 				this.list.toggle();
@@ -173,8 +177,10 @@
 			for(var i=0,len=this.items.length;i<len;i++){
 				var item=this.items[i];
 				if(item.value==value){
-					this.$text.val(item.label);
-					this.$value.val(this.value);
+					this.$text.val(item.label);							
+					if(this.$value){
+						this.$value.val(this.value);
+					}
 					return;
 				}
 			}
