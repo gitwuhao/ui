@@ -1,3 +1,6 @@
+.x-ui-form{
+	color: #000;
+}
 .x-ui-form .x-ui-textfield,.x-ui-form .x-ui-textfield input{
 	height: 24px;
 }
