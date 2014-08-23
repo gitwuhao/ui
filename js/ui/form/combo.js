@@ -157,6 +157,10 @@
 			this.onFocusAfter();
 			if(selectedItem!=this.selectedItem){
 				this.on('change',this.selectedItem);
+				if(selectedItem){
+					selectedItem.$elem.removeClass('selected');
+				}
+				this.selectedItem.$elem.addClass('selected');
 			}
 		},
 		onArrowClick: function(event){

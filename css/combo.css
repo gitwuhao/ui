@@ -34,6 +34,9 @@
 .x-ui-combo-list-item.hover{
 	background-color: #D5E1F2;
 }
+.x-ui-combo-list-item.selected{
+	background-color: #C1DDF1;
+}
 .x-ui-combo-list-separator {
 	height: 1px;
 	line-height: 1px;
