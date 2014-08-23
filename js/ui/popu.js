@@ -53,7 +53,7 @@
 				if(this.currentPopu){
 					this.currentPopu.on("hide");
 				}
-				this.currentPopu=null;
+				//this.currentPopu=null;
 			},
 			removePopu:function(popu){
 				ui.logger(this);
