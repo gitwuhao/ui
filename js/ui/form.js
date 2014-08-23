@@ -224,7 +224,7 @@
 				}
 				this.active=null;
 			},
-			removeItem: function(item){
+			removeActiveItem: function(item){
 				if(this.active==item){
 					this.active=null;
 				}
@@ -336,9 +336,11 @@
 		onFocus : CF.emptyFunction,
 		onFocusAfter : function(){
 			ui.logger(this);
-			ui.form.field.setActive(this);
-			this.$elem.removeClass("hover");
-			this.$elem.addClass("selected");
+			if(this.activeable!=false){
+				ui.form.field.setActive(this);
+				this.$elem.removeClass("hover");
+				this.$elem.addClass("selected");
+			}
 			this.isFocus=true;
 		},
 		disabled : function(){
@@ -353,7 +355,7 @@
 			this.isDisabled=true;
 			this.$elem.addClass("disabled");
 			this.$elem.removeClass("selected");
-			ui.form.field.removeItem(this);
+			ui.form.field.removeActiveItem(this);
 			this.isFocus=false;
 		},
 		onDisabled : CF.emptyFunction,
@@ -374,7 +376,7 @@
 		onEnabledAfter : CF.emptyFunction,
 		remove:function(){
 			ui.logger(this);
-			ui.form.field.removeItem(this);
+			ui.form.field.removeActiveItem(this);
 			this.callSuperMethod();
 		},
 		onChange :function(){
