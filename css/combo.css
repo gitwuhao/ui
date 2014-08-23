@@ -10,7 +10,9 @@
 	background-position: -420px -20px;
 	display: table-cell;
 }
-
+.x-ui-combo .x-ui-textfield [type="text"]{
+	cursor: default;
+}
 .x-ui-combo-list{
 	list-style: none;
 	text-decoration: none;

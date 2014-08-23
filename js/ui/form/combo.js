@@ -78,7 +78,6 @@
 				}
 			});
 
-
 			this.$icon.mousedown(function(event){
 				if(me.isDisabled!=true){
 					me.focus();
@@ -100,6 +99,8 @@
 					}
 				});
 			}
+			this.isHover=true;
+			this.bindHover(this.$elem);
 		},
 		focus:function(){
 			ui.logger(this);
