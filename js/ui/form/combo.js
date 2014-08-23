@@ -120,12 +120,19 @@
 			ui.logger(this);
 			var me=this;
 			if(this.items && !this.list){
-				var list={
+				var cls,
+					list={
 					items: this.items
 				};
+				if(this.cls){
+					cls=this.cls +'-combo-list';
+				}else{
+					cls='';
+				}
 
-				var listConfig=CF.merger(list,{
+				this.list=new ComboList(CF.merger(list,{
 					boxcls : this._css_combo+"-popu",
+					cls : cls,
 					icon:false,
 					autoSetOffset:true,
 					autoWidth : this.autoWidthForList,
@@ -135,8 +142,7 @@
 					onItemSelectedAfter : function(item){
 						me.on('selected',item);
 					}
-				});
-				this.list=new ComboList(listConfig);
+				}));
 				this.on('comboListInit');
 			}
 			if(this.list){
@@ -208,7 +214,7 @@
 			getTemplate:function(config){
 				ui.widget.applyCSS(config,this.css);
 				var items=config.items;
-				var html=['<ul class="',config._c_combo_list,'">'];
+				var html=['<ul class="',config._c_combo_list,' ',(config.cls||''),'">'];
 				for(var i=0,len=items.length;i<len;i++){
 					var item=items[i];
 					if(item=='-'){

@@ -12,6 +12,7 @@
 }
 .x-ui-combo .x-ui-textfield [type="text"]{
 	cursor: default;
+	text-overflow: ellipsis;
 }
 .x-ui-combo-list{
 	list-style: none;
