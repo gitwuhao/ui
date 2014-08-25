@@ -5,7 +5,10 @@
 .x-ui-combo .x-ui-text-box{
 	cursor: default;
 }
-
+.x-ui-combo.disabled {
+	opacity: 0.3;
+	cursor: default;
+}
 .x-ui-combo .x-ui-combo-icon{
 	background-position: -420px -20px;
 	display: table-cell;
