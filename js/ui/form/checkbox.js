@@ -76,7 +76,8 @@
 		bindItemEvent:function(item){
 			ui.logger(this);
 		
-			this.bindHover(item.$elem);
+			this.bindHover(this.$elem);
+			
 			
 			item.$owner=this;
 

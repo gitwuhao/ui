@@ -50,6 +50,7 @@
 
 			this.bindHover(this.$item);
 			
+
 			this.$input.focus({
 				me : this,
 			},function(event){

@@ -196,7 +196,7 @@
 			this.isDisabled=false;
 		},
 		bindHover:function($elem){
-			if(this.isHover!=true){
+			if(this.isHover==false){
 				return;
 			}
 			var me=this;
