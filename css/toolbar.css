@@ -48,3 +48,11 @@
 	border: 1px solid #5FA1FF;
 	box-shadow: 0 0 5px #A5C8FF;
 }
+.x-ui-toolbar-button-box .x-ui-button.move{
+	cursor: move;
+	float: right;
+	opacity: initial;
+}
+.x-ui-toolbar-button-box .x-ui-button.move .x-ui-icon{
+	background-position: -340px -20px;
+}
