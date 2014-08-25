@@ -1,6 +1,6 @@
 (function(CF,$){
 
-	window.path='js/ui/';
+	window.UI_LIB_PATH='js/ui/';
 
 	$.includePack('css','css/ui.css');
 
