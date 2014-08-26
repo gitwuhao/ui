@@ -128,7 +128,7 @@
 		offset:'lt',
 		//top、center
 		align:'tc',
-		time : 5000,
+		time : 0,
 		onRenderAfter:function(config){
 			ui.logger(this);
 			this.$box=this.$elem;
@@ -140,7 +140,7 @@
 			this.height=this.$elem.outerHeight();
 			this.setOffset();
 
-			this.$elem.data(ui.quicktip.KEY,this);
+			this.$elem.data(ui.quicktip.DATA_KEY,this);
 		},
 		onBindEvent:function(){
 			ui.logger(this);
@@ -428,9 +428,9 @@
 		show : function(config){
 			new QuickTip(config);
 		},
-		KEY : '__QUICK_TIP__',
+		DATA_KEY : '__QUICK_TIP__',
 		remove  : function(id){
-			var data=$('#'+id).data(this.KEY);
+			var data=$('#'+id).data(this.DATA_KEY);
 			if(data){
 				data.remove();
 			}
