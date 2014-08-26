@@ -1,7 +1,8 @@
 (function(CF,jQuery,ui){
 "use strict";
 
-	var currentUndo;
+	var currentUndo,
+		isStop=false;
 
 	ui.UndoManager={
 		redo : function(callback){
@@ -18,7 +19,15 @@
 			currentUndo=undo;
 		},
 		getCurrent : function(){
-			return currentUndo;
+			if(isStop==false){
+				return currentUndo;
+			}
+		},
+		start : function(undo){
+			isStop=false;
+		},
+		stop : function(){
+			isStop=true;
 		},
 		getInstance:function(size){
 			var instace=new undo(size);
@@ -235,8 +244,14 @@
 		var __CURRENT_UNDO__=ui.UndoManager.getCurrent();
 		if(event.ctrlKey && __CURRENT_UNDO__){
 			var cmd='';
+			/*ps ctrl+alt+z*/
+			if(event.keyCode==90 && event.altKey){
+				cmd='redo';
+			/*ps ctrl+shift+z*/
+			}else if(event.keyCode==90 && event.shiftKey){
+				cmd='undo';
 			/*ctrl+z*/
-			if(event.keyCode==90){
+			}else if(event.keyCode==90){
 				cmd='undo';
 			/*ctrl+y*/
 			}else if(event.keyCode==89){
