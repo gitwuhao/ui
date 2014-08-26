@@ -7,6 +7,7 @@
 		UI_LIB_PATH+'datepicker.js',
 		UI_LIB_PATH+'form.js',
 		UI_LIB_PATH+'form/text.js',
+		UI_LIB_PATH+'form/textarea.js',
 		UI_LIB_PATH+'form/color.js',
 		UI_LIB_PATH+'form/combo.js',
 		UI_LIB_PATH+'form/date.js',

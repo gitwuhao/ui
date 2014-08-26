@@ -16,6 +16,7 @@
 		'button',
 		'toolbar',
 		'text',
+		'textarea',
 		'combo',
 		'menu',
 		'splitbutton',

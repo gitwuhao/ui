@@ -1,0 +1,77 @@
+div.x-ui-textarea{
+	float: left;
+}
+.x-ui-textarea *{
+	box-sizing: border-box;
+}
+.x-ui-textarea table{
+	border-collapse: collapse;
+	width: 100%;
+}
+.x-ui-textarea td{
+	padding: 0px;
+}
+div.x-ui-textarea .x-ui-label{
+	line-height: 22px;
+	width: 60px;
+	text-align: right;
+	font-size: 12px;
+	font-family: 宋体;
+}
+.x-ui-textarea .x-ui-label,.x-ui-textarea .x-ui-label-padding,.x-ui-textarea .ide-ui-item-field{
+	vertical-align: top;
+}
+div.x-ui-textarea .x-ui-label-padding{
+	width: 8px;
+	font-size: 1px;
+}
+div.x-ui-textarea.disabled .x-ui-item-field{
+	opacity: 0.3;
+}
+.x-ui-label-padding .x-ui-required-icon{
+	color:red;
+	font-weight:bold;
+	font: normal 13px/17px helvetica, arial, verdana, sans-serif;
+}
+
+.x-ui-textarea .x-ui-textarea-box{
+	border-radius: 2px;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #C0C0C0 #D9D9D9 #D9D9D9;
+	-webkit-user-select: none;
+	background-color: #FFF;
+	box-shadow: 1px 1px 3px #EEE inset;
+}
+
+.x-ui-textareafield textarea {
+	min-height: 30px;
+	outline: 0px;
+	border: 0px;
+	padding: 3px 5px;
+	width: 100%;
+	font: normal 12px/16px 宋体;
+	margin: 0px;
+	background-color: transparent;
+	resize: none;
+}
+.x-ui-textarea-box .x-ui-textareafield{
+	height: 20px;
+}
+.x-ui-textarea-box .x-ui-icon,.x-ui-textarea-box .x-ui-invalid-icon{
+	display: none;
+	width: 16px;
+}
+.x-ui-textarea.error .x-ui-invalid-icon {
+	display: table-cell;
+	background-position: -420px -60px;
+}
+.x-ui-textarea-box .x-ui-clear-icon{
+	display: table-cell;
+	background-position: -420px -80px;
+	font-size: 0px;
+	cursor: pointer;
+}
+.x-ui-textarea.error .x-ui-textarea-box{
+	border-color: #CF4C35;
+}

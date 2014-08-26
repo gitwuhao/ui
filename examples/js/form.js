@@ -77,6 +77,13 @@ window.examples.form=function(){
 				value:'2'
 
 			}]
+		},{
+			label:'标签',
+			xtype:'textarea',
+			cols : 6,
+			rows : 10,
+			required:true,
+			value:"sdfsdfsdf"
 		}],
 		buttons:[{
 			label:'确定',
