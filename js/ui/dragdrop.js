@@ -94,6 +94,7 @@
 				var config=event.data.me.config;
 				if(config && config.event && config.event.target!=event.target){
 					event.data.me.hideResizeBox();
+					event.data.me.cleanConfig();
 				}
 			});
 		},
