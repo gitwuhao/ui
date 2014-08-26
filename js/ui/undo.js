@@ -1,36 +1,36 @@
 (function(CF,jQuery,ui){
 "use strict";
 
-	var currentUndo,
-		isStop=false;
+	var __CURRENT_UNDO__,
+		__IS_STOP__=false;
 
 	ui.UndoManager={
 		redo : function(callback){
-			if(currentUndo){
-				return currentUndo.redo(callback);
+			if(__CURRENT_UNDO__){
+				return __CURRENT_UNDO__.redo(callback);
 			}
 		},
 		undo : function(callback){
-			if(currentUndo){
-				return currentUndo.undo(callback);
+			if(__CURRENT_UNDO__){
+				return __CURRENT_UNDO__.undo(callback);
 			}
 		},
-		setCurrent : function(undo){
-			currentUndo=undo;
+		setCurrent : function(instace){
+			__CURRENT_UNDO__=instace;
 		},
 		getCurrent : function(){
-			if(isStop==false){
-				return currentUndo;
+			if(__IS_STOP__==false){
+				return __CURRENT_UNDO__;
 			}
 		},
 		start : function(undo){
-			isStop=false;
+			__IS_STOP__=false;
 		},
 		stop : function(){
-			isStop=true;
+			__IS_STOP__=true;
 		},
 		getInstance:function(size){
-			var instace=new undo(size);
+			var instace=new Undo(size);
 
 			var currentUndo={
 				destroy : function(){
@@ -54,7 +54,7 @@
 		}
 	};
 
-	var undo=function(size){
+	var Undo=function(size){
 		if(size>0){
 			this.size=size;
 		}
@@ -62,7 +62,7 @@
 	};
 
 
-	undo.prototype={
+	Undo.prototype={
 		undoCommands : null,
 		index : -1,
 		isExecuting : false,
@@ -241,8 +241,8 @@
 
 
 	$.getDoc().keydown(function(event){
-		var __CURRENT_UNDO__=ui.UndoManager.getCurrent();
-		if(event.ctrlKey && __CURRENT_UNDO__){
+		var currentUndo=ui.UndoManager.getCurrent();
+		if(event.ctrlKey && currentUndo){
 			var cmd='';
 			/*ps ctrl+alt+z*/
 			if(event.keyCode==90 && event.altKey){
@@ -259,32 +259,13 @@
 			}else{
 				return;
 			}
-
-			if(cmd){
-				var target=event.target;
-				var tagName=target.tagName;
-
-				/*过滤文本框、编辑框的 ctrl+z  ctrl+y */
-				/*
-				if(	/^textarea$/i.test(tagName) || 
-					(/^input$/i.test(tagName) && /^text$/i.test(target.type)) ||
-					target.isContentEditable  ){
-					if(document.execCommand(cmd)){
-						return false;
-					}
-					return;
-				}
-				*/
-				
-				//if(document.execCommand(cmd)){
-				//	return false;
-				//}
-				__CURRENT_UNDO__[cmd]();
+			if(cmd=='undo'){
+				ui.UndoManager.undo();
+			}else if(cmd=='redo'){
+				ui.UndoManager.redo();
 			}
-			
 			return false;
 		}
-
 	});
 
 })(CF,jQuery,ui);
