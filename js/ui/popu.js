@@ -98,6 +98,41 @@
 				});
 
 				this.initEventListener=CF.emptyFunction;
+			},
+			getZIndex : (function(){
+				var zindex =  100000;
+				return function(){
+					return zindex;
+				};
+			})(),
+			createMask : function(config){
+				var zindex=this.getZIndex(),
+					html=['<div style="position: absolute;left: 0px;top: 0px;right: 0px;',
+									'bottom: 0px;background-color: rgba(0, 0, 0, 0.05);',
+									'z-index: ',zindex,';">',
+						  '</div>'].join(''),
+					div=$.createElement(html);
+					
+				$.getBody().append(div);
+				
+				this.currentMask={
+					target : div,
+					$target : $(div),
+					zindex : zindex
+				};
+				
+				if(config && config.onClick){		
+					this.currentMask.$target.click({
+						config : config
+					},function(event){
+						event.data.config.onClick(event);
+					});
+				}
+				return zindex;
+			},
+			removeMask : function(){
+				this.currentMask.$target.remove();
+				delete this.currentMask;
 			}
 		},
 		onRenderBefore:function(config){
@@ -120,7 +155,6 @@
 			if(this.width){
 				this.$elem.css("width",this.width);
 			}
-
 			
 			if(this.height){
 				this.$elem.css("height",this.height);
