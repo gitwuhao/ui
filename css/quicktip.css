@@ -64,3 +64,17 @@
 	0%{opacity:0.9;}
 	100%{opacity:0;}
 }
+
+
+
+/*++++++++++++++++++++++++++++++++++animation++++++++++++++++++++++++++++++++++*/
+.fadeInDown-animation{
+-webkit-animation:fadeInDown 1s .2s ease both;
+}
+@-webkit-keyframes fadeInDown{
+0%{opacity:0;
+-webkit-transform:translateY(-20px)}
+100%{opacity:1;
+-webkit-transform:translateY(0)}
+}
+/*----------------------------------animation----------------------------------*/
