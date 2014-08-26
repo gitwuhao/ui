@@ -27,7 +27,7 @@
 				html.push('</div>');
 				return html.join('');
 			},
-			getOffsetParentPoint : function(element,parent){
+			getOffsetParentPoint : $.getOffsetParentPoint || function(element,parent){
 				var point={
 						left : element.offsetLeft,
 						top : element.offsetTop
