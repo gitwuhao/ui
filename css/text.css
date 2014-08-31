@@ -25,6 +25,10 @@ div.x-ui-text .x-ui-label-padding{
 div.x-ui-text.disabled .x-ui-item-field{
 	opacity: 0.3;
 }
+.x-ui-text.disabled {
+	opacity: 0.3;
+	cursor: default;
+}
 .x-ui-label-padding .x-ui-required-icon{
 	color:red;
 	font-weight:bold;
