@@ -662,9 +662,18 @@
 				y = event.pageY,
 				target = event.target,
 				className = target.className,
-				type = this.config.type,
+				config = this.config;
+				type = config.type,
 				isBG = /bg/i.test(className);
+			
+			if(config.onDblClick && isBG && this.lastMouseDownEvent){
+				if(event.timeStamp - 300 < this.lastMouseDownEvent.timeStamp){
+					config.onDblClick(event);
+				}
+				//console.info(event.timeStamp - this.lastMouseDownEvent.timeStamp);
+			}
 
+			this.lastMouseDownEvent = event;
 			this.event = event;
 
 			if (type.drag && isBG) {
@@ -673,8 +682,8 @@
 				this.on('sortstart', x, y);
 			} else if (type.resize && !isBG) {
 				if(window.getComputedStyle(target).cursor!='default'){
-					this.config.$cursortarget = $(target);
-					this.config.resizetype = $.data(target, 'resizeType');
+					config.$cursortarget = $(target);
+					config.resizetype = $.data(target, 'resizeType');
 					this.on('resizestart', x, y);
 				}
 			}
