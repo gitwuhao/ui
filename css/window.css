@@ -3,15 +3,10 @@
 	height: 100%;
 	left: 0px;
 	top: 0px;
-	opacity: 0.2;
-	background-color: #000;
-/*
-	background: -webkit-radial-gradient(circle, #FFF, #D3D3D3);
-*/
-
+	background-color: rgba(0, 0, 0, 0.05);
 	-webkit-user-select: none;
 	position: fixed;
-	z-index: 100000;
+	z-index: 199999;
 	display: none;
 }
 .x-ui-window{
@@ -30,6 +25,7 @@
 	color: #FFF;
 	white-space: nowrap;
 	padding: 5px;
+	-webkit-user-select: none;
 }
 .x-ui-title{
 	overflow: hidden;
