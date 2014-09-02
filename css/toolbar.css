@@ -14,6 +14,9 @@
 	font-family:宋体;
 	-webkit-user-select: none;
 }
+.x-ui-toolbar-button-box input[type="text"],.x-ui-toolbar-popup-box input[type="text"]{
+	-webkit-user-select: none;
+}
 .x-ui-toolbar-button-box{
 	float: left;
 	margin: 5px;
