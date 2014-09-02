@@ -109,7 +109,7 @@
 				var zindex=this.getZIndex(),
 					html=['<div style="position: absolute;left: 0px;top: 0px;right: 0px;',
 									'bottom: 0px;background-color: rgba(0, 0, 0, 0.05);',
-									'z-index: ',zindex,';">',
+									'z-index: ',zindex,';-webkit-user-select: none;">',
 						  '</div>'].join(''),
 					div=$.createElement(html);
 					
