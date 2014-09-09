@@ -131,8 +131,10 @@
 				return zindex;
 			},
 			removeMask : function(){
-				this.currentMask.$target.remove();
-				delete this.currentMask;
+				$.setTimeout(function(){
+					this.currentMask.$target.remove();
+					delete this.currentMask;
+				},100,this);
 			}
 		},
 		onRenderBefore:function(config){
