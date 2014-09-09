@@ -132,7 +132,9 @@
 			},
 			removeMask : function(){
 				$.setTimeout(function(){
-					this.currentMask.$target.remove();
+					var $target=this.currentMask.$target;
+					$target.hide();
+					$target.remove();
 					delete this.currentMask;
 				},100,this);
 			}
