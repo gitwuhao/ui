@@ -23,6 +23,7 @@
 	width:200px;
 	height:100px;
 	margin: 20% auto;
+	overflow: hidden;
 }
 .bubbling-g-box span {
 	display: inline-block;
