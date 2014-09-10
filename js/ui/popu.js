@@ -106,6 +106,10 @@
 				};
 			})(),
 			createMask : function(config){
+				if(this.currentMask && this.currentMask.$target){
+					this.currentMask.$target.remove();
+				}
+
 				var zindex=this.getZIndex(),
 					html=['<div style="position: absolute;left: 0px;top: 0px;right: 0px;',
 									'bottom: 0px;background-color: rgba(0, 0, 0, 0.05);',
@@ -114,13 +118,12 @@
 					div=$.createElement(html);
 					
 				$.getBody().append(div);
-				
 				this.currentMask={
 					target : div,
 					$target : $(div),
 					zindex : zindex
 				};
-				
+
 				if(config && config.onClick){		
 					this.currentMask.$target.click({
 						config : config
@@ -131,6 +134,9 @@
 				return zindex;
 			},
 			removeMask : function(){
+				if(!this.currentMask){
+					return;
+				}
 				$.setTimeout(function(){
 					var $target=this.currentMask.$target;
 					$target.hide();
@@ -138,7 +144,10 @@
 					delete this.currentMask;
 				},100,this);
 			},
-			createLoading : function(config){
+			createLoading : function(config){				
+				if(this.currentLoading && this.currentLoading.$target){
+					this.currentLoading.$target.remove();
+				}
 				var zindex=this.getZIndex(),
 					html=['<div style="position: absolute;left: 0px;top: 0px;right: 0px;',
 									'bottom: 0px;background-color: rgba(0, 0, 0, 0.05);',
@@ -153,9 +162,9 @@
 							'</div>',
 						  '</div>'].join(''),
 					div=$.createElement(html);
-					
+
 				$.getBody().append(div);
-				
+
 				this.currentLoading={
 					target : div,
 					$target : $(div),
@@ -172,6 +181,9 @@
 				return zindex;
 			},
 			removeLoading : function(){
+				if(!this.currentLoading){
+					return;
+				}
 				$.setTimeout(function(){
 					var $target=this.currentLoading.$target;
 					$target.hide();
