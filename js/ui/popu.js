@@ -137,6 +137,47 @@
 					$target.remove();
 					delete this.currentMask;
 				},100,this);
+			},
+			createLoading : function(config){
+				var zindex=this.getZIndex(),
+					html=['<div style="position: absolute;left: 0px;top: 0px;right: 0px;',
+									'bottom: 0px;background-color: rgba(0, 0, 0, 0.05);',
+									'z-index: ',zindex,';-webkit-user-select: none;">',
+							'<div class="bubbling-g-box">',
+								'<span class="bubbling-g-1">',
+								'</span>',
+								'<span class="bubbling-g-2">',
+								'</span>',
+								'<span class="bubbling-g-3">',
+								'</span>',
+							'</div>',
+						  '</div>'].join(''),
+					div=$.createElement(html);
+					
+				$.getBody().append(div);
+				
+				this.currentLoading={
+					target : div,
+					$target : $(div),
+					zindex : zindex
+				};
+				
+				if(config && config.onClick){		
+					this.currentLoading.$target.click({
+						config : config
+					},function(event){
+						event.data.config.onClick(event);
+					});
+				}
+				return zindex;
+			},
+			removeLoading : function(){
+				$.setTimeout(function(){
+					var $target=this.currentLoading.$target;
+					$target.hide();
+					$target.remove();
+					delete this.currentLoading;
+				},100,this);
 			}
 		},
 		onRenderBefore:function(config){
