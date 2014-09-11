@@ -20,17 +20,17 @@
 }
 .bubbling-g-box {
 	text-align: center;
-	width:200px;
-	height:100px;
-	margin: 20% auto;
+	width: 400px;
+	height: 200px;
+	margin: 15% auto;
 	overflow: hidden;
 }
 .bubbling-g-box span {
 	display: inline-block;
 	vertical-align: middle;
-	width: 15px;
-	height: 15px;
-	margin: 30% auto;
+	width: 5%;
+	height: 10%;
+	margin-top: 30%;
 	background-color: #6CF;
 	-webkit-border-radius: 50%;
 	-webkit-animation: bubbling_G 1.3s infinite alternate;
@@ -38,23 +38,26 @@
 .bubbling-g-box .bubbling-g-1 {
 	-webkit-animation-delay: 0s;
 }
+
 .bubbling-g-box .bubbling-g-2 {
 	-webkit-animation-delay: 0.39s;
 }
+
 .bubbling-g-box .bubbling-g-3 {
 	-webkit-animation-delay: 0.78s;
 }
+
 @-webkit-keyframes bubbling_G {
 	0% {
-		width: 15px;
-		height: 15px;
+		width: 5%;
+		height: 10%;
 		opacity: 1;
 		-webkit-transform: translateY(0);
 	}
 
 	100% {
-		width: 35px;
-		height: 35px;
+		width: 15%;
+		height: 30%;
 		opacity: 0;
 		-webkit-transform: translateY(-30px);
 	}
