@@ -110,6 +110,8 @@
 				if(this.currentMask && this.currentMask.$target){
 					this.currentMask.$target.remove();
 				}
+				
+				config=config||{};
 
 				var zindex=config.zindex || this.getZIndex(),
 					html=['<div style="',this.__MASK_STYLE__,
@@ -148,6 +150,9 @@
 				if(this.currentLoading && this.currentLoading.$target){
 					this.currentLoading.$target.remove();
 				}
+				
+				config=config||{};
+
 				var zindex=config.zindex || this.getZIndex(),
 					html=['<div style="',this.__MASK_STYLE__,
 									   'z-index: ',zindex,';" class="',(config.cls||""),'">',
