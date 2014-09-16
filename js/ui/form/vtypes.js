@@ -23,13 +23,24 @@
 				handle: handle,
 				arg : arg
 			});
+
+			$text.on('focus',function(event){
+				var _data_=$.data(this,ui.form.vtypes.__IS_MOUSE_WHEEL__);
+				_data_.isFocus=true;
+			});
+				
+			$text.on('blur',function(event){
+				var _data_=$.data(this,ui.form.vtypes.__IS_MOUSE_WHEEL__);
+				_data_.isFocus=false;
+			});
+
 			if(this.isBindMouseWheelEventListener){
 				return;
 			}
 			$.getBody().on("mousewheel",function(event){
 				var target=document.activeElement,
 					_data_=$.data(target,ui.form.vtypes.__IS_MOUSE_WHEEL__);
-				if(_data_ && _data_.handle){
+				if(_data_ && _data_.handle && _data_.isFocus){
 					return _data_.handle(event,_data_.arg);
 				}
 			});
