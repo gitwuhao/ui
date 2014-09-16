@@ -287,6 +287,13 @@
 				this.value=value;
 			});
 
+		},
+		'autoselect' : function(item){
+			item.addEventListener('textfocus',function(event){
+				$.setTimeout(function(){
+					this.select();
+				},200,event.target);
+			});
 		}
 	};
 
