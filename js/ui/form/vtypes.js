@@ -28,7 +28,7 @@
 				var _data_=$.data(this,ui.form.vtypes.__IS_MOUSE_WHEEL__);
 				_data_.isFocus=true;
 			});
-				
+
 			$text.on('blur',function(event){
 				var _data_=$.data(this,ui.form.vtypes.__IS_MOUSE_WHEEL__);
 				_data_.isFocus=false;
@@ -293,7 +293,7 @@
 			item.addEventListener('textfocus',function(event){
 				$.setTimeout(function(){
 					this.select();
-				},200,event.target);
+				},100,event.target);
 			});
 		}
 	};

@@ -1,5 +1,5 @@
 (function(CF,$,ui){
-	
+
 	ui.form.text=function(render){
 		this.callSuperMethod();
 	};
@@ -17,7 +17,7 @@
 			},
 			getTemplate: function(config){
 				var cloneConfig={};
-				
+
 				CF.merger(cloneConfig,config);
 
 				ui.widget.applyCSS(config,this.css);
@@ -71,7 +71,7 @@
 				html.push('</tr>',
 							'</table>',
 							'</div>');
-				
+
 				cloneConfig.html=html.join('');
 				return this.getFieldTemplate(cloneConfig);
 			}
@@ -79,11 +79,11 @@
 		onRenderAfter:function(config){
 			ui.logger(this);
 			var elem=this.$elem;
-			
+
 			this.$label=$("."+config._c_label+":first",elem);
-			
+
 			this.$text=$(":text:first",elem);
-			
+
 			this.$icon=this.$text.parent().next();
 
 			this._clear_icon=config._c_clear_icon;
@@ -110,7 +110,7 @@
 			});
 
 
-			
+
 			this.$text.mousedown(function(event){
 				if(me.isDisabled!=true && me.readonly!=true){
 					if(event.shiftKey){
@@ -135,7 +135,7 @@
 					event.stopBubble(me);
 				}
 			});
-			
+
 			if(this.readonly!=true){
 				this.$text.keydown(function(event){
 					if(me.isDisabled!=true){
@@ -149,7 +149,7 @@
 			}
 
 			this.bindHover(this.$elem);
-			
+
 		},
 		focus : function(){
 			ui.logger(this);
@@ -177,6 +177,6 @@
 			this.$text.val(this.value);
 		}
 	});
-	
+
 
 })(CF,$,ui);
