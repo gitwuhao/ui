@@ -81,11 +81,14 @@
 					me.timeStamp=event.timeStamp;
 				//}
 			},
-			isDebug : function(){
-				return localStorage['__quick_tip_listener__']=='false';
-			},
+			isListener: (function(){
+				var _R_ = CF.isDebug ? true : false ;
+				return function(){
+					return _R_;
+				};
+			})(),
 			trigger:function(event){
-				if(this.isDebug()){
+				if(this.isListener()){
 					return;
 				}
 				var events=this.events,
@@ -387,7 +390,7 @@
 			this.$arrow.css(arrowPoint);
 			this.$elem.css(offset);
 
-			if(!QuickTip.isDebug()){
+			if(!QuickTip.isListener()){
 				this.addMouseMoveListener();
 			}
 			this.timestamp=$.timestamp();
