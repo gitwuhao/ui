@@ -50,10 +50,12 @@
 			},
 			removeCurrentPopu:function(){
 				ui.logger(this);
-				if(this.currentPopu){
+				if(this.currentPopu && !this.currentPopu.isHide){
 					this.currentPopu.on("hide");
+					return true;
 				}
 				//this.currentPopu=null;
+				return false;
 			},
 			removePopu:function(popu){
 				ui.logger(this);
@@ -78,9 +80,11 @@
 			},
 			initEventListener : function(){
 				var me=this;
-				$.getDoc().keydown(function(event){
+				$.getBody().keydown(function(event){
 					if(event.keyCode==27){
-						me.removeCurrentPopu();
+						if(me.removeCurrentPopu()){
+							return false;
+						}
 					}
 				});
 				
