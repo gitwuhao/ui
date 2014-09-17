@@ -109,6 +109,18 @@
 				}
 			});
 
+
+			
+			this.$text.mousedown(function(event){
+				if(me.isDisabled!=true && me.readonly!=true){
+					if(event.shiftKey){
+						$.setTimeout(function(){
+							this.select();
+						},100,this);
+					}
+				}
+			});
+
 			this.$text.blur(function(event){
 				if(me.on('blur',event,this)){
 					me.trigger("textblur",event);

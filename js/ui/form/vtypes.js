@@ -289,6 +289,7 @@
 
 		},
 		'autoselect' : function(item){
+			item.isAutoselect=true;
 			item.addEventListener('textfocus',function(event){
 				$.setTimeout(function(){
 					this.select();
