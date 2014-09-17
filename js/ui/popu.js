@@ -153,7 +153,7 @@
 				
 				config=config||{};
 
-				var zindex=config.zindex || this.getZIndex(),
+				var zindex=config.zindex || '999999999',
 					html=['<div style="',this.__MASK_STYLE__,
 									   'z-index: ',zindex,';" class="',(config.cls||""),'">',
 							'<div class="bubbling-g-box">',
