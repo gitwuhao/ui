@@ -224,14 +224,18 @@
 			this.isHide=false;
 			
 			var me=this;
-/*
-			$.getDoc().one("keydown",function(event){
-				CF.logger(me,arguments);
+
+			$.getBody().one("keydown.ui_win_event",{
+				me : this,
+			},function(event){
 				if(event.keyCode==27){
-					me.close();
+					var me=event.data.me;
+					if(me.isHide==false){
+						me.close();
+					}
+					return false;
 				}
 			});
-*/
 		},
 		resetSubWinOffset:function(){
 			
@@ -256,6 +260,7 @@
 			this.$mask.hide();
 			this.isHide=true;
 			ui.window.resetBodyScroll();
+			$.getBody().off("keydown.ui_win_event");
 		},
 		onCloseAfter:function(){
 			ui.logger(this);

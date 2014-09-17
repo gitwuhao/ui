@@ -80,13 +80,6 @@
 			},
 			initEventListener : function(){
 				var me=this;
-				$.getBody().keydown(function(event){
-					if(event.keyCode==27){
-						if(me.removeCurrentPopu()){
-							return false;
-						}
-					}
-				});
 				
 				$.getDoc().mousedown(function(event,owner){
 					var currentPopu=me.currentPopu;
@@ -272,6 +265,9 @@
 			ui.logger(this);
 			this.isHide=true;
 			this.$elem.hide();
+			setTimeout(function(){
+				$.getBody().off('keydown.popu_event');
+			},100);
 		},
 		onHideAfter : function(){
 			ui.logger(this);
@@ -291,6 +287,12 @@
 			if(this.autoSetOffset!=false){
 				this.resetOffset();
 			}
+
+			$.getBody().on('keydown.ui_popu_event',function(event){
+				if(event.keyCode==27 && ui.popu.removeCurrentPopu()){
+					return false;				
+				}
+			});
 		},
 		onShowAfter:function(){
 			ui.logger(this);
