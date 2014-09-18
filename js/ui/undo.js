@@ -259,11 +259,19 @@
 			}else{
 				return;
 			}
-			if(cmd=='undo'){
-				ui.UndoManager.undo();
-			}else if(cmd=='redo'){
-				ui.UndoManager.redo();
+			if($.isEditable(event.target)){
+				setTimeout(function(){
+					event.target.blur();
+				},0);
 			}
+			
+			setTimeout(function(){
+				if(cmd=='undo'){
+					ui.UndoManager.undo();
+				}else if(cmd=='redo'){
+					ui.UndoManager.redo();
+				}
+			},100);
 			return false;
 		}
 	});
