@@ -129,10 +129,17 @@
 			x = pageX - offset.x;
 			y = pageY - offset.y;
 
+
 			if(x == 0 && y == 0){
 				return;
 			}
 			
+			/*
+			if(config.isCheckScrollBox){
+				this.onCheckScrollBox(event);
+			}
+			*/
+
 			this.event = event;
 
 			offset.x = pageX;
@@ -179,6 +186,10 @@
 		},
 		onMouseup : function(event) {
 			ui.logger(this);
+			if(this.autoscrollID){
+				window.clearInterval(this.autoscrollID);
+				delete this.autoscrollID;
+			}
 			if (this.type == 'drag') {
 				this.on('dragover');
 			} else if (this.type == 'resize') {
@@ -281,7 +292,11 @@
 			if (!config.type.resize) {
 				this.hideResizeBox();
 			}
-
+			/*
+			if(config.scrollBox && (config.scrollTop || config.scrollLeft)){
+				config.isCheckScrollBox=true;
+			}
+			*/
 			margin=config.margin;
 			if(margin>0){
 				margin={
@@ -437,13 +452,89 @@
 		},
 		bindSortContent : function() {
 			ui.logger(this);
-			var events = ['mousemove', ''].join(this.__EVENTNAMESPACE__ + ' ');
-			this.config.$parentBox.on(events, {
+			var config=this.config,
+				events = ['mousemove', ''].join(this.__EVENTNAMESPACE__ + ' ');
+
+			config.$parentBox.on(events, {
 				me : this
 			}, function(event) {
 				event.data.me.on('sortBoxMousemove', event);
 			});
+
 		},
+/*
+		onCheckScrollBox : function(event){
+			var config=this.config,
+				maxHeight,
+				maxWidth,
+				offset,
+				$scrollBox,
+				isTOP,
+				isLEFT,
+				isBOTTOM,
+				isRIGHT;
+			
+			if(!config.$scrollBox){
+				config.$scrollBox=$(config.scrollBox);
+			}
+
+			$scrollBox=config.$scrollBox;
+
+			offset=$scrollBox.offset();
+			
+			maxHeight= offset.top + $scrollBox.height();
+
+			maxWidth= offset.left + $scrollBox.width();
+
+			
+			if(event.pageY > maxHeight){
+				config.isBOTTOM=true;
+				delete config.isTOP;
+			}else if(event.pageY > offset.top){
+				config.isTOP=true;
+				delete config.isBOTTOM;
+			}else{
+				delete config.isBOTTOM;
+				delete config.isTOP;
+			}
+
+			if(event.pageX > maxWidth){
+				config.isRIGHT=true;
+				delete config.isLEFT;
+			}else if(event.pageX > offset.left){
+				config.isLEFT=true;
+				delete config.isRIGHT;
+			}else{
+				delete config.isLEFT;
+				delete config.isRIGHT;
+			}
+			
+			//console.info('checkScroll:['+config.isTOP+','+config.isBOTTOM+']');
+
+			if(this.autoscrollID==undefined){
+				this.autoscrollID=$.setInterval(function(){
+					this.autoScroll(this.config,this.config.scrollBox);
+				},500,this);
+			}
+		},
+		autoScroll : function(config,scrollBox){
+			if(this.autoscrollID!=undefined){
+				if(config.isBOTTOM && config.scrollTop){
+					scrollBox.scrollTop = scrollBox.scrollTop + config.scrollTop;
+				}else if(config.isTOP && config.scrollTop){
+					scrollBox.scrollTop = scrollBox.scrollTop - config.scrollTop;
+				}
+
+				if(config.isRIGHT && config.scrollLeft){
+					scrollBox.scrollLeft = scrollBox.scrollLeft + config.scrollLeft;
+				}else if(config.isLEFT && config.scrollLeft){
+					scrollBox.scrollLeft = scrollBox.scrollLeft - config.scrollLeft;
+				}
+
+				//console.info('autoScroll:['+config.isTOP+','+config.isBOTTOM+']');
+			}
+		},
+*/
 		unbindSortContent : function() {
 			ui.logger(this);
 			this.config.$parentBox.off(this.__EVENTNAMESPACE__);
@@ -464,16 +555,19 @@
 			if(!elemet){
 				return;
 			}
-
+/*
 			if(event.timeStamp - this.lastSortTime < 50){
 				return;
 			}
-
+*/
 			config.event=event;
 			delete this.replaceElemet;
+			/*
 			if(event.altKey){
 				this.on('replaceElemet',elemet);
-			}else if(elemet!=srcTarget){
+			}else 
+			*/
+			if(elemet!=srcTarget){
 				if(config.onSort){
 					config.onSort(elemet);
 				}else if(elemet.parentElement==srcTarget.parentElement){
@@ -1038,7 +1132,7 @@
 		setOffset : function( x , y ){
 			return getInstance().setOffset(x,y);
 		},
-		scrollTop : function(box,element){
+		scrollTop : CF.emptyFunction || function(box,element){
 			var offsetTop=box.offsetTop,
 				scrollTop=box.scrollTop,
 				scrollHeight=box.scrollHeight,
