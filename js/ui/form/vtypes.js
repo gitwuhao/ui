@@ -148,7 +148,7 @@
 			},{
 				me :item
 			});
-
+		
 			this.int(item);
 		},
 		'int' : function(item){
@@ -296,6 +296,14 @@
 				$.setTimeout(function(){
 					this.select();
 				},100,event.target);
+			});
+		},
+		'required' : function(item){
+			item.isRequired=true;
+			item.addEventListener('setvalue',function(value){
+				if(this.value=='' || value==''){
+					this.value=this.oldValue;
+				}
 			});
 		}
 	};
