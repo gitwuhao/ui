@@ -166,9 +166,11 @@
 					 event.keyCode==9 ||
 					 event.keyCode==37 ||
 					 event.keyCode==39 ||
-					 event.keyCode==27 ||
 					 event.ctrlKey  || event.altKey ){
 					return;
+				 }else if(event.keyCode==27){
+					 event.target.value=this.value;
+					 event.target.blur();
 				 }else if(event.keyCode==38 && this.spinUp){
 					this.spinUp(event);
 				 }else if(event.keyCode==40 && this.spinDown){
