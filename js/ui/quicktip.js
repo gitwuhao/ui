@@ -132,6 +132,7 @@
 		//top、center
 		align:'tc',
 		time : 0,
+		minOpacity : 70,
 		onRenderAfter:function(config){
 			ui.logger(this);
 			this.$box=this.$elem;
@@ -197,10 +198,12 @@
 					window.clearTimeout(this._TIME_OUT_ID_);
 					delete this._TIME_OUT_ID_;
 				}
-				
-				this._TIME_OUT_ID_=$.setTimeout(function(){
-					this.hide();
-				},3000,this);
+
+				if(param.index < this.minOpacity){
+					this._TIME_OUT_ID_=$.setTimeout(function(){
+						this.hide();
+					},3000,this);
+				}
 
 				var x=event.pageX - param.lastEvent.pageX,
 					y=event.pageY - param.lastEvent.pageY,
