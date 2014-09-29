@@ -411,8 +411,12 @@
 		hide : function(){
 			ui.logger(this);
 			if(this.$elem){
-				this.$elem.addClass('easeout');
-				$.setTimeout(this.remove,1000,this);
+				if(this.$elem.css('opacity')==''){
+					this.$elem.addClass('easeout');
+					$.setTimeout(this.remove,1000,this);
+				}else{
+					this.remove();
+				}
 			}
 		},
 		remove:function(){
