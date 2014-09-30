@@ -65,7 +65,7 @@
 					text_value=config.unit;
 				}
 				html.push('<td class="',config._c_icon," ",(text_icon||""),'">',text_value,'</td>');
-				if(config.required || config.vtype){
+				if(config.isValid){
 					html.push('<td class="',config._c_invalid_icon,'">&nbsp;</td>');
 				}
 				html.push('</tr>',
