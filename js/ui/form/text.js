@@ -111,8 +111,6 @@
 				}
 			});
 
-
-
 			this.$text.mousedown(function(event){
 				if(me.isDisabled!=true){
 					if(me.readonly!=true && event.shiftKey){
