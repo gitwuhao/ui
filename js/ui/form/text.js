@@ -114,12 +114,13 @@
 
 
 			this.$text.mousedown(function(event){
-				if(me.isDisabled!=true && me.readonly!=true){
-					if(event.shiftKey){
+				if(me.isDisabled!=true){
+					if(me.readonly!=true && event.shiftKey){
 						$.setTimeout(function(){
 							this.select();
 						},100,this);
 					}
+					me.on('mousedown',event,this);
 				}
 			});
 
