@@ -131,8 +131,10 @@
 
 			this.$icon.mousedown(function(event){
 				if(me.isDisabled!=true){
-					me.trigger("iconmousedown",event);
-					me.focus();
+					if(me.on('iconmousedown',event,this)){
+						me.focus();
+						me.trigger("iconmousedown",event);
+					}
 					event.stopBubble(me);
 				}
 			});
