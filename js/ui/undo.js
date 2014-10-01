@@ -246,10 +246,13 @@
 			var cmd='';
 			/*ps ctrl+alt+z*/
 			if(event.keyCode==90 && event.altKey){
-				cmd='redo';
+				cmd='undo';
 			/*ps ctrl+shift+z*/
 			}else if(event.keyCode==90 && event.shiftKey){
-				cmd='undo';
+				cmd='redo';
+			/*ps ctrl+alt+x*/
+			//}else if(event.keyCode==88 && event.altKey){
+			//	cmd='redo';
 			/*ctrl+z*/
 			}else if(event.keyCode==90){
 				cmd='undo';
