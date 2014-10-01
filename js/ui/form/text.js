@@ -56,7 +56,7 @@
 				}
 				html.push(' /></td>');
 
-				var text_icon;
+				var text_icon=null;
 				var text_value='&nbsp;';
 				if(config.icon){
 					text_icon=config.px+'-'+config.icon+'-icon';
@@ -64,7 +64,9 @@
 					text_icon=config._c_unit;
 					text_value=config.unit;
 				}
-				html.push('<td class="',config._c_icon," ",(text_icon||""),'">',text_value,'</td>');
+				if(text_icon!=null){
+					html.push('<td class="',config._c_icon," ",(text_icon||""),'">',text_value,'</td>');
+				}
 				if(config.isValid){
 					html.push('<td class="',config._c_invalid_icon,'">&nbsp;</td>');
 				}
