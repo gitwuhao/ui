@@ -28,7 +28,8 @@
 		'colorpicker',
 		'tab',
 		'undo',
-		'dragdrop'
+		'dragdrop',
+		'tree'
 	];
 	
 	var param=[];
