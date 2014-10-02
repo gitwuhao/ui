@@ -242,6 +242,18 @@
 					node.$elem.removeClass('expand');
 				}
 			}
+		},
+		remove : function(){
+			ui.logger(this);
+			var items=this.children;
+			for(var i=0,len=items.length;i<len;i++){
+				var item=items[i];
+				if(item.remove){
+					item.remove();
+				}
+			}
+			delete this.children;
+			this.callSuperMethod();
 		}
 	});
 
