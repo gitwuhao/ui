@@ -28,7 +28,8 @@
 						  '</div>');
 				return html.join("");
 			}
-		},
+		},	
+		//singleExpand: true
 		onRenderAfter:function(config){
 			ui.logger(this);
 			var $elem=this.$elem,
@@ -45,8 +46,6 @@
 				item=ui.getXTypeItem(item,children[i]);
 				items[i]=item;
 			}
-
-
 		},
 		onBindEvent:function(){
 			ui.logger(this);
@@ -62,6 +61,19 @@
 		collapseAll : function(){
 			ui.logger(this);
 		
+		},
+		onNodeExpand : function(node){
+			if(this.singleExpand && this.expandNode){
+				this.expandNode.collapse();
+			}
+			this.expandNode=node;
+		},
+		setActiveNode : function(node){
+			if(this.activeNode){
+				this.activeNode.$elem.removeClass('active');
+			}
+			this.activeNode=node;
+			node.$elem.addClass('active');
 		}
 	});
 
@@ -170,6 +182,7 @@
 		},
 		onNodeClick : function(event,target){
 			ui.logger(this);
+			this.tree.setActiveNode(this);
 		},
 		loadChildren : function(){
 			ui.logger(this);
@@ -177,44 +190,44 @@
 				this.isExpand=true;
 				return;
 			}
-			var html,
-				item,
-				prev,
-				$elem,
-				children=this.children;
+			var children=this.children;
 			if(children[0]._owner_name_==this._owner_name_){
 
 			}else{
-				prev=this;
-
-				for(var i=0,len=children.length;i<len;i++){
-					item=children[i];
-					item.level=this.level+1;
-					item.$owner=this.$owner;
-					item.xtype='ui.tree.node';
-					$elem=prev.$elem;
-					$elem.after(this.getClass().getTemplate(item));
-					item=ui.getXTypeItem(item,$elem[0].nextElementSibling);
-					item.parent=this;
-					item.prev=prev;
-					prev=item;
-					children[i]=item;
-				}
-				
-				children[0].prev=null;
-
-				for(var i=0,len=children.length;i<len;i++){
-					item=children[i];
-					item.next=children[i+1];
-				}
+				this.renderNode();
 				this.isExpand=true;
 			}
 			this.loadChildren=CF.emptyFunction;
+		},
+		renderNode : function(){
+			var children=this.children,
+				item,
+				$elem,
+				prev=this;
+			for(var i=0,len=children.length;i<len;i++){
+				item=children[i];
+				item.level=this.level+1;
+				item.tree=this.tree;
+				item.xtype='ui.tree.node';
+				$elem=prev.$elem;
+				$elem.after(this.getClass().getTemplate(item));
+				item=ui.getXTypeItem(item,$elem[0].nextElementSibling);
+				item.parent=this;
+				item.prev=prev;
+				prev=item;
+				children[i]=item;
+			}
+			children[0].prev=null;
+			for(var i=0,len=children.length;i<len;i++){
+				item=children[i];
+				item.next=children[i+1];
+			}
 		},
 		expand : function(){
 			ui.logger(this);
 			this.loadChildren();
 			this.$elem.addClass('expand');
+			this.tree.on('nodeExpand',this);
 			if(this.isExpand==true){
 				return;
 			}
