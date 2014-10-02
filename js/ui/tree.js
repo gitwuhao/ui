@@ -175,7 +175,6 @@
 				this.isExpand=true;
 				return;
 			}
-
 			var html,
 				item,
 				prev,
@@ -183,10 +182,14 @@
 			if(children[0]._owner_name_==this._owner_name_){
 
 			}else{
+				prev=this;
+
 				for(var i=0,len=children.length;i<len;i++){
 					item=children[i];
 					item.level=this.level+1;
-					this.$elem.after(this.getClass().getTemplate(item));
+					
+					prev.$elem.after(this.getClass().getTemplate(item));
+
 					item.$owner=this.$owner;
 					item.xtype='ui.tree.node';
 					item=ui.getXTypeItem(item,this.$elem[0].nextElementSibling);
@@ -195,6 +198,9 @@
 					children[i]=item;
 					prev=item;
 				}
+				
+				children[0].prev=null;
+
 				for(var i=0,len=children.length;i<len;i++){
 					item=children[i];
 					item.next=children[i+1];
@@ -218,14 +224,24 @@
 		},
 		collapse : function(){
 			ui.logger(this);
-			var children=this.children;
-			for(var i=0,len=children.length;i<len;i++){
-				var node=children[i];
-				node.$elem.hide();
-				node.$elem.removeClass('expand');
-			}
+			this.hideNode();
 			this.isExpand=false;
 			this.$elem.removeClass('expand');
+		},
+		hideNode : function(){
+			ui.logger(this);
+			var children=this.children;
+			if(!children){
+				return;
+			}
+			for(var i=0,len=children.length;i<len;i++){
+				var node=children[i];
+				if(node.hideNode){
+					node.hideNode();
+					node.$elem.hide();
+					node.$elem.removeClass('expand');
+				}
+			}
 		}
 	});
 
