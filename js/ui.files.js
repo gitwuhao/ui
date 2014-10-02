@@ -28,7 +28,8 @@
 		UI_LIB_PATH+'texteditor.js',
 		UI_LIB_PATH+'loading.js',
 		UI_LIB_PATH+'quicktip.js',
-		UI_LIB_PATH+'dragdrop.js'
+		UI_LIB_PATH+'dragdrop.js',
+		UI_LIB_PATH+'tree.js'
 	];
 
 })();

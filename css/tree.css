@@ -23,24 +23,24 @@
 	height: 20px;
 	margin-top: 5px;
 }
-.x-ui-tree-list .x-ui-tree-node-item .folder{
-	background-position: -460px -0px;
-}
-.x-ui-tree-list .x-ui-tree-node-item .file{
-	background-position: -460px -20px;
-}
-.x-ui-tree-list .x-ui-tree-node-item .open{
-	background-position: -460px -40px;
-}
-.x-ui-tree-list .x-ui-tree-node-item .expand{
-	background-position: -460px -60px;
-	cursor: pointer;
-}
-.x-ui-tree-list .x-ui-tree-node-item .collapse{
+.x-ui-tree-list .x-ui-tree-node .x-ui-tree-arrow{
 	background-position: -460px -80px;
 	cursor: pointer;
 }
-.x-ui-tree-list .x-ui-tree-node-item .x-ui-tree-node-label{
+.x-ui-tree-list .x-ui-tree-node.expand .x-ui-tree-arrow{
+	background-position: -460px -60px;
+	cursor: pointer;
+}
+.x-ui-tree-list .x-ui-tree-node .x-ui-tree-parent{
+	background-position: -460px -0px;
+}
+.x-ui-tree-list .x-ui-tree-node.expand .x-ui-tree-parent{
+	background-position: -460px -40px;
+}
+.x-ui-tree-list .x-ui-tree-node-col .x-ui-tree-leaf{
+	background-position: -460px -20px;
+}
+.x-ui-tree-list .x-ui-tree-node-col .x-ui-tree-node-label{
 	margin-left: 5px;
 	color: #555;
 }
