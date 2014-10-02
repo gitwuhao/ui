@@ -178,6 +178,7 @@
 			var html,
 				item,
 				prev,
+				$elem,
 				children=this.children;
 			if(children[0]._owner_name_==this._owner_name_){
 
@@ -187,16 +188,15 @@
 				for(var i=0,len=children.length;i<len;i++){
 					item=children[i];
 					item.level=this.level+1;
-					
-					prev.$elem.after(this.getClass().getTemplate(item));
-
 					item.$owner=this.$owner;
 					item.xtype='ui.tree.node';
-					item=ui.getXTypeItem(item,this.$elem[0].nextElementSibling);
+					$elem=prev.$elem;
+					$elem.after(this.getClass().getTemplate(item));
+					item=ui.getXTypeItem(item,$elem[0].nextElementSibling);
 					item.parent=this;
 					item.prev=prev;
-					children[i]=item;
 					prev=item;
+					children[i]=item;
 				}
 				
 				children[0].prev=null;
