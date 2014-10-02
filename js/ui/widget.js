@@ -30,6 +30,9 @@
 		if(!_class){
 			_class=ui[xtype];
 		}
+		if(!_class){
+			_class=ui.getClass(xtype);
+		}
 		item=new _class(config);
 		item.initRender();
 		return item;
