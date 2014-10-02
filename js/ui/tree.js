@@ -20,7 +20,8 @@
 				for(var i=0,len=items.length;i<len;i++){
 					node=items[i];
 					node.level=0;
-					html.push(ui.tree.node.getTemplate(node));
+					node.xtype='ui.tree.node';
+					html.push(ui.getXTypeHTML(node));
 				}
 				html.push(
 							'</table>',
@@ -41,7 +42,6 @@
 			for(var i=0,len=items.length;i<len;i++){
 				var item=items[i];
 				item.$owner=this;
-				item.xtype='ui.tree.node';
 				item=ui.getXTypeItem(item,children[i]);
 				items[i]=item;
 			}
@@ -54,6 +54,14 @@
 		},
 		onClick : function(event){
 			ui.logger(this);
+		},
+		expandAll : function(){
+			ui.logger(this);
+			
+		},
+		collapseAll : function(){
+			ui.logger(this);
+		
 		}
 	});
 
@@ -138,50 +146,70 @@
 				event.data.me.on('nodeClick',event,this);
 			});
 
+			
+			this.$node.dblclick({
+				me : this
+			},function(event){
+				var me=event.data.me;
+				if(me.isExpand){
+					me.collapse();
+				}else{
+					me.expand();
+				}
+			});
 		},
 		onArrowClick : function(event,target){
 			ui.logger(this);
 			if(this.isExpand){
 				this.collapse();
-				return;
-			}
-			if(this.children.url){
-
-				this.isExpand=true;
 			}else{
-				var html,
-					item,
-					prev,
-					children=this.children;
-				if(children[0]._owner_name_==this._owner_name_){
-					this.expand();
-				}else{
-					for(var i=0,len=children.length;i<len;i++){
-						item=children[i];
-						item.level=this.level+1;
-						this.$elem.after(this.getClass().getTemplate(item));
-						item.$owner=this.$owner;
-						item.xtype='ui.tree.node';
-						item=ui.getXTypeItem(item,this.$elem[0].nextElementSibling);
-						item.parent=this;
-						item.prev=prev;
-						children[i]=item;
-						prev=item;
-					}
-					for(var i=0,len=children.length;i<len;i++){
-						item=children[i];
-						item.next=children[i+1];
-					}
-					this.isExpand=true;
-				}
+				this.expand();
 			}
 		},
 		onNodeClick : function(event,target){
 			ui.logger(this);
-			
+		},
+		loadChildren : function(){
+			ui.logger(this);
+			if(this.children.url){
+				this.isExpand=true;
+				return;
+			}
+
+			var html,
+				item,
+				prev,
+				children=this.children;
+			if(children[0]._owner_name_==this._owner_name_){
+
+			}else{
+				for(var i=0,len=children.length;i<len;i++){
+					item=children[i];
+					item.level=this.level+1;
+					this.$elem.after(this.getClass().getTemplate(item));
+					item.$owner=this.$owner;
+					item.xtype='ui.tree.node';
+					item=ui.getXTypeItem(item,this.$elem[0].nextElementSibling);
+					item.parent=this;
+					item.prev=prev;
+					children[i]=item;
+					prev=item;
+				}
+				for(var i=0,len=children.length;i<len;i++){
+					item=children[i];
+					item.next=children[i+1];
+				}
+				this.isExpand=true;
+			}
+			this.loadChildren=CF.emptyFunction;
 		},
 		expand : function(){
 			ui.logger(this);
+			this.loadChildren();
+			this.$elem.addClass('expand');
+			if(this.isExpand==true){
+				return;
+			}
 			var children=this.children;
 			for(var i=0,len=children.length;i<len;i++){
 				children[i].$elem.show();
@@ -192,9 +220,12 @@
 			ui.logger(this);
 			var children=this.children;
 			for(var i=0,len=children.length;i<len;i++){
-				children[i].$elem.hide();
+				var node=children[i];
+				node.$elem.hide();
+				node.$elem.removeClass('expand');
 			}
 			this.isExpand=false;
+			this.$elem.removeClass('expand');
 		}
 	});
 

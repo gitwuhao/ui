@@ -7,17 +7,18 @@
 	
 	var _class_map_={};
 	ui.getClass=function(xtype){
-		return _class_map_[xtype];
-	};
-
-	ui.getXTypeHTML=function(config){
-		var _class,
-			xtype=config.xtype;
-			_class=ui.form[xtype];
+		var _class=ui.form[xtype];
 		if(!_class){
 			_class=ui[xtype];
 		}
-		return _class.getTemplate(config);
+		if(!_class){
+			_class=_class_map_[xtype];
+		}
+		return _class;
+	};
+
+	ui.getXTypeHTML=function(config){
+		return ui.getClass(config.xtype).getTemplate(config);
 	};
 
 	ui.getXTypeItem=function(config,elem){
@@ -25,14 +26,8 @@
 			xtype=config.xtype;
 		config.elem=elem;
 		config.autoRender=false;
+		_class=ui.getClass(config.xtype);
 		delete config.xtype;
-		_class=ui.form[xtype];
-		if(!_class){
-			_class=ui[xtype];
-		}
-		if(!_class){
-			_class=ui.getClass(xtype);
-		}
 		item=new _class(config);
 		item.initRender();
 		return item;
