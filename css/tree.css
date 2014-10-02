@@ -15,6 +15,16 @@
 	font-size: 14px;
 	font-family: tahoma, arial, 'Hiragino Sans GB', 宋体, sans-serif;
 }
+.x-ui-tree-list .x-ui-tree-node-col{
+	-webkit-user-select: none;
+	cursor: default;
+}
+.x-ui-tree-list .x-ui-tree-node.hover,.x-ui-tree-list .x-ui-tree-node:hover{
+    background-color: #DFEAF2;
+}
+.x-ui-tree-list .x-ui-tree-node.active,.x-ui-tree-list .x-ui-tree-node:active{
+    background-color: #C1DDF1;
+}
 .x-ui-tree-list .x-ui-tree-node div{
 	float: left;
 }
