@@ -1,0 +1,113 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>ui</title>
+<link rel="stylesheet" type="text/css" href="css/ui.css" />
+<style>
+.x-ui-tree-box{
+
+}
+.x-ui-tree-list{
+	width: 100%;
+	border-collapse: collapse;
+	border-spacing: 0px;
+}
+.x-ui-tree-list td{
+	padding:0px;
+}
+.x-ui-tree-list .x-ui-tree-node{
+	line-height: 30px;
+	overflow: hidden;
+	font-size: 14px;
+	font-family: tahoma, arial, 'Hiragino Sans GB', 宋体, sans-serif;
+}
+.x-ui-tree-list .x-ui-tree-node div{
+	float: left;
+}
+.x-ui-tree-list .x-ui-tree-node div.x-ui-icon{
+	width: 20px;
+	height: 20px;
+	margin-top: 5px;
+}
+.x-ui-tree-list .x-ui-tree-node-item .folder{
+	background-position: -460px -0px;
+}
+.x-ui-tree-list .x-ui-tree-node-item .file{
+	background-position: -460px -20px;
+}
+.x-ui-tree-list .x-ui-tree-node-item .open{
+	background-position: -460px -40px;
+}
+.x-ui-tree-list .x-ui-tree-node-item .expand{
+	background-position: -460px -60px;
+	cursor: pointer;
+}
+.x-ui-tree-list .x-ui-tree-node-item .collapse{
+	background-position: -460px -80px;
+	cursor: pointer;
+}
+.x-ui-tree-list .x-ui-tree-node-item .x-ui-tree-node-label{
+	margin-left: 5px;
+}
+</style>
+</head>
+<body>
+<div class="x-ui-tree-box" style="width: 500px;height:500px;">
+<table class="x-ui-tree-list">
+<tr class="x-ui-tree-node">
+	<td class="x-ui-tree-node-item">
+		<div class="collapse x-ui-icon"></div>
+		<div class="folder x-ui-icon"></div>
+		<div class="x-ui-tree-node-label">java</div>
+	</td>
+</tr>
+<tr class="x-ui-tree-node">
+	<td class="x-ui-tree-node-item">
+		<div class="expand x-ui-icon"></div>
+		<div class="open x-ui-icon"></div>
+		<div class="x-ui-tree-node-label">java</div>
+	</td>
+</tr>
+<tr class="x-ui-tree-node">
+	<td class="x-ui-tree-node-item">
+		<div class="x-ui-icon"></div>
+		<div class="expand x-ui-icon"></div>
+		<div class="open x-ui-icon"></div>
+		<div class="x-ui-tree-node-label">java</div>
+	</td>
+</tr>
+<tr class="x-ui-tree-node">
+	<td class="x-ui-tree-node-item">
+		<div class="x-ui-icon"></div>
+		<div class="x-ui-icon"></div>
+		<div class="expand x-ui-icon"></div>
+		<div class="open x-ui-icon"></div>
+		<div class="x-ui-tree-node-label">java</div>
+	</td>
+</tr>
+<tr class="x-ui-tree-node">
+	<td class="x-ui-tree-node-item">
+		<div class="x-ui-icon"></div>
+		<div class="x-ui-icon"></div>
+		<div class="x-ui-icon"></div>
+		<div class="expand x-ui-icon"></div>
+		<div class="open x-ui-icon"></div>
+		<div class="x-ui-tree-node-label">java</div>
+	</td>
+</tr>
+<tr class="x-ui-tree-node">
+	<td class="x-ui-tree-node-item">
+		<div class="x-ui-icon"></div>
+		<div class="x-ui-icon"></div>
+		<div class="x-ui-icon"></div>
+		<div class="x-ui-icon"></div>
+		<div class="x-ui-icon"></div>
+		<div class="file x-ui-icon"></div>
+		<div class="x-ui-tree-node-label">java开发</div>
+	</td>
+</tr>
+</table>
+</div>
+</body>
+</html>
