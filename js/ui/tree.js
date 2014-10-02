@@ -41,7 +41,7 @@
 
 			for(var i=0,len=items.length;i<len;i++){
 				var item=items[i];
-				item.$owner=this;
+				item.tree=this;
 				item=ui.getXTypeItem(item,children[i]);
 				items[i]=item;
 			}
@@ -111,7 +111,7 @@
 				return html.join("");
 			}
 		},
-		onRenderAfter:function(){
+		onRenderAfter:function(config){
 			ui.logger(this);
 			var $elem=this.$elem;
 			this.$node=$elem.children('.'+this._c_tree_node_col);
@@ -126,6 +126,8 @@
 			if(this.expand==true){
 				delete this.expand;
 				this.expand();
+			}else{
+				this.isExpand=false;
 			}
 		},
 		onBindEvent:function(){
@@ -216,31 +218,49 @@
 			if(this.isExpand==true){
 				return;
 			}
-			var children=this.children;
+			var children=this.children,
+				node;
 			for(var i=0,len=children.length;i<len;i++){
-				children[i].$elem.show();
+				node=children[i];
+				node.showNode();
 			}
 			this.isExpand=true;
 		},
+		showNode : function(){
+			ui.logger(this);
+			this.$elem.show();
+			if(!this.children || this.isExpand!=true){
+				return;
+			}
+			var children=this.children,
+				node;
+			for(var i=0,len=children.length;i<len;i++){
+				node=children[i];
+				node.showNode();
+			}
+		},
 		collapse : function(){
 			ui.logger(this);
-			this.hideNode();
+			var children=this.children,
+				node;
+			for(var i=0,len=children.length;i<len;i++){
+				node=children[i];
+				node.hideNode();
+			}
 			this.isExpand=false;
 			this.$elem.removeClass('expand');
 		},
 		hideNode : function(){
 			ui.logger(this);
-			var children=this.children;
-			if(!children){
+			this.$elem.hide();
+			if(!this.children){
 				return;
 			}
+			var children=this.children,
+				node;
 			for(var i=0,len=children.length;i<len;i++){
-				var node=children[i];
-				if(node.hideNode){
-					node.hideNode();
-					node.$elem.hide();
-					node.$elem.removeClass('expand');
-				}
+				node=children[i];
+				node.hideNode();
 			}
 		},
 		remove : function(){
