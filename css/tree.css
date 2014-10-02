@@ -22,7 +22,7 @@
 .x-ui-tree-list .x-ui-tree-node.hover,.x-ui-tree-list .x-ui-tree-node:hover{
     background-color: #DFEAF2;
 }
-.x-ui-tree-list .x-ui-tree-node.active,.x-ui-tree-list .x-ui-tree-node:active{
+.x-ui-tree-list .x-ui-tree-node.active{
     background-color: #C1DDF1;
 }
 .x-ui-tree-list .x-ui-tree-node div{

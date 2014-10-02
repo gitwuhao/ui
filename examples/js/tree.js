@@ -29,7 +29,25 @@ window.examples.tree=function(){
 			},{
 				label : 'g'
 			},{
-				label : 'h'
+				label : 'h',
+				children : [{
+					label : 'h1'
+				},{
+					label : 'h2'
+				},{
+					label : 'h3'
+				},{
+					label : 'h4',
+					children : [{
+						label : 'x1'
+					},{
+						label : 'x2'
+					},{
+						label : 'x3'
+					},{
+						label : 'x4'
+					}]
+				}]
 			}]
 		},{
 			label : '2'
