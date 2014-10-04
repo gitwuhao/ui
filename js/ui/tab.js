@@ -1,4 +1,4 @@
-(function(CF,jQuery,ui){
+(function(CF,$,ui){
 
 	ui.tab=function(){
 		this.callSuperMethod();
@@ -252,17 +252,17 @@
 
 
 			var html=['<div class="',this._c_tabbar_tag,'">',this.label,'</div>'];
-			var tag=jQuery.createElement(html.join(''));
+			var tag=$.createElement(html.join(''));
 			$tabbarbox.append(tag);
 
-			this.$elem=jQuery(tag);
+			this.$elem=$(tag);
 			this.$tag=this.$elem;
 
 
-			var tabView=jQuery.createElement(['<div class="',this._c_tabview,' ',(this.cls||''),'"></div>'].join(''));
+			var tabView=$.createElement(['<div class="',this._c_tabview,' ',(this.cls||''),'"></div>'].join(''));
 			$tabviewbox.append(tabView);
 
-			this.$tabview=jQuery(tabView);
+			this.$tabview=$(tabView);
 
 
 			delete this._c_tabview;
@@ -272,13 +272,15 @@
 
 		},
 		onRenderTabView : function(){
-			var html=[];
 			if(this.html){
-				html.push(this.html);
+				this.$tabview.html(this.html);
 			}else if(this.src){
-				html.push('<iframe src="',this.src,'"></iframe>');
+				this.$tabview.html('<iframe src="',this.src,'"></iframe>');
+			}else if(this.form){
+				var form=this.form;
+				form.render=this.$tabview[0];
+				this.form=new ui.form(form);
 			}
-			this.$tabview.html(html.join(''));
 			if(this.onLoad){
 				this.onLoad();
 			}
@@ -326,4 +328,4 @@
 		}
 	});
 
-})(CF,jQuery,ui);
+})(CF,$,ui);
