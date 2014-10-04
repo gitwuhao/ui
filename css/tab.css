@@ -1,6 +1,11 @@
 .x-ui-tab-panel{
 
 }
+.x-ui-tab-panel .x-ui-tabbar-box{
+	font-size: 12px;
+	overflow: hidden;
+	cursor: default;
+}
 .x-ui-tab-panel .x-ui-tabbar-box .x-ui-tabbar-tag:first-child {
 	border-top-left-radius: 3px;
 	border-bottom-left-radius: 3px;
@@ -13,7 +18,7 @@
 .x-ui-tab-panel .x-ui-tabbar-box .x-ui-tabbar-tag{
 	float: left;
 	padding: 6px;
-	font-size: 14px;
+	font-size: 12px;
 	margin-left: -1px;
 	border: 1px solid #DDD;
 	min-width: 80px;
@@ -35,12 +40,6 @@
 	border-color: #CCC;
 }
 
-
-.x-ui-tab-panel .x-ui-tabbar-box{
-	font-size: 12px;
-	display: inline-block;
-	cursor: default;
-}
 .x-ui-tab-panel .x-ui-tabview-box{
 
 }
@@ -66,4 +65,10 @@
 .x-ui-tab-panel .x-ui-floatbar-box .x-ui-button:hover {
 	box-shadow: 0px 1px 2px #DBDBDB;
 	border-bottom-color: #CECECE;
+}
+
+
+
+.x-ui-tab-panel.line{
+
 }
