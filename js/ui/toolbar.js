@@ -47,6 +47,10 @@
 						html.push(ui.getXTypeHTML(item));
 					}
 				}
+
+				if(config.isMove){
+					html.push('<div class="x-ui-button move x-ui-icon-button" title="移动工具栏"><div class="x-ui-icon"></div></div>');
+				}
 				
 				html.push('</div>',
 				'<div class="',config._c_popup_box,'"></div>',
@@ -78,6 +82,27 @@
 						this.itemsMap['_'+icon+'_']=items[i];
 					}
 				}
+			}
+			
+			if(this.isMove){
+				this.$buttonbar.children('.move:first').mousedown({
+					me : this,
+					target : this.$elem[0]
+				},function(event){
+					var data=event.data;
+					ui.dragdrop.drag({
+						parentBox : document.body,
+						target : data.target,
+						me : data.me,
+						event : event,
+						onDragmove : function(){
+							this.me.disabled();
+						},
+						onDragover : function(){
+							this.me.enabled();
+						}
+					});
+				});
 			}
 		},
 		getItem:function(icon){
