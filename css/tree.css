@@ -10,20 +10,22 @@
 	padding:0px;
 }
 .x-ui-tree-list .x-ui-tree-node{
-	line-height: 30px;
+	line-height: 25px;
 	overflow: hidden;
-	font-size: 14px;
+	font-size: 12px;
 	font-family: tahoma, arial, 'Hiragino Sans GB', 宋体, sans-serif;
 }
 .x-ui-tree-list .x-ui-tree-node-col{
 	-webkit-user-select: none;
 	cursor: default;
+	white-space: nowrap;
+	overflow: hidden;
 }
 .x-ui-tree-list .x-ui-tree-node.hover,.x-ui-tree-list .x-ui-tree-node:hover{
-    background-color: #DFEAF2;
+    background-color: #F4FAFF;
 }
 .x-ui-tree-list .x-ui-tree-node.active{
-    background-color: #C1DDF1;
+    background-color: #E0F2FF;
 }
 .x-ui-tree-list .x-ui-tree-node div{
 	float: left;
@@ -31,14 +33,14 @@
 .x-ui-tree-list .x-ui-tree-node div.x-ui-icon{
 	width: 20px;
 	height: 20px;
-	margin-top: 5px;
+	margin-top: 3px;
 }
 .x-ui-tree-list .x-ui-tree-node .x-ui-tree-arrow{
-	background-position: -460px -80px;
+	background-position: -458px -80px;
 	cursor: pointer;
 }
 .x-ui-tree-list .x-ui-tree-node.expand .x-ui-tree-arrow{
-	background-position: -460px -60px;
+	background-position: -458px -60px;
 	cursor: pointer;
 }
 .x-ui-tree-list .x-ui-tree-node .x-ui-tree-parent{

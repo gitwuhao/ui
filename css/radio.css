@@ -17,6 +17,7 @@
 	border: 1px solid #D9D9D9;
 	font-size: 0px;
 	cursor: default;
+	box-sizing: border-box;
 }
 .x-ui-radio-group .x-ui-icon{
 	background-position: -442px -44px;

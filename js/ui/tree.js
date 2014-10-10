@@ -117,7 +117,7 @@
 				}
 
 				html.push(		'<div class="',cls,' ',config._c_icon,'"></div>',
-								'<div class="',config._c_tree_node_label,'">',config.label,'</div>',
+								'<span class="',config._c_tree_node_label,'">',config.label,'</span>',
 							'</td>',
 						'</tr>');
 				return html.join("");
