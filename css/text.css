@@ -8,9 +8,6 @@ div.x-ui-text{
 	border-collapse: collapse;
 	width: 100%;
 }
-.x-ui-text td{
-	padding: 0px;
-}
 div.x-ui-text .x-ui-label{
 	line-height: 22px;
 	width: 60px;
