@@ -40,7 +40,7 @@
 .x-ui-form-box .x-ui-button-box{
 
 }
-.x-ui-form-box .x-ui-button-box .x-ui-button{
+.x-ui-form-box .x-ui-button-box .x-ui-button,.x-ui-form-button{
 	font-size: 12px;
 	cursor: pointer;
 	border: 1px solid #DDD;
@@ -51,12 +51,15 @@
 	background: -webkit-gradient(linear, left top, left bottom, from(#FFF), to(#EFEFEF));
 	margin: 0px 10px;
 }
+.x-ui-form-box .x-ui-button-box .x-ui-button .x-ui-label,.x-ui-form-button .x-ui-label{
+	float: none;
+}
 
-.x-ui-form-box .x-ui-button-box .x-ui-button:active{
+.x-ui-form-box .x-ui-button-box .x-ui-button:active,.x-ui-form-button:active{
 	background-image: -webkit-linear-gradient(top,#E0E0E0,#EEE);
 	border-color: #CCC;
 }
-.x-ui-button-box .x-ui-button.hover{
+.x-ui-button-box .x-ui-button.hover,.x-ui-form-button:hover{
 	box-shadow: 0px 1px 2px #DBDBDB;
 	border-bottom-color: #CECECE;
 }
