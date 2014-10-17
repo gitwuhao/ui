@@ -41,7 +41,7 @@
 					html.push('</div>');
 				}
 				
-				html.push('<div class="',config._c_tabbar_box,'"></div>');
+				html.push('<div class="',config._c_tabbar_box,' uns"></div>');
 
 				if(config.topbar){
 					if(config.px==ui.cssPrefix){
@@ -76,6 +76,12 @@
 					var item=ui.getXTypeItem(this.floatbar[i],children[i]);
 					if(item.cls){
 						this.floatbar[item.cls]=item;
+					}else if(item.name){
+						this.floatbar[item.name]=item;
+					}
+
+					if(item.icon){
+						this.floatbar[item.icon]=item;
 					}
 					item.$owner=this;
 					this.floatbar[i]=item;
@@ -113,6 +119,9 @@
 		},
 		setCurrentTab : function(tab){
 			ui.logger(this);
+			if(this.currentTab==tab){
+				return;
+			}
 			if(this.currentTab){
 				this.currentTab.isActive=false;
 				this.currentTab.hide();
