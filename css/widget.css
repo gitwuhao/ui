@@ -23,6 +23,10 @@ div.x-ui-icon {
 	box-shadow: 0 0 5px #F9DF7D;
 }
 
+/*
+border: 1px solid #88BCFF;
+box-shadow: 0 0 5px #B0DFFF;
+*/
 
 .x-ui-del-icon .x-ui-icon{
 	background-position: -400px -140px;
