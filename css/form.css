@@ -55,13 +55,14 @@
 	float: none;
 }
 
-.x-ui-form-box .x-ui-button-box .x-ui-button:active,.x-ui-form-button:active{
-	background-image: -webkit-linear-gradient(top,#E0E0E0,#EEE);
-	border-color: #CCC;
-}
 .x-ui-button-box .x-ui-button.hover,.x-ui-form-button:hover{
 	box-shadow: 0px 1px 2px #DBDBDB;
 	border-bottom-color: #CECECE;
+}
+.x-ui-form-box .x-ui-button-box .x-ui-button:active,.x-ui-form-button:active{
+	background-image: -webkit-linear-gradient(top,#E0E0E0,#EEE);
+	border-color: #CCC;
+	box-shadow:none;
 }
 .x-ui-form-box .x-ui-form-table{
 	width:100%;
