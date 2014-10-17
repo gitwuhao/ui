@@ -1,45 +1,46 @@
-.x-ui-form{
+.x-ui-form-box{
 	color: #000;
 }
-.x-ui-form .x-ui-textfield,.x-ui-form .x-ui-textfield input{
+.x-ui-form-box .x-ui-textfield,.x-ui-form-box .x-ui-textfield input{
 	height: 24px;
 }
-.x-ui-form .x-ui-form-item .x-ui-label,.x-ui-form .x-ui-form-label {
+.x-ui-form-box .x-ui-form-item .x-ui-label,.x-ui-form-box .x-ui-form-label {
 	line-height: 24px;
 	width: 60px;
+	height: 40px;
 }
-.x-ui-form .x-ui-form-item td{
+.x-ui-form-box .x-ui-form-item td{
 	padding: 0px;
 }
-.x-ui-form .x-ui-form-item .x-ui-label{
+.x-ui-form-box .x-ui-form-item .x-ui-label{
 	height: 30px;
 	font-size: 12px;
 	font-family: 宋体;
 	text-align: right;
 }
-.x-ui-form .x-ui-form-item  .x-ui-label-padding,.x-ui-form .x-ui-form-label-padding {
+.x-ui-form-box .x-ui-form-item  .x-ui-label-padding,.x-ui-form-box .x-ui-form-label-padding {
 	width: 8px;
 	font-size: 1px;
 }
-.x-ui-form .disabled .x-ui-item-field{
+.x-ui-form-box .disabled .x-ui-item-field{
 	opacity: 0.3;
 }
-.x-ui-form .x-ui-text .x-ui-invalid-icon{
+.x-ui-form-box .x-ui-text .x-ui-invalid-icon{
 	background-position: -422px -58px;
 }
-.x-ui-form .x-ui-text .x-ui-clear-icon{
+.x-ui-form-box .x-ui-text .x-ui-clear-icon{
 	background-position: -420px -78px;
 }
-.x-ui-form .x-ui-date .x-ui-date-icon {
+.x-ui-form-box .x-ui-date .x-ui-date-icon {
 	background-position: -420px 1px;
 }
-.x-ui-form .x-ui-text-box .x-ui-icon{
+.x-ui-form-box .x-ui-text-box .x-ui-icon{
 	width: 18px;
 }
-.x-ui-form .x-ui-button-box{
+.x-ui-form-box .x-ui-button-box{
 
 }
-.x-ui-form .x-ui-button-box .x-ui-button{
+.x-ui-form-box .x-ui-button-box .x-ui-button{
 	font-size: 12px;
 	cursor: pointer;
 	border: 1px solid #DDD;
@@ -51,7 +52,7 @@
 	margin: 0px 10px;
 }
 
-.x-ui-form .x-ui-button-box .x-ui-button:active{
+.x-ui-form-box .x-ui-button-box .x-ui-button:active{
 	background-image: -webkit-linear-gradient(top,#E0E0E0,#EEE);
 	border-color: #CCC;
 }
@@ -59,6 +60,6 @@
 	box-shadow: 0px 1px 2px #DBDBDB;
 	border-bottom-color: #CECECE;
 }
-.x-ui-form table{
+.x-ui-form-box .x-ui-form-table{
 	width:100%;
 }

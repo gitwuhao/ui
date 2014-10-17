@@ -8,6 +8,7 @@
 		_name_ : "form",
 		statics:{
 			css:{
+				_c_form_box : '-form-box',
 				_c_form : '-form',
 				_c_form_item : '-form-item',
 				_c_button_box : '-button-box',
@@ -18,8 +19,8 @@
 			},
 			getTemplate: function(config){
 				ui.widget.applyCSS(config,this.css);
-				var html=['<div class="',config._c_form,' ',(config.cls||''),'">',
-							'<form'];
+				var html=['<div class="',config._c_form_box,' ',(config.cls||''),'">',
+							'<form  class="',config._c_form,'"'];
 				if(config.autocomplete){	
 					html.push(' autocomplete="',config.autocomplete,'"');
 				}
