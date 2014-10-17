@@ -45,8 +45,6 @@
 				var items=config.items;
 				for(var i=0,len=items.length;i<len;i++){
 					var item=items[i];
-					var xtype=item.xtype||'text';
-					var input=ui.form[xtype];
 					if(config.isTableLayout!=false){
 						item.form=true;
 					}
@@ -58,7 +56,15 @@
 					if(config.px){
 						item.px=config.px;
 					}
-					html.push(input.getTemplate(item));
+					if(item.html){
+						item.type='htmlitem';
+						html.push(ui.form.field.getFieldTemplate(item));
+						delete item.type;
+					}else{
+						var xtype=item.xtype||'text';
+						var input=ui.form[xtype];
+						html.push(input.getTemplate(item));
+					}
 					delete item.form;
 				}
 
@@ -140,8 +146,10 @@
 			var items=this.items;
 			for(var i=0,len=items.length;i<len;i++){
 				var item=items[i];
-				item=this.getClass().getFormItem(item,rows[i]);
-				this.items[i]=item;
+				if(!item.html){
+					item=this.getClass().getFormItem(item,rows[i]);
+					this.items[i]=item;
+				}
 			}
 			this.itemsToMap();
 
@@ -271,11 +279,13 @@
 					}
 					html.push('</td>',
 							  '<td  class="',config._c_item_field,'">');
+				}else if(config.form && !config.label){
+					html.push('<td colspan="3" class="',config._c_item_field,'">');
 				}
 				
 				html.push(config.html);
 				
-				if(config.label){
+				if(config.label || (config.form && !config.label)){
 					html.push('</td>',
 						  '</tr>');
 				}
