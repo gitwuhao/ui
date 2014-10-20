@@ -23,6 +23,11 @@ div.x-ui-icon {
 	box-shadow: 0 0 5px #F9DF7D;
 }
 
+.x-ui-text.hover .x-ui-text-box,.x-ui-button.hover,
+.x-ui-split-button.hover,.x-ui-checkbox-group.hover .x-ui-icon,.x-ui-radio-group.hover .x-ui-icon{
+	border: 1px solid #5FA1FF;
+	box-shadow: 0 0 5px #A5C8FF;
+}
 /*
 border: 1px solid #88BCFF;
 box-shadow: 0 0 5px #B0DFFF;
