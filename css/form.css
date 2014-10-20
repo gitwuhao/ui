@@ -48,8 +48,10 @@
 	border-radius: 3px;
 	display: inline-block;
 	color: #777;
-	background: -webkit-gradient(linear, left top, left bottom, from(#FFF), to(#EFEFEF));
+	background: -webkit-gradient(linear, left top, left bottom, from(#FFF), to(#F5F5F5));
 	margin-right:10px;
+	box-shadow: 0px 1px 2px #EEE;
+	border-bottom-color: #CCC;
 }
 
 .x-ui-form-box .x-ui-button-box .x-ui-button:last-child{
@@ -63,13 +65,12 @@
 }
 
 .x-ui-button-box .x-ui-button.hover,.x-ui-form-button:hover{
-	box-shadow: 0px 1px 2px #DBDBDB;
-	border-bottom-color: #CECECE;
+	background: -webkit-gradient(linear, left top, left bottom, from(#FFF), to(#FEFEFE));
+	color:#999;
 }
 .x-ui-form-box .x-ui-button-box .x-ui-button:active,.x-ui-form-button:active{
-	background-image: -webkit-linear-gradient(top,#E0E0E0,#EEE);
+	background-image: -webkit-linear-gradient(top,#EDEDED,#F0F0F0,#EFEFEF);
 	border-color: #CCC;
-	box-shadow:none;
 }
 .x-ui-form-box .x-ui-form-table{
 	width:100%;
