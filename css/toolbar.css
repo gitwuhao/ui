@@ -27,9 +27,16 @@
 }
 
 .x-ui-toolbar-button-box .x-ui-button{
-	margin: 1px;
+	margin: 2px 1px;
 	padding: 1px;
 	border: none;
+}
+.x-ui-toolbar-button-box .x-ui-split-button,.x-ui-toolbar-button-box .x-ui-text{
+	margin: 2px 1px;
+}
+.x-ui-toolbar-button-box .x-ui-split-button .x-ui-button{
+	margin: 0px;    
+	padding: 0px;
 }
 .x-ui-toolbar-button-box .x-ui-separator{
 	float: left;
@@ -45,9 +52,6 @@
 }
 .x-ui-toolbar-button-box .x-ui-text .x-ui-label-padding{
 	display: none;
-}
-.x-ui-toolbar-button-box .x-ui-text{
-	margin: 1px 2px;
 }
 
 .x-ui-toolbar-box .x-ui-button.hover,.x-ui-toolbar-box  .x-ui-split-button.hover,.x-ui-toolbar-box  .x-ui-button.selected,.x-ui-toolbar-box  .x-ui-split-button.selected {

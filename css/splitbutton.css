@@ -2,10 +2,12 @@
 	float:left;
 	margin: 1px;
 	padding: 1px;
+	border-radius: 3px;
 }
 .x-ui-split-button .x-ui-button {
 	margin: 0px;
 	padding: 0px;
+	border-radius: 0px;
 }
 .x-ui-split-button.selected .x-ui-arrow-button.hover{
 	border-color:#F79B39;
