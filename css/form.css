@@ -47,9 +47,13 @@
 	padding: 5px 20px;
 	border-radius: 3px;
 	display: inline-block;
-	color: #3C3C3C;
+	color: #777;
 	background: -webkit-gradient(linear, left top, left bottom, from(#FFF), to(#EFEFEF));
-	margin: 0px 10px;
+	margin-right:10px;
+}
+
+.x-ui-form-box .x-ui-button-box .x-ui-button:last-child{
+	margin-right:0px;
 }
 .x-ui-form-button{
 	margin:0;
