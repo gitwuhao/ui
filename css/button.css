@@ -1,8 +1,11 @@
 .x-ui-button{
-	margin: 1px;
-	padding: 1px;
 	-webkit-user-select: none;
+	font-size: 12px;
 	cursor: pointer;
+	border: 1px solid #DDD;
+	padding: 5px 20px;
+	border-radius: 3px;
+	color: #777;
 }
 .x-ui-button.disabled{
 	background-color: #F1F1F1;

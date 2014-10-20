@@ -25,6 +25,12 @@
 .x-ui-breakline{
 	clear: both;
 }
+
+.x-ui-toolbar-button-box .x-ui-button{
+	margin: 1px;
+	padding: 1px;
+	border: none;
+}
 .x-ui-toolbar-button-box .x-ui-separator{
 	float: left;
 	width: 2px;
