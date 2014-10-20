@@ -23,6 +23,7 @@
 	border: 1px solid #DDD;
 	min-width: 80px;
 	max-width: 100px;
+	color: #777;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	text-align: center;
