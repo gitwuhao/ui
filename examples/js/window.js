@@ -1,5 +1,13 @@
 (function(){
+
+	
 window.examples.window=function(){
+	
+	if(!ui.messagebox){
+		$.loadJSQueue(UI_LIB_PATH+'messagebox.js',window.examples.window);
+		return;	
+	}
+
 
 	var win=new ui.window({
 		cls:'user',
