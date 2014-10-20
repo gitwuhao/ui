@@ -15,6 +15,36 @@
 .x-ui-button,.x-ui-button .x-ui-icon,.x-ui-button .x-ui-label{
 	float: left;	
 }
+/*
 .x-ui-button.button{
 	background: -webkit-gradient(linear, left top, left bottom, from(#FFF), to(#EDEDED)); 
+}
+*/
+
+.x-ui-button-box .x-ui-button{
+	font-size: 12px;
+	cursor: pointer;
+	border: 1px solid #DDD;
+	padding: 5px 20px;
+	border-radius: 3px;
+	display: inline-block;
+	color: #777;
+	background: -webkit-gradient(linear, left top, left bottom, from(#FFF), to(#F5F5F5));
+	margin-right:10px;
+	box-shadow: 0px 1px 2px #EEE;
+	border-bottom-color: #CCC;
+}
+.x-ui-button-box .x-ui-button:last-child{
+	margin-right:0px;
+}
+.x-ui-button-box .x-ui-button .x-ui-label,.x-ui-button-box .x-ui-label{
+	float: none;
+}
+.x-ui-button-box .x-ui-button.hover{
+	background: -webkit-gradient(linear, left top, left bottom, from(#FFF), to(#FEFEFE));
+	color:#999;
+}
+.x-ui-button-box .x-ui-button:active{
+	background-image: -webkit-linear-gradient(top,#EDEDED,#F0F0F0,#EFEFEF);
+	border-color: #CCC;
 }

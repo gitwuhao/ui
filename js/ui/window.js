@@ -16,7 +16,8 @@
 				_c_icon: '-icon',
 				_c_body: '-win-body',
 				_c_sub_win: '-sub-win-body',
-				_c_button_box: '-win-button-box',
+				_c_bottom_box: '-bottom-box',
+				_c_button_box: '-button-box',
 				_c_button: '-button'
 			},
 			getTemplate: function(config){
@@ -37,13 +38,15 @@
 						  '<div class="',config._c_body,'">',(config.html||''),'</div>');
 
 				if(config.buttons){
-					html.push('<div class="',config._c_button_box,'">');
+					html.push('<div class="',config._c_bottom_box,'">',
+								'<div class="',config._c_button_box,'">');
 					var buttons=config.buttons;
 					for(var i=0,len=buttons.length;i<len;i++){
 						buttons[i].xtype='button';
 						html.push(ui.getXTypeHTML(buttons[i]));
 					}
-					html.push('</div>');
+					html.push('</div>',
+							'</div>');
 				}
 				html.push('</div>');
 				return html.join('');
@@ -149,7 +152,7 @@
 			
 			var me=this;
 			if(this.buttons){
-				var $buttonbox=$elem.children('.'+this._c_button_box);
+				var $buttonbox=$('.'+this._c_button_box,$elem);
 				var buttonList=$buttonbox.children();
 				for(var i=0,len=buttonList.length;i<len;i++){
 					var button=ui.getXTypeItem(this.buttons[i],buttonList[i]);
