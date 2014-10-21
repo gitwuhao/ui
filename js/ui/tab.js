@@ -144,7 +144,9 @@
 
 			this.items[tabPanel.index]=tabPanel;
 
-			if(tabPanel.cls){
+			if(tabPanel.name){
+				this.items['_'+tabPanel.name+'_']=tabPanel;
+			}else if(tabPanel.cls){
 				this.items['_'+tabPanel.cls+'_']=tabPanel;
 			}
 
