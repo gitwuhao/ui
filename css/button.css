@@ -5,7 +5,7 @@
 	border: 1px solid #DDD;
 	padding: 5px 20px;
 	border-radius: 3px;
-	color: #777;
+	color: #999;
 }
 .x-ui-button.disabled{
 	background-color: #F1F1F1;
@@ -28,7 +28,7 @@
 	padding: 5px 20px;
 	border-radius: 3px;
 	display: inline-block;
-	color: #777;
+	color: #999;
 	background: -webkit-gradient(linear, left top, left bottom, from(#FFF), to(#F5F5F5));
 	margin-right:10px;
 	box-shadow: 0px 1px 2px #EEE;
