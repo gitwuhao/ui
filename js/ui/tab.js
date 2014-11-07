@@ -24,23 +24,27 @@
 					html.push('<div class="',config._c_floatbar_box,'">');
 					for(var i=0,len=floatbar.length;i<len;i++){
 						var item=floatbar[i];
-						var xtype=item.xtype;
-						var _class;
-						if(xtype=='splitbutton'){
-							_class=ui.splitbutton;
-						}else if(xtype=='text'){
-							_class=ui.form.text;
+						if(item.html){
+							html.push(item.html);
 						}else{
-							_class=ui.button;
+							var xtype=item.xtype;
+							var _class;
+							if(xtype=='splitbutton'){
+								_class=ui.splitbutton;
+							}else if(xtype=='text'){
+								_class=ui.form.text;
+							}else{
+								_class=ui.button;
+							}
+							if(config.px){
+								item.px=config.px;
+							}
+							html.push(_class.getTemplate(item));
 						}
-						if(config.px){
-							item.px=config.px;
-						}
-						html.push(_class.getTemplate(item));
 					}
 					html.push('</div>');
 				}
-				
+
 				html.push('<div class="',config._c_tabbar_box,' uns"></div>');
 
 				if(config.topbar){
@@ -73,18 +77,21 @@
 				this.$floatbar=$tabpanel.children('.'+this._c_floatbar_box);
 				var children=this.$floatbar.children();
 				for(var i=0,len=children.length;i<len;i++){
-					var item=ui.getXTypeItem(this.floatbar[i],children[i]);
-					if(item.cls){
-						this.floatbar[item.cls]=item;
-					}else if(item.name){
-						this.floatbar[item.name]=item;
-					}
+					var item=this.floatbar[i];
+					if(!item.html){
+						item=ui.getXTypeItem(this.floatbar[i],children[i]);
+						if(item.cls){
+							this.floatbar[item.cls]=item;
+						}else if(item.name){
+							this.floatbar[item.name]=item;
+						}
 
-					if(item.icon){
-						this.floatbar[item.icon]=item;
+						if(item.icon){
+							this.floatbar[item.icon]=item;
+						}
+						this.floatbar[i]=item;
 					}
 					item.$owner=this;
-					this.floatbar[i]=item;
 				}
 			}
 			if(this.topbar){
@@ -134,7 +141,7 @@
 			tab.$tabbarbox=this.$tabbarbox;
 			tab.$tabviewbox=this.$tabviewbox;
 			tab.tabPanel=this;
-			
+
 			if(this.px){
 				tab.px=this.px;
 			}
@@ -159,7 +166,7 @@
 				return this.currentTab;
 			}
 			return this.items['_'+key+'_'];
-		},		
+		},
 		getItem:function(icon){
 			var item;
 			if(this.topbar){
@@ -217,7 +224,7 @@
 					this.remove(items[i]);
 				}
 			}
-			
+
 			if(this.topbar  && this.topbar.remove){
 				this.topbar.remove();
 			}

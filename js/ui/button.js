@@ -31,7 +31,11 @@
 				if(config.icon==true){
 					html.push('<div class="',config._c_icon,'"></div>');
 				}else if(label){
-					html.push('<div class="',config._c_label,'">',label,'</div>');
+					html.push('<div class="',config._c_label,'">',label);
+					if(config.icon){
+						html.push('<div class="',config._c_icon,' ',config.icon,'"></div>');
+					}
+					html.push('</div>');
 				}
 				html.push('</div>');
 				return html.join("");
