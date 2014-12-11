@@ -19,6 +19,7 @@
 							'<table class="',config._c_tree_list,'">'];
 				for(var i=0,len=items.length;i<len;i++){
 					node=items[i];
+					node.tree=config;
 					node.level=0;
 					node.xtype='ui.tree.node';
 					html.push(ui.getXTypeHTML(node));
@@ -29,6 +30,7 @@
 				return html.join("");
 			}
 		},	
+		labelKey:'label',
 		//singleExpand: true
 		onRenderAfter:function(config){
 			ui.logger(this);
@@ -74,6 +76,12 @@
 			}
 			this.activeNode=node;
 			node.$elem.addClass('active');
+		},
+		removeActiveNode : function(){
+			if(this.activeNode){
+				this.activeNode.$elem.removeClass('active');
+			}
+			this.activeNode=null;
 		}
 	});
 
@@ -115,6 +123,8 @@
 					cls=config._c_tree_leaf;
 					html.push('<div class="',config._c_icon,'"></div>');
 				}
+
+				config.label=config[config.tree.labelKey];
 
 				html.push(		'<div class="',cls,' ',config._c_icon,'"></div>',
 								'<span class="',config._c_tree_node_label,'">',config.label,'</span>',
@@ -180,10 +190,12 @@
 			}else{
 				this.expand();
 			}
+			this.tree.on('arrowClick',this,event);
 		},
 		onNodeClick : function(event,target){
 			ui.logger(this);
 			this.tree.setActiveNode(this);
+			this.tree.on('nodeClick',this,event);
 		},
 		loadChildren : function(){
 			ui.logger(this);
