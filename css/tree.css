@@ -13,7 +13,7 @@
 	line-height: 25px;
 	overflow: hidden;
 	font-size: 12px;
-	font-family: tahoma, arial, 'Hiragino Sans GB', 宋体, sans-serif;
+	font-family: tahoma, arial, 'Hiragino Sans GB', SimSun, sans-serif;
 }
 .x-ui-tree-list .x-ui-tree-node-col{
 	-webkit-user-select: none;

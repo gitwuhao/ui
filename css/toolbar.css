@@ -11,7 +11,7 @@
 }
 .x-ui-toolbar-button-box,.x-ui-toolbar-popup-box{
 	font-size:12px;
-	font-family:宋体;
+	font-family:SimSun;
 	-webkit-user-select: none;
 }
 .x-ui-toolbar-button-box input[type="text"],.x-ui-toolbar-popup-box input[type="text"]{
