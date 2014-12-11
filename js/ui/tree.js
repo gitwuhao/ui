@@ -160,17 +160,18 @@
 				event.data.me.on('nodeClick',event,this);
 			});
 
-			
-			this.$node.dblclick({
-				me : this
-			},function(event){
-				var me=event.data.me;
-				if(me.isExpand){
-					me.collapse();
-				}else{
-					me.expand();
-				}
-			});
+			if(this.children){
+				this.$node.dblclick({
+					me : this
+				},function(event){
+					var me=event.data.me;
+					if(me.isExpand){
+						me.collapse();
+					}else{
+						me.expand();
+					}
+				});
+			}
 		},
 		onArrowClick : function(event,target){
 			ui.logger(this);
