@@ -121,10 +121,10 @@
 					me.focus(_item_);
 					if(event.shiftKey){
 						me.checkedAll();
+					}else if(event.ctrlKey && event.altKey){
+						me.reverseChecked();
 					}else if(event.ctrlKey){
 						me.unCheckedAll(_item_);
-					}else if(event.altKey){
-						me.reverseChecked();
 					}else{
 						me.checked(_item_);
 					}
