@@ -29,8 +29,7 @@
 						  '</div>');
 				return html.join("");
 			}
-		},	
-		labelKey:'label',
+		},
 		//singleExpand: true
 		onRenderAfter:function(config){
 			ui.logger(this);
@@ -123,8 +122,9 @@
 					cls=config._c_tree_leaf;
 					html.push('<div class="',config._c_icon,'"></div>');
 				}
-
-				config.label=config[config.tree.labelKey];
+				var labelKey=config.tree.labelKey;
+				labelKey=labelKey||'label';
+				config.label=config[labelKey];
 
 				html.push(		'<div class="',cls,' ',config._c_icon,'"></div>',
 								'<span class="',config._c_tree_node_label,'">',config.label,'</span>',
