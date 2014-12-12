@@ -199,6 +199,9 @@
 			for(var i=0,len=items.length;i<len;i++){
 				items[i].enabled();
 			}
+		},
+		reset:function(){
+			
 		}
 	});
 
