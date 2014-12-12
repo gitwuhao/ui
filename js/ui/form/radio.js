@@ -92,14 +92,12 @@
 					 event.keyCode==32 ||
 					 event.keyCode==13 ||
 					 event.keyCode==9 ||
-					 event.ctrlKey  || event.altKey ){
+					 event.ctrlKey  || event.altKey  || event.shiftKey){
 					return;
 				}
 				event.preventDefault();
 				event.stopPropagation();
 			});
-
-
 
 			item.$input.blur({
 				item : item,

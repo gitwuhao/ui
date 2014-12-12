@@ -27,7 +27,7 @@
 					if(item.width){
 						html.push(' style="width:',item.width,'px;" ');
 					}
-					html.push('><input type="button" class="',config._c_icon,
+					html.push('><input type="text" class="',config._c_icon,
 								'" value="',item.value,'"/>');
 					if(item.label){
 						html.push('<span>',item.label,'</span>');
@@ -93,6 +93,22 @@
 				me : this,
 			},function(event){
 				event.data.me.on('blur',event.data.item);
+			});
+
+			
+			item.$input.keydown({
+				item : item,
+				me : this,
+			},function(event){
+				if(event.keyCode==27 ||
+					 event.keyCode==32 ||
+					 event.keyCode==13 ||
+					 event.keyCode==9 ||
+					 event.ctrlKey  || event.altKey  || event.shiftKey){
+					return;
+				}
+				event.preventDefault();
+				event.stopPropagation();
 			});
  
 			item.$elem.click({

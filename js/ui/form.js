@@ -202,6 +202,9 @@
 		},
 		reset:function(){
 			
+		},
+		getParam : function(){
+			return $.param2Object($(this.from).serialize());
 		}
 	});
 
