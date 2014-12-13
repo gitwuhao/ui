@@ -178,6 +178,9 @@
 			if(!item && this.floatbar){
 				item=this.floatbar[icon]
 			}
+			if(!item && this.items){
+				item=this.getTab(icon);
+			}
 			return item;
 		},
 		disabled:function(icon){
