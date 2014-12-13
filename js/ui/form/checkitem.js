@@ -20,7 +20,7 @@
 				ui.widget.applyCSS(config,this.css);
 				var html=[];
 				html.push('<div class="',config._c_checkbox_group,'"');
-				html.push('><input type="button" name="',(config.name||''),'" class="',config._c_icon,
+				html.push('><input type="text" readonly name="',(config.name||''),'" class="',config._c_icon,
 							'" />');
 				if(config.text){
 					html.push('<span>',config.text,'</span>');
@@ -63,6 +63,22 @@
 				event.data.me.on('blur');
 			});
  
+
+ 			this.$input.keydown({
+				me : this,
+			},function(event){
+				if(event.keyCode==27 ||
+					 event.keyCode==9 ||
+					 event.ctrlKey  || event.altKey  || event.shiftKey){
+					return;
+				}else if(event.keyCode==13 || event.keyCode==32 ){
+					event.data.me.$elem.click();
+					return;
+				}
+				event.preventDefault();
+				event.stopPropagation();
+			});
+
 			this.$elem.click({
 				me : this,
 			},function(event){
