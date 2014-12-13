@@ -27,7 +27,7 @@
 					if(item.width){
 						html.push(' style="width:',item.width,'px;" ');
 					}
-					html.push('><input type="text" class="',config._c_icon,
+					html.push('><input type="button" class="',config._c_icon,
 								'" value="',item.value,'"/>');
 					if(item.label){
 						html.push('<span>',item.label,'</span>');
@@ -95,7 +95,7 @@
 				event.data.me.on('blur',event.data.item);
 			});
 
-			
+			/*
 			item.$input.keydown({
 				item : item,
 				me : this,
@@ -110,7 +110,7 @@
 				event.preventDefault();
 				event.stopPropagation();
 			});
- 
+			*/
 			item.$elem.click({
 				item : item,
 				me : this,

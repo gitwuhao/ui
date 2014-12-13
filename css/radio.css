@@ -18,7 +18,6 @@
 	font-size: 0px;
 	cursor: default;
 	box-sizing: border-box;
-	-webkit-appearance: button;
 }
 .x-ui-radio-group .x-ui-icon{
 	background-position: -442px -44px;
@@ -29,8 +28,6 @@
 	background-position: -442px -4px;
 	border-radius: 2px;
 }
-
-
 .x-ui-radio-group span,.x-ui-checkbox-group span{
 	float: left;
 	margin: 0px 5px;

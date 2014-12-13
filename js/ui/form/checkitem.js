@@ -20,7 +20,7 @@
 				ui.widget.applyCSS(config,this.css);
 				var html=[];
 				html.push('<div class="',config._c_checkbox_group,'"');
-				html.push('><input type="text" name="',(config.name||''),'" class="',config._c_icon,
+				html.push('><input type="button" name="',(config.name||''),'" class="',config._c_icon,
 							'" />');
 				if(config.text){
 					html.push('<span>',config.text,'</span>');
