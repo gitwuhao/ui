@@ -20,6 +20,7 @@
 	cursor: default;
 	white-space: nowrap;
 	overflow: hidden;
+	line-height: 20px;
 }
 .x-ui-tree-list .x-ui-tree-node.hover,.x-ui-tree-list .x-ui-tree-node:hover{
     background-color: #F4FAFF;
@@ -33,7 +34,7 @@
 .x-ui-tree-list .x-ui-tree-node div.x-ui-icon{
 	width: 20px;
 	height: 20px;
-	margin-top: 3px;
+	/* margin-top: 3px; */
 }
 .x-ui-tree-list .x-ui-tree-node .x-ui-tree-arrow{
 	background-position: -458px -80px;
@@ -55,4 +56,5 @@
 .x-ui-tree-list .x-ui-tree-node-col .x-ui-tree-node-label{
 	margin-left: 5px;
 	color: #555;
+	/* line-height: 24px; */
 }

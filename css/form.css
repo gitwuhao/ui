@@ -1,8 +1,11 @@
 .x-ui-form-box{
 	color: #000;
 }
-.x-ui-form-box .x-ui-textfield,.x-ui-form-box .x-ui-textfield input{
-	height: 24px;
+.x-ui-form-box .x-ui-textfield{
+
+}
+.x-ui-form-box .x-ui-textfield input{
+	height: 20px;
 }
 .x-ui-form-box .x-ui-form-item .x-ui-label,.x-ui-form-box .x-ui-form-label {
 	line-height: 24px;
