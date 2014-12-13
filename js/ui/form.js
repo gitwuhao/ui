@@ -47,7 +47,7 @@
 				for(var i=0,len=items.length;i<len;i++){
 					var item=items[i];
 					if(config.isTableLayout!=false){
-						item.form=true;
+						item.form=config;
 					}
 					if(item.cls){
 						item.cls=item.cls + ' ' + config._c_form_item;
@@ -73,8 +73,12 @@
 				if(buttons){
 					if(config.isTableLayout!=false){
 						html.push('<tr>',
-									'<td class="',config._c_form_label,'">&nbsp;</td>',
-									'<td class="',config._c_form_label_padding,'">&nbsp;</td>',
+									'<td class="',config._c_form_label,'">&nbsp;</td>');
+						if(!config.notLabelPadding){
+							html.push(
+									'<td class="',config._c_form_label_padding,'">&nbsp;</td>');
+						}
+						html.push(
 									'<td class="',config._c_button_box,'" >');
 					}else{
 						html.push('<div class="',config._c_button_box,'" >');
@@ -297,15 +301,19 @@
 					}else{
 						html.push('&nbsp;');
 					}
-					html.push('</td>',
+					html.push('</td>');
+					if(!config.form.notLabelPadding){
+						html.push(		
 							  '<td class="',config._c_label_padding,'">');
-					if(config.required){
-						html.push('<span class="',config._c_required_icon,'">*</span>');
-					}else{
-						html.push('&nbsp;');
+						if(config.required){
+							html.push('<span class="',config._c_required_icon,'">*</span>');
+						}else{
+							html.push('&nbsp;');
+						}
+						html.push(
+							   '</td>');
 					}
-					html.push('</td>',
-							  '<td  class="',config._c_item_field,'">');
+					html.push('<td  class="',config._c_item_field,'">');
 				}else if(config.form && !config.label){
 					html.push('<td colspan="3" class="',config._c_item_field,'">');
 				}
