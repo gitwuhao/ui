@@ -203,8 +203,28 @@
 		reset:function(){
 			
 		},
-		getParam : function(){
-			return $.param2Object($(this.from).serialize());
+		getParamArray : function(isRemoveEmpty){
+			var array=$(this.from).serializeArray();
+			if(isRemoveEmpty){
+				for(var i=array.length-1;i>=0;i--){
+					var item=array[i];
+					if(!item.value){
+						array.splice(i,1);
+					}
+				}
+			}
+			return array;
+		},
+		getParam : function(isRemoveEmpty){
+			var array=this.getParamArray(isRemoveEmpty);
+			if(!array || array.length==0){
+				return;
+			}
+			var map=[];
+			$.it(array,function(key,item){
+				map.push(item.name+'='+encodeURIComponent(item.value));
+			});
+			return map.join('&');
 		}
 	});
 
