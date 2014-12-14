@@ -94,7 +94,7 @@
 				var events=this.events,
 					isOverScreen=false;
 				
-				if(event.screenY >= window.innerHeight || event.screenX >= window.innerWidth){
+				if(event.clientY >= window.innerHeight || event.clientX >= window.innerWidth){
 					isOverScreen=true;
 				}
 				for(var key in events){
@@ -133,6 +133,8 @@
 		align:'tc',
 		time : 0,
 		minOpacity : 70,
+		//最小延时(5s)
+		MIN_DELAY_TIME : 5000,
 		onRenderAfter:function(config){
 			ui.logger(this);
 			this.$box=this.$elem;
@@ -188,18 +190,18 @@
 			var offset=this.$elem.offset();
 			
 			QuickTip.addListener(this,function(event,param,isOverScreen){
-				if(isOverScreen){
-					this.hide();
-					return;
-				}else if(!param.lastEvent){
+				 if(!param.lastEvent){
 					param.lastEvent=event;
+					return;
+				}else if(isOverScreen){
+					this.hide();
 					return;
 				}else if(this._TIME_OUT_ID_){
 					window.clearTimeout(this._TIME_OUT_ID_);
 					delete this._TIME_OUT_ID_;
 				}
 
-				if(param.index < this.minOpacity){
+				if(param.index < this.minOpacity || event.timeStamp < param.startTime + this.MIN_DELAY_TIME){
 					this._TIME_OUT_ID_=$.setTimeout(function(){
 						this.hide();
 					},3000,this);
@@ -300,6 +302,7 @@
 				
 			},{
 				index : 90 ,
+				startTime : $.now(),
 				left : offset.left,
 				top : offset.top,
 				width : this.width,
