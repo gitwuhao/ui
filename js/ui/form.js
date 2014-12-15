@@ -293,7 +293,6 @@
 					html.push('<tr class="',config.px,'-',config.type,' ',(config.cls||''),'">');
 				}
 
-				
 				if(config.label){
 					html.push('<td class="',config._c_label,'">');
 					if($.trim(config.label)){
@@ -302,7 +301,7 @@
 						html.push('&nbsp;');
 					}
 					html.push('</td>');
-					if(!config.form.notLabelPadding){
+					if(config.form && !config.form.notLabelPadding){
 						html.push(		
 							  '<td class="',config._c_label_padding,'">');
 						if(config.required){
