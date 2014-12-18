@@ -19,63 +19,53 @@
 				ui.widget.applyCSS(config,this.css);
 				var html=['<div class="',config._c_tab_panel,' ',(config.cls||''),' border-box">'];
 				if(config.floatbar){
+					//ui.button
 					var floatbar=config.floatbar;
-					html.push('<div class="',config._c_floatbar_box,'">',
-								'<div class="',config._c_floatbar_box,'-all">',
-									this.getFloatbarHTML(config,config.floatbar),
-								'</div>',
-							  '</div>');
+					html.push('<div class="',config._c_floatbar_box,'">');
+					for(var i=0,len=floatbar.length;i<len;i++){
+						var item=floatbar[i];
+						if(item.html){
+							html.push(item.html);
+						}else{
+							var xtype=item.xtype;
+							var _class;
+							if(xtype=='splitbutton'){
+								_class=ui.splitbutton;
+							}else if(xtype=='text'){
+								_class=ui.form.text;
+							}else{
+								_class=ui.button;
+							}
+							if(config.px){
+								item.px=config.px;
+							}
+							html.push(_class.getTemplate(item));
+						}
+					}
+					html.push('</div>');
 				}
+
 				html.push('<div class="',config._c_tabbar_box,' uns"></div>');
+
 				if(config.topbar){
-					html.push('<div class="',config._c_topbar_box,'">',
-								'<div class="',config._c_topbar_box,'-all">',
-									this.getToolbarHTML(config,config.topbar),
-								'</div>',
-							   '</div>');
+					if(config.px==ui.cssPrefix){
+						config.topbar.px='x-ui-tab';
+					}else{
+						config.topbar.px=config.px;
+					}
+					html.push('<div class="',config._c_topbar_box,'">',ui.toolbar.getTemplate(config.topbar),'</div>');
 				}
 				html.push(   '<div class="',config._c_tabview_box,'"></div>');
 				if(config.bottombar){
-					html.push('<div class="',config._c_bottombar_box,'">',
-								'<div class="',config._c_bottombar_box,'-all">',
-									this.getToolbarHTML(config,config.bottombar),
-								'</div>',
-							   '</div>');
+					if(config.px==ui.cssPrefix){
+						config.bottombar.px='x-ui-tab';
+					}else{
+						config.bottombar.px=config.px;
+					}
+					html.push('<div class="',config._c_bottombar_box,'">',ui.toolbar.getTemplate(config.bottombar),'</div>');
 				}
 				html.push('</div>');
 				return html.join('');
-			},
-			getFloatbarHTML : function(config,floatbar){
-				var html=[];
-				for(var i=0,len=floatbar.length;i<len;i++){
-					var item=floatbar[i];
-					if(item.html){
-						html.push(item.html);
-					}else{
-						var xtype=item.xtype;
-						var _class;
-						if(xtype=='splitbutton'){
-							_class=ui.splitbutton;
-						}else if(xtype=='text'){
-							_class=ui.form.text;
-						}else{
-							_class=ui.button;
-						}
-						if(config.px){
-							item.px=config.px;
-						}
-						html.push(_class.getTemplate(item));
-					}
-				}
-				return html;
-			},
-			getToolbarHTML : function(config,toolbar){
-				if(config.px==ui.cssPrefix){
-					toolbar.px='x-ui-tab';
-				}else{
-					toolbar.px=config.px+'-tab';
-				}
-				return ui.toolbar.getTemplate(toolbar);
 			}
 		},
 		onRenderAfter:function(config){
@@ -106,41 +96,22 @@
 			}
 			if(this.topbar){
 				var $topbarbox=$tabpanel.children('.'+this._c_topbar_box);
-				this.topbar=this.initRenderToolbar(this.topbar,$topbarbox);
+				this.topbar.elem=$topbarbox.children()[0];
+				this.topbar.autoRender=false;
+				this.topbar=new ui.toolbar(this.topbar);
+				this.topbar.initRender();
+				this.topbar.$owner=this;
 			}
 
 			if(this.bottombar){
 				var $bottombarbox=$tabpanel.children('.'+this._c_bottombar_box);
-				this.bottombar=this.initRenderToolbar(this.bottombar,$bottombarbox);
+				this.bottombar.elem=$bottombarbox.children()[0];
+				this.bottombar.autoRender=false;
+				this.bottombar=new ui.toolbar(this.bottombar);
+				this.bottombar.initRender();
+				this.bottombar.$owner=this;
 			}
-		},
-		initRenderFloatbar : function(floatbar,$floatbar){
-			var children=$floatbar.children();
-			for(var i=0,len=children.length;i<len;i++){
-				var item=floatbar[i];
-				if(!item.html){
-					item=ui.getXTypeItem(floatbar[i],children[i]);
-					if(item.cls){
-						floatbar[item.cls]=item;
-					}else if(item.name){
-						floatbar[item.name]=item;
-					}
 
-					if(item.icon){
-						floatbar[item.icon]=item;
-					}
-					floatbar[i]=item;
-				}
-				item.$owner=this;
-			}
-		},
-		initRenderToolbar : function(toolbarConfig,$toolbar){
-			toolbarConfig.elem=$toolbar.children()[0];
-			toolbarConfig.autoRender=false;
-			var toolbar=new ui.toolbar(toolbarConfig);
-			toolbar.initRender();
-			toolbar.$owner=this;
-			return toolbar;
 		},
 		onBindEvent:function(){
 			ui.logger(this);
