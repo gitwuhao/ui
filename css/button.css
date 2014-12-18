@@ -15,6 +15,7 @@
 .x-ui-button,.x-ui-button .x-ui-icon,.x-ui-button .x-ui-label{
 	float: left;	
 }
+
 /*
 .x-ui-button.button{
 	background: -webkit-gradient(linear, left top, left bottom, from(#FFF), to(#EDEDED)); 
@@ -47,4 +48,13 @@
 .x-ui-button-box .x-ui-button:active{
 	background-image: -webkit-linear-gradient(top,#EDEDED,#F0F0F0,#EFEFEF);
 	border-color: #CCC;
+}
+
+
+.x-ui-icon-button{
+	padding: 4px;
+}
+
+.x-ui-icon-button.refresh .x-ui-icon {
+	background-position: -300px -80px;
 }
