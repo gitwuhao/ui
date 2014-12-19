@@ -166,6 +166,9 @@
 					item=this.getClass().getButtonItem(item,buttonList[i]);
 					item.$owner=this;
 					this.buttons[i]=item;
+					if(item.name){
+						this.itemsMap['_'+item.name+'_']=item;
+					}
 				}
 			}
 		},
