@@ -355,7 +355,7 @@
 		},
 		getValue:function(){
 			ui.logger(this);
-			return this.value;
+			return this.value||'';
 		},
 		blur : CF.emptyFunction,
 		onBlurBefore : function(){
