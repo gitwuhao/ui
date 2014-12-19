@@ -302,7 +302,7 @@
 				
 			},{
 				index : 90 ,
-				startTime : $.now(),
+				startTime : $.timestamp(),
 				left : offset.left,
 				top : offset.top,
 				width : this.width,
