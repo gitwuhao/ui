@@ -1,4 +1,6 @@
 (function(CF,$,ui){
+	
+	var MaskMap={};
 
 	ui.popu=function(){
 		this.callSuperMethod();
@@ -130,18 +132,29 @@
 						event.data.config.onClick(event);
 					});
 				}
+				
+				MaskMap[zindex]=this.currentMask;
+
 				return zindex;
 			},
-			removeMask : function(){
-				if(!this.currentMask){
+			removeMask : function(zindex){
+				var mask;
+				if(zindex){
+					mask=MaskMap[zindex];
+				}else{
+					mask=this.currentMask;
+				}
+
+				if(!mask){
 					return;
 				}
-				$.setTimeout(function(){
-					var $target=this.currentMask.$target;
+				$.setTimeout(function(_mask_){
+					var $target=_mask_.$target;
 					$target.hide();
 					$target.remove();
+					delete MaskMap[_mask_.zindex];
 					delete this.currentMask;
-				},100,this);
+				},100,this,[mask]);
 			},
 			createLoading : function(config){				
 				if(this.currentLoading && this.currentLoading.$target){

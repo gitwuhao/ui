@@ -39,7 +39,7 @@
 				}
 				$.getDoc().on('mousemove',{
 					me : this
-				},this.handle);
+				},this.eventHandle);
 					
 				$.getDoc().on('keydown',{
 					me : this
@@ -48,7 +48,7 @@
 				this.isStart=true;
 			},
 			stopListener : function(){
-				$.getDoc().off('mousemove',this.handle);
+				$.getDoc().off('mousemove',this.eventHandle);
 				$.getDoc().off('keydown',this.removeAll);
 				this.isStart=false;
 			},
@@ -73,7 +73,7 @@
 				me.stopListener();
 				return false;
 			},
-			handle : function(event){
+			eventHandle : function(event){
 				var me=event.data.me,
 					timeStamp=me.timeStamp;
 				//if(timeStamp && event.timeStamp - timeStamp > 50){
@@ -150,19 +150,24 @@
 		},
 		onBindEvent:function(){
 			ui.logger(this);
-			if(!this.handle){
-				
-				/*
-				$.setTimeout(function(){
-					this.on('hide');
-				},this.time,this);
-				*/
-			}else{
+			if(this.isConfirm){
 				this.$box.click({
 					me : this
 				},function(event){
 					event.data.me.on('click');
 				});
+			
+				ui.popu.createMask({
+					$owner : this,
+					onClick : function(event){
+						ui.popu.removeMask(this.zindex);
+						if(this.$owner.no){
+							this.$owner.no();
+						}
+						this.$owner.hide();
+					}
+				});
+				
 			}
 /*
 			if(this.targetContent){
@@ -178,9 +183,7 @@
 		},
 		addMouseMoveListener : function(){
 			ui.logger(this);
-			if(this.handle){
-				return;
-			}else if(this.time>1000){
+			if(this.time>1000){
 				this._TIME_OUT_ID_=$.setTimeout(function(){
 					this.hide();
 				},this.time,this);
@@ -395,16 +398,18 @@
 			this.$arrow.addClass(align);
 			this.$arrow.css(arrowPoint);
 			this.$elem.css(offset);
+			
+			if(this.isConfirm){
 
-			if(!QuickTip.isListener()){
+			}else if(!QuickTip.isListener()){
 				this.addMouseMoveListener();
 			}
 			this.timestamp=$.timestamp();
 		},
 		onClick : function(){
 			ui.logger(this);
-			if(this.handle){
-				this.handle();
+			if(this.yes){
+				this.yes();
 			}
 		},
 		onHide:function(){
@@ -438,7 +443,35 @@
 	CF.merger(QuickTip.prototype,ui.mask);
 	
 	ui.quicktip={
+		/**
+		*	{
+		*		align : 'lc',
+		*		offset : 'lt',
+		*		cls : 'list-search-quicktip c1',
+		*		html : html,
+		*		target :  element
+		*	}
+		**/
 		show : function(config){
+			new QuickTip(config);
+		},
+		/**
+		*	{
+		*		align : 'lc',
+		*		offset : 'lt',
+		*		cls : 'list-search-quicktip c1',
+		*		html : html,
+		*		target :  element,
+		*		yes : function(){
+		*			
+		*		},
+		*		cancel: function(){
+		*		
+		*		}
+		*	}
+		**/
+		confirm : function(config){
+			config.isConfirm=true;
 			new QuickTip(config);
 		},
 		DATA_KEY : '__QUICK_TIP__',
