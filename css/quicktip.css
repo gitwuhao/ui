@@ -24,6 +24,9 @@
 	margin-left: -10px;
 }
 
+.x-ui-qtip-box.x-ui-qtip-confirm .x-ui-qtip-content{
+	text-align: center;
+}
 
 .x-ui-qtip-content span{
 	/*line-height: 50px;*/

@@ -12,7 +12,8 @@
 			css:{
 				_c_qtip_box: '-qtip-box',
 				_c_qtip_content: '-qtip-content',
-				_c_qtip_arrow_box: '-qtip-arrow-box'
+				_c_qtip_arrow_box: '-qtip-arrow-box',
+				_c_qtip_confirm: '-qtip-confirm'
 			},
 			getID : function(){
 				return 'Q'+(_index_++)+'TIP';
@@ -20,7 +21,7 @@
 			getTemplate: function(config){
 				ui.widget.applyCSS(config,this.css);
 				config.id=this.getID();
-				var html=['<div class="',config._c_qtip_box,' ',(config.cls||''),' border-box uns" id="',config.id,'">',
+				var html=['<div class="',config._c_qtip_box,' ',config._c_qtip_confirm,' ',(config.cls||''),' border-box uns" id="',config.id,'">',
 							'<div class="',config._c_qtip_content,'">',config.html,'</div>',
 							'<div class="',config._c_qtip_arrow_box,'">',
 								'<div class="',config.px,'-icon"></div>',
