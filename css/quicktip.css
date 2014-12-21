@@ -26,6 +26,7 @@
 
 .x-ui-qtip-box.x-ui-qtip-confirm .x-ui-qtip-content{
 	text-align: center;
+	cursor: pointer;
 }
 
 .x-ui-qtip-content span{

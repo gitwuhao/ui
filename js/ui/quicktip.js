@@ -153,12 +153,17 @@
 			ui.logger(this);
 			if(this.isConfirm){
 				this.$box.click({
-					me : this
+					$owner : this
 				},function(event){
-					event.data.me.on('click');
+					var $owner= event.data.$owner;
+					if($owner.yes){
+						$owner.yes();
+					}
+					$owner.hide();
+					ui.popu.removeMask($owner.zindex);
 				});
 			
-				ui.popu.createMask({
+				this.zindex=ui.popu.createMask({
 					$owner : this,
 					onClick : function(event){
 						ui.popu.removeMask(this.zindex);
@@ -406,12 +411,6 @@
 				this.addMouseMoveListener();
 			}
 			this.timestamp=$.timestamp();
-		},
-		onClick : function(){
-			ui.logger(this);
-			if(this.yes){
-				this.yes();
-			}
 		},
 		onHide:function(){
 			ui.logger(this);
