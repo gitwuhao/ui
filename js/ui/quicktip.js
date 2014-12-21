@@ -162,18 +162,6 @@
 					$owner.hide();
 					ui.popu.removeMask($owner.zindex);
 				});
-			
-				this.zindex=ui.popu.createMask({
-					$owner : this,
-					onClick : function(event){
-						ui.popu.removeMask(this.zindex);
-						if(this.$owner.no){
-							this.$owner.no();
-						}
-						this.$owner.hide();
-					}
-				});
-				
 			}
 /*
 			if(this.targetContent){
@@ -472,6 +460,19 @@
 		**/
 		confirm : function(config){
 			config.isConfirm=true;
+			config.onRender=function(){
+				this.zindex=ui.popu.createMask({
+					$owner : this,
+					onClick : function(event){
+						ui.popu.removeMask(this.zindex);
+						if(this.$owner.no){
+							this.$owner.no();
+						}
+						this.$owner.hide();
+					}
+				});
+				this.callPrototypeMethod();
+			};
 			new QuickTip(config);
 		},
 		DATA_KEY : '__QUICK_TIP__',
