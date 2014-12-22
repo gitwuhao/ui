@@ -152,7 +152,7 @@
 		onBindEvent:function(){
 			ui.logger(this);
 			if(this.isConfirm){
-				this.$box.click({
+				this.$content.click({
 					$owner : this
 				},function(event){
 					var $owner= event.data.$owner;
