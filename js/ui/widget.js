@@ -50,6 +50,7 @@
 	ui.logger=function(ref){
 		var caller,
 			_owner_,
+			callerName,
 			arg;
 		caller=arguments.callee.caller;
 		arg=caller.arguments;
