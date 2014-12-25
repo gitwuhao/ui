@@ -134,12 +134,20 @@
 			
 			this.$body=$elem.children('.'+this._c_body);
 			
-			var css={};
-			if(this.width){
-				css.width=this.width;
-			}
-			if(this.height){
-				css.height=this.height;			
+			var css;
+			if(this.css){
+				css=this.css;
+			}else{
+				css={};
+				if(this.width){
+					css.width=this.width;
+				}
+				if(this.padding){
+					css.padding=this.padding;
+				}
+				if(this.height){
+					css.height=this.height;			
+				}
 			}
 
 			for(var key in css){
