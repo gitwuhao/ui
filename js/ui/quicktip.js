@@ -148,6 +148,19 @@
 			this.setOffset();
 
 			this.$elem.data(ui.quicktip.DATA_KEY,this);
+
+			
+			var css;
+			if(this.css){
+				css=this.css;
+			}else{
+				css={};
+			}
+
+			for(var key in css){
+				this.$box.css(css);
+				break;
+			}
 		},
 		onBindEvent:function(){
 			ui.logger(this);
