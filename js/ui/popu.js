@@ -105,6 +105,14 @@
 				};
 			})(),
 			__MASK_STYLE__  : 'position: absolute;left: 0px;top: 0px;right: 0px;bottom: 0px;background-color: rgba(0, 0, 0, 0.05);-webkit-user-select: none;',
+			__LOADING_HTML__ : ['<div class="bubbling-g-box">',
+									'<span class="bubbling-g-1">',
+									'</span>',
+									'<span class="bubbling-g-2">',
+									'</span>',
+									'<span class="bubbling-g-3">',
+									'</span>',
+								'</div>'].join(''),
 			createMask : function(config){
 				if(this.currentMask && this.currentMask.$target){
 					this.currentMask.$target.remove();
@@ -116,9 +124,12 @@
 					html=['<div style="',this.__MASK_STYLE__,
 									   'z-index: ',zindex,';" class="',(config.cls||""),'">',
 					      '</div>'].join(''),
-					div=$.createElement(html);
+					div;
+
+				div=$.createElement(html);
 					
 				$.getBody().append(div);
+
 				this.currentMask={
 					target : div,
 					$target : $(div),
@@ -156,6 +167,18 @@
 					delete this.currentMask;
 				},100,this,[mask]);
 			},
+			createInnerLoadingAnimation : function(config){
+				if(!config.$elem){
+					return;
+				}
+				var div=$.createElement(this.__LOADING_HTML__);
+				config.$elem.empty();
+				config.$elem.append(div);
+				config.$loading=$(div);
+				if(config.css){
+					config.$loading.css(config.css);
+				}
+			},
 			createLoading : function(config){				
 				if(this.currentLoading && this.currentLoading.$target){
 					this.currentLoading.$target.remove();
@@ -164,18 +187,22 @@
 				config=config||{};
 
 				var zindex=config.zindex || '999999999',
-					html=['<div style="',this.__MASK_STYLE__,
-									   'z-index: ',zindex,';" class="',(config.cls||""),'">',
-							'<div class="bubbling-g-box">',
-								'<span class="bubbling-g-1">',
-								'</span>',
-								'<span class="bubbling-g-2">',
-								'</span>',
-								'<span class="bubbling-g-3">',
-								'</span>',
-							'</div>',
-						  '</div>'].join(''),
-					div=$.createElement(html);
+					html,
+					div;
+
+				html=['<div style="',this.__MASK_STYLE__ ,
+							'z-index:',zindex,';" class="',(config.cls||''),'">',
+						'<div class="bubbling-g-box">',
+							'<span class="bubbling-g-1">',
+							'</span>',
+							'<span class="bubbling-g-2">',
+							'</span>',
+							'<span class="bubbling-g-3">',
+							'</span>',
+						'</div>',
+					  '</div>'].join('');
+				
+				div=$.createElement(html);
 
 				$.getBody().append(div);
 
