@@ -112,16 +112,17 @@
 				this.bottombar.$owner=this;
 			}
 
-		},
-		onBindEvent:function(){
-			ui.logger(this);
 			var tagList=this.$tabbarbox.children();
 			var tabViewList=this.$tabviewbox.children();
 			var items=this.items;
 			this.items={};
 			for(var i=0,len=items.length;i<len;i++){
 				var item=items[i];
-				this.add(item);
+				items[i]=this.add(item);
+			}
+
+			if(!this.currentTab){
+				this.setCurrentTab(items[0])
 			}
 		},
 		setCurrentTab : function(tab){
@@ -157,9 +158,10 @@
 				this.items['_'+tabPanel.cls+'_']=tabPanel;
 			}
 
-			if(tab.active && !this.currentTab){
+			if(tabPanel.active && !this.currentTab){
 				this.setCurrentTab(tabPanel);
 			}
+			return tabPanel;
 		},
 		getTab:function(key){
 			if(!key){
