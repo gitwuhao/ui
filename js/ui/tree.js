@@ -301,7 +301,6 @@
 				}
 				delete this.children;
 			}
-
 			CF.removeOwnProperty.call(this);
 		}
 	});
