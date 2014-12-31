@@ -59,3 +59,17 @@ box-shadow: 0 0 5px #B0DFFF;
 	outline:none;
 	padding:0px;
 }
+
+
+
+
+.x-ui-scrollbar ::-webkit-scrollbar {
+	 width: 8px;/*对垂直流动条有效*/
+	 height: 8px;/*对水平流动条有效*/
+}
+/*垂直滚动条的按钮*/   /* 垂直滚动条的滑动块*/
+.x-ui-scrollbar ::-webkit-scrollbar-button,.x-ui-scrollbar ::-webkit-scrollbar-thumb {
+	 background-color: #DDD;
+	 background: -webkit-linear-gradient(left,#CCC 0%, #BBB 100%);
+	 border-radius:2px;
+}
