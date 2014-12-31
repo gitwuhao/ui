@@ -159,7 +159,6 @@
 			this.scope.trigger('undoafter',command);
 			return result;
 		},
-
 		redo: function (callback) {
 			var result=false;
 			this.scope.trigger('redobefore',null);
@@ -235,6 +234,11 @@
 				}	
 			}
 			return false;
+		},
+		setLastCommand : function(command){
+			if(command.index > -1 && this.hasRedo() ){
+				this._removeCommand(command.index + 1,this.undoCommands.length - command.index);
+			}
 		}
 	};
 
