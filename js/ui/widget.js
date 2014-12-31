@@ -251,6 +251,9 @@
 			if(items){
 				for(var i=0,len=items.length;i<len;i++){
 					var item=items[i];
+					if(!item){
+						var c=1;
+					}
 					if(item.remove){
 						item.remove();
 					}

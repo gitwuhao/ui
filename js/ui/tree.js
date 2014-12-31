@@ -292,14 +292,15 @@
 		remove : function(){
 			ui.logger(this);
 			var items=this.children;
-			for(var i=0,len=items.length;i<len;i++){
-				var item=items[i];
-				if(item.remove){
-					item.remove();
+			if(items){
+				for(var i=0,len=items.length;i<len;i++){
+					var item=items[i];
+					if(item.remove){
+						item.remove();
+					}
 				}
+				delete this.children;
 			}
-			delete this.children;
-			this.callSuperMethod();
 		}
 	});
 
