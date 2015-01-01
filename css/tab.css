@@ -63,6 +63,7 @@
 	border: 1px solid #DDD;
 	border-radius: 3px;
 	margin: 0px 3px;
+	padding: 2px 3px 3px 3px;
 }
 
 .x-ui-tab-panel .x-ui-floatbar-box .x-ui-button:hover {
