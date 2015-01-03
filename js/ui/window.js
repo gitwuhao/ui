@@ -217,6 +217,7 @@
 			ui.logger(this);
 			if(this.item && !this.item.__isUI__){
 				this.item.render=this.$body[0];
+				this.item.$owner=this;
 				if(this.item.xtype=='form'){
 					this.form=new ui.form(this.item);
 					this.item=this.form;
@@ -224,7 +225,6 @@
 				}else if(this.item.xtype=='tab'){
 					this.item=new ui.tab(this.item);
 				}
-				this.item.$owner=this;
 				delete this.item.xtype;
 			}
 
