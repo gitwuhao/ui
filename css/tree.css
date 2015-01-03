@@ -53,6 +53,10 @@
 .x-ui-tree-list .x-ui-tree-node-col .x-ui-tree-leaf{
 	background-position: -460px -20px;
 }
+.x-ui-tree-box.none-icon .x-ui-tree-node .x-ui-tree-parent,.x-ui-tree-box.none-icon .x-ui-tree-node-col .x-ui-tree-leaf{
+	display: none;
+}
+
 .x-ui-tree-list .x-ui-tree-node-col .x-ui-tree-node-label{
 	margin-left: 5px;
 /*	color: #555;
