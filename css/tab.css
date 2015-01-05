@@ -75,7 +75,7 @@
 
 .x-ui-tab-panel .x-ui-floatbar-box .x-ui-button:hover {
 	box-shadow: 0px 1px 2px #DBDBDB;
-	border-bottom-color: #CECECE;
+	border-color: #CECECE;
 }
 .x-ui-tab-panel .x-ui-floatbar-box .x-ui-textfield input{
 	height: 20px;
