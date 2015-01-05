@@ -63,8 +63,9 @@
 	overflow: hidden;
 	padding: 2px 0px;
 }
-
 .x-ui-tab-panel .x-ui-floatbar-box .x-ui-button{
+	border: 1px solid #DDD;
+	border-radius: 3px;
 	margin: 0px 3px;
 	padding: 4px 5px 3px 5px;
 }
