@@ -63,6 +63,9 @@
 	border: 1px solid #DDD;
 	border-radius: 3px;
 	margin: 0px 3px;
+	padding: 3px 5px;
+}
+.x-ui-tab-panel .x-ui-floatbar-box .x-ui-icon-button{
 	padding: 3px;
 }
 
