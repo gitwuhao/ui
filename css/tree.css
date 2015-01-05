@@ -23,10 +23,10 @@
 	line-height: 20px;
 }
 .x-ui-tree-list .x-ui-tree-node.hover,.x-ui-tree-list .x-ui-tree-node:hover{
-    background-color: #F4FAFF;
+    background-color: #EAF3F7;
 }
 .x-ui-tree-list .x-ui-tree-node.active{
-    background-color: #D5F2FF;
+    background-color: #D2EEFF;
 }
 .x-ui-tree-list .x-ui-tree-node div{
 	float: left;
