@@ -31,7 +31,7 @@
 				if(config.icon==true){
 					html.push('<div class="',config._c_icon,'"></div>');
 				}else if(label){
-					html.push('<div class="',config._c_label,'">',label);
+					html.push('<div class="',config._c_label,'"><span>',label,'</span>');
 					if(config.icon){
 						html.push('<div class="',config._c_icon,' ',config.icon,'"></div>');
 					}
@@ -45,6 +45,7 @@
 			ui.logger(this);
 			var $elem=this.$elem;
 			this.$button=$elem;
+			this.$label=$elem.children('.'+this._c_label+':first').children('span:first');
 			
 			if(this.isDisabled){
 				this.disabled();
