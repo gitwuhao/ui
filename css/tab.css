@@ -79,6 +79,10 @@
 	box-shadow: 0px 1px 2px #DBDBDB;
 	border-color: #CECECE;
 }
+.x-ui-tab-panel .x-ui-floatbar-box .x-ui-button.disabled {
+	box-shadow:none;
+	border-color: #DDD;
+}
 .x-ui-tab-panel .x-ui-floatbar-box .x-ui-textfield input{
 	height: 20px;
 }
