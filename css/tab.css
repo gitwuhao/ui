@@ -18,8 +18,10 @@
 }
 .x-ui-tab-panel .x-ui-tabbar-box .x-ui-tabbar-tag{
 	float: left;
-	padding: 6px;
+	/* padding: 6px; */
+	line-height: 28px;
 	font-size: 12px;
+	height: 30px;
 	margin-left: -1px;
 	border: 1px solid #DDD;
 	min-width: 80px;
@@ -39,6 +41,8 @@
 	color: #777;
 	text-decoration: none;
 	cursor: default;
+	line-height: 28px;
+	padding: 6px 13px;
 }
 .x-ui-tab-panel .x-ui-tabbar-box .x-ui-tabbar-tag.selected{
 	box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.1);
@@ -67,10 +71,10 @@
 	border: 1px solid #DDD;
 	border-radius: 3px;
 	margin: 0px 3px;
-	padding: 4px 5px 3px 5px;
+	padding: 4px 5px;
 }
 .x-ui-tab-panel .x-ui-floatbar-box .x-ui-icon-button{
-	padding: 3px;
+	padding: 4px 5px;
 }
 
 .x-ui-tab-panel .x-ui-floatbar-box .x-ui-button:hover {
@@ -78,7 +82,8 @@
 	border-color: #CECECE;
 }
 .x-ui-tab-panel .x-ui-floatbar-box .x-ui-textfield input{
-	height: 20px;
+	height: 24px;
+	/* line-height: 24px; */
 }
 
 .x-ui-tab-panel.line{
