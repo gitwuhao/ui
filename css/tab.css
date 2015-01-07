@@ -18,7 +18,7 @@
 }
 .x-ui-tab-panel .x-ui-tabbar-box .x-ui-tabbar-tag{
 	float: left;
-	padding: 6px;
+	padding: 6px 0px;
 	font-size: 12px;
 	height: 28px;
 	margin-left: -1px;
@@ -40,7 +40,7 @@
 	color: #777;
 	text-decoration: none;
 	cursor: default;
-	padding: 5px 13px;
+	padding: 5px 14px;
 }
 .x-ui-tab-panel .x-ui-tabbar-box .x-ui-tabbar-tag.selected{
 	box-shadow: inset 0px 1px 2px rgba(0, 0, 0, 0.1);
