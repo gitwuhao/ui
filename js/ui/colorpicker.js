@@ -353,6 +353,12 @@ For usage and examples: colpick.com/plugin
 				$(this).parent().parent().data('colpick').fields.parent().removeClass('colpick_focus');
 				$(this).parent().addClass('colpick_focus');
 			},
+			paste = function (event) {
+				var color=$.getHexColor($.getClipboardTextData(event));
+				if(color){
+					this.value=color.replace('#','');
+				}
+			},
 			//Increment/decrement arrows functions
 			downIncrement = function (ev) {
 				ev.preventDefault ? ev.preventDefault() : ev.returnValue = false;
@@ -585,7 +591,7 @@ For usage and examples: colpick.com/plugin
 						//Setup submit button
 						cal.find('div.colpick_submit').html(options.submitText).click(clickSubmit);
 						//Setup input fields
-						options.fields = cal.find('input').change(change).blur(blur).focus(focus);
+						options.fields = cal.find('input').change(change).blur(blur).focus(focus).on('paste',paste);
 						cal.find('div.colpick_field_arrs').mousedown(downIncrement).end().find('div.colpick_clean_color').click(cleanColor);
 						//Setup hue selector
 						options.selector = cal.find('div.colpick_color').on('mousedown touchstart',downSelector);
