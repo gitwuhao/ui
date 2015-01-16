@@ -82,7 +82,7 @@
 				}else if(event.altKey){
 
 				}
-				this.value=$.toNumber(this.value);
+				this.value=$.toNumber(this.value)||this.minValue;
 				var value=this.value;
 				if(this.maxValue <= this.value + v){
 					v=this.maxValue - this.value;
@@ -103,7 +103,7 @@
 				}else if(event.altKey){
 
 				}
-				this.value=$.toNumber(this.value);
+				this.value=$.toNumber(this.value)||this.minValue;
 				var value=this.value;
 				if(this.minValue >= this.value - v){
 					v=this.value - this.minValue;
