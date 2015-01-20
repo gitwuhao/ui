@@ -333,13 +333,13 @@
 			if (point.x == ui.dragdrop.__M_RIGHT__) {
 				point.x = maxWidth;
 			} else if (point.x == ui.dragdrop.__M_CENTER__) {
-				point.x = ((maxWidth - _w)/2) - _l;
+				point.x = parseInt((maxWidth - _w)/2) - _l;
 			} else if (point.x == ui.dragdrop.__M_LEFT__) {
 				point.x = -maxWidth;
 			} else if (point.y == ui.dragdrop.__M_TOP__) {
 				point.y = -maxHeight;
 			} else if (point.y == ui.dragdrop.__M_MIDDLE__) {
-				point.y = ((maxHeight - _h)/2) - _t;
+				point.y = parseInt((maxHeight - _h)/2) - _t;
 			} else if (point.y == ui.dragdrop.__M_BOTTOM__) {
 				point.y = maxHeight;
 			}
