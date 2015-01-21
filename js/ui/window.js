@@ -236,7 +236,7 @@
 			
 			var me=this;
 
-			$.getBody().one("keydown.ui_win_event",{
+			$.getBody().on("keydown.ui_win_event",{
 				me : this,
 			},function(event){
 				if(event.keyCode==27){
