@@ -101,6 +101,7 @@
 				this.topbar=new ui.toolbar(this.topbar);
 				this.topbar.initRender();
 				this.topbar.$owner=this;
+				this.$topbarbox=$topbarbox;
 			}
 
 			if(this.bottombar){
@@ -110,6 +111,7 @@
 				this.bottombar=new ui.toolbar(this.bottombar);
 				this.bottombar.initRender();
 				this.bottombar.$owner=this;
+				this.$bottombarbox=$bottombarbox;
 			}
 
 			var tagList=this.$tabbarbox.children();
