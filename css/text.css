@@ -55,6 +55,9 @@ div.x-ui-text.disabled .x-ui-item-field{
 .x-ui-text-box .x-ui-textfield{
 	height: 20px;
 }
+.x-ui-text-box table td{
+	padding: 0px;
+}
 .x-ui-text-box .x-ui-icon,.x-ui-text-box .x-ui-invalid-icon{
 	display: none;
 	width: 16px;
