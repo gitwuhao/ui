@@ -7,11 +7,12 @@
 	border-radius: 3px;
 	color: #999;
 }
-.x-ui-button.disabled{
+div.x-ui-button.disabled{
 	background-color: #F1F1F1;
 	opacity: 0.5;
 	cursor: default;
 	color: #AAA;
+	background-image:none;
 }
 .x-ui-button,.x-ui-button .x-ui-icon,.x-ui-button .x-ui-label{
 	float: left;	
@@ -24,7 +25,6 @@
 
 .x-ui-button-box .x-ui-button{
 	font-size: 12px;
-	cursor: pointer;
 	border: 1px solid #DDD;
 	padding: 5px 20px;
 	border-radius: 3px;
@@ -49,8 +49,6 @@
 	background-image: -webkit-linear-gradient(top,#EDEDED,#F0F0F0,#EFEFEF);
 	border-color: #CCC;
 }
-
-
 .x-ui-icon-button{
 	padding: 4px;
 }
