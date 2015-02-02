@@ -167,7 +167,7 @@
 					delete this.currentMask;
 				},100,this,[mask]);
 			},
-			createInnerLoadingAnimation : function(config){
+			createInnerLoading : function(config){
 				if(!config.$elem){
 					return;
 				}
