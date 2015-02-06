@@ -138,22 +138,26 @@
 		onFocusAfter:function(item){
 			ui.form.field.setActive(this);
 			if(this.currentItem && this.currentItem!=item){
-				this.currentItem.$elem.removeClass("selected");
+				this.removeCurrentItem();
 			}
 			item.$elem.addClass("selected");
 			this.currentItem=item;
 			this.isFocus=true;
 		},
-		onBlurAfter : function(){
+		removeCurrentItem : function(){
 			if(this.currentItem){
 				this.currentItem.$elem.removeClass("selected");
 			}
+			delete this.currentItem;
+		},
+		onBlurAfter : function(){
+			this.removeCurrentItem();
 			this.isFocus=false;
 		},
 		onUnChecked:function(item){
 			ui.logger(this);
 			item.checked=false;
-			item.$elem.removeClass("checked");
+			item.$elem.removeClass("checked selected");
 			item.$input.attr("name","");
 		},
 		onChecked:function(item){
