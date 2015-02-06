@@ -2,7 +2,7 @@
 
 	window.UI_LIB_PATH='js/ui/';
 
-	$.includePack('css','css/ui.css');
+	$.includePack('css','css/imports.css');
 
     $.loadJSQueue(
 		'js/ui.files.js',
