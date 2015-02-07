@@ -2,7 +2,7 @@
 	
 	window.UIList=[
 		UI_LIB_PATH+'widget.js',
-		UI_LIB_PATH+'popu.js',
+		UI_LIB_PATH+'mask.js',
 		UI_LIB_PATH+'calendar.js',
 		UI_LIB_PATH+'datepicker.js',
 		UI_LIB_PATH+'form.js',
@@ -23,9 +23,9 @@
 		UI_LIB_PATH+'window.js',
 		UI_LIB_PATH+'colorpicker.js',
 		UI_LIB_PATH+'undo.js',
-		UI_LIB_PATH+'delicon.js',
-		UI_LIB_PATH+'texteditor.js',
-		UI_LIB_PATH+'loading.js',
+		//UI_LIB_PATH+'delicon.js',
+		//UI_LIB_PATH+'texteditor.js',
+		//UI_LIB_PATH+'loading.js',
 		UI_LIB_PATH+'quicktip.js',
 		UI_LIB_PATH+'dragdrop.js',
 		UI_LIB_PATH+'tree.js'
