@@ -85,13 +85,16 @@ ui.extend(ui.window,ui.widget,{
 			if(winArray.length==0){
 				return;
 			}
-			var win=winArray.pop();
-			win.on("close");
+			var win=winArray.getLast();
+			if(win){
+				win.on("close");
+				winArray.pop();
+			}
 			if(winArray.length==0){
 				//停止侦听
 				this.stopListener();
 			}else{
-				win=winArray[winArray.length-1];
+				win=winArray.getLast();
 				win.$elem.show();
 			}
 		},
@@ -99,7 +102,10 @@ ui.extend(ui.window,ui.widget,{
 		startListener : function(){
 			$.getBody().on(this.EVENT_KEY,function(event){
 				if(event.keyCode==27){
-					ui.window.close();
+					var win=winArray.getLast();
+					if(win && win.closable!=false){
+						win.close();
+					}
 					return false;
 				}
 			});
