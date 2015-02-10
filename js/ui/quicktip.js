@@ -441,7 +441,7 @@
 		}
 	});
 
-	CF.merger(QuickTip.prototype,ui.mask);
+	//CF.merger(QuickTip.prototype,ui.mask);
 	
 	ui.quicktip={
 		/**
