@@ -23,7 +23,7 @@ div.x-ui-button.disabled{
 }
 */
 
-.x-ui-button-box .x-ui-button{
+.x-ui-button-box .x-ui-button,.x-ui-button.s1{
 	font-size: 12px;
 	border: 1px solid #DDD;
 	padding: 5px 20px;
@@ -38,14 +38,14 @@ div.x-ui-button.disabled{
 .x-ui-button-box .x-ui-button:last-child{
 	margin-right:0px;
 }
-.x-ui-button-box .x-ui-button .x-ui-label,.x-ui-button-box .x-ui-label{
+.x-ui-button-box .x-ui-button .x-ui-label,.x-ui-button-box .x-ui-label,.x-ui-button.s1 .x-ui-label{
 	float: none;
 }
-.x-ui-button-box .x-ui-button.hover{
+.x-ui-button-box .x-ui-button.hover,.x-ui-button.s1.hover{
 	background: -webkit-gradient(linear, left top, left bottom, from(#FFF), to(#FEFEFE));
 	color:#999;
 }
-.x-ui-button-box .x-ui-button:active{
+.x-ui-button-box .x-ui-button:active,.x-ui-button.s1:active{
 	background-image: -webkit-linear-gradient(top,#EDEDED,#F0F0F0,#EFEFEF);
 	border-color: #CCC;
 }
