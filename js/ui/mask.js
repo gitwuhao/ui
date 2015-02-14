@@ -148,6 +148,9 @@
 
 				return zindex;
 			},
+			getCurrentMask : function(){
+				return this.currentMask;
+			},
 			removeMask : function(zindex){
 				var mask;
 				if(zindex){
