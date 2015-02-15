@@ -207,8 +207,8 @@
 			
 
 			if(this.autoSize==true){
-				var width=this.$render.getBoxInnerWidth();
-				var height=this.$render.getBoxInnerHeight();
+				var width=this.$render.getInnerBoxWidth();
+				var height=this.$render.getInnerBoxHeight();
 				this.setBoxSize(width,height);
 			}
 			this.resize();
@@ -320,7 +320,7 @@
 		resize : function(){
 			ui.logger(this);
 			
-			var boxInnerHeight=this.$elem.getBoxInnerHeight();
+			var boxInnerHeight=this.$elem.getInnerBoxHeight();
 			var headerHeight=this.$header.outerHeight();
 			var weekHeight=this.$week.outerHeight();
 
