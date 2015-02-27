@@ -17,33 +17,45 @@
 				}
 			}
 		},
-		__IS_MOUSE_WHEEL__:'__IS_MOUSE_WHEEL__',
-		bindMouseWheel : function($text,handle,arg){
-			$text.data(ui.form.vtypes.__IS_MOUSE_WHEEL__,{
+		__IS_MOUSE_WHEEL__:'__IS_UI_MOUSE_WHEEL__',
+		addMouseWheelListener : function($text,handle,arg){
+			var DATA_KEY=this.__IS_MOUSE_WHEEL__;
+			$text.data(DATA_KEY,{
 				handle: handle,
 				arg : arg
 			});
 
-			$text.on('focus',function(event){
-				var _data_=$.data(this,ui.form.vtypes.__IS_MOUSE_WHEEL__);
+			$text.on('focus',{
+				me : this
+			},function(event){
+				var _data_=$.data(this,DATA_KEY);
 				_data_.isFocus=true;
+				event.data.me.bindMouseWheelListener();
 			});
 
-			$text.on('blur',function(event){
-				var _data_=$.data(this,ui.form.vtypes.__IS_MOUSE_WHEEL__);
+			$text.on('blur',{
+				me : this
+			},function(event){
+				var _data_=$.data(this,DATA_KEY);
 				_data_.isFocus=false;
+				event.data.me.unbindMouseWheelListener();
 			});
 
-			if(this.isBindMouseWheelEventListener){
-				return;
-			}
-			$.getBody().on("mousewheel",function(event){
+		},
+		__EVENT_MOUSE_WHEEL__:'mousewheel._UI_EVENT_',
+		bindMouseWheelListener : function(){
+			this.unbindMouseWheelListener();
+			var DATA_KEY=this.__IS_MOUSE_WHEEL__;
+			$.getBody().on(this.__EVENT_MOUSE_WHEEL__,function(event){
 				var target=document.activeElement,
-					_data_=$.data(target,ui.form.vtypes.__IS_MOUSE_WHEEL__);
+					_data_=$.data(target,DATA_KEY);
 				if(_data_ && _data_.handle && _data_.isFocus){
 					return _data_.handle(event,_data_.arg);
 				}
 			});
+		},
+		unbindMouseWheelListener : function(){
+			$.getBody().off(this.__EVENT_MOUSE_WHEEL__);
 		},
 /*		enterToTab:function(item){
 			item.addEventListener('textkeydown',function(event){
@@ -140,7 +152,7 @@
 				}
 			});
 
-			this.bindMouseWheel(item.$text,function(event,arg){
+			this.addMouseWheelListener(item.$text,function(event,arg){
 				if(arg.me.isDisabled!=true){
 					arg.me.trigger("spinwheel",event);
 					return false;
