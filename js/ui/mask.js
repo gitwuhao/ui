@@ -104,7 +104,7 @@
 					return zindex;
 				};
 			})(),
-			__MASK_STYLE__  : 'position: absolute;left: 0px;top: 0px;right: 0px;bottom: 0px;background-color: rgba(0, 0, 0, 0.05);-webkit-user-select: none;',
+			__MASK_STYLE__  : 'position: absolute;left: 0px;top: 0px;right: 0px;bottom: 0px;background-color: rgba(0, 0, 0, 0.1);-webkit-user-select: none;',
 			__LOADING_HTML__ : ['<div class="bubbling-g-box">',
 									'<span class="bubbling-g-1">',
 									'</span>',
