@@ -180,7 +180,10 @@ For usage and examples: colpick.com/plugin
 				toggle:function(){
 					getInstance().toggle(this.config);
 				},
-				removes : ui.widget.remove
+				removes : ui.widget.remove,
+				setColor : function(color){
+					this.config.color=color;
+				}
 			};
 		},
 		setColor:function(color){

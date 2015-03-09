@@ -106,6 +106,7 @@
 					}
 				});
 			}
+			this.colorpicker.setColor(this.value);
 			this.colorpicker.toggle();
 		},
 		changeColor:function(color){
@@ -139,6 +140,9 @@
 		},
 		setValue:function(value){
 			ui.logger(this);
+			if(/rgb|rgba/i.test(value)){
+				value=$.rgbToHex(value);
+			}
 			if(this.callSuperMethod()==false){
 				return false;
 			}
