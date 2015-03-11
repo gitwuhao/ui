@@ -248,17 +248,8 @@
 		var currentUndo=ui.UndoManager.getCurrent();
 		if(event.ctrlKey && currentUndo){
 			var cmd='';
-			/*ps ctrl+alt+z*/
-			if(event.keyCode==90 && event.altKey){
-				cmd='undo';
-			/*ps ctrl+shift+z*/
-			}else if(event.keyCode==90 && event.shiftKey){
-				cmd='redo';
-			/*ps ctrl+alt+x*/
-			//}else if(event.keyCode==88 && event.altKey){
-			//	cmd='redo';
 			/*ctrl+z*/
-			}else if(event.keyCode==90){
+			if(event.keyCode==90){
 				cmd='undo';
 			/*ctrl+y*/
 			}else if(event.keyCode==89){
@@ -289,6 +280,46 @@
 /*
 
 
+
+
+	$.getDoc().keydown(function(event){
+		var currentUndo=ui.UndoManager.getCurrent();
+		if(event.ctrlKey && currentUndo){
+			var cmd='';
+			//ps ctrl+alt+z
+			if(event.keyCode==90 && event.altKey){
+				cmd='undo';
+			//ps ctrl+shift+z
+			}else if(event.keyCode==90 && event.shiftKey){
+				cmd='redo';
+			//ps ctrl+alt+x
+			//}else if(event.keyCode==88 && event.altKey){
+			//	cmd='redo';
+			/ctrl+z
+			}else if(event.keyCode==90){
+				cmd='undo';
+			//ctrl+y
+			}else if(event.keyCode==89){
+				cmd='redo';
+			}else{
+				return;
+			}
+			if($.isEditable(event.target)){
+				setTimeout(function(){
+					event.target.blur();
+				},0);
+			}
+			
+			setTimeout(function(){
+				if(cmd=='undo'){
+					ui.UndoManager.undo();
+				}else if(cmd=='redo'){
+					ui.UndoManager.redo();
+				}
+			},100);
+			return false;
+		}
+	});
 
 	$.getDoc().keydown(function(event){
 		if(event.ctrlKey){
