@@ -23,6 +23,9 @@
 				return __CURRENT_UNDO__;
 			}
 		},
+		/**
+		*  当有第三方undo时，需要停用或启用当前undo
+		**/
 		start : function(undo){
 			__IS_STOP__=false;
 		},
