@@ -15,7 +15,8 @@
 }
 
 .x-ui-dd-resize-box .nw,.x-ui-dd-resize-box .ne,.x-ui-dd-resize-box .sw,.x-ui-dd-resize-box .se,.x-ui-dd-resize-box .n,.x-ui-dd-resize-box .s,.x-ui-dd-resize-box .w,.x-ui-dd-resize-box .e{
-	background-color: #000;
+	outline: 1px solid #000;
+	background-color: #FFF;
 	width: 8px;
 	height: 8px;
 	position: absolute;
