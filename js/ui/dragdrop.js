@@ -637,6 +637,7 @@
 		sortstart : function() {
 			ui.logger(this);
 			if (this.isResetsortbox) {
+				this.$sortbox.show();
 				return;
 			}
 			var region = this.getTargetRegion();
@@ -664,6 +665,7 @@
 				config.onSortstart();
 			}
 			ui.dragdrop.trigger('sortstart',this.config);
+			
 		},
 		onSortmove : function(x, y) {
 			ui.logger(this);
@@ -934,6 +936,9 @@
 			var config=this.config;
 			if(config && config.$target){
 				config.$target.removeClass('x-ui-dd-target');
+			}
+			if(this.$sortbox){
+				this.$sortbox.hide();
 			}
 		},
 		onResizestart : function(x, y) {
