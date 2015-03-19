@@ -3,7 +3,7 @@
 }
 .x-ui-icon,.x-ui-arrow-icon,.x-ui-clear-icon,.x-ui-del-icon,.x-ui-invalid-icon,.x-ui-tab-icon{
 	background-repeat: no-repeat;
-	background-image: url(/_/images/allicon.png);
+	background-image: url(/allicon.png);
 	background-position: 100px;
 }
 div.x-ui-icon {
