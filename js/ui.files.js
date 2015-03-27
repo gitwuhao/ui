@@ -13,7 +13,6 @@
 		UI_LIB_PATH+'form/date.js',
 		UI_LIB_PATH+'form/radio.js',
 		UI_LIB_PATH+'form/checkbox.js',
-		UI_LIB_PATH+'form/checkitem.js',
 		UI_LIB_PATH+'form/vtypes.js',
 		UI_LIB_PATH+'button.js',
 		UI_LIB_PATH+'menu.js',
